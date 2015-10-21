@@ -288,13 +288,10 @@
     NSString *myFilename = [[NSString alloc] init];
     switch(dataFilenameIndex) {
         case 0:
-            myFilename = @"SCWaveDistributionList";
+            myFilename = @"SCWaveDistributionListCurrent";
             break;
         case 1:
-            myFilename = @"EdibleMontereyBayDistributionList";
-            break;
-        case 2:
-            myFilename = @"GoodTimesDistributionList";
+            myFilename = @"MontereyWaveDistributionList";
             break;
     }
     NSLog(@"Loads fileName %@", myFilename);
