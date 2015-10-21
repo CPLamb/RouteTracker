@@ -30,7 +30,6 @@
 		83279E7A1A5084FD007496BB /* questions1.png in Resources */ = {isa = PBXBuildFile; fileRef = 83279E791A5084FD007496BB /* questions1.png */; };
 		83279E7D1A51FEF5007496BB /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83279E7C1A51FEF5007496BB /* DetailViewController.m */; };
 		83279E801A5206B5007496BB /* SetupTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83279E7F1A5206B5007496BB /* SetupTableViewController.m */; };
-		83279E831A531ADC007496BB /* SCWaveDistributionList.csv in Resources */ = {isa = PBXBuildFile; fileRef = 83279E811A531ADC007496BB /* SCWaveDistributionList.csv */; };
 		83279E841A531ADC007496BB /* SCWaveDistributionListOLD.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83279E821A531ADC007496BB /* SCWaveDistributionListOLD.plist */; };
 		83279E871A5328C0007496BB /* MemberTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83279E861A5328C0007496BB /* MemberTableViewCell.m */; };
 		83279E8A1A5363B8007496BB /* MapItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 83279E891A5363B8007496BB /* MapItem.m */; };
@@ -93,7 +92,6 @@
 		83279F4A1A59C9D4007496BB /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83279F481A59C9D4007496BB /* GTMOAuth2ViewTouch.xib */; };
 		83279F4D1A59DDA6007496BB /* FilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83279F4C1A59DDA6007496BB /* FilesViewController.m */; };
 		83279F501A5C4E2D007496BB /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83279F4F1A5C4E2D007496BB /* HomeViewController.m */; };
-		83BC548B1A631BB900DBDA4A /* SCWaveDistributionList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83BC54891A631BB900DBDA4A /* SCWaveDistributionList.plist */; };
 		83BC548D1A631E1600DBDA4A /* logo_SantaCruzNewspaperTaxi.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BC548C1A631E1600DBDA4A /* logo_SantaCruzNewspaperTaxi.png */; };
 		83BC548F1A64553800DBDA4A /* EMBlogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BC548E1A64553800DBDA4A /* EMBlogo.png */; };
 		83D5F0F61A65831C00C27571 /* EdibleMontereyBayDistributionList.csv in Resources */ = {isa = PBXBuildFile; fileRef = 83D5F0F41A65831C00C27571 /* EdibleMontereyBayDistributionList.csv */; };
@@ -144,7 +142,6 @@
 		83279E7C1A51FEF5007496BB /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		83279E7E1A5206B5007496BB /* SetupTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetupTableViewController.h; sourceTree = "<group>"; };
 		83279E7F1A5206B5007496BB /* SetupTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetupTableViewController.m; sourceTree = "<group>"; };
-		83279E811A531ADC007496BB /* SCWaveDistributionList.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SCWaveDistributionList.csv; sourceTree = "<group>"; };
 		83279E821A531ADC007496BB /* SCWaveDistributionListOLD.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SCWaveDistributionListOLD.plist; sourceTree = "<group>"; };
 		83279E851A5328C0007496BB /* MemberTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberTableViewCell.h; sourceTree = "<group>"; };
 		83279E861A5328C0007496BB /* MemberTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberTableViewCell.m; sourceTree = "<group>"; };
@@ -268,7 +265,6 @@
 		83279F4C1A59DDA6007496BB /* FilesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilesViewController.m; sourceTree = "<group>"; };
 		83279F4E1A5C4E2D007496BB /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		83279F4F1A5C4E2D007496BB /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
-		83BC54891A631BB900DBDA4A /* SCWaveDistributionList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SCWaveDistributionList.plist; sourceTree = "<group>"; };
 		83BC548C1A631E1600DBDA4A /* logo_SantaCruzNewspaperTaxi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_SantaCruzNewspaperTaxi.png; sourceTree = "<group>"; };
 		83BC548E1A64553800DBDA4A /* EMBlogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EMBlogo.png; sourceTree = "<group>"; };
 		83D5F0F41A65831C00C27571 /* EdibleMontereyBayDistributionList.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = EdibleMontereyBayDistributionList.csv; sourceTree = "<group>"; };
@@ -549,8 +545,6 @@
 				8308DC361BD7F4F800D5B164 /* MontereyWaveDistributionList.plist */,
 				83D5F0F41A65831C00C27571 /* EdibleMontereyBayDistributionList.csv */,
 				83D5F0F51A65831C00C27571 /* EdibleMontereyBayDistributionList.plist */,
-				83BC54891A631BB900DBDA4A /* SCWaveDistributionList.plist */,
-				83279E811A531ADC007496BB /* SCWaveDistributionList.csv */,
 				83279E821A531ADC007496BB /* SCWaveDistributionListOLD.plist */,
 			);
 			name = DataLists;
@@ -646,7 +640,6 @@
 				8308DC381BD7F4F800D5B164 /* MontereyWaveDistributionList.plist in Resources */,
 				83BC548D1A631E1600DBDA4A /* logo_SantaCruzNewspaperTaxi.png in Resources */,
 				83279E631A4F4F2A007496BB /* docs24.png in Resources */,
-				83279E831A531ADC007496BB /* SCWaveDistributionList.csv in Resources */,
 				83279E841A531ADC007496BB /* SCWaveDistributionListOLD.plist in Resources */,
 				83279E5B1A4F4C05007496BB /* house.png in Resources */,
 				83279E5D1A4F4C16007496BB /* globe.png in Resources */,
@@ -658,7 +651,6 @@
 				83279E751A4F722C007496BB /* SCWavesSantaLogo.png in Resources */,
 				83279E3F1A4F3B23007496BB /* Images.xcassets in Resources */,
 				8308DC371BD7F4F800D5B164 /* MontereyWaveDistributionList.csv in Resources */,
-				83BC548B1A631BB900DBDA4A /* SCWaveDistributionList.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
