@@ -27,7 +27,7 @@
     
 // Loads file locally
     NSBundle *mainBundle = [NSBundle mainBundle];
-    NSURL *fileURL = [mainBundle URLForResource:@"SCWaveDistributionList" withExtension:@"plist"];
+    NSURL *fileURL = [mainBundle URLForResource:@"MontereyWaveDistributionList" withExtension:@"plist"];
 //    NSLog(@"The Plist filename & directory is %@", fileURL);
     
     // Old link for pList = https://dl.dropboxusercontent.com/u/13142051/TLFMemberList.plist

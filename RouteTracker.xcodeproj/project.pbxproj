@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8308DC371BD7F4F800D5B164 /* MontereyWaveDistributionList.csv in Resources */ = {isa = PBXBuildFile; fileRef = 8308DC351BD7F4F800D5B164 /* MontereyWaveDistributionList.csv */; };
+		8308DC381BD7F4F800D5B164 /* MontereyWaveDistributionList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8308DC361BD7F4F800D5B164 /* MontereyWaveDistributionList.plist */; };
 		83279E311A4F3B23007496BB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83279E301A4F3B23007496BB /* main.m */; };
 		83279E341A4F3B23007496BB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83279E331A4F3B23007496BB /* AppDelegate.m */; };
 		83279E3D1A4F3B23007496BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83279E3B1A4F3B23007496BB /* Main.storyboard */; };
@@ -109,6 +111,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8308DC351BD7F4F800D5B164 /* MontereyWaveDistributionList.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MontereyWaveDistributionList.csv; sourceTree = "<group>"; };
+		8308DC361BD7F4F800D5B164 /* MontereyWaveDistributionList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MontereyWaveDistributionList.plist; sourceTree = "<group>"; };
 		83279E2B1A4F3B23007496BB /* RouteTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RouteTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83279E2F1A4F3B23007496BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		83279E301A4F3B23007496BB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -341,9 +345,9 @@
 				83279F4C1A59DDA6007496BB /* FilesViewController.m */,
 				83279E7E1A5206B5007496BB /* SetupTableViewController.h */,
 				83279E7F1A5206B5007496BB /* SetupTableViewController.m */,
+				83279E2E1A4F3B23007496BB /* Supporting Files */,
 				83279F3C1A5876C1007496BB /* Google Drive */,
 				83279E991A58684D007496BB /* Frameworks */,
-				83279E2E1A4F3B23007496BB /* Supporting Files */,
 			);
 			path = RouteTracker;
 			sourceTree = "<group>";
@@ -541,6 +545,8 @@
 		83BC54871A6319EB00DBDA4A /* DataLists */ = {
 			isa = PBXGroup;
 			children = (
+				8308DC351BD7F4F800D5B164 /* MontereyWaveDistributionList.csv */,
+				8308DC361BD7F4F800D5B164 /* MontereyWaveDistributionList.plist */,
 				83D5F0F41A65831C00C27571 /* EdibleMontereyBayDistributionList.csv */,
 				83D5F0F51A65831C00C27571 /* EdibleMontereyBayDistributionList.plist */,
 				83BC54891A631BB900DBDA4A /* SCWaveDistributionList.plist */,
@@ -637,6 +643,7 @@
 				83279E3D1A4F3B23007496BB /* Main.storyboard in Resources */,
 				83BC548F1A64553800DBDA4A /* EMBlogo.png in Resources */,
 				83279E421A4F3B23007496BB /* LaunchScreen.xib in Resources */,
+				8308DC381BD7F4F800D5B164 /* MontereyWaveDistributionList.plist in Resources */,
 				83BC548D1A631E1600DBDA4A /* logo_SantaCruzNewspaperTaxi.png in Resources */,
 				83279E631A4F4F2A007496BB /* docs24.png in Resources */,
 				83279E831A531ADC007496BB /* SCWaveDistributionList.csv in Resources */,
@@ -650,6 +657,7 @@
 				83279E7A1A5084FD007496BB /* questions1.png in Resources */,
 				83279E751A4F722C007496BB /* SCWavesSantaLogo.png in Resources */,
 				83279E3F1A4F3B23007496BB /* Images.xcassets in Resources */,
+				8308DC371BD7F4F800D5B164 /* MontereyWaveDistributionList.csv in Resources */,
 				83BC548B1A631BB900DBDA4A /* SCWaveDistributionList.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
