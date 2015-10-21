@@ -717,7 +717,7 @@
                                                     <rect key="frame" x="94" y="16" width="218" height="29"/>
                                                     <segments>
                                                         <segment title="SC Waves"/>
-                                                        <segment title="Edible Monterey"/>
+                                                        <segment title="Monterey Waves"/>
                                                     </segments>
                                                     <connections>
                                                         <action selector="selectSpreadsheetControl:" destination="0GM-Ui-0MM" eventType="valueChanged" id="oO2-fF-SHV"/>
