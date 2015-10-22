@@ -286,7 +286,7 @@ const int  MAX_PINS_TO_DROP = 200;
     }
 //    [pinsArray addObject:self.mapView.userLocation];
 
-    NSLog(@"Accessing pinsArray with count = %lu", (unsigned long)[pinsArray count]);
+    NSLog(@"ACCESSING pinsArray with count = %lu", (unsigned long)[pinsArray count]);
     return pinsArray;
 }
 
