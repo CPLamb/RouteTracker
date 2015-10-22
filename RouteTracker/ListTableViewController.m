@@ -58,6 +58,7 @@
     [self loadLocalPlistData];
 //    [self selectProperPlistData];
     NSLog(@"Should reload the dataFile");
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -307,6 +308,7 @@
     NSURL *fileURL = [mainBundle URLForResource:resourceFilename  withExtension:@"plist"];
     // NSURL *fileURL = [mainBundle URLForResource:@"SCWaveDistributionList" withExtension:@"plist"];
     
+    
     self.membersArray = [NSArray arrayWithContentsOfURL:fileURL];
     NSLog(@"Array count %d", [self.membersArray count]);
     
@@ -314,7 +316,7 @@
     // self.driversArray = [NSArray arrayWithObjects:@"Bill", @"CPL", @"Mick", nil];
     [self buildDriversList];
     
-    // [[NSUserDefaults standardUserDefaults] setObject:self.driversArray forKey:@"drivers_list"];
+    [[NSUserDefaults standardUserDefaults] setObject:self.driversArray forKey:@"drivers_list"];
     
 // Reloads the tableView
     [self.tableView reloadData];

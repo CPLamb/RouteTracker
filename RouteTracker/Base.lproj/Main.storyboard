@@ -1291,7 +1291,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="EMBlogo.png" width="1986" height="1200"/>
         <image name="IconSetup24.png" width="24" height="24"/>
         <image name="docs24.png" width="24" height="24"/>
         <image name="globe.png" width="26" height="26"/>
