@@ -26,7 +26,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     int dataFilenameIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_spreadsheet"];
-    
+    NSLog(@"dataFilenameIndex = %d", dataFilenameIndex);
 // Sets up display of magazine loaded
     switch(dataFilenameIndex) {
         case 0:
@@ -39,6 +39,8 @@
            break;
     }
     NSLog(@"Listing the loaded spreadsheet %@", self.selectedMagazine.text);
+
+  
 }
 
 - (void)didReceiveMemoryWarning {
