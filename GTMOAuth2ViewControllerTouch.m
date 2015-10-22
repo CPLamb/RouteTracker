@@ -807,7 +807,7 @@ static Class gSignInClass = Nil;
 }
 #else
 // Deployment target >= iOS 6.
-- (NSUInteger)supportedInterfaceOrientations {
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
   return UIInterfaceOrientationMaskAll;
 }
 #endif

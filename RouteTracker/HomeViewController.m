@@ -6,6 +6,12 @@
 //  Copyright (c) 2015 com.SantaCruzNewspaperTaxi. All rights reserved.
 //
 
+/*
+ 
+ This link talks about breaking up storyboards
+ http://www.newventuresoftware.com/blog/organizing-xcode-projects-using-multiple-storyboards/
+ */
+
 #import "HomeViewController.h"
 
 @interface HomeViewController ()
@@ -25,8 +31,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    int dataFilenameIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_spreadsheet"];
-    NSLog(@"dataFilenameIndex = %d", dataFilenameIndex);
+    NSInteger dataFilenameIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_spreadsheet"];
+    NSLog(@"dataFilenameIndex = %ld", dataFilenameIndex);
 // Sets up display of magazine loaded
     switch(dataFilenameIndex) {
         case 0:
@@ -39,8 +45,6 @@
            break;
     }
     NSLog(@"Listing the loaded spreadsheet %@", self.selectedMagazine.text);
-
-  
 }
 
 - (void)didReceiveMemoryWarning {

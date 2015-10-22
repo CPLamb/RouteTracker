@@ -170,7 +170,7 @@
     // Create the mutable array
     NSMutableArray *indexedNameArray = [NSMutableArray arrayWithCapacity:600];
     
-    // Create an indexed arrray start with the first index letter
+    // Create an indexed array start with the first index letter
     for (int i=0; i <=([indexArray count] - 1); i++) {
         NSString *theIndexItem = [indexArray objectAtIndex:i];
         NSMutableArray *aListOfItems = [NSMutableArray arrayWithCapacity:50];
@@ -191,9 +191,9 @@
         //        NSArray *aListOfSortedItems = [aListOfItems sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
         [indexedNameArray addObject:aListOfItems];
     }
-    self.namesArray = [NSArray arrayWithArray:indexedNameArray];
-    //    NSLog(@"The self.namesArray = %@", self.namesArray);
-    
+    self.namesArray = [NSMutableArray arrayWithArray:indexedNameArray];
+        NSLog(@"ListViewTableController self.namesArray = %@", self.namesArray);
+
     return self.namesArray;
 }
 
@@ -227,7 +227,7 @@
     // Makes sure there is something in the filteredArray
     if ([self.filteredArray count] > 0) {
         // Copy to namesArray and reload the data
-        self.namesArray = [NSArray arrayWithArray:self.filteredArray];
+        self.namesArray = [NSMutableArray arrayWithArray:self.filteredArray];
         
         // Reworks the index & cells
         [self makeSectionsIndex:self.namesArray];
@@ -240,7 +240,7 @@
         
         //Loads up the annotation pins for the BigMap
         self.mapViewController.mapAnnotations = [[NSMutableArray alloc] initWithArray:self.namesArray];
-        NSLog(@"Loaded %d pins", [self.namesArray count]);
+        NSLog(@"Loaded %lu pins", (unsigned long)[self.namesArray count]);
     }
 }
 
@@ -284,7 +284,7 @@
 
 - (NSString *)selectProperPlistData {
  
-    int dataFilenameIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_spreadsheet"];
+    NSInteger dataFilenameIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_spreadsheet"];
     
     NSString *myFilename = [[NSString alloc] init];
     switch(dataFilenameIndex) {
@@ -387,15 +387,15 @@
 // Initialization
     sortedByCategory = NO;
     
-    self.namesArray = [NSArray arrayWithArray:self.membersArray];
+    self.namesArray = [NSMutableArray arrayWithArray:self.membersArray];
     
     // Reworks the index & cells
     [self makeSectionsIndex:self.namesArray];
     [self makeIndexedArray:self.namesArray withIndex:self.indexArray];
     
     // Store new filtered data in the central data object
-    //    MEMBERLISTDATA.namesArray = [NSArray arrayWithArray:self.namesArray];
-    
+    MEMBERLISTDATA.namesArray = [NSArray arrayWithArray:self.namesArray];
+
     // Regenerate the data
     [self.tableView reloadData];
     

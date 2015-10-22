@@ -231,7 +231,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1270" y="1058"/>
+            <point key="canvasLocation" x="1581" y="1058"/>
         </scene>
         <!--TabBarVC-->
         <scene sceneID="yl2-sM-qoP">
@@ -352,8 +352,8 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Deliver:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Cs-KW-por">
-                                        <rect key="frame" x="8" y="56" width="63" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deliver:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Cs-KW-por">
+                                        <rect key="frame" x="8" y="56" width="58" height="21"/>
                                         <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -914,6 +914,7 @@
                     <navigationItem key="navigationItem" title="Setup" id="iNO-e7-wgu"/>
                     <connections>
                         <outlet property="driverPicker" destination="11K-as-cON" id="n0u-sz-B5D"/>
+                        <outlet property="magazineSelectorControl" destination="0Q6-C8-aH6" id="AkR-1c-dIF"/>
                         <outlet property="mapSelectorControl" destination="vKe-Ls-2dq" id="t6H-nn-V3i"/>
                     </connections>
                 </tableViewController>
@@ -1291,6 +1292,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="EMBlogo.png" width="1986" height="1200"/>
         <image name="IconSetup24.png" width="24" height="24"/>
         <image name="docs24.png" width="24" height="24"/>
         <image name="globe.png" width="26" height="26"/>
@@ -1303,7 +1305,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="2bE-YB-t9k"/>
-        <segue reference="wXl-0J-PM3"/>
-        <segue reference="hGG-Lb-Gts"/>
+        <segue reference="fec-gw-sch"/>
+        <segue reference="qPY-Ep-njk"/>
     </inferredMetricsTieBreakers>
 </document>

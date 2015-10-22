@@ -17,18 +17,23 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-  NSLog(@"application didFinishLaunchingWithOptions");
+
+    NSLog(@"application didFinishLaunchingWithOptions");
     
     self.memberData = [[MemberListData alloc] init];
     
-// initialize defaults for app parameters using NSUserDefaults
+// initialize defaults for app parameters using NSUserDefault
     NSString *dateKey    = @"dateKey";
     NSDate *lastRead    = (NSDate *)[[NSUserDefaults standardUserDefaults] objectForKey:dateKey];
-    if (lastRead == nil)     // App first run: set up user defaults.
+
+    NSLog(@"lastRead = %@", lastRead);
+
+    // App first run: set up user defaults.
+    if (lastRead == nil)
     {
         NSDictionary *appDefaults  = [NSDictionary dictionaryWithObjectsAndKeys:[NSDate date], dateKey, nil];
         
-    // do any other initialization you want to do here - e.g. the starting default values.
+      // do any other initialization you want to do here - e.g. the starting default values.
         // [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"should_play_sounds"];
         [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"selected_spreadsheet"];
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"selected_map_type"];
