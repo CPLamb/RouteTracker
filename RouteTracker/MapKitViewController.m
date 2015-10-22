@@ -351,24 +351,22 @@ const int  MAX_PINS_TO_DROP = 200;
     [self.mapView removeAnnotations:self.mapView.annotations];
 }
 
-
-/*
-- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
-    [self zoomToFitMapAnnotations];
-    
-    // If defaultPin is set, select it when we view the map
-    [self.mapView selectAnnotation:self.defaultPin animated:YES];    
-}
-*/
+//- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
+//    [self zoomToFitMapAnnotations];
+//    
+//    // If defaultPin is set, select it when we view the map
+//    [self.mapView selectAnnotation:self.defaultPin animated:YES];    
+//}
 
 #pragma mark - MapView Annotation Methods
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
-    // Sends User to the DetailViewController
     
+// Sends User to the DetailViewController
     id<MKAnnotation> sender = view.annotation;
-        NSLog(@"Performing segue to detail view for annotation view: %@", sender);
-    [self performSegueWithIdentifier:@"showDetails" sender:sender];
+        NSLog(@"Performing SEGUE to detail view for annotation view: %@", sender);
+    [self performSegueWithIdentifier:@"showDetail" sender:sender];
+
 }
 
 // Configures the Annotation popup

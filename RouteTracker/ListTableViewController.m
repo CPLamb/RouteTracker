@@ -473,7 +473,7 @@
 // Configure the cell text fields
     cell.textLabel.text = [[[self.namesArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"Name"];      // for subclass cell memberTableViewCell.title.text
     
-    NSString *subtitleDeliver = [[[self.namesArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"Initial Delivery"];
+    NSString *subtitleDeliver = [[[self.namesArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"Total Quantity to Deliver"];
     NSString *subtitleDriver = [[[self.namesArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"Driver"];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"Deliver: %@       Driver: %@", subtitleDeliver, subtitleDriver];
     

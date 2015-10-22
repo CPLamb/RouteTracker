@@ -222,7 +222,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="dUl-CY-pRf" id="Z4F-ie-O3M"/>
-                        <segue destination="ehp-uA-B6h" kind="show" identifier="showDetails" id="qPY-Ep-njk"/>
+                        <segue destination="ehp-uA-B6h" kind="show" identifier="showDetail" id="qPY-Ep-njk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
@@ -1299,8 +1299,8 @@
         <image name="questions1.png" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2bE-YB-t9k"/>
-        <segue reference="fec-gw-sch"/>
+        <segue reference="iFG-n3-Skd"/>
         <segue reference="qPY-Ep-njk"/>
+        <segue reference="2bE-YB-t9k"/>
     </inferredMetricsTieBreakers>
 </document>
