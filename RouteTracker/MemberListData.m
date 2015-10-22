@@ -32,6 +32,8 @@
 // Use NSUserDefault to determine which file to load
     NSInteger dataFilenameIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_spreadsheet"];
     switch(dataFilenameIndex) {
+        
+// Alloc/init the fileURL outside the boundaries of switch/case statement
         case 0:
             fileURL = [mainBundle URLForResource:@"SCWaveDistributionListCurrent" withExtension:@"plist"];  //MontereyWaveDistributionList
             break;
