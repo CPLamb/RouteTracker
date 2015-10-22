@@ -25,9 +25,22 @@
 - (void)loadPlistData {
     // Loads the Plist into member array either from web or locally
     
-// Loads file locally
+// Loads file locally from either sheet
     NSBundle *mainBundle = [NSBundle mainBundle];
-    NSURL *fileURL = [mainBundle URLForResource:@"MontereyWaveDistributionList" withExtension:@"plist"];
+    
+    // Use NSUserDefault to determine which file to load
+    NSInteger dataFilenameIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_spreadsheet"];
+    switch(dataFilenameIndex) {
+        case 0:
+            NSURL *fileURL = [mainBundle URLForResource:@"SCWaveDistributionListCurrent" withExtension:@"plist"];  //MontereyWaveDistributionList
+            break;
+        case 1:
+            NSURL *fileURL = [mainBundle URLForResource:@"MontereyWaveDistributionList" withExtension:@"plist"];  //MontereyWaveDistributionList
+            break;
+    }
+//    if (dataFilenameIndex == 0) {
+    NSURL *fileURL = [mainBundle URLForResource:@"SCWaveDistributionListCurrent" withExtension:@"plist"];  //MontereyWaveDistributionList
+//    }
 //    NSLog(@"The Plist filename & directory is %@", fileURL);
     
     // Old link for pList = https://dl.dropboxusercontent.com/u/13142051/TLFMemberList.plist
