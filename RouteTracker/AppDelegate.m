@@ -17,6 +17,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+  NSLog(@"application didFinishLaunchingWithOptions");
     
     self.memberData = [[MemberListData alloc] init];
     
@@ -29,7 +30,7 @@
         
     // do any other initialization you want to do here - e.g. the starting default values.
         // [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"should_play_sounds"];
-        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"selected_spreadsheet"];
+        [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"selected_spreadsheet"];
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"selected_map_type"];
         [[NSUserDefaults standardUserDefaults] setObject:@"ALL" forKey:@"selected_driver"];
         
