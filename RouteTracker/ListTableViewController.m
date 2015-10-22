@@ -192,7 +192,7 @@
         [indexedNameArray addObject:aListOfItems];
     }
     self.namesArray = [NSMutableArray arrayWithArray:indexedNameArray];
-        NSLog(@"ListViewTableController self.namesArray = %@", self.namesArray);
+//        NSLog(@"ListViewTableController self.namesArray = %@", self.namesArray);
 
     return self.namesArray;
 }

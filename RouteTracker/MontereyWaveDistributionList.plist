@@ -10,19 +10,19 @@
 		<key>Category</key>
 		<string>dining</string>
 		<key>City</key>
-		<string></string>
+		<string>Santa Cruz</string>
 		<key>Color</key>
 		<string></string>
 		<key>Contact Name</key>
-		<string></string>
+		<string>Chris Lamb</string>
 		<key>Contact Phone</key>
-		<string></string>
+		<string>831-234-9927</string>
 		<key>Delivered to Date</key>
 		<string></string>
 		<key>Driver</key>
-		<string></string>
+		<string>Chris</string>
 		<key>Has Rack</key>
-		<string></string>
+		<string>y</string>
 		<key>Hrs per Deliv</key>
 		<string></string>
 		<key>Latitude</key>
@@ -30,7 +30,7 @@
 		<key>Longitude</key>
 		<string>-121.886</string>
 		<key>Name</key>
-		<string>zzzAbalonetti Seafood Trattoria</string>
+		<string>Abalonetti Seafood Trattoria</string>
 		<key>Notes</key>
 		<string></string>
 		<key>Number of Deliveries</key>
@@ -40,16 +40,18 @@
 		<key>Restock Quantity (6 x)</key>
 		<string></string>
 		<key>State</key>
-		<string></string>
+		<string>CA</string>
 		<key>Stop #</key>
 		<string></string>
 		<key>Street</key>
-		<string></string>
+		<string>924 3rd Street</string>
 		<key>Total Quantity to Deliver</key>
-		<string></string>
+		<string>60</string>
 		<key>Zipcode</key>
-		<string></string>
+		<string>95060</string>
 		<key>first delivery</key>
+		<string></string>
+		<key>New item</key>
 		<string></string>
 	</dict>
 	<dict>
@@ -834,7 +836,7 @@
 		<key>Longitude</key>
 		<string>-121.887</string>
 		<key>Name</key>
-		<string>Beach House at Lover's Point</string>
+		<string>Beach House at Lover&apos;s Point</string>
 		<key>Notes</key>
 		<string></string>
 		<key>Number of Deliveries</key>
@@ -3604,7 +3606,7 @@
 		<key>Longitude</key>
 		<string>-121.887</string>
 		<key>Name</key>
-		<string>Jack's Restaurant &amp; Lounge</string>
+		<string>Jack&apos;s Restaurant &amp; Lounge</string>
 		<key>Notes</key>
 		<string></string>
 		<key>Number of Deliveries</key>
@@ -4156,7 +4158,7 @@
 		<key>Longitude</key>
 		<string>-121.889718</string>
 		<key>Name</key>
-		<string>Loulou's Griddle In the Middle</string>
+		<string>Loulou&apos;s Griddle In the Middle</string>
 		<key>Notes</key>
 		<string></string>
 		<key>Number of Deliveries</key>
@@ -4861,7 +4863,7 @@
 		<key>Longitude</key>
 		<string>-121.857311</string>
 		<key>Name</key>
-		<string>Mundo's Cafe.</string>
+		<string>Mundo&apos;s Cafe.</string>
 		<key>Notes</key>
 		<string></string>
 		<key>Number of Deliveries</key>
@@ -5011,7 +5013,7 @@
 		<key>Longitude</key>
 		<string>-121.884</string>
 		<key>Name</key>
-		<string>muni rack - Cannery Row Across from Sly McFly's</string>
+		<string>muni rack - Cannery Row Across from Sly McFly&apos;s</string>
 		<key>Notes</key>
 		<string></string>
 		<key>Number of Deliveries</key>
@@ -5375,7 +5377,7 @@
 		<key>Stop #</key>
 		<string></string>
 		<key>Street</key>
-		<string>1 Fisherman's Wharf</string>
+		<string>1 Fisherman&apos;s Wharf</string>
 		<key>Total Quantity to Deliver</key>
 		<string>30</string>
 		<key>Zipcode</key>
@@ -6012,7 +6014,7 @@
 		<key>Longitude</key>
 		<string>-121.89766</string>
 		<key>Name</key>
-		<string>Papa Chevo's Cannery Row</string>
+		<string>Papa Chevo&apos;s Cannery Row</string>
 		<key>Notes</key>
 		<string></string>
 		<key>Number of Deliveries</key>
@@ -6062,7 +6064,7 @@
 		<key>Longitude</key>
 		<string>-121.843107</string>
 		<key>Name</key>
-		<string>Papa Chevo's Seaside</string>
+		<string>Papa Chevo&apos;s Seaside</string>
 		<key>Notes</key>
 		<string></string>
 		<key>Number of Deliveries</key>
@@ -6262,7 +6264,7 @@
 		<key>Longitude</key>
 		<string>-121.892</string>
 		<key>Name</key>
-		<string>Peter B's</string>
+		<string>Peter B&apos;s</string>
 		<key>Notes</key>
 		<string></string>
 		<key>Number of Deliveries</key>
@@ -7904,7 +7906,7 @@
 		<key>Color</key>
 		<string></string>
 		<key>Contact Name</key>
-		<string>LM w/Marketing asst "Lateena"?</string>
+		<string>LM w/Marketing asst &quot;Lateena&quot;?</string>
 		<key>Contact Phone</key>
 		<string>394-3321</string>
 		<key>Delivered to Date</key>

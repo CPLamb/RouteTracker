@@ -22,17 +22,17 @@
     
 // Assigns values to the text fields
     self.nameTextField.text = [self.detailItem objectForKey:@"Name"];
-    self.deliverTextField.text = [self.detailItem objectForKey:@"Initial Delivery"];
+    self.deliverTextField.text = [self.detailItem objectForKey:@"Total Quantity to Deliver"];
     self.returnedTextField.text = [self.detailItem objectForKey:@"Quantity Returned"];
     self.notesTextField.text = [self.detailItem objectForKey:@"Notes"];
     self.driverTextField.text = [self.detailItem objectForKey:@"Driver"];
     self.categoryTextField.text = [self.detailItem objectForKey:@"Category"];
-    self.advertiserTextField.text = [self.detailItem objectForKey:@"Advertiser"];
+    self.advertiserTextField.text = [self.detailItem objectForKey:@"Advert iser"];
 
     self.latitudeTextField.text = [self.detailItem objectForKey:@"Latitude"];
     self.longitudeTextField.text = [self.detailItem objectForKey:@"Longitude"];
     
-    self.addressTextField.text = [self.detailItem objectForKey:@"Address"];
+    self.addressTextField.text = [self.detailItem objectForKey:@"Street"];
     self.cityTextField.text = [self.detailItem objectForKey:@"City"];
     self.stateTextField.text = [self.detailItem objectForKey:@"State"];
     self.zipTextField.text = [self.detailItem objectForKey:@"Zipcode"];
