@@ -30,16 +30,13 @@
 // Sets up display of magazine loaded
     switch(dataFilenameIndex) {
         case 0:
-            self.selectedMagazine.text = @"SCWaveDistributionList";
+            self.selectedMagazine.text = @"SCWaveDistributionListCurrent";
             self.selectedMagazineLogo = [UIImage imageNamed:@"SCWavesSantaLogo.png"];
             break;
         case 1:
-            self.selectedMagazine.text = @"EdibleMontereyBayDistributionList";
+            self.selectedMagazine.text = @"MontereyWaveDistributionList";
             self.selectedMagazineLogo = [UIImage imageNamed:@"EMBLogo.png"];
            break;
-        case 2:
-            self.selectedMagazine.text = @"GoodTimesDistributionList";
-            break;
     }
     NSLog(@"Listing the loaded spreadsheet %@", self.selectedMagazine.text);
 }

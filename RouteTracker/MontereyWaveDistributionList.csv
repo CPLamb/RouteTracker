@@ -1,4 +1,4 @@
-Name,Street,City,State,Zipcode,Category,Total Quantity to Deliver,Driver / Sales,Notes,Advert iser,Has Rack,Restock,Contact Name,Contact Phone,Latitude,Longitude,first delivery,Restock Quantity (6 x),Delivered to Date,Number of Deliveries,Hrs per Deliv,Stop #,Color,Advertiser Color
+Name,Street,City,State,Zipcode,Category,Total Quantity to Deliver,Driver,Notes,Advert iser,Has Rack,Restock,Contact Name,Contact Phone,Latitude,Longitude,first delivery,Restock Quantity (6 x),Delivered to Date,Number of Deliveries,Hrs per Deliv,Stop #,Color,Advertiser Color
 Abalonetti Seafood Trattoria,,,,,dining,,,,y,,,,,36.667,-121.886,,,,,,,,
 Acme Coffee,485 Palm Ave Suite B,Seaside,CA,93955,coffee,30,Carrie,,,,,Larry,,36.608601,-121.852515,,,,,,,,
 Adventures by the Sea,210 Portola Plaza,Monterey,CA,93940,sports,30,Mick,,,,n,,,36.601776,-121.89394,,,,,,,,

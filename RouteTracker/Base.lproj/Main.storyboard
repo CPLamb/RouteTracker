@@ -76,9 +76,6 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="EMBlogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="WqO-R5-tKR">
-                                        <rect key="frame" x="79" y="279" width="147" height="92"/>
-                                    </imageView>
                                 </subviews>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="size" keyPath="contentSize">
@@ -1185,7 +1182,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="EMBlogo.png" width="1986" height="1200"/>
         <image name="IconSetup24.png" width="24" height="24"/>
         <image name="docs24.png" width="24" height="24"/>
         <image name="globe.png" width="26" height="26"/>
