@@ -64,7 +64,7 @@ const int  MAX_PINS_TO_DROP = 200;
  //   NSLog(@"%@ WILL appear...", self);
     
 // Changes map type based on setup map control
-    int mapType = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_map_type"];
+    NSInteger mapType = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_map_type"];
     switch(mapType) {
         case 0:
             self.mapView.mapType = MKMapTypeStandard;
@@ -78,7 +78,7 @@ const int  MAX_PINS_TO_DROP = 200;
     }
     
 // Changes the spreadsheet file based upon the setup file control
-    int dataFilenameIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_spreadsheet"];
+    NSInteger dataFilenameIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_spreadsheet"];
     
     NSString *myFilename = [[NSString alloc] init];
     switch(dataFilenameIndex) {
@@ -105,7 +105,7 @@ const int  MAX_PINS_TO_DROP = 200;
     
     
     // Limit the total number pins to drop to MAX_PINS_TO_DROP so that map view is not too cluttered
-    NSLog(@"Pins in the select = %d", [self.mapAnnotations count]);
+    NSLog(@"Pins in the select = %lu", (unsigned long)[self.mapAnnotations count]);
     
     [self.mapView addAnnotations:self.mapAnnotations];
 // Displays an annotation the first object
@@ -286,7 +286,7 @@ const int  MAX_PINS_TO_DROP = 200;
     }
 //    [pinsArray addObject:self.mapView.userLocation];
 
-    NSLog(@"Accessing pinsArray with count = %d", [pinsArray count]);
+    NSLog(@"Accessing pinsArray with count = %lu", (unsigned long)[pinsArray count]);
     return pinsArray;
 }
 

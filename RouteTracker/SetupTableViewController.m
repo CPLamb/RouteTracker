@@ -31,6 +31,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
   NSLog(@"SetupViewController viewWillAppear");
+
+  self.magazineSelectorControl.selectedSegmentIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_spreadsheet"];
+  
   self.mapSelectorControl.selectedSegmentIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_map_type"];
 
 }
@@ -50,7 +53,7 @@
 - (IBAction)selectSpreadsheetControl:(UISegmentedControl *)sender
 {
     [[NSUserDefaults standardUserDefaults] setInteger:sender.selectedSegmentIndex forKey:@"selected_spreadsheet"];
-    NSLog(@"selects which spreadsheet to display %d", sender.selectedSegmentIndex);
+    NSLog(@"selects which spreadsheet to display %ld", (long)sender.selectedSegmentIndex);
     
     [self.delegate dataFileSelect:self];
 }

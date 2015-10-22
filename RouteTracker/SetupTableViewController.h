@@ -11,6 +11,7 @@
 @class SetupTableViewController;
 
 @protocol SetupTableViewControllerDelegate  <NSObject>
+
 @optional
 - (void)dataFileSelect:(SetupTableViewController *)controller;
 - (void)changeSpreadsheet:(SetupTableViewController *)controller;
@@ -20,8 +21,11 @@
 
 @property (weak, nonatomic) id <SetupTableViewControllerDelegate> delegate;
 
+@property (weak, nonatomic) IBOutlet UISegmentedControl *magazineSelectorControl;
+
 @property (weak, nonatomic) IBOutlet UISegmentedControl *mapSelectorControl;
 
 @property (weak, nonatomic) IBOutlet UIPickerView *driverPicker;
+
 - (IBAction)mapTypeControl:(UISegmentedControl *)sender;
 @end
