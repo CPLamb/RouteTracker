@@ -27,21 +27,21 @@
     
 // Loads file locally from either sheet
     NSBundle *mainBundle = [NSBundle mainBundle];
+    NSURL *fileURL = [[NSURL alloc] init];
     
-    // Use NSUserDefault to determine which file to load
+// Use NSUserDefault to determine which file to load
     NSInteger dataFilenameIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_spreadsheet"];
     switch(dataFilenameIndex) {
         case 0:
-            NSURL *fileURL = [mainBundle URLForResource:@"SCWaveDistributionListCurrent" withExtension:@"plist"];  //MontereyWaveDistributionList
+            fileURL = [mainBundle URLForResource:@"SCWaveDistributionListCurrent" withExtension:@"plist"];  //MontereyWaveDistributionList
             break;
         case 1:
-            NSURL *fileURL = [mainBundle URLForResource:@"MontereyWaveDistributionList" withExtension:@"plist"];  //MontereyWaveDistributionList
+            fileURL = [mainBundle URLForResource:@"MontereyWaveDistributionList" withExtension:@"plist"];  //MontereyWaveDistributionList
             break;
     }
-//    if (dataFilenameIndex == 0) {
-    NSURL *fileURL = [mainBundle URLForResource:@"SCWaveDistributionListCurrent" withExtension:@"plist"];  //MontereyWaveDistributionList
-//    }
-//    NSLog(@"The Plist filename & directory is %@", fileURL);
+//    NSURL *fileURL = [mainBundle URLForResource:@"SCWaveDistributionListCurrent" withExtension:@"plist"];  //MontereyWaveDistributionList
+
+    NSLog(@"The Plist filename & directory is %@", fileURL);
     
     // Old link for pList = https://dl.dropboxusercontent.com/u/13142051/TLFMemberList.plist
     // Public dropBox URL for the pList = https://www.dropbox.com/s/j1op2cn56abrdlw/TLFMemberList.plist
