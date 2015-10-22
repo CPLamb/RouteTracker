@@ -37,11 +37,9 @@
     switch(dataFilenameIndex) {
         case 0:
             self.selectedMagazine.text = @"SCWaveDistributionListCurrent";
-            self.selectedMagazineLogo = [UIImage imageNamed:@"SCWavesSantaLogo.png"];
             break;
         case 1:
             self.selectedMagazine.text = @"MontereyWaveDistributionList";
-            self.selectedMagazineLogo = [UIImage imageNamed:@"EMBLogo.png"];
            break;
     }
     NSLog(@"Listing the loaded spreadsheet %@", self.selectedMagazine.text);
