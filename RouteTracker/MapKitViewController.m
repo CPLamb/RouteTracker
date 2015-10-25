@@ -230,8 +230,8 @@ const int  MAX_PINS_TO_DROP = 200;
     // test location
     //    CLLocationCoordinate2D coords = CLLocationCoordinate2DMake(36.9793,-121.9985);
     
-    NSString *latitude = [[self.pinsArray objectAtIndex:0] objectForKey:@"latitude"];
-    NSString *longitude = [[self.pinsArray objectAtIndex:0] objectForKey:@"longitude"];
+    NSString *latitude = [[self.pinsArray objectAtIndex:0] objectForKey:@"Latitude"];
+    NSString *longitude = [[self.pinsArray objectAtIndex:0] objectForKey:@"Longitude"];
     
     CLLocationCoordinate2D coords = CLLocationCoordinate2DMake([latitude doubleValue], [longitude doubleValue]);
     
