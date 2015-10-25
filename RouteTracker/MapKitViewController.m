@@ -120,10 +120,14 @@ const int  MAX_PINS_TO_DROP = 200;
 #pragma mark - Navigation segue method
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NoShopAnnotation *)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    NSLog(@"Sequeing from %@", sender);
+    NSLog(@"Sequeing from %@", sender.memberData);
+//    NSArray *object = (NSArray)sender.
+// Sets the detailItem to the selected item
+          [[segue destinationViewController] setDetailItem:sender.memberData];
+
 }
 
 #pragma mark - Custom Methods

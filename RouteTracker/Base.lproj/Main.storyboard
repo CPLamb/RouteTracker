@@ -1299,8 +1299,8 @@
         <image name="questions1.png" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="2bE-YB-t9k"/>
         <segue reference="iFG-n3-Skd"/>
         <segue reference="qPY-Ep-njk"/>
-        <segue reference="2bE-YB-t9k"/>
     </inferredMetricsTieBreakers>
 </document>
