@@ -58,6 +58,9 @@
     [self loadLocalPlistData];
 //    [self selectProperPlistData];
     NSLog(@"Should reload the dataFile");
+    
+    [self.memberListAll loadPlistData];
+
     [self.tableView reloadData];
 }
 

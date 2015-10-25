@@ -21,4 +21,6 @@ It can be either read from an embedded pList, or an URL
 @property (strong, nonatomic) NSArray *namesArray;  // array of indexed array of dictionaries
 @property (strong, nonatomic) NSArray *membersArray;    // complete list derived from the PList
 
+- (void)loadPlistData;
+
 @end

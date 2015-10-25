@@ -164,7 +164,7 @@ const int  MAX_PINS_TO_DROP = 200;
     CLLocationCoordinate2D minCoord = CLLocationCoordinate2DMake(180, 180.0);
     CLLocationCoordinate2D maxCoord = CLLocationCoordinate2DMake(-180.0, -180.0);
     
-    //    NSLog(@"Checking min/max coords for %d mapAnnotations", [self.mapAnnotations count]);
+    NSLog(@"Checking min/max coords for %lu mapAnnotations", (unsigned long)[self.mapAnnotations count]);
     // checks all annotations for min and max (deprecated -- checking pinsArray instead)
     for (MapItem * item in self.mapAnnotations){
         if ((item.latitude != 0) && (item.longitude != 0)) {

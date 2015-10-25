@@ -12,13 +12,13 @@
 @synthesize namesArray = _namesArray;
 @synthesize membersArray = _membersArray;
 
-- (id)init {                        // overridden initializer
-    if ((self = [super init])) {
-        [self loadPlistData];
-    }
-    return self;
-    
-}
+//- (id)init {                        // overridden initializer
+//    if ((self = [super init])) {
+//        [self loadPlistData];
+//    }
+//    return self;
+//    
+//}
 
 #pragma mark - Custom methods
 
