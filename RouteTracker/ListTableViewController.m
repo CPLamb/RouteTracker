@@ -9,6 +9,7 @@
 #import "ListTableViewController.h"
 #import "MemberListData.h"
 #import "SetupTableViewController.h"
+#import "AppDelegate.h"
 
 @interface ListTableViewController ()
 
@@ -55,9 +56,19 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self loadLocalPlistData];
-//    [self selectProperPlistData];
-    NSLog(@"Should reload the dataFile");
+// Changes the correct spreadsheet based upon the appDelegate memberData property
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate.memberData loadPlistData];
+    NSLog(@"Should reload the dataFile %@", delegate.memberData.description);
+    
+// Makes up the index array & the sorted array for the cells
+    [self makeSectionsIndex:delegate.memberData.membersArray];     // self.membersArray
+    [self makeIndexedArray:delegate.memberData.membersArray withIndex:self.indexArray];
+    
+    sortedByDriver = NO;
+    memberTableViewCell = [[MemberTableViewCell alloc] init];
+    
+// Reloads the list
     [self.tableView reloadData];
 }
 
@@ -102,7 +113,7 @@
 #pragma mark - Custom sort & search methods
 
 - (NSArray *)makeSectionsIndex:(NSArray *)arrayOfDictionaries {
-        NSLog(@"Takes the array of Dictionaries (PList), and creates an index of first letters for use in the tableview");
+ //       NSLog(@"Takes the array of Dictionaries (PList), and creates an index of first letters for use in the tableview");
     
     // Creates a mutable set to read each letter only once
     NSMutableSet *sectionsMutableSet = [NSMutableSet setWithCapacity:36];

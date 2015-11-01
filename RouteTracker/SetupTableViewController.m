@@ -30,7 +30,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-  NSLog(@"SetupViewController viewWillAppear");
+//  NSLog(@"SetupViewController viewWillAppear");
 
   self.magazineSelectorControl.selectedSegmentIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_spreadsheet"];
   
