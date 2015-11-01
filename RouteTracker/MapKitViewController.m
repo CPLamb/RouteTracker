@@ -10,6 +10,7 @@
 #import "MapItem.h"
 #import "NoShopAnnotation.h"
 #import "MemberListData.h"
+#import "AppDelegate.h"
 
 @interface MapKitViewController () <CLLocationManagerDelegate>
 @property (strong, nonatomic) CLLocationManager *locationManager;
@@ -61,7 +62,7 @@ const int  MAX_PINS_TO_DROP = 200;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
- //   NSLog(@"%@ WILL appear...", self);
+//    NSLog(@"%@ WILL appear...", self);
     
 // Changes map type based on setup map control
     NSInteger mapType = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_map_type"];
@@ -77,19 +78,9 @@ const int  MAX_PINS_TO_DROP = 200;
             break;
     }
     
-// Changes the spreadsheet file based upon the setup file control
-    NSInteger dataFilenameIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_spreadsheet"];
-    
-    NSString *myFilename = [[NSString alloc] init];
-    switch(dataFilenameIndex) {
-        case 0:
-        myFilename = @"SCWaveDistributionListCurrent";
-        break;
-        case 1:
-        myFilename = @"MontereyWaveDistributionList";
-        break;
-    }
-    NSLog(@"map index %lu spreadsheet index %@", (unsigned long)self.mapView.mapType, myFilename);
+// Changes the correct spreadsheet based upon the appDelegate memberData property
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate.memberData loadPlistData];
     
 // Loads from data objects
     [self loadPins];

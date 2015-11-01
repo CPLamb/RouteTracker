@@ -9,6 +9,7 @@
 #import "ListTableViewController.h"
 #import "MemberListData.h"
 #import "SetupTableViewController.h"
+#import "AppDelegate.h"
 
 @interface ListTableViewController ()
 
@@ -55,12 +56,16 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self loadLocalPlistData];
-//    [self selectProperPlistData];
+// Changes the correct spreadsheet based upon the appDelegate memberData property
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate.memberData loadPlistData];
     NSLog(@"Should reload the dataFile");
     
-    [self.memberListAll loadPlistData];
-
+// Makes up the index array & the sorted array for the cells
+    [self makeSectionsIndex:self.membersArray];
+    [self makeIndexedArray:self.membersArray withIndex:self.indexArray];
+    
+// Reloads the list
     [self.tableView reloadData];
 }
 
