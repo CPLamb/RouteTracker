@@ -131,17 +131,14 @@
             NSString *aName = [aDictionary objectForKey:@"Driver"];
             if ([aName length] == 0) {
                 aName = @"XXX";
-                NSLog(@"ListTableVC - %@", aName);
             }
-            NSString *aLetter = [aName substringToIndex:3U];        //uses the first letter of the string
-            [sectionsMutableSet addObject:aLetter];
+   //         NSString *aLetter = [aName substringToIndex:6U];        //uses the first letter of the string
+            [sectionsMutableSet addObject:aName];
         } else {
             NSString *aName = [aDictionary objectForKey:@"Name"];
             NSString *aLetter = [aName substringToIndex:1U];        //uses the first letter of the string
             [sectionsMutableSet addObject:aLetter];
         }
-
-        
     }
     
     // Copies the mutable set into a set & then makes a mutable array of the set
@@ -201,6 +198,8 @@
             NSString *firstLetterOfWord = [[NSString alloc] init];
             if (sortedByCategory) {
                 firstLetterOfWord = [[wordsArray objectAtIndex:j] objectForKey:@"Category"];
+            } else if (sortedByDriver) {
+                firstLetterOfWord = [[wordsArray objectAtIndex:j] objectForKey:@"Driver"];
             } else {
                 firstLetterOfWord = [[[wordsArray objectAtIndex:j] objectForKey:@"Name"] substringToIndex:1U];
             }
