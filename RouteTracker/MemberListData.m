@@ -41,8 +41,6 @@
             fileURL = [mainBundle URLForResource:@"MontereyWaveDistributionList" withExtension:@"plist"];  //MontereyWaveDistributionList
             break;
     }
-//    NSURL *fileURL = [mainBundle URLForResource:@"SCWaveDistributionListCurrent" withExtension:@"plist"];  //MontereyWaveDistributionList
-
 //    NSLog(@"The Plist filename & directory is %@", fileURL);
     
     // MontereyWaves dropbox link = https://dl.dropboxusercontent.com/u/13142051/MontereyWaveDistributionList.plist
