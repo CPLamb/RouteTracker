@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>City</key>
+		<string>Santa Cruz</string>
+		<key>Description</key>
+		<string>This is a string that may have, commas in it</string>
+		<key>Name</key>
+		<string>Chris</string>
+		<key>State</key>
+		<string>CA</string>
+		<key>Street</key>
+		<string>924 3rd Street</string>
+		<key>Zip</key>
+		<string>95060</string>
+	</dict>
+	<dict>
+		<key>City</key>
+		<string>Santa Cruz</string>
+		<key>Description</key>
+		<string>This is more test strings</string>
+		<key>Name</key>
+		<string>Richard</string>
+		<key>State</key>
+		<string>CA</string>
+		<key>Street</key>
+		<string>2030 N. Pacific Ave.</string>
+		<key>Zip</key>
+		<string>95060</string>
+	</dict>
+	<dict>
+		<key>City</key>
+		<string>Franklin Lakes</string>
+		<key>Description</key>
+		<string>@ I wonder if this string works,?.##</string>
+		<key>Name</key>
+		<string>Mom</string>
+		<key>State</key>
+		<string>New Jersey</string>
+		<key>Street</key>
+		<string>108 Tequesta Drive</string>
+		<key>Zip</key>
+		<string>7417</string>
+	</dict>
+</array>
+</plist>
