@@ -45,7 +45,7 @@
 
 //    NSLog(@"The Plist filename & directory is %@", fileURL);
     
-    // Old link for pList = https://dl.dropboxusercontent.com/u/13142051/TLFMemberList.plist
+    // Old link for pList = https://dl.dropboxusercontent.com/u/13142051/MontereyWaveDistributionList.plist
     // Public dropBox URL for the pList = https://www.dropbox.com/s/j1op2cn56abrdlw/TLFMemberList.plist
     
 // Loads the file from the web
