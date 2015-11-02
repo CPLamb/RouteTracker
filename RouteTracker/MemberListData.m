@@ -41,12 +41,10 @@
             fileURL = [mainBundle URLForResource:@"MontereyWaveDistributionList" withExtension:@"plist"];  //MontereyWaveDistributionList
             break;
     }
-//    NSURL *fileURL = [mainBundle URLForResource:@"SCWaveDistributionListCurrent" withExtension:@"plist"];  //MontereyWaveDistributionList
-
 //    NSLog(@"The Plist filename & directory is %@", fileURL);
     
-    // Old link for pList = https://dl.dropboxusercontent.com/u/13142051/MontereyWaveDistributionList.plist
-    // Public dropBox URL for the pList = https://www.dropbox.com/s/j1op2cn56abrdlw/TLFMemberList.plist
+    // MontereyWaves dropbox link = https://dl.dropboxusercontent.com/u/13142051/MontereyWaveDistributionList.plist
+    // SCWaves dropbox link - https://dl.dropboxusercontent.com/u/13142051/SCWaveDistributionListCurrent.plist
     
 // Loads the file from the web
 //    NSString *fileURLString = @"https://dl.dropboxusercontent.com/u/13142051/TLFMemberList.plist";
