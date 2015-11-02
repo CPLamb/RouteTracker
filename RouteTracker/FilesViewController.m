@@ -46,7 +46,7 @@
     NSString *fileTitle = self.selectedFile.title;
     self.filenameLabel.text = [NSString stringWithFormat:@"Filename: %@", fileTitle];
     self.modifiedDateTextfield.text = [self.selectedFile.modifiedDate stringValue];
-    NSLog(@"Selected file %@", self.selectedFile);
+    NSLog(@"FilesVC - Selected file %@", self.selectedFile);
 }
 
 - (IBAction)downloadButton:(UIButton *)sender
@@ -93,10 +93,11 @@
         [fetcher beginFetchWithCompletionHandler:^(NSData *data, NSError *error) {
             [alert dismissWithClickedButtonIndex:0 animated:YES];
             if (error == nil) {
-                NSLog(@"It loaded something");
+                NSLog(@"FilesVC - It loaded something");
                 NSString* fileContent = [[NSString alloc] initWithData:data
                                                               encoding:NSUTF8StringEncoding];
                 self.fileContent.text = fileContent;
+                [self csvToPlist];
             } else {
                 NSLog(@"An error occurred: %@", error);
                 [DrEditUtilities showErrorMessageWithTitle:@"Unable to load file"
@@ -105,6 +106,10 @@
             }
         }];
     }
+}
+
+- (void)csvToPlist {
+    NSLog(@"FilesVC - The string we're looking at is %@", self.fileContent.text);
 }
 
 @end

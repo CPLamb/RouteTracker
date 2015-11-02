@@ -131,7 +131,7 @@ static NSString *const kClientSecret = @"F2CVzLCS5PQj2T4JazioSL8-";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-    NSLog(@"Selected file at indexPath %d %d", indexPath.section, indexPath.row);
+    NSLog(@"DrEditFilesListVC - Selected file at indexPath %ld %ld", indexPath.section, (long)indexPath.row);
     
     // Assigns proper file to spreadsheet
     self.selectedSpreadsheet = [self.driveFiles objectAtIndex:indexPath.row];
@@ -187,7 +187,7 @@ static NSString *const kClientSecret = @"F2CVzLCS5PQj2T4JazioSL8-";
   
   if ([segueIdentifier isEqualToString:@"editFile"]) {                  // tap a cell
       
-      NSLog(@"YEA-HA let look at the file!");
+      NSLog(@"DrEditFilesListVC - YEA-HA let look at the file!");
       viewController.selectedFile = self.selectedSpreadsheet;
       viewController.driveService = [self driveService];
   } else if ([segueIdentifier isEqualToString:@"addFile"]) {    // tap add button
