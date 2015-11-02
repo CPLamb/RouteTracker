@@ -44,12 +44,6 @@
     [self.delegate cancelSortView:self];
 }
 
-- (IBAction)filterByDrivers:(UIButton *)sender
-{
-    NSLog(@"Filter the List by the selected driver field");
-    [self.delegate fieldFilter:self];
-}
-
 - (IBAction)sortByCategory:(UIButton *)sender {
  //   NSLog(@"Category Button pressed %@", sender);
     
@@ -59,6 +53,11 @@
 - (IBAction)sortByName:(UIButton *)sender {
     
     [self.delegate nameSort:self];
+}
+
+- (IBAction)sortByDriver:(UIButton *)sender {
+    
+    [self.delegate driverSort:self];
 }
 
 @end

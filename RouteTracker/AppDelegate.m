@@ -13,7 +13,7 @@
 @end
 
 @implementation AppDelegate
-@synthesize memberData = _memberData;
+//@synthesize memberData = _memberData;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.

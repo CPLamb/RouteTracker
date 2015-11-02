@@ -127,11 +127,20 @@
             if (aCategory.length > 0) {
                 [sectionsMutableSet addObject:aCategory];
             }
+        } else if (sortedByDriver) {
+            NSString *aName = [aDictionary objectForKey:@"Driver"];
+            if ([aName length] == 0) {
+                aName = @"XXX";
+                NSLog(@"ListTableVC - %@", aName);
+            }
+            NSString *aLetter = [aName substringToIndex:3U];        //uses the first letter of the string
+            [sectionsMutableSet addObject:aLetter];
         } else {
             NSString *aName = [aDictionary objectForKey:@"Name"];
             NSString *aLetter = [aName substringToIndex:1U];        //uses the first letter of the string
             [sectionsMutableSet addObject:aLetter];
         }
+
         
     }
     
@@ -419,8 +428,9 @@
     
     // Initialization
     sortedByCategory = YES;
+    sortedByDriver = NO;
     //    self.sortSelectionView.alpha = 0.0;
-    self.namesArray = [NSArray arrayWithArray:self.membersArray];
+    self.namesArray = [NSMutableArray arrayWithArray:self.membersArray];
     
     // Reworks the index & cells
     [self makeSectionsIndex:self.namesArray];
@@ -435,14 +445,15 @@
     // Removes the view controller
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
-/*
-- (void)categorySort:(SortSelectionViewController *)controller {
-        NSLog(@"Sorts the table by category");
+
+- (void)driverSort:(SortSelectionViewController *)controller {
+        NSLog(@"ListTableVC - Sorts the table by driver");
     
     // Initialization
     sortedByDriver = YES;
+    sortedByCategory = NO;
     //    self.sortSelectionView.alpha = 0.0;
-    self.namesArray = [NSArray arrayWithArray:self.membersArray];
+    self.namesArray = [NSMutableArray arrayWithArray:self.membersArray];
     
     // Reworks the index & cells
     [self makeSectionsIndex:self.namesArray];
@@ -459,7 +470,7 @@
     // Removes the view controller
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
-*/
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

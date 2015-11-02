@@ -15,6 +15,7 @@
 - (void)cancelSortView:(SortSelectionViewController *)controller;
 - (void)nameSort:(SortSelectionViewController *)controller;
 - (void)categorySort:(SortSelectionViewController *)controller;
+- (void)driverSort:(SortSelectionViewController *)controller;
 - (void)fieldFilter:(SortSelectionViewController *)controller;
  
 @end
@@ -25,8 +26,8 @@
 
 - (IBAction)sortByCategory:(UIButton *)sender;
 - (IBAction)sortByName:(UIButton *)sender;
+- (IBAction)sortByDriver:(UIButton *)sender;
 - (IBAction)filterForCoupons:(UIButton *)sender;
 - (IBAction)cancelButton:(UIButton *)sender;
-- (IBAction)filterByDrivers:(UIButton *)sender;
 
 @end
