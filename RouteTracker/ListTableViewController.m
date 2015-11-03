@@ -57,8 +57,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 // Changes the correct spreadsheet based upon the appDelegate memberData property
+    
     AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-    [delegate.memberData loadPlistData];
+//    [delegate.memberData loadPlistData];
     NSLog(@"Should reload the dataFile %@", delegate.memberData.description);
     
 // Makes up the index array & the sorted array for the cells
@@ -98,10 +99,10 @@
     // Show Map screen
     if ([[segue identifier] isEqualToString:@"showMap"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSArray *object = [[self.namesArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+ //       NSArray *object = [[self.namesArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
         
     // Sets the detailItem to the selected item
-        [[segue destinationViewController] setMapAnnotations:self.namesArray];
+        [[segue destinationViewController] setMapAnnotations:self.namesArray]; // self.namesArray
     }
     
     // Show Sort Selection screen
