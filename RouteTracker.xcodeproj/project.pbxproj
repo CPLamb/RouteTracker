@@ -94,6 +94,8 @@
 		83279F4A1A59C9D4007496BB /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83279F481A59C9D4007496BB /* GTMOAuth2ViewTouch.xib */; };
 		83279F4D1A59DDA6007496BB /* FilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83279F4C1A59DDA6007496BB /* FilesViewController.m */; };
 		83279F501A5C4E2D007496BB /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83279F4F1A5C4E2D007496BB /* HomeViewController.m */; };
+		83B86BB51BE816C20017DA31 /* RouteTrackerTestCSV.csv in Resources */ = {isa = PBXBuildFile; fileRef = 83B86BB31BE816C20017DA31 /* RouteTrackerTestCSV.csv */; };
+		83B86BB61BE816C20017DA31 /* RouteTrackerTestCSV.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83B86BB41BE816C20017DA31 /* RouteTrackerTestCSV.plist */; };
 		83BC548D1A631E1600DBDA4A /* logo_SantaCruzNewspaperTaxi.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BC548C1A631E1600DBDA4A /* logo_SantaCruzNewspaperTaxi.png */; };
 		83BC548F1A64553800DBDA4A /* EMBlogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BC548E1A64553800DBDA4A /* EMBlogo.png */; };
 /* End PBXBuildFile section */
@@ -267,6 +269,8 @@
 		83279F4C1A59DDA6007496BB /* FilesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilesViewController.m; sourceTree = "<group>"; };
 		83279F4E1A5C4E2D007496BB /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		83279F4F1A5C4E2D007496BB /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		83B86BB31BE816C20017DA31 /* RouteTrackerTestCSV.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RouteTrackerTestCSV.csv; sourceTree = "<group>"; };
+		83B86BB41BE816C20017DA31 /* RouteTrackerTestCSV.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RouteTrackerTestCSV.plist; sourceTree = "<group>"; };
 		83BC548C1A631E1600DBDA4A /* logo_SantaCruzNewspaperTaxi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_SantaCruzNewspaperTaxi.png; sourceTree = "<group>"; };
 		83BC548E1A64553800DBDA4A /* EMBlogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EMBlogo.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -541,6 +545,8 @@
 		83BC54871A6319EB00DBDA4A /* DataLists */ = {
 			isa = PBXGroup;
 			children = (
+				83B86BB31BE816C20017DA31 /* RouteTrackerTestCSV.csv */,
+				83B86BB41BE816C20017DA31 /* RouteTrackerTestCSV.plist */,
 				8308DC3D1BD8435000D5B164 /* MontereyWaveDistributionList.csv */,
 				8308DC3E1BD8435000D5B164 /* MontereyWaveDistributionList.plist */,
 				8308DC391BD81EFB00D5B164 /* SCWaveDistributionListCurrent.csv */,
@@ -650,8 +656,10 @@
 				83279E591A4F4BBD007496BB /* IconSetup24.png in Resources */,
 				83279E7A1A5084FD007496BB /* questions1.png in Resources */,
 				83279E751A4F722C007496BB /* SCWavesSantaLogo.png in Resources */,
+				83B86BB61BE816C20017DA31 /* RouteTrackerTestCSV.plist in Resources */,
 				8308DC3F1BD8435000D5B164 /* MontereyWaveDistributionList.csv in Resources */,
 				83279E3F1A4F3B23007496BB /* Images.xcassets in Resources */,
+				83B86BB51BE816C20017DA31 /* RouteTrackerTestCSV.csv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

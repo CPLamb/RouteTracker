@@ -80,7 +80,7 @@ const int  MAX_PINS_TO_DROP = 200;
     
 // Changes the correct spreadsheet based upon the appDelegate memberData property
     AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-    [delegate.memberData loadPlistData];
+//    [delegate.memberData loadPlistData];
     
 // Loads from data objects
     [self loadPins];
@@ -99,6 +99,7 @@ const int  MAX_PINS_TO_DROP = 200;
     NSLog(@"Pins in the select = %lu", (unsigned long)[self.mapAnnotations count]);
     
     [self.mapView addAnnotations:self.mapAnnotations];
+    
 // Displays an annotation the first object
  //   [self.mapView selectAnnotation:[self.mapAnnotations objectAtIndex:0] animated:YES];
 }
