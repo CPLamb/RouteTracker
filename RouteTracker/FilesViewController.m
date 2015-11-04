@@ -19,6 +19,7 @@
 @end
 
 @implementation FilesViewController
+NSString* fileContent;
 @synthesize driveService = _driveService;
 @synthesize selectedFile = _selectedFile;
 @synthesize delegate = _delegate;
@@ -94,10 +95,12 @@
             [alert dismissWithClickedButtonIndex:0 animated:YES];
             if (error == nil) {
                 NSLog(@"FilesVC - It loaded something");
-                NSString* fileContent = [[NSString alloc] initWithData:data
+                fileContent = [[NSString alloc] initWithData:data
                                                               encoding:NSUTF8StringEncoding];
                 self.fileContent.text = fileContent;
-                [self csvToPlist];
+
+                [self csvToPlist]; // convert to plist
+
             } else {
                 NSLog(@"An error occurred: %@", error);
                 [DrEditUtilities showErrorMessageWithTitle:@"Unable to load file"
@@ -108,8 +111,50 @@
     }
 }
 
+// convert to plist
 - (void)csvToPlist {
-    NSLog(@"FilesVC - The string we're looking at is %@", self.fileContent.text);
+    NSLog(@"FilesVC - The string we're looking at is \n>>>>%@<<<<", self.fileContent.text);
+    NSString *str = self.fileContent.text;
+
+
+// Build tokens array
+
+NSLog(@"String length = %lu", (unsigned long)[str length]);
+
+  for(int i=0; i<[str length]; i++) {
+    NSString *token = @"";
+    NSLog(@"token[%d] = %@", i, token);
+    [token ]
+
+    char c  = [str characterAtIndex:i];
+
+    [NSString ]
+
+    NSLog(@"Character[%d] =  %c unicode = %d", i, c, c);
+    if (c == 44) {
+      NSLog(@"%@", token);
+      break;
+    }
+  }
+
+
+
+
+
+//  NSLog(@"FilesVC - Token count = %lu", (unsigned long)[tokens count]);
+//  for(int i=0; i<[tokens count]; i++) {
+//    NSLog(@"FilesVC - token[%d] length = %lu token = %@ ",i, (unsigned long)[[tokens objectAtIndex:i]length], [tokens objectAtIndex:i]);
+//    for(int j=0; j<[[tokens objectAtIndex:i]length]; j++) {
+//      char token = [[tokens objectAtIndex:i]characterAtIndex:j];
+//
+//
+//      NSLog(@"token[%d][%d] = %c Unicode = %d", i, j, token, token);
+//    }
+//
+//  }
+
 }
+
+
 
 @end
