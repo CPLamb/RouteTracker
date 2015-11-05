@@ -47,7 +47,7 @@ NSString* fileContent;
     NSString *fileTitle = self.selectedFile.title;
     self.filenameLabel.text = [NSString stringWithFormat:@"Filename: %@", fileTitle];
     self.modifiedDateTextfield.text = [self.selectedFile.modifiedDate stringValue];
-    NSLog(@"FilesVC - Selected file %@", self.selectedFile);
+    NSLog(@"FilesVC - Selected file %@", self.selectedFile.title);
 }
 
 - (IBAction)downloadButton:(UIButton *)sender
@@ -185,7 +185,7 @@ NSString* fileContent;
   NSLog(@"tokens[%d] = %@", tokenCount, tokenWord);
 
   NSLog(@"tokenCount = %d", tokenCount);
-
+    NSLog(@"tokens array = %@", tokens);
 
 
 //  NSLog(@"FilesVC - Token count = %lu", (unsigned long)[tokens count]);

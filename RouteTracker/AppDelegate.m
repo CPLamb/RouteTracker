@@ -17,8 +17,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-
-    NSLog(@"application didFinishLaunchingWithOptions");
     
     self.memberData = [[MemberListData alloc] init];
     [self.memberData loadPlistData];
