@@ -147,9 +147,10 @@ NSString* fileContent;
     // look for quote
     if ([csvString characterAtIndex:charIndex] == quoteSentinel) {
        if (insideQuote == true) {
-        insideQuote = false; // closing quote
-        ignoreComma = false;
-       
+         insideQuote = false; // closing quote
+         ignoreComma = false;
+         continue;
+
        } else {
          ignoreComma = true;
          insideQuote = true; // opening quote
@@ -180,9 +181,11 @@ NSString* fileContent;
     tokenWord = [tokenWord stringByAppendingString:tokenChar];
   } // for loop
 
-  NSLog(@"tokenWord = %@", tokenWord);
+  tokens[tokenCount] = tokenWord; // grab the current tokenWord and add to tokens array. Note this is the last token in the file. 
+  NSLog(@"tokens[%d] = %@", tokenCount, tokenWord);
+
   NSLog(@"tokenCount = %d", tokenCount);
-  NSLog(@"tokens = %@", tokens);
+
 
 
 //  NSLog(@"FilesVC - Token count = %lu", (unsigned long)[tokens count]);
