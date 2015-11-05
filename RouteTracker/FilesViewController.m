@@ -126,6 +126,8 @@ NSString* fileContent;
   NSString *tokenWord = @"";
   NSMutableArray *tokens;
   int tokenCount = 0;
+  bool insideQuote = false;
+  bool ignoreComma = false;
 
   // constants
   int commaSentinel = 44;
@@ -142,9 +144,21 @@ NSString* fileContent;
 //    NSLog(@"Character[%d] =  %@ unicode = %d", charIndex, tokenChar, [csvString characterAtIndex:charIndex]);
 
 
+    // look for quote
+    if ([csvString characterAtIndex:charIndex] == quoteSentinel) {
+       if (insideQuote == true) {
+        insideQuote = false; // closing quote
+        ignoreComma = false;
+       
+       } else {
+         ignoreComma = true;
+         insideQuote = true; // opening quote
+         continue;
+       }
+    }
 
-    // look for comma
-    if ([csvString characterAtIndex:charIndex] == commaSentinel) {
+    // look for comma & ignore comma if inside quote
+    if ([csvString characterAtIndex:charIndex] == commaSentinel && !ignoreComma) {
       tokens[tokenCount] = tokenWord; // grab the current tokenWord and add to tokens array
       NSLog(@"tokens[%d] = %@", tokenCount, tokenWord);
       tokenCount++;
