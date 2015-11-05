@@ -114,31 +114,61 @@ NSString* fileContent;
 // convert to plist
 - (void)csvToPlist {
     NSLog(@"FilesVC - The string we're looking at is \n>>>>%@<<<<", self.fileContent.text);
-    NSString *str = self.fileContent.text;
+
+    NSString *csvString = self.fileContent.text;
+
+// Build tokens array from string
+
+  NSUInteger stringLength = [csvString length];
+  NSLog(@"String length = %lu", stringLength);
+
+  // initialization
+  NSString *tokenWord = @"";
+  NSMutableArray *tokens;
+  int tokenCount = 0;
+
+  // constants
+  int commaSentinel = 44;
+  int quoteSentinel = 34;
+  int linefeedSentinel = 10;
+  int carriageReturnSentinel = 13;
+
+  // loop over string to break-out tokens
+  for(int charIndex = 0; charIndex < stringLength; charIndex++) {
+
+    // read csvString current character and convert to NSString *tokenChar
+    NSString *tokenChar = [NSString stringWithFormat:@"%c", [csvString characterAtIndex: charIndex ]];
+
+//    NSLog(@"Character[%d] =  %@ unicode = %d", charIndex, tokenChar, [csvString characterAtIndex:charIndex]);
 
 
-// Build tokens array
 
-NSLog(@"String length = %lu", (unsigned long)[str length]);
-
-  for(int i=0; i<[str length]; i++) {
-    NSString *token = @"";
-    NSLog(@"token[%d] = %@", i, token);
-    [token ]
-
-    char c  = [str characterAtIndex:i];
-
-    [NSString ]
-
-    NSLog(@"Character[%d] =  %c unicode = %d", i, c, c);
-    if (c == 44) {
-      NSLog(@"%@", token);
-      break;
+    // look for comma
+    if ([csvString characterAtIndex:charIndex] == commaSentinel) {
+      tokens[tokenCount] = tokenWord; // grab the current tokenWord and add to tokens array
+      NSLog(@"tokens[%d] = %@", tokenCount, tokenWord);
+      tokenCount++;
+      tokenWord = @""; // reset tokenWord
+      continue;
     }
-  }
 
+    // look for end-of-line i.e., a carriageReturn followed by linefeed
+    if (([csvString characterAtIndex:charIndex] == carriageReturnSentinel) && ([csvString characterAtIndex:charIndex+1] == linefeedSentinel)) {
+      tokens[tokenCount] = tokenWord; // grab the current tokenWord and add to tokens array. Note, this is the last token on the current line
+      NSLog(@"tokens[%d] = %@", tokenCount, tokenWord);
+      tokenCount++;
+      tokenWord = @""; // reset tokenWord
+      charIndex++; // skip over carriage return
+      continue; //  skip linefeed
+    }
 
+    // Build tokenWord tokenChar-by-tokenChar
+    tokenWord = [tokenWord stringByAppendingString:tokenChar];
+  } // for loop
 
+  NSLog(@"tokenWord = %@", tokenWord);
+  NSLog(@"tokenCount = %d", tokenCount);
+  NSLog(@"tokens = %@", tokens);
 
 
 //  NSLog(@"FilesVC - Token count = %lu", (unsigned long)[tokens count]);
