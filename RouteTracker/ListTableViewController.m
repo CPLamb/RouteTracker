@@ -330,7 +330,7 @@
     
     
     self.membersArray = [NSArray arrayWithContentsOfURL:fileURL];
-    NSLog(@"Array count %d", [self.membersArray count]);
+    NSLog(@"Array count %lu", (unsigned long)[self.membersArray count]);
     
 // Recalculates the driversArray and assigns it to NSUserDefaults
     // self.driversArray = [NSArray arrayWithObjects:@"Bill", @"CPL", @"Mick", nil];

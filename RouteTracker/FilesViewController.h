@@ -22,4 +22,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *numberOfRowsTextfield;
 @property (weak, nonatomic) IBOutlet UITextView *fileContent;
 
+@property (strong, nonatomic) NSArray *namesArray;  // array of indexed array of dictionaries
+@property (strong, nonatomic) NSArray *membersArray;    // complete list derived from the PList
+
+
 @end
