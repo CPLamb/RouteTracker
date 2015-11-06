@@ -78,9 +78,12 @@ const int  MAX_PINS_TO_DROP = 200;
             break;
     }
     
-// Changes the correct spreadsheet based upon the appDelegate memberData property
-    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-//    [delegate.memberData loadPlistData];
+// Changes the correct spreadsheet based upon the appDelegate memberData property IF the list is NOT filtered
+    NSInteger listFiltered = [[NSUserDefaults standardUserDefaults] integerForKey: @"list_filtered"];
+    if (!listFiltered) {
+        AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+        [delegate.memberData loadPlistData];
+    }
     
 // Loads from data objects
     [self loadPins];
