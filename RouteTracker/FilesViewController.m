@@ -178,12 +178,13 @@ NSString* fileContent;
       // grab the current tokenWord and add to tokens array. Note, this is the last token on the current line
       tokens[tokenCount] = tokenWord;
 
-      // This line of code executes once following the first time first a carriage return
-      // & line feed is detected. These first line tokens are the keys for the spreadsheet.
-      if (numberOfFields == 0) numberOfFields = tokenCount;
-
       //      NSLog(@"tokens[%d] = %@", tokenCount, tokenWord);
       tokenCount++;
+
+      // numberOfFields is the number of keys in the spreadsheet. This line of code executes
+      // once following the first time  a carriage return & line feed is detected.
+      if (numberOfFields == 0) numberOfFields = tokenCount;
+
       tokenWord = @""; // reset tokenWord
       charIndex++; // skip over carriage return
       continue; //  skip linefeed
@@ -209,7 +210,7 @@ NSString* fileContent;
 
   for(int tokenIndex=numberOfFields; tokenIndex <= tokenCount; tokenIndex++){
     plistData = [plistData stringByAppendingString:@"\t\t<key>"];
-    plistData = [plistData stringByAppendingString:tokens[tokenIndex % 7]];  // key
+    plistData = [plistData stringByAppendingString:tokens[tokenIndex % numberOfFields]];  // key
     plistData = [plistData stringByAppendingString:@"</key>\n"];
 
     plistData = [plistData stringByAppendingString:@"\t\t<string>"];
@@ -221,20 +222,30 @@ NSString* fileContent;
   plistData = [plistData stringByAppendingString:@"</array>\n"];
   plistData = [plistData stringByAppendingString:@"</plist>\n"];
 
-  NSLog(@"plistData\n\n%@", plistData);
+  NSLog(@"FilesVC -- plistData\n\n%@", plistData);
 
-  NSBundle *mainBundle = [NSBundle mainBundle];
-//  NSURL *fileURL = [[NSURL alloc] init];
 
-//  fileURL = [mainBundle URLForResource:@"TestDistributionList" withExtension:@"plist"];
+  // Create an array of dictionaries
+
+  NSMutableArray *membersMutableArray = [[NSMutableArray alloc]init];
+
+
+
+
+
+  NSMutableDictionary *gronk1 = [[NSMutableDictionary alloc]init];
+  [gronk1 setValue:@"Chris" forKey:@"Name"];
+  [gronk1 setValue:@"924 3rd Street" forKey:@"Street"];
+
+
+//  @{ [[NSString alloc]initWithUTF8String:"Name"]: @"Chris", @"Street": @"924 3rd Street" };
+
+  NSLog(@"grunk1 = \n%@", gronk1);
+//  NSDictionary *gronk2 = @{ @"hzi": @"zzbork", @823: @YES };
+//  NSLog(@"grunk = \n%@", gronk1);
 //
-//  self.membersArray = [NSArray arrayWithContentsOfURL:fileURL];
-
-  self.namesArray = [NSArray arrayWithArray:self.membersArray];
-
-  NSURL *appBundle = [mainBundle bundleURL];
-  NSLog(@"appBundle.path = \n%@", appBundle.path.description);
-
+//  NSArray *gronksArray = @[ gronk1, gronk2 ]; // This give me an array of dictioanries
+//  NSLog(@"gronksArray = \n%@", gronksArray);
 
 }
 @end

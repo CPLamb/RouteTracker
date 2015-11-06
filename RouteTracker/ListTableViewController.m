@@ -297,6 +297,7 @@
             [driversListSet addObject:[[self.membersArray objectAtIndex:i] objectForKey:@"Driver"]];                                   }
     }
     self.driversArray = [driversListSet allObjects];
+//  self.driversArray = (amy, sam , john);
     NSLog(@"The driversList is %@", self.driversArray);
 
     [[NSUserDefaults standardUserDefaults] setObject:self.driversArray forKey:@"drivers_list"];
