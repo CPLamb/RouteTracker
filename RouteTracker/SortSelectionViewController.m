@@ -42,6 +42,9 @@
     NSLog(@"Cancel Button pressed %@", sender);
     
     [self.delegate cancelSortView:self];
+    
+    // sets the global BOOL list_filtered to 0
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"list_filtered"];
 }
 
 - (IBAction)sortByCategory:(UIButton *)sender {
@@ -53,6 +56,9 @@
 - (IBAction)sortByName:(UIButton *)sender {
     
     [self.delegate nameSort:self];
+    
+// sets the global BOOL list_filtered to 0
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"list_filtered"];
 }
 
 - (IBAction)sortByDriver:(UIButton *)sender {
