@@ -35,7 +35,7 @@
         
 // Alloc/init the fileURL outside the boundaries of switch/case statement
         case 0:
-            fileURL = [mainBundle URLForResource:@"SCWaveDistributionListCurrent" withExtension:@"plist"];  //MontereyWaveDistributionList
+            fileURL = [mainBundle URLForResource:@"SCWaveDistributionListCurrent" withExtension:@"csv"];  //MontereyWaveDistributionList
             break;
         case 1:
             fileURL = [mainBundle URLForResource:@"MontereyWaveDistributionList" withExtension:@"plist"];  //MontereyWaveDistributionList

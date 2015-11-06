@@ -44,9 +44,9 @@ NSString* fileContent;
 
 - (void)displayFileName
 {
-    NSString *fileTitle = self.selectedFile.title;
-    self.filenameLabel.text = [NSString stringWithFormat:@"Filename: %@", fileTitle];
-    self.modifiedDateTextfield.text = [self.selectedFile.modifiedDate stringValue];
+  NSString *fileTitle = self.selectedFile.title;
+  self.filenameLabel.text = [NSString stringWithFormat:@"Filename: %@", fileTitle];
+  self.modifiedDateTextfield.text = [self.selectedFile.modifiedDate stringValue];
     NSLog(@"FilesVC - Selected file %@", self.selectedFile.title);
 }
 
@@ -190,8 +190,10 @@ NSString* fileContent;
   // grab the current tokenWord and add to tokens array. Note this is the last token in the file.
   tokens[tokenCount] = tokenWord;
 
+  // Parsing is complete
+
   NSLog(@"tokenCount = %d", tokenCount);
-    NSLog(@"tokens array = %@", tokens);
+//    NSLog(@"tokens array = %@", tokens);
 
   // Build plist string in pieces
   plistData = [plistData stringByAppendingString:@"\n\n\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>"];
@@ -216,5 +218,6 @@ NSString* fileContent;
   plistData = [plistData stringByAppendingString:@"</plist>\n"];
 
   NSLog(@"plistData\n\n%@", plistData);
+//    NSLog(@"DONE - Great work!");
 }
 @end
