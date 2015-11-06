@@ -56,16 +56,17 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-// Changes the correct spreadsheet based upon the appDelegate memberData property
-    
-    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-//    [delegate.memberData loadPlistData];
-    NSLog(@"Should reload the dataFile %@", delegate.memberData.description);
+// Changes the correct spreadsheet based upon the appDelegate memberData property IF the list is NOT filtered
+    NSInteger listFiltered = [[NSUserDefaults standardUserDefaults] integerForKey: @"list_filtered"];
+    if (!listFiltered) {
+        AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+        [delegate.memberData loadPlistData];
+        NSLog(@"Should reload the dataFile %@", delegate.memberData.description);
     
 // Makes up the index array & the sorted array for the cells
-    [self makeSectionsIndex:delegate.memberData.membersArray];     // self.membersArray
-    [self makeIndexedArray:delegate.memberData.membersArray withIndex:self.indexArray];
-    
+        [self makeSectionsIndex:delegate.memberData.membersArray];     // self.membersArray
+        [self makeIndexedArray:delegate.memberData.membersArray withIndex:self.indexArray];
+    }
     sortedByDriver = NO;
     memberTableViewCell = [[MemberTableViewCell alloc] init];
     
@@ -262,6 +263,9 @@
         self.mapViewController.mapAnnotations = [[NSMutableArray alloc] initWithArray:self.namesArray];
         NSLog(@"Loaded %lu pins", (unsigned long)[self.namesArray count]);
     }
+// sets the global BOOL list_filtered to 1
+    [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"list_filtered"];
+
 }
 
 #pragma mark - UISearchBarDelegate methods
@@ -276,6 +280,10 @@
     //    NSLog(@"Now we're SEARCHING baby!");
     self.navigationItem.title = [NSString stringWithFormat:@"%@'s route", self.searchString];
     [self.mySearchBar resignFirstResponder];            // dismisses the keyboard
+    
+// sets the global BOOL list_filtered to TRUE
+    [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"list_filtered"];
+
 }
 /*
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
@@ -297,6 +305,7 @@
             [driversListSet addObject:[[self.membersArray objectAtIndex:i] objectForKey:@"Driver"]];                                   }
     }
     self.driversArray = [driversListSet allObjects];
+//  self.driversArray = (amy, sam , john);
     NSLog(@"The driversList is %@", self.driversArray);
 
     [[NSUserDefaults standardUserDefaults] setObject:self.driversArray forKey:@"drivers_list"];

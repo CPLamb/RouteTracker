@@ -33,7 +33,7 @@
         NSDictionary *appDefaults  = [NSDictionary dictionaryWithObjectsAndKeys:[NSDate date], dateKey, nil];
         
       // do any other initialization you want to do here - e.g. the starting default values.
-        // [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"should_play_sounds"];
+        [[NSUserDefaults standardUserDefaults] setInteger:0     forKey:@"list_filtered"];
         [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"selected_spreadsheet"];
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"selected_map_type"];
         [[NSUserDefaults standardUserDefaults] setObject:@"ALL" forKey:@"selected_driver"];

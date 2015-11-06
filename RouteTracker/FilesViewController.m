@@ -178,12 +178,13 @@ NSString* fileContent;
       // grab the current tokenWord and add to tokens array. Note, this is the last token on the current line
       tokens[tokenCount] = tokenWord;
 
-      // This line of code executes once following the first time first a carriage return
-      // & line feed is detected. These first line tokens are the keys for the spreadsheet.
-      if (numberOfFields == 0) numberOfFields = tokenCount;
-
       //      NSLog(@"tokens[%d] = %@", tokenCount, tokenWord);
       tokenCount++;
+
+      // numberOfFields is the number of keys in the spreadsheet. This line of code executes
+      // once following the first time  a carriage return & line feed is detected.
+      if (numberOfFields == 0) numberOfFields = tokenCount;
+
       tokenWord = @""; // reset tokenWord
       charIndex++; // skip over carriage return
       continue; //  skip linefeed
@@ -210,7 +211,7 @@ NSString* fileContent;
 
   for(int tokenIndex=numberOfFields; tokenIndex <= tokenCount; tokenIndex++){
     plistData = [plistData stringByAppendingString:@"\t\t<key>"];
-    plistData = [plistData stringByAppendingString:tokens[tokenIndex % 7]];  // key
+    plistData = [plistData stringByAppendingString:tokens[tokenIndex % numberOfFields]];  // key
     plistData = [plistData stringByAppendingString:@"</key>\n"];
 
     plistData = [plistData stringByAppendingString:@"\t\t<string>"];
