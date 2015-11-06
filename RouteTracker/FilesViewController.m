@@ -114,7 +114,7 @@ NSString* fileContent;
 // http://www.raywenderlich.com/66395/documenting-in-xcode-with-headerdoc-tutorial
 /*!
  * @discussion This method converts a csv file to a plist format
- * @param 
+ * @param
  */
 - (void)csvToPlist {
   //    NSLog(@"FilesVC - The string we're looking at is \n>>>>%@<<<<", self.fileContent.text);
@@ -133,7 +133,7 @@ NSString* fileContent;
   bool insideQuote = false;
   bool ignoreComma = false;
   NSString *plistData = [[NSString alloc]init];
-  int numberOfFields = 7; // TODO this needs to be dynamcally determined
+  int numberOfFields = 0;
 
   // constants
   int commaSentinel = 44;
@@ -177,6 +177,11 @@ NSString* fileContent;
 
       // grab the current tokenWord and add to tokens array. Note, this is the last token on the current line
       tokens[tokenCount] = tokenWord;
+
+      // This line of code executes once following the first time first a carriage return
+      // & line feed is detected. These first line tokens are the keys for the spreadsheet.
+      if (numberOfFields == 0) numberOfFields = tokenCount;
+
       //      NSLog(@"tokens[%d] = %@", tokenCount, tokenWord);
       tokenCount++;
       tokenWord = @""; // reset tokenWord

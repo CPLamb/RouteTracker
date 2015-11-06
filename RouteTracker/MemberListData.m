@@ -50,11 +50,16 @@
 //    NSString *fileURLString = @"https://dl.dropboxusercontent.com/u/13142051/TLFMemberList.plist";
 //    NSURL *fileURL = [[NSURL alloc]initWithString:fileURLString];
 
+  NSLog(@"MemberListData -loadPlistData -- fileURL = \n%@", fileURL);
     self.membersArray = [NSArray arrayWithContentsOfURL:fileURL];
+//  NSLog(@"MemberListData -loadPlistData -- self.membersArray = \n%@", self.membersArray);
+
 //    NSLog(@"MEMBERLISTDATA Array count %d", [self.membersArray count]);
 
     // Copy members array into the names array which can later be sorted for other views
     self.namesArray = [NSArray arrayWithArray:self.membersArray];
+
+    
     
     // loads the web Plist on another thread
 //    [self loadPlistURL];   temporaary disable 9/16
