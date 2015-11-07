@@ -112,9 +112,12 @@ NSString* fileContent;
         NSLog(@"FilesVC - It loaded something");
         fileContent = [[NSString alloc] initWithData:data
                                             encoding:NSUTF8StringEncoding];
+
         self.fileContent.text = fileContent;
 
-        [self csvToPlist]; // convert to plist
+        self.membersArray = [self csvDataToArrayOfDictionaries:fileContent]; // convert to plist
+
+        NSLog(@"FilesVC loadFileContent - self.membersArray = \n%@", self.membersArray);
 
       } else {
         NSLog(@"An error occurred: %@", error);
@@ -125,20 +128,21 @@ NSString* fileContent;
     }];
   }
 }
+// fileContent is the variable displaying loaded data on the file loaded screen
 
 // http://www.raywenderlich.com/66395/documenting-in-xcode-with-headerdoc-tutorial
 /*!
- * @discussion This method converts a csv file to a plist format
+ * @discussion This method accepts a Google spreadsheet formated as a csv text string and returns an Array of Dictionaries
  * @param
  */
-- (void)csvToPlist {
-  //    NSLog(@"FilesVC - The string we're looking at is \n>>>>%@<<<<", self.fileContent.text);
+- (NSArray*)csvDataToArrayOfDictionaries: (NSString *) csvFile {
+      NSLog(@"FilesVC csvDataToArrayOfDictionaries: - The string we're looking at is \n>>>>%@<<<<", csvFile);
 
-  NSString *csvString = self.fileContent.text;
+//  NSString *csvString = csvFile;
 
   // Build tokens array from string
 
-  NSUInteger stringLength = [csvString length];
+  NSUInteger stringLength = [csvFile length];
   //  NSLog(@"String length = %lu", stringLength);
 
   // initialization
@@ -160,13 +164,13 @@ NSString* fileContent;
   for(int charIndex = 0; charIndex < stringLength; charIndex++) {
 
     // read csvString current character and convert to NSString *tokenChar
-    NSString *tokenChar = [NSString stringWithFormat:@"%c", [csvString characterAtIndex: charIndex ]];
+    NSString *tokenChar = [NSString stringWithFormat:@"%c", [csvFile characterAtIndex: charIndex ]];
 
     //    NSLog(@"Character[%d] =  %@ unicode = %d", charIndex, tokenChar, [csvString characterAtIndex:charIndex]);
 
 
     // look for quote
-    if ([csvString characterAtIndex:charIndex] == quoteSentinel) {
+    if ([csvFile characterAtIndex:charIndex] == quoteSentinel) {
       if (insideQuote == true) {
         insideQuote = false; // closing quote
         ignoreComma = false;
@@ -179,7 +183,7 @@ NSString* fileContent;
       }
     }
     // look for comma & ignore comma if inside quote
-    if ([csvString characterAtIndex:charIndex] == commaSentinel && !ignoreComma) {
+    if ([csvFile characterAtIndex:charIndex] == commaSentinel && !ignoreComma) {
       tokens[tokenCount] = tokenWord; // grab the current tokenWord and add to tokens array
       //      NSLog(@"tokens[%d] = %@", tokenCount, tokenWord);
       tokenCount++;
@@ -187,8 +191,8 @@ NSString* fileContent;
       continue;
     }
     // look for end-of-line i.e., a carriageReturn followed by linefeed
-    if (([csvString characterAtIndex:charIndex] == carriageReturnSentinel)
-        && ([csvString characterAtIndex:charIndex+1] == linefeedSentinel)) {
+    if (([csvFile characterAtIndex:charIndex] == carriageReturnSentinel)
+        && ([csvFile characterAtIndex:charIndex+1] == linefeedSentinel)) {
 
       // grab the current tokenWord and add to tokens array. Note, this is the last token on the current line
       tokens[tokenCount] = tokenWord;
@@ -216,27 +220,24 @@ NSString* fileContent;
   NSLog(@"tokenCount = %d", tokenCount);
 //    NSLog(@"tokens array = %@", tokens);
 
-  // Build plist string in pieces
+// Build plist string in pieces
   plistData = [plistData stringByAppendingString:@"\n\n\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>"];
   plistData = [plistData stringByAppendingString:@"\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">"];
   plistData = [plistData stringByAppendingString:@"\n<plist version=\"1.0\">"];
   plistData = [plistData stringByAppendingString:@"\n<array>\n"];
 
-  plistData = [plistData stringByAppendingString:@"\t<dict>\n"];
+  // loop over entire data set
+  for(int tokenIndex=numberOfFields; tokenIndex < tokenCount; tokenIndex += numberOfFields){
 
-  for(int tokenIndex=numberOfFields; tokenIndex <= tokenCount; tokenIndex++){
-    plistData = [plistData stringByAppendingString:@"\t\t<key>"];
-    plistData = [plistData stringByAppendingString:tokens[tokenIndex % numberOfFields]];  // key
-    plistData = [plistData stringByAppendingString:@"</key>\n"];
+    // create a dictionary entry
+    plistData = [plistData stringByAppendingString:@"\t<dict>\n"];
 
-    plistData = [plistData stringByAppendingString:@"\t\t<string>"];
-    plistData = [plistData stringByAppendingString:tokens[tokenIndex]]; // value
-    plistData = [plistData stringByAppendingString:@"</string>\n"];
-  }
+    for(int i = 0; i < numberOfFields; i++){
 
-  plistData = [plistData stringByAppendingString:@"\t</dict>\n"];
-  plistData = [plistData stringByAppendingString:@"</array>\n"];
-  plistData = [plistData stringByAppendingString:@"</plist>\n"];
+      // key
+      plistData = [plistData stringByAppendingString:@"\t\t<key>"];
+      plistData = [plistData stringByAppendingString:tokens[i]];
+      plistData = [plistData stringByAppendingString:@"</key>\n"];
 
   NSLog(@"plistData\n\n%@", plistData);
 //    NSLog(@"DONE - Great work!");
