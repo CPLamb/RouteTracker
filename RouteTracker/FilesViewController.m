@@ -246,18 +246,17 @@ NSString* fileContent;
   // create an empty membersArray
   NSMutableArray *membersArray = [[NSMutableArray alloc]init];
 
-  // create empty dictionary
-  NSMutableDictionary *currentDictionary = [[NSMutableDictionary alloc]init];
-
   // loop over entire data set
   for(int tokenIndex=numberOfFields; tokenIndex < tokenCount; tokenIndex += numberOfFields){
-        [currentDictionary removeAllObjects];
+
+    // create empty dictionary
+    NSMutableDictionary *currentDictionary = [[NSMutableDictionary alloc]init];
+
     // loop over fields
     for(int i = 0; i < numberOfFields; i++){
        // Adds given key-value pair to the dictionary.
       [currentDictionary setValue:tokens[i + tokenIndex] forKey:tokens[i]];
     }
-
 
     // Add dictionary to membersArray
     [membersArray addObject:currentDictionary];
