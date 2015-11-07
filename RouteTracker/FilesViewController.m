@@ -66,7 +66,22 @@ NSString* fileContent;
 
 - (IBAction)changeFolderButton:(UIButton *)sender
 {
-  NSLog(@"Let's try to change the Google Drive folder");
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *URL = [documentsDirectory stringByAppendingPathComponent:@"SomeDirectoryName"];
+    URL = [URL stringByAppendingPathComponent:@"MyFileName.txt"];
+    NSError *AttributesError = nil;
+    NSDictionary *FileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:URL error:&AttributesError];
+    NSNumber *FileSizeNumber = [FileAttributes objectForKey:NSFileSize];
+    long FileSize = [FileSizeNumber longValue];
+    NSLog(@"File: %@, Size: %ld", URL, FileSize);
+
+    
+//Get path to a resource file in the bundle
+//    NSString *path = [applicationBundle pathForResource:@"MontereyWaveDistributionList"
+//                                                 ofType:@"plist"];	//Returns nil if not found
+//    NSLog(@"Let's see about file actions %@", path);
 }
 
 #pragma mark - Google Drive methods
