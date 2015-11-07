@@ -8,17 +8,7 @@
 
 #import "FilesViewController.h"
 #import "AppDelegate.h"
-
-
 #import "DrEditUtilities.h"
-
-@interface FilesViewController ()
-
-- (IBAction)downloadButton:(UIButton *)sender;
-- (IBAction)updateListButton:(UIButton *)sender;
-- (IBAction)changeFolderButton:(UIButton *)sender;
-
-@end
 
 @implementation FilesViewController
 NSString* fileContent;
@@ -52,7 +42,7 @@ NSString* fileContent;
     NSLog(@"FilesVC - Selected file %@", self.selectedFile.title);
 }
 
-- (IBAction)downloadButton:(UIButton *)sender
+- (IBAction)downloadSpreadsheetButton:(UIButton *)sender
 {
   NSLog(@"Let's try to download a file from Google Drive");
   [self loadFileContent];
@@ -61,14 +51,17 @@ NSString* fileContent;
   //    NSLog(@"spreadsheet is %d", spreadsheetNumber);
 }
 
-- (IBAction)updateListButton:(UIButton *)sender;
+- (IBAction)saveSpreadsheetButton:(UIButton *)sender
 {
-  NSLog(@"Copies downloaded file into NSUserDefaults and overwrites the local list");
+    NSLog(@"Overwrites the local list & then reloads the file");
+    
+// reloads the file that is selected ***This may not be necessary****
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate.memberData loadPlistData];
 }
 
-- (IBAction)changeFolderButton:(UIButton *)sender
+- (IBAction)testButton:(UIButton *)sender // for testing file management stuff
 {
-    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *URL = [documentsDirectory stringByAppendingPathComponent:@"SomeDirectoryName"];
@@ -79,10 +72,8 @@ NSString* fileContent;
     long FileSize = [FileSizeNumber longValue];
     NSLog(@"File: %@, Size: %ld", URL, FileSize);
 
-    
 //Get path to a resource file in the bundle
-//    NSString *path = [applicationBundle pathForResource:@"MontereyWaveDistributionList"
-//                                                 ofType:@"plist"];	//Returns nil if not found
+//    NSString *path = [applicationBundle pathForResource:@"MontereyWaveDistributionList" ofType:@"plist"];	//Returns nil if not found
 //    NSLog(@"Let's see about file actions %@", path);
 }
 
@@ -288,6 +279,5 @@ NSString* fileContent;
 
   return membersArray;
 }
-- (IBAction)changeSpreadsheet:(id)sender {
-}
+
 @end
