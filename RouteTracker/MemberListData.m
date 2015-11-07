@@ -35,7 +35,7 @@
         
 // Alloc/init the fileURL outside the boundaries of switch/case statement
         case 0:
-            fileURL = [mainBundle URLForResource:@"SCWaveDistributionListCurrent" withExtension:@"csv"];  //MontereyWaveDistributionList
+            fileURL = [mainBundle URLForResource:@"SCWaveDistributionListCurrent" withExtension:@"plist"];  //MontereyWaveDistributionList
             break;
         case 1:
             fileURL = [mainBundle URLForResource:@"MontereyWaveDistributionList" withExtension:@"plist"];  //MontereyWaveDistributionList
@@ -52,7 +52,8 @@
 
   NSLog(@"MemberListData -loadPlistData -- fileURL = \n%@", fileURL);
     self.membersArray = [NSArray arrayWithContentsOfURL:fileURL];
-//  NSLog(@"MemberListData -loadPlistData -- self.membersArray = \n%@", self.membersArray);
+
+    //  NSLog(@"MemberListData -loadPlistData -- self.membersArray = \n%@", self.membersArray);
 
 //    NSLog(@"MEMBERLISTDATA Array count %d", [self.membersArray count]);
 

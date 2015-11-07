@@ -239,7 +239,47 @@ NSString* fileContent;
       plistData = [plistData stringByAppendingString:tokens[i]];
       plistData = [plistData stringByAppendingString:@"</key>\n"];
 
-  NSLog(@"plistData\n\n%@", plistData);
-//    NSLog(@"DONE - Great work!");
+      // value
+      plistData = [plistData stringByAppendingString:@"\t\t<string>"];
+      plistData = [plistData stringByAppendingString:tokens[i + tokenIndex]];
+      plistData = [plistData stringByAppendingString:@"</string>\n"];
+
+    }
+
+    plistData = [plistData stringByAppendingString:@"\t</dict>\n"];
+
+  } // return for-loop over entire data set
+
+  plistData = [plistData stringByAppendingString:@"</array>\n"];
+  plistData = [plistData stringByAppendingString:@"</plist>\n"];
+
+// The pList is complete
+  NSLog(@"FilesVC csvDataToArrayOfDictionaries -- plistData\n\n%@", plistData);
+
+
+// Create an array of dictionaries
+
+  // create an empty membersArray
+  NSMutableArray *membersArray = [[NSMutableArray alloc]init];
+
+  // loop over entire data set
+  for(int tokenIndex=numberOfFields; tokenIndex < tokenCount; tokenIndex += numberOfFields){
+
+    // create empty dictionary
+    NSMutableDictionary *currentDictionary = [[NSMutableDictionary alloc]init];
+
+    // loop over fields
+    for(int i = 0; i < numberOfFields; i++){
+       // Adds given key-value pair to the dictionary.
+      [currentDictionary setValue:tokens[i + tokenIndex] forKey:tokens[i]];
+    }
+
+    // Add dictionary to membersArray
+    [membersArray addObject:currentDictionary];
+  }
+
+  NSLog(@"FilesVC csvDataToArrayOfDictionaries -- membersArray = \n%@", membersArray);
+
+  return membersArray;
 }
 @end
