@@ -1035,6 +1035,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="changeSpreadsheet:" destination="Foq-vK-isD" eventType="touchUpInside" id="F6z-Nb-4qY"/>
                                     <action selector="uploadButton:" destination="Foq-vK-isD" eventType="touchUpInside" id="iSW-Vo-cf0"/>
                                 </connections>
                             </button>

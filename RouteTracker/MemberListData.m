@@ -52,6 +52,7 @@
 
   NSLog(@"MemberListData -loadPlistData -- fileURL = \n%@", fileURL);
     self.membersArray = [NSArray arrayWithContentsOfURL:fileURL];
+//    self.membersArray = [self csvDataToArrayOfDictionaries:<#(NSString *)#>]
 //  NSLog(@"MemberListData -loadPlistData -- self.membersArray = \n%@", self.membersArray);
 
 //    NSLog(@"MEMBERLISTDATA Array count %d", [self.membersArray count]);
