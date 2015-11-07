@@ -7,6 +7,8 @@
 //
 
 #import "FilesViewController.h"
+#import "AppDelegate.h"
+
 
 #import "DrEditUtilities.h"
 
@@ -280,6 +282,12 @@ NSString* fileContent;
 
   NSLog(@"FilesVC csvDataToArrayOfDictionaries -- membersArray = \n%@", membersArray);
 
+  AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+  [delegate.memberData loadPlistData];
+  NSLog(@"Should reload the dataFile %@", delegate.memberData.description);
+
   return membersArray;
+}
+- (IBAction)changeSpreadsheet:(id)sender {
 }
 @end
