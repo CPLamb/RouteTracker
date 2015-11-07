@@ -1020,7 +1020,7 @@
                                 <rect key="frame" x="16" y="229" width="288" height="39"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <state key="normal" title="Notify Office when Done">
+                                <state key="normal" title="Test Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -1031,12 +1031,12 @@
                                 <rect key="frame" x="16" y="192" width="288" height="39"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <state key="normal" title="Change Spreadsheet">
+                                <state key="normal" title="Save Spreadsheet">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="changeSpreadsheet:" destination="Foq-vK-isD" eventType="touchUpInside" id="F6z-Nb-4qY"/>
-                                    <action selector="uploadButton:" destination="Foq-vK-isD" eventType="touchUpInside" id="iSW-Vo-cf0"/>
+                                    <action selector="saveSpreadsheet:" destination="Foq-vK-isD" eventType="touchUpInside" id="JKO-NV-eGt"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vra-XP-1Kk">

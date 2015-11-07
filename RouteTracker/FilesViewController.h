@@ -24,7 +24,5 @@
 
 @property (strong, nonatomic) NSArray *namesArray;  // array of indexed array of dictionaries
 @property (strong, nonatomic) NSArray *membersArray;    // complete list derived from the PList
-- (IBAction)changeSpreadsheet:(id)sender;
-
 
 @end
