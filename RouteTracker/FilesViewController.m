@@ -204,13 +204,13 @@ NSString* fileContent;
 
   NSLog(@"tokenCount = %d", tokenCount);
 
-  // Build plist string in pieces
+// Build plist string in pieces
   plistData = [plistData stringByAppendingString:@"\n\n\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>"];
   plistData = [plistData stringByAppendingString:@"\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">"];
   plistData = [plistData stringByAppendingString:@"\n<plist version=\"1.0\">"];
   plistData = [plistData stringByAppendingString:@"\n<array>\n"];
 
-// loop over entire data set
+  // loop over entire data set
   for(int tokenIndex=numberOfFields; tokenIndex < tokenCount; tokenIndex += numberOfFields){
 
     // create a dictionary entry
@@ -237,24 +237,31 @@ NSString* fileContent;
   plistData = [plistData stringByAppendingString:@"</array>\n"];
   plistData = [plistData stringByAppendingString:@"</plist>\n"];
 
+// The pList is complete
   NSLog(@"FilesVC csvDataToArrayOfDictionaries -- plistData\n\n%@", plistData);
 
 
-  // Create an array of dictionaries
+// Create an array of dictionaries
 
-  // create an empty array
+  // create an empty membersArray
   NSMutableArray *membersArray = [[NSMutableArray alloc]init];
 
   // create empty dictionary
   NSMutableDictionary *currentDictionary = [[NSMutableDictionary alloc]init];
 
-  for(int tokenIndex=numberOfFields; tokenIndex <= tokenCount; tokenIndex++){
-     // Adds given key-value pair to the dictionary.
-    [currentDictionary setValue:tokens[tokenIndex] forKey:tokens[tokenIndex % numberOfFields]];
-  }
+  // loop over entire data set
+  for(int tokenIndex=numberOfFields; tokenIndex < tokenCount; tokenIndex += numberOfFields){
+        [currentDictionary removeAllObjects];
+    // loop over fields
+    for(int i = 0; i < numberOfFields; i++){
+       // Adds given key-value pair to the dictionary.
+      [currentDictionary setValue:tokens[i + tokenIndex] forKey:tokens[i]];
+    }
 
-  // Add dictionary to membersArray
-  [membersArray addObject:currentDictionary];
+
+    // Add dictionary to membersArray
+    [membersArray addObject:currentDictionary];
+  }
 
   NSLog(@"FilesVC csvDataToArrayOfDictionaries -- membersArray = \n%@", membersArray);
 
