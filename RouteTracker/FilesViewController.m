@@ -82,6 +82,14 @@ NSString* fileContent;
 //    NSLog(@"Let's see about file actions %@", path);
 }
 
+- (IBAction)test02Button:(UIButton *)sender {
+    NSLog(@"02 test action");
+}
+
+- (IBAction)test03Button:(UIButton *)sender {
+    NSLog(@"03 test action");
+}
+
 #pragma mark - Google Drive methods
 
 - (void)loadFileContent {
@@ -115,6 +123,8 @@ NSString* fileContent;
 
         self.membersArray = [self csvDataToArrayOfDictionaries:fileContent]; // convert to plist
 
+          self.numberOfRowsTextfield.text = [NSString stringWithFormat:@"%lu", (unsigned long)[self.membersArray count]];
+          
         NSLog(@"FilesVC loadFileContent - self.membersArray = \n%@", self.membersArray);
 
       } else {

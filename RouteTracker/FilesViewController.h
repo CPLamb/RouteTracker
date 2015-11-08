@@ -28,5 +28,7 @@
 - (IBAction)downloadSpreadsheetButton:(UIButton *)sender;
 - (IBAction)saveSpreadsheetButton:(UIButton *)sender;
 - (IBAction)testButton:(UIButton *)sender;
+- (IBAction)test02Button:(UIButton *)sender;
+- (IBAction)test03Button:(UIButton *)sender;
 
 @end
