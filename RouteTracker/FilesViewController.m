@@ -70,6 +70,9 @@ NSString* fileContent;
     NSDictionary *FileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:URL error:&AttributesError];
     NSNumber *FileSizeNumber = [FileAttributes objectForKey:NSFileSize];
     long FileSize = [FileSizeNumber longValue];
+
+//  NSString *loadedFile = [NSString stringWithContentsOfURL:URL encoding:<#(NSStringEncoding)#> error:<#(NSError * _Nullable __autoreleasing * _Nullable)#>
+
     NSLog(@"File: %@, Size: %ld", URL, FileSize);
 
 //Get path to a resource file in the bundle
