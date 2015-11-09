@@ -70,7 +70,8 @@ NSString* fileContent;
     path = [path stringByAppendingPathComponent:self.filenameLabel.text];
     NSData *theData;
     theData = [[NSFileManager defaultManager] contentsAtPath:path];
-    NSLog(@"TheData = %@", theData);
+    NSString *theDataString = [[NSString alloc] initWithData:theData encoding:NSUTF8StringEncoding];
+    NSLog(@"TheData = %@", theDataString);
 }
 
 - (IBAction)test02Button:(UIButton *)sender {
