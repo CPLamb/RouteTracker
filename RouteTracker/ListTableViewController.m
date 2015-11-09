@@ -305,6 +305,7 @@
             [driversListSet addObject:[[self.membersArray objectAtIndex:i] objectForKey:@"Driver"]];                                   }
     }
     self.driversArray = [driversListSet allObjects];
+//  self.driversArray = (amy, sam , john);
     NSLog(@"The driversList is %@", self.driversArray);
 
     [[NSUserDefaults standardUserDefaults] setObject:self.driversArray forKey:@"drivers_list"];
@@ -338,7 +339,7 @@
     
     
     self.membersArray = [NSArray arrayWithContentsOfURL:fileURL];
-    NSLog(@"Array count %d", [self.membersArray count]);
+    NSLog(@"Array count %lu", (unsigned long)[self.membersArray count]);
     
 // Recalculates the driversArray and assigns it to NSUserDefaults
     // self.driversArray = [NSArray arrayWithObjects:@"Bill", @"CPL", @"Mick", nil];

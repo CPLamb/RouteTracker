@@ -32,7 +32,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     NSInteger dataFilenameIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_spreadsheet"];
-    NSLog(@"dataFilenameIndex = %ld", dataFilenameIndex);
+//    NSLog(@"HomeViewController -- dataFilenameIndex = %ld", dataFilenameIndex);
 // Sets up display of magazine loaded
     switch(dataFilenameIndex) {
         case 0:
@@ -42,7 +42,7 @@
             self.selectedMagazine.text = @"MontereyWaveDistributionList";
            break;
     }
-    NSLog(@"Listing the loaded spreadsheet %@", self.selectedMagazine.text);
+//    NSLog(@"Listing the loaded spreadsheet %@", self.selectedMagazine.text);
 }
 
 - (void)didReceiveMemoryWarning {

@@ -187,7 +187,7 @@ static NSString *const kClientSecret = @"F2CVzLCS5PQj2T4JazioSL8-";
   
   if ([segueIdentifier isEqualToString:@"editFile"]) {                  // tap a cell
       
-      NSLog(@"DrEditFilesListVC - YEA-HA let look at the file!");
+      NSLog(@"DrEditFilesListVC selcted file = %@", self.selectedSpreadsheet);
       viewController.selectedFile = self.selectedSpreadsheet;
       viewController.driveService = [self driveService];
   } else if ([segueIdentifier isEqualToString:@"addFile"]) {    // tap add button
