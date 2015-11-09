@@ -20,13 +20,15 @@
 @interface SetupTableViewController : UITableViewController
 
 @property (weak, nonatomic) id <SetupTableViewControllerDelegate> delegate;
+@property (weak, nonatomic) NSArray *directoryContent;
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *magazineSelectorControl;
-
 @property (weak, nonatomic) IBOutlet UISegmentedControl *mapSelectorControl;
 @property (weak, nonatomic) IBOutlet UIPickerView *filePicker;
-
 @property (weak, nonatomic) IBOutlet UIPickerView *driverPicker;
 
 - (IBAction)mapTypeControl:(UISegmentedControl *)sender;
+
+- (IBAction)TestButton:(UIButton *)sender;
+
 @end
