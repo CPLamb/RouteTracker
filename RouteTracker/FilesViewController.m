@@ -105,6 +105,31 @@ NSString* fileContent;
     }
 }
 
+- (IBAction)test04Button:(UIButton *)sender {
+    NSLog(@"04 test action - DELETES all files in the directory");
+
+//DELETE ALL FILES IN DIRECTORY
+    NSString *path;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    path = [paths objectAtIndex:0];
+    NSArray *directoryContent = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:NULL];
+    NSError *error = nil;
+    if (error == nil)
+    {
+        for (NSString *Filename in directoryContent)
+        {
+            NSString *FilePath = [path stringByAppendingPathComponent:Filename];
+            BOOL removeSuccess = [[NSFileManager defaultManager] removeItemAtPath:FilePath error:&error];
+            if (!removeSuccess)
+            {
+                // Error handling
+                
+            }
+        }
+    }
+
+}
+
 #pragma mark - Google Drive methods
 
 - (void)loadFileContent {

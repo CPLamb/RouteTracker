@@ -30,5 +30,6 @@
 - (IBAction)testButton:(UIButton *)sender;
 - (IBAction)test02Button:(UIButton *)sender;
 - (IBAction)test03Button:(UIButton *)sender;
+- (IBAction)test04Button:(UIButton *)sender;
 
 @end
