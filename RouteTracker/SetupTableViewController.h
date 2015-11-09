@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *magazineSelectorControl;
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *mapSelectorControl;
+@property (weak, nonatomic) IBOutlet UIPickerView *filePicker;
 
 @property (weak, nonatomic) IBOutlet UIPickerView *driverPicker;
 

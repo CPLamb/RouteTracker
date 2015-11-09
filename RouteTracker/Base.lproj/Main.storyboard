@@ -842,19 +842,42 @@
                                         </tableViewCellContentView>
                                         <animations/>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="140" id="sms-yX-0kH">
+                                        <rect key="frame" x="0.0" y="281.5" width="320" height="140"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sms-yX-0kH" id="WwW-am-Qh5">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="139.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B2x-Yg-t4U">
+                                                    <rect key="frame" x="17" y="32" width="285" height="99.5"/>
+                                                    <connections>
+                                                        <outlet property="dataSource" destination="0GM-Ui-0MM" id="lMz-vo-Gnt"/>
+                                                        <outlet property="delegate" destination="0GM-Ui-0MM" id="ALF-26-oEg"/>
+                                                    </connections>
+                                                </pickerView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Downloaded Files;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ws-za-DFO">
+                                                    <rect key="frame" x="9" y="3" width="166" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="The Drivers" id="uM4-M9-Qif">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="160" id="Jhf-F0-8Us">
-                                        <rect key="frame" x="0.0" y="323.5" width="320" height="160"/>
+                                        <rect key="frame" x="0.0" y="463.5" width="320" height="160"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jhf-F0-8Us" id="OrM-E1-v4u">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="159.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="11K-as-cON">
-                                                    <rect key="frame" x="64" y="8" width="168" height="140"/>
+                                                    <rect key="frame" x="64" y="8" width="168" height="143.5"/>
                                                     <animations/>
                                                     <connections>
                                                         <outlet property="dataSource" destination="0GM-Ui-0MM" id="nNR-Me-n3e"/>
@@ -871,7 +894,7 @@
                             <tableViewSection headerTitle="The Other Stuff" id="LDV-Wd-O1y">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="MMw-vY-C2y">
-                                        <rect key="frame" x="0.0" y="525.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="665.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MMw-vY-C2y" id="ave-fO-7oL">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -881,7 +904,7 @@
                                         <animations/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="vAc-lr-ZiC">
-                                        <rect key="frame" x="0.0" y="569.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="709.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vAc-lr-ZiC" id="50q-OW-NNB">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -891,7 +914,7 @@
                                         <animations/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="pke-cH-nsx">
-                                        <rect key="frame" x="0.0" y="613.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="753.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pke-cH-nsx" id="PaV-JN-x22">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -910,6 +933,7 @@
                     <navigationItem key="navigationItem" title="Setup" id="iNO-e7-wgu"/>
                     <connections>
                         <outlet property="driverPicker" destination="11K-as-cON" id="n0u-sz-B5D"/>
+                        <outlet property="filePicker" destination="B2x-Yg-t4U" id="rsF-TB-rhY"/>
                         <outlet property="magazineSelectorControl" destination="0Q6-C8-aH6" id="AkR-1c-dIF"/>
                         <outlet property="mapSelectorControl" destination="vKe-Ls-2dq" id="t6H-nn-V3i"/>
                     </connections>
