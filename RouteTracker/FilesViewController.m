@@ -62,6 +62,8 @@ NSString* fileContent;
 
 - (IBAction)testButton:(UIButton *)sender // for testing file management stuff
 {
+    NSLog(@"01 test action - READS a file from the Documents directory");
+
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *myString = @"I'm the man ";
@@ -83,11 +85,34 @@ NSString* fileContent;
 }
 
 - (IBAction)test02Button:(UIButton *)sender {
-    NSLog(@"02 test action");
+    NSLog(@"02 test action - SAVES a file to Documents directory");
+    NSData *file = [self.fileContent.text dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *path;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    path = [paths objectAtIndex:0];
+    path = [path stringByAppendingPathComponent:self.filenameLabel.text];
+    NSLog(@"Path/FilenName = %@", path);
+    
+    [[NSFileManager defaultManager] createFileAtPath:path
+                                            contents:file
+                                          attributes:nil];
 }
 
 - (IBAction)test03Button:(UIButton *)sender {
-    NSLog(@"03 test action");
+    NSLog(@"03 test action - LIST all files in directory");
+    
+    //----- LIST ALL FILES -----
+    NSLog(@"LISTING ALL FILES FOUND");
+    
+    int Count;
+    NSString *path;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    path = [paths objectAtIndex:0];
+    NSArray *directoryContent = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:NULL];
+    for (Count = 0; Count < (int)[directoryContent count]; Count++)
+    {
+        NSLog(@"File %d: %@", (Count + 1), [directoryContent objectAtIndex:Count]);
+    }
 }
 
 #pragma mark - Google Drive methods
