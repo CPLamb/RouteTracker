@@ -37,7 +37,7 @@ NSString* fileContent;
 - (void)displayFileName
 {
   NSString *fileTitle = self.selectedFile.title;
-  self.filenameLabel.text = [NSString stringWithFormat:@"Filename: %@", fileTitle];
+  self.filenameLabel.text = fileTitle;
   self.modifiedDateTextfield.text = [self.selectedFile.modifiedDate stringValue];
     NSLog(@"FilesVC - Selected file %@", self.selectedFile.title);
 }
@@ -64,24 +64,13 @@ NSString* fileContent;
 {
     NSLog(@"01 test action - READS a file from the Documents directory");
 
+    NSString *path;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *myString = @"I'm the man ";
-    NSString *URL = [documentsDirectory stringByAppendingPathComponent:@"SomeDirectoryName"];
-    URL = [URL stringByAppendingPathComponent:@"MyFileName.txt"];
-    URL = [URL stringByAppendingString:myString];
-    NSError *AttributesError = nil;
-    NSDictionary *FileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:URL error:&AttributesError];
-    NSNumber *FileSizeNumber = [FileAttributes objectForKey:NSFileSize];
-    long FileSize = [FileSizeNumber longValue];
-
- //   NSString *loadedFile = [NSString stringWithContentsOfURL:URL encoding:NSUTF8StringEncoding error:nil];
- //   NSLog(@"%@",loadedFile);
-    NSLog(@"File: %@, Size: %ld", URL, FileSize);
-
-//Get path to a resource file in the bundle
-//    NSString *path = [applicationBundle pathForResource:@"MontereyWaveDistributionList" ofType:@"plist"];	//Returns nil if not found
-//    NSLog(@"Let's see about file actions %@", path);
+    path = [paths objectAtIndex:0];
+    path = [path stringByAppendingPathComponent:self.filenameLabel.text];
+    NSData *theData;
+    theData = [[NSFileManager defaultManager] contentsAtPath:path];
+    NSLog(@"TheData = %@", theData);
 }
 
 - (IBAction)test02Button:(UIButton *)sender {
