@@ -826,35 +826,66 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="55.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e2p-ZA-Dg0">
-                                                    <rect key="frame" x="181" y="12" width="51" height="31"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Access Google Drive:" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="33f-1S-nLb">
+                                                    <rect key="frame" x="8" y="-1" width="169" height="55.5"/>
                                                     <animations/>
-                                                </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Access Google Drive:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="33f-1S-nLb">
-                                                    <rect key="frame" x="8" y="14" width="175" height="25"/>
-                                                    <animations/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cLG-aA-ER4">
+                                                    <rect key="frame" x="256" y="13" width="46" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="16"/>
+                                                    <state key="normal" title="Click"/>
+                                                    <connections>
+                                                        <action selector="TestButton:" destination="0GM-Ui-0MM" eventType="touchUpInside" id="T0A-g8-gJ7"/>
+                                                    </connections>
+                                                </button>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e2p-ZA-Dg0">
+                                                    <rect key="frame" x="185" y="11" width="51" height="31"/>
+                                                    <animations/>
+                                                </switch>
                                             </subviews>
                                             <animations/>
                                         </tableViewCellContentView>
                                         <animations/>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="140" id="sms-yX-0kH">
+                                        <rect key="frame" x="0.0" y="281.5" width="320" height="140"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sms-yX-0kH" id="WwW-am-Qh5">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="139.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B2x-Yg-t4U">
+                                                    <rect key="frame" x="17" y="32" width="285" height="99.5"/>
+                                                    <connections>
+                                                        <outlet property="dataSource" destination="0GM-Ui-0MM" id="lMz-vo-Gnt"/>
+                                                        <outlet property="delegate" destination="0GM-Ui-0MM" id="ALF-26-oEg"/>
+                                                    </connections>
+                                                </pickerView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Downloaded Files;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ws-za-DFO">
+                                                    <rect key="frame" x="9" y="3" width="166" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="The Drivers" id="uM4-M9-Qif">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="160" id="Jhf-F0-8Us">
-                                        <rect key="frame" x="0.0" y="323.5" width="320" height="160"/>
+                                        <rect key="frame" x="0.0" y="463.5" width="320" height="160"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jhf-F0-8Us" id="OrM-E1-v4u">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="159.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="11K-as-cON">
-                                                    <rect key="frame" x="64" y="8" width="168" height="140"/>
+                                                    <rect key="frame" x="64" y="8" width="168" height="143.5"/>
                                                     <animations/>
                                                     <connections>
                                                         <outlet property="dataSource" destination="0GM-Ui-0MM" id="nNR-Me-n3e"/>
@@ -871,7 +902,7 @@
                             <tableViewSection headerTitle="The Other Stuff" id="LDV-Wd-O1y">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="MMw-vY-C2y">
-                                        <rect key="frame" x="0.0" y="525.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="665.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MMw-vY-C2y" id="ave-fO-7oL">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -881,7 +912,7 @@
                                         <animations/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="vAc-lr-ZiC">
-                                        <rect key="frame" x="0.0" y="569.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="709.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vAc-lr-ZiC" id="50q-OW-NNB">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -891,7 +922,7 @@
                                         <animations/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="pke-cH-nsx">
-                                        <rect key="frame" x="0.0" y="613.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="753.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pke-cH-nsx" id="PaV-JN-x22">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -910,6 +941,7 @@
                     <navigationItem key="navigationItem" title="Setup" id="iNO-e7-wgu"/>
                     <connections>
                         <outlet property="driverPicker" destination="11K-as-cON" id="n0u-sz-B5D"/>
+                        <outlet property="filePicker" destination="B2x-Yg-t4U" id="rsF-TB-rhY"/>
                         <outlet property="magazineSelectorControl" destination="0Q6-C8-aH6" id="AkR-1c-dIF"/>
                         <outlet property="mapSelectorControl" destination="vKe-Ls-2dq" id="t6H-nn-V3i"/>
                     </connections>
@@ -1009,7 +1041,7 @@
                                 <rect key="frame" x="16" y="155" width="288" height="39"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <state key="normal" title="Download Spreadsheet">
+                                <state key="normal" title="Download from Google">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -1017,10 +1049,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ppK-9o-GwP">
-                                <rect key="frame" x="16" y="370" width="288" height="39"/>
+                                <rect key="frame" x="16" y="354" width="288" height="39"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <state key="normal" title="01 Test READ button">
+                                <state key="normal" title="01 READ file ">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -1028,9 +1060,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CP0-NA-LoV">
-                                <rect key="frame" x="16" y="417" width="288" height="39"/>
+                                <rect key="frame" x="16" y="307" width="288" height="39"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <state key="normal" title="02 Test SAVE button">
+                                <state key="normal" title="02 SAVE file">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -1038,24 +1070,24 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6t3-8N-pLt">
-                                <rect key="frame" x="16" y="464" width="288" height="39"/>
+                                <rect key="frame" x="16" y="401" width="288" height="39"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <state key="normal" title="03 Test LIST FILES button">
+                                <state key="normal" title="03 LIST files">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="test03Button:" destination="Foq-vK-isD" eventType="touchUpInside" id="dma-QX-DmG"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VCf-ZL-Z5i">
-                                <rect key="frame" x="16" y="192" width="288" height="39"/>
-                                <animations/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z4g-4P-Rpc">
+                                <rect key="frame" x="16" y="448" width="288" height="39"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <state key="normal" title="Save Spreadsheet">
+                                <state key="normal" title="04 DELETE files">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="saveSpreadsheetButton:" destination="Foq-vK-isD" eventType="touchUpInside" id="HdX-r1-M0E"/>
+                                    <action selector="test03Button:" destination="Foq-vK-isD" eventType="touchUpInside" id="d3z-g4-Wdm"/>
+                                    <action selector="test04Button:" destination="Foq-vK-isD" eventType="touchUpInside" id="FYL-gR-O9C"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vra-XP-1Kk">
@@ -1079,20 +1111,20 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="# of Records:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oxZ-2v-YQh">
-                                <rect key="frame" x="16" y="242" width="110" height="21"/>
+                                <rect key="frame" x="16" y="205" width="110" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YVa-qK-LC1">
-                                <rect key="frame" x="134" y="239" width="66" height="30"/>
+                                <rect key="frame" x="134" y="202" width="66" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="First couple lines of the data file, to confirm that the proper file has been downloaded" translatesAutoresizingMaskIntoConstraints="NO" id="we9-TB-Xtu">
-                                <rect key="frame" x="16" y="277" width="288" height="68"/>
+                                <rect key="frame" x="16" y="240" width="288" height="59"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>

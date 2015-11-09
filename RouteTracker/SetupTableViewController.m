@@ -17,6 +17,7 @@
 
 @implementation SetupTableViewController
 @synthesize delegate = _delegate;
+@synthesize directoryContent = _directoryContent;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -61,6 +62,20 @@
 - (IBAction)mapTypeControl:(UISegmentedControl *)sender
 {
     [[NSUserDefaults standardUserDefaults] setInteger:sender.selectedSegmentIndex forKey:@"selected_map_type"];
+}
+
+- (IBAction)TestButton:(UIButton *)sender {
+    NSLog(@"LISTS all files in directory");
+
+    int Count;
+    NSString *path;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    path = [paths objectAtIndex:0];
+    self.directoryContent = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:NULL];
+    for (Count = 0; Count < (int)[self.directoryContent count]; Count++)
+    {
+        NSLog(@"File %d: %@", (Count + 1), [self.directoryContent objectAtIndex:Count]);
+    }
 }
 
 
