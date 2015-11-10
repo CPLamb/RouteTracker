@@ -107,10 +107,12 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    // GETs the selected driver & SETs it into theUserDefaults
+    // GETs the selected file & SETs it into theUserDefaults
     NSString *driver = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"drivers_list"] objectAtIndex:row];
     [[NSUserDefaults standardUserDefaults]setObject:driver forKey:@"selected_driver"];
     NSLog(@"Driver -> %@", driver);
+  NSLog(@"\npickerView:\n%@\ndidSelectRow:\n%ld\ninComponent:\n%ld",pickerView,(long)row,(long)component  );
+
 }
 
 
