@@ -74,7 +74,7 @@
     self.directoryContent = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:NULL];
     for (Count = 0; Count < (int)[self.directoryContent count]; Count++)
     {
-        NSLog(@"File %d: %@", (Count + 1), [self.directoryContent objectAtIndex:Count]);
+        NSLog(@"File %d: %@", Count, [self.directoryContent objectAtIndex:Count]);
     }
 }
 
@@ -92,15 +92,17 @@
 // returns the number of rows
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    NSArray *driversList = [[NSUserDefaults standardUserDefaults] objectForKey:@"drivers_list"];
-    return [driversList count];
+    return [self.directoryContent count];
+//    NSArray *driversList = [[NSUserDefaults standardUserDefaults] objectForKey:@"drivers_list"];
+//    return [driversList count];
 }
 
 // returns the title of each row
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    NSArray *driversList = [[NSUserDefaults standardUserDefaults] objectForKey:@"drivers_list"];
-    return [driversList objectAtIndex:row];
+    return [self.directoryContent objectAtIndex:row];
+//    NSArray *driversList = [[NSUserDefaults standardUserDefaults] objectForKey:@"drivers_list"];
+//    return [driversList objectAtIndex:row];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
