@@ -92,23 +92,25 @@
 // returns the number of rows
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    NSArray *driversList = [[NSUserDefaults standardUserDefaults] objectForKey:@"drivers_list"];
-    return [driversList count];
+  NSLog(@"\npickerView:\n%@ \nnumberOfRowsInComponent:\n%ld  = \n%lu", pickerView, (long)component, [self.directoryContent count]);
+  return [self.directoryContent count];
 }
 
 // returns the title of each row
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    NSArray *driversList = [[NSUserDefaults standardUserDefaults] objectForKey:@"drivers_list"];
-    return [driversList objectAtIndex:row];
+  NSLog(@"\npickerView: \n%@ \ntitleForRow: \n%ld \nforComponent: \n%ld = \n%@", pickerView,(long)row, (long)component, [self.directoryContent objectAtIndex:row]);
+    return [self.directoryContent objectAtIndex:row];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    // GETs the selected driver & SETs it into theUserDefaults
+    // GETs the selected file & SETs it into theUserDefaults
     NSString *driver = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"drivers_list"] objectAtIndex:row];
     [[NSUserDefaults standardUserDefaults]setObject:driver forKey:@"selected_driver"];
     NSLog(@"Driver -> %@", driver);
+  NSLog(@"\npickerView:\n%@\ndidSelectRow:\n%ld\ninComponent:\n%ld",pickerView,(long)row,(long)component  );
+
 }
 
 
