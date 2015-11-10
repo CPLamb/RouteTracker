@@ -386,7 +386,8 @@ const int  MAX_PINS_TO_DROP = 200;
     MKPinAnnotationView *customPinView = [[MKPinAnnotationView alloc]
                                           initWithAnnotation:annotation
                                           reuseIdentifier:BridgeAnnotationIdentifier];
-    customPinView.pinColor = MKPinAnnotationColorRed;
+    customPinView.pinColor = MKPinAnnotationColorGreen;
+    
     //       customPinView.animatesDrop = YES;
     customPinView.canShowCallout = YES;
     //            customPinView.image = [UIImage imageNamed:@"lobster.png"];
