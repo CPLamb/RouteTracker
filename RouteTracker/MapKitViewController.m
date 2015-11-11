@@ -316,7 +316,7 @@ const int  MAX_PINS_TO_DROP = 200;
         //        MapItem *aNewPin = [[MapItem alloc] initWithCoordinates:coordinates placeName:aName description:aDescription];
         
         // Adds annotations to the mapAnnotations array depending upon hasShop Boolean
-        if (hasShop) {
+        if (!hasShop) {
             MapItem *aNewPin = [[MapItem alloc] initWithCoordinates:coordinates memberData:d];
             aNewPin.memberData = d; // set data about the member so it can be passed to annotations and disclosures
             [self.mapAnnotations addObject:aNewPin];
@@ -376,7 +376,7 @@ const int  MAX_PINS_TO_DROP = 200;
     {
         return nil;
     }
-    // NSLog(@"The annotation is %@", annotation);
+    NSLog(@"The annotation is %@", annotation);
     // try to dequeue an existing pin view first
     static NSString *BridgeAnnotationIdentifier = @"bridgeAnnotationIdentifier";
     
@@ -386,15 +386,15 @@ const int  MAX_PINS_TO_DROP = 200;
     MKPinAnnotationView *customPinView = [[MKPinAnnotationView alloc]
                                           initWithAnnotation:annotation
                                           reuseIdentifier:BridgeAnnotationIdentifier];
-    customPinView.pinColor = MKPinAnnotationColorGreen;
+    customPinView.pinColor = MKPinAnnotationColorRed;
+ //   customPinView.
     
-    //       customPinView.animatesDrop = YES;
     customPinView.canShowCallout = YES;
     //            customPinView.image = [UIImage imageNamed:@"lobster.png"];
     //            NSLog(@"The customPinView is %@", customPinView);
     
     
-    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
+    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeInfoDark];
     //            [rightButton addTarget:nil action:nil forControlEvents:UIControlEventTouchUpInside];
     customPinView.rightCalloutAccessoryView = rightButton;
     

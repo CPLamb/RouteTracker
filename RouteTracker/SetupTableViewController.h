@@ -29,6 +29,4 @@
 
 - (IBAction)mapTypeControl:(UISegmentedControl *)sender;
 
-- (IBAction)TestButton:(UIButton *)sender;
-
 @end
