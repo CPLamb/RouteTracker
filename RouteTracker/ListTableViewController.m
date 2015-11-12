@@ -68,7 +68,27 @@
         [self makeSectionsIndex:delegate.memberData.membersArray];     // self.membersArray
         [self makeIndexedArray:delegate.memberData.membersArray withIndex:self.indexArray];
     }
-    sortedByDriver = NO;
+    
+// Saves the edited member (detailItem) to the current array
+    NSDictionary *editedMemberItem = [[NSUserDefaults standardUserDefaults] objectForKey:@"selected_member"];
+    NSLog(@"edited member = %@", editedMemberItem);
+    NSArray *selectedIndexPathArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"selected_indexPath"];
+    NSLog(@"It's indexPath = %@", selectedIndexPathArray);
+    
+    
+    
+// Writes edited detailItem to the filtered Array
+    NSMutableArray *theArray = [self.namesArray objectAtIndex:0];
+
+    long section = [[selectedIndexPathArray objectAtIndex:1] integerValue];
+    long row = [[selectedIndexPathArray objectAtIndex:0] integerValue];
+    NSMutableArray *theSection = [self.namesArray objectAtIndex:section];
+    NSDictionary *theDictionary = [theSection objectAtIndex:row];
+    [theSection replaceObjectAtIndex:[[selectedIndexPathArray objectAtIndex:1] integerValue] withObject:editedMemberItem];
+
+    NSLog(@"ListTableVC - the dictionary = %@", theSection);
+    
+//    sortedByDriver = NO;
     memberTableViewCell = [[MemberTableViewCell alloc] init];
     
 // Reloads the list
@@ -94,7 +114,7 @@
         self.selectedMemberPath = [self.tableView indexPathForCell:sender];
         NSArray *object = [[self.namesArray objectAtIndex:self.selectedMemberPath.section] objectAtIndex:self.selectedMemberPath.row];
         
-        // Sets the detailItem to the selected item
+// Sets the detailItem to the selected item
         [[segue destinationViewController] setSelectedIndexPath:self.selectedMemberPath];
         [[segue destinationViewController] setDetailItem:object];
     }
@@ -307,7 +327,7 @@
             [driversListSet addObject:[[self.membersArray objectAtIndex:i] objectForKey:@"Driver"]];                                   }
     }
     self.driversArray = [driversListSet allObjects];
-//  self.driversArray = (amy, sam , john);
+
     NSLog(@"The driversList is %@", self.driversArray);
 
     [[NSUserDefaults standardUserDefaults] setObject:self.driversArray forKey:@"drivers_list"];

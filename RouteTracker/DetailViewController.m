@@ -23,7 +23,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+// IndexPath of the selected detailItem dictionary
     NSLog(@"Selected indexPath = %@", self.selectedIndexPath);
+     int section = (int)self.selectedIndexPath.section;
+    int row = (int)self.selectedIndexPath.row;
+
+    NSArray *indexPathArray = [NSArray arrayWithObjects:[NSNumber numberWithInt:row] , [NSNumber numberWithInt:section], nil];
+    [[NSUserDefaults standardUserDefaults] setObject:indexPathArray forKey:@"selected_indexPath"];
+
+    
 // Assigns values to the text fields
     self.nameTextField.text = [self.detailItem objectForKey:@"Name"];
     self.deliverTextField.text = [self.detailItem objectForKey:@"Total Quantity to Deliver"];

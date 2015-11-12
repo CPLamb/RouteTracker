@@ -39,6 +39,7 @@
         [[NSUserDefaults standardUserDefaults] setObject:@"ALL" forKey:@"selected_driver"];
         [[NSUserDefaults standardUserDefaults] setObject:@"initialString" forKey:@"selected_plist"];
         [[NSUserDefaults standardUserDefaults] setObject:@"initialDictionary" forKey:@"selected_member"];
+        [[NSUserDefaults standardUserDefaults] setObject:@"selectedIndexPath" forKey:@"selected_indexPath"];
         
     // sync the defaults to disk
         [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
