@@ -15,6 +15,7 @@
 
 @property UITextField *returnedTextField;  // Custom tableViewCell properties
 @property BOOL delivered;
+@property NSIndexPath *selectedMemberPath;
 
 @end
 
@@ -90,10 +91,11 @@
     
     // Show Details screen
     if ([[segue identifier] isEqualToString:@"showDetails"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-        NSArray *object = [[self.namesArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+        self.selectedMemberPath = [self.tableView indexPathForCell:sender];
+        NSArray *object = [[self.namesArray objectAtIndex:self.selectedMemberPath.section] objectAtIndex:self.selectedMemberPath.row];
         
         // Sets the detailItem to the selected item
+        [[segue destinationViewController] setSelectedIndexPath:self.selectedMemberPath];
         [[segue destinationViewController] setDetailItem:object];
     }
     

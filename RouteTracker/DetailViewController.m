@@ -16,10 +16,14 @@
 
 @implementation DetailViewController
 
+
+#pragma mark - Lifecycle Methods
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    NSLog(@"Selected indexPath = %@", self.selectedIndexPath);
 // Assigns values to the text fields
     self.nameTextField.text = [self.detailItem objectForKey:@"Name"];
     self.deliverTextField.text = [self.detailItem objectForKey:@"Total Quantity to Deliver"];
@@ -43,6 +47,14 @@
 // Tap to hide keyboard
     UITapGestureRecognizer *hideKeyboardTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideTap:)];
     [self.view addGestureRecognizer:hideKeyboardTap];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    NSLog(@"Save the modified details to the detailItem mutableDictionart");
+    
+    [self.detailItem setValue:self.nameTextField.text forKey:@"Name"];
+//    [self.detailItem setObject:@"Name" forKey:self.nameTextField.text];
+    NSLog(@"detailItem Name = %@", [self.detailItem objectForKey:@"Name"]);
 }
 
 - (void)didReceiveMemoryWarning {

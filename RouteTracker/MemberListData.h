@@ -19,7 +19,7 @@ It can be either read from an embedded pList, or an URL
 @interface MemberListData : NSObject  <SortSelectionViewControllerDelegate>
 
 @property (strong, nonatomic) NSArray *namesArray;  // array of indexed array of dictionaries
-@property (strong, nonatomic) NSArray *membersArray;    // complete list derived from the PList
+@property (strong, nonatomic) NSMutableArray *membersArray;    // complete list derived from the PList
 
 - (void)loadPlistData;
 

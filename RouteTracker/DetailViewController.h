@@ -10,7 +10,8 @@
 
 @interface DetailViewController : UIViewController <UIGestureRecognizerDelegate>
 
-@property (strong, nonatomic) id detailItem;  // Selected location
+@property (strong, nonatomic) NSMutableDictionary *detailItem;  // Selected location
+@property (strong, nonatomic) NSIndexPath *selectedIndexPath;     //store index path for editing
 
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *deliverTextField;
@@ -27,4 +28,5 @@
 @property (weak, nonatomic) IBOutlet UITextField *zipTextField;
 @property (weak, nonatomic) IBOutlet UITextField *contactTextField;
 @property (weak, nonatomic) IBOutlet UITextView *phoneTextField;
+
 @end
