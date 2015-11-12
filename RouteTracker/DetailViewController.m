@@ -67,7 +67,20 @@
     [mutableDetailItem setValue:self.returnedTextField.text forKey:@"Quantity Returned"];
     [mutableDetailItem setValue:self.notesTextField.text forKey:@"Notes"];
     [mutableDetailItem setValue:self.driverTextField.text forKey:@"Driver"];
+    [mutableDetailItem setValue:self.categoryTextField.text forKey:@"Category"];
+    [mutableDetailItem setValue:self.advertiserTextField.text forKey:@"Advert iser"];
     
+    [mutableDetailItem setValue:self.latitudeTextField.text forKey:@"Latitude"];
+    [mutableDetailItem setValue:self.longitudeTextField.text forKey:@"Longitude"];
+
+    [mutableDetailItem setValue:self.addressTextField.text forKey:@"Street"];
+    [mutableDetailItem setValue:self.cityTextField.text forKey:@"City"];
+    [mutableDetailItem setValue:self.stateTextField.text forKey:@"State"];
+    [mutableDetailItem setValue:self.zipTextField.text forKey:@"Zipcode"];
+    
+    [mutableDetailItem setValue:self.contactTextField.text forKey:@"Contact Name"];
+    [mutableDetailItem setValue:self.phoneTextField.text forKey:@"Contact Phone"];
+
     NSLog(@"detailItem Name = %@", mutableDetailItem);
     
 // Stores the detailItem to NSUserDefaults
