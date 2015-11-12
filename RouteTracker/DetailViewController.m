@@ -61,6 +61,11 @@
     [mutableDetailItem setValue:self.driverTextField.text forKey:@"Driver"];
     
     NSLog(@"detailItem Name = %@", mutableDetailItem);
+    
+// Stores the detailItem to NSUserDefaults
+    NSDictionary *myDictionary = [NSDictionary dictionaryWithDictionary:mutableDetailItem];
+    [[NSUserDefaults standardUserDefaults] setObject:myDictionary forKey:@"selected_member"];
+
 }
 
 - (void)didReceiveMemoryWarning {
