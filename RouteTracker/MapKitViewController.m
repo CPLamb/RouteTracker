@@ -118,7 +118,7 @@ const int  MAX_PINS_TO_DROP = 200;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NoShopAnnotation *)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    NSLog(@"Sequeing from %@", sender.memberData);
+    NSLog(@"Sequeing with memberData item %@", sender.memberData);
 //    NSArray *object = (NSArray)sender.
 // Sets the detailItem to the selected item
           [[segue destinationViewController] setDetailItem:sender.memberData];

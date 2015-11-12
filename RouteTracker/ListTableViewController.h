@@ -21,7 +21,8 @@
     
 }
 @property (nonatomic, strong) MemberListData *memberListAll;
-@property (strong, nonatomic) id detailItem;    
+@property (strong, nonatomic) NSMutableDictionary *detailItem;
+@property (strong, nonatomic) NSIndexPath *selectedIndexPath;   // saved for editing purposes
 
 @property (nonatomic, strong) NSArray *membersArray;    // Master array of dictionaries from the PList
 @property (strong, nonatomic) NSMutableArray *namesArray;      // Name of each member object By Letter
