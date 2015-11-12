@@ -50,11 +50,17 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    NSLog(@"Save the modified details to the detailItem mutableDictionart");
+    NSLog(@"Save the modified details to the detailItem mutableDictionary");
     
-    [self.detailItem setValue:self.nameTextField.text forKey:@"Name"];
-//    [self.detailItem setObject:@"Name" forKey:self.nameTextField.text];
-    NSLog(@"detailItem Name = %@", [self.detailItem objectForKey:@"Name"]);
+// A mutable Dictionary must be created from the original for editing?
+    NSMutableDictionary *mutableDetailItem = [NSMutableDictionary dictionaryWithDictionary:self.detailItem];
+    [mutableDetailItem setValue:self.nameTextField.text forKey:@"Name"];
+    [mutableDetailItem setValue:self.deliverTextField.text forKey:@"Total Quantity to Deliver"];
+    [mutableDetailItem setValue:self.returnedTextField.text forKey:@"Quantity Returned"];
+    [mutableDetailItem setValue:self.notesTextField.text forKey:@"Notes"];
+    [mutableDetailItem setValue:self.driverTextField.text forKey:@"Driver"];
+    
+    NSLog(@"detailItem Name = %@", mutableDetailItem);
 }
 
 - (void)didReceiveMemoryWarning {
