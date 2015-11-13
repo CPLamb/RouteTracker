@@ -84,7 +84,7 @@
     long row = [[selectedIndexPathArray objectAtIndex:0] integerValue];
     NSMutableArray *theSection = [self.namesArray objectAtIndex:section];
     NSDictionary *theDictionary = [theSection objectAtIndex:row];
-    [theSection replaceObjectAtIndex:[[selectedIndexPathArray objectAtIndex:1] integerValue] withObject:editedMemberItem];
+//    [theSection replaceObjectAtIndex:[[selectedIndexPathArray objectAtIndex:1] integerValue] withObject:editedMemberItem];
 
     NSLog(@"ListTableVC - the dictionary = %@", theSection);
     
