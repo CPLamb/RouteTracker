@@ -32,8 +32,8 @@
     {
         NSDictionary *appDefaults  = [NSDictionary dictionaryWithObjectsAndKeys:[NSDate date], dateKey, nil];
         
-// do any other initialization you want to do here - e.g. the starting default values.
-        [[NSUserDefaults standardUserDefaults] setInteger:0     forKey:@"list_filtered"];
+// NSUserDefault setup for passing info around the app the starting default values.
+        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"list_filtered"];
         [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"selected_spreadsheet"];
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"selected_map_type"];
         [[NSUserDefaults standardUserDefaults] setObject:@"ALL" forKey:@"selected_driver"];
@@ -41,7 +41,7 @@
         [[NSUserDefaults standardUserDefaults] setObject:@"initialDictionary" forKey:@"selected_member"];
         [[NSUserDefaults standardUserDefaults] setObject:@"selectedIndexPath" forKey:@"selected_indexPath"];
         
-    // sync the defaults to disk
+// sync the defaults to disk
         [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }

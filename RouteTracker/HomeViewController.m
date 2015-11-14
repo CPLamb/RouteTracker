@@ -40,6 +40,9 @@
             break;
         case 1:
             self.selectedMagazine.text = @"MontereyWaveDistributionList";
+            break;
+        case 2:
+            self.selectedMagazine.text = @"EdibleMontereyDistributionList";
            break;
     }
 //    NSLog(@"Listing the loaded spreadsheet %@", self.selectedMagazine.text);

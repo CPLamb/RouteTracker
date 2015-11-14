@@ -94,6 +94,8 @@
 		83279F4A1A59C9D4007496BB /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83279F481A59C9D4007496BB /* GTMOAuth2ViewTouch.xib */; };
 		83279F4D1A59DDA6007496BB /* FilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83279F4C1A59DDA6007496BB /* FilesViewController.m */; };
 		83279F501A5C4E2D007496BB /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83279F4F1A5C4E2D007496BB /* HomeViewController.m */; };
+		836141911BF7DF64003F3D7A /* EdibleMontereyDistributionList.csv in Resources */ = {isa = PBXBuildFile; fileRef = 8361418F1BF7DF64003F3D7A /* EdibleMontereyDistributionList.csv */; };
+		836141921BF7DF64003F3D7A /* EdibleMontereyDistributionList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 836141901BF7DF64003F3D7A /* EdibleMontereyDistributionList.plist */; };
 		83B86BB51BE816C20017DA31 /* RouteTrackerTestCSV.csv in Resources */ = {isa = PBXBuildFile; fileRef = 83B86BB31BE816C20017DA31 /* RouteTrackerTestCSV.csv */; };
 		83B86BB61BE816C20017DA31 /* RouteTrackerTestCSV.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83B86BB41BE816C20017DA31 /* RouteTrackerTestCSV.plist */; };
 		83BC548D1A631E1600DBDA4A /* logo_SantaCruzNewspaperTaxi.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BC548C1A631E1600DBDA4A /* logo_SantaCruzNewspaperTaxi.png */; };
@@ -269,6 +271,8 @@
 		83279F4C1A59DDA6007496BB /* FilesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilesViewController.m; sourceTree = "<group>"; };
 		83279F4E1A5C4E2D007496BB /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		83279F4F1A5C4E2D007496BB /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		8361418F1BF7DF64003F3D7A /* EdibleMontereyDistributionList.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = EdibleMontereyDistributionList.csv; sourceTree = "<group>"; };
+		836141901BF7DF64003F3D7A /* EdibleMontereyDistributionList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = EdibleMontereyDistributionList.plist; sourceTree = "<group>"; };
 		83B86BB31BE816C20017DA31 /* RouteTrackerTestCSV.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RouteTrackerTestCSV.csv; sourceTree = "<group>"; };
 		83B86BB41BE816C20017DA31 /* RouteTrackerTestCSV.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RouteTrackerTestCSV.plist; sourceTree = "<group>"; };
 		83BC548C1A631E1600DBDA4A /* logo_SantaCruzNewspaperTaxi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_SantaCruzNewspaperTaxi.png; sourceTree = "<group>"; };
@@ -545,6 +549,8 @@
 		83BC54871A6319EB00DBDA4A /* DataLists */ = {
 			isa = PBXGroup;
 			children = (
+				8361418F1BF7DF64003F3D7A /* EdibleMontereyDistributionList.csv */,
+				836141901BF7DF64003F3D7A /* EdibleMontereyDistributionList.plist */,
 				832770DE1BF192F600000583 /* MontereyWaveDistributionList.csv */,
 				832770DF1BF192F600000583 /* MontereyWaveDistributionList.plist */,
 				83B86BB31BE816C20017DA31 /* RouteTrackerTestCSV.csv */,
@@ -640,6 +646,7 @@
 			files = (
 				83279F4A1A59C9D4007496BB /* GTMOAuth2ViewTouch.xib in Resources */,
 				83279E651A4F4F2A007496BB /* list24.png in Resources */,
+				836141921BF7DF64003F3D7A /* EdibleMontereyDistributionList.plist in Resources */,
 				83279E3D1A4F3B23007496BB /* Main.storyboard in Resources */,
 				8308DC3B1BD81EFB00D5B164 /* SCWaveDistributionListCurrent.csv in Resources */,
 				83BC548F1A64553800DBDA4A /* EMBlogo.png in Resources */,
@@ -653,6 +660,7 @@
 				83279E5D1A4F4C16007496BB /* globe.png in Resources */,
 				83279E641A4F4F2A007496BB /* key24.png in Resources */,
 				83279E5F1A4F4C2B007496BB /* magnifier.png in Resources */,
+				836141911BF7DF64003F3D7A /* EdibleMontereyDistributionList.csv in Resources */,
 				83279E591A4F4BBD007496BB /* IconSetup24.png in Resources */,
 				83279E7A1A5084FD007496BB /* questions1.png in Resources */,
 				83279E751A4F722C007496BB /* SCWavesSantaLogo.png in Resources */,
