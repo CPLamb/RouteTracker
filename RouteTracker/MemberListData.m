@@ -35,10 +35,13 @@
         
 // Alloc/init the fileURL outside the boundaries of switch/case statement
         case 0:
-            fileURL = [mainBundle URLForResource:@"SCWaveDistributionListCurrent" withExtension:@"plist"];  //MontereyWaveDistributionList
+            fileURL = [mainBundle URLForResource:@"SCWaveDistributionListCurrent" withExtension:@"plist"];
             break;
         case 1:
             fileURL = [mainBundle URLForResource:@"MontereyWaveDistributionList" withExtension:@"plist"];  //MontereyWaveDistributionList
+            break;
+        case 2:
+            fileURL = [mainBundle URLForResource:@"EdibleMontereyDistributionList" withExtension:@"plist"];
             break;
     }
 //    NSLog(@"The Plist filename & directory is %@", fileURL);
