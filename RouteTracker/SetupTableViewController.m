@@ -61,8 +61,23 @@ int filesCount = 1;
 
 - (IBAction)selectSpreadsheetControl:(UISegmentedControl *)sender
 {
-    [[NSUserDefaults standardUserDefaults] setInteger:sender.selectedSegmentIndex forKey:@"selected_spreadsheet"];
-    NSLog(@"selects which spreadsheet to display %ld", (long)sender.selectedSegmentIndex);
+//    [[NSUserDefaults standardUserDefaults] setInteger:sender.selectedSegmentIndex forKey:@"selected_spreadsheet"];
+    
+    NSString *dataFilename = [[NSString alloc] init];
+    switch(sender.selectedSegmentIndex) {
+        case 0:
+            dataFilename = @"SCWaveDistributionListCurrent";
+            break;
+        case 1:
+            dataFilename = @"MontereyWaveDistributionList";
+            break;
+        case 2:
+            dataFilename = @"EdibleMontereyDistributionList";
+            break;
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:dataFilename forKey:@"selected_spreadsheet"];
+    
+    NSLog(@"The selected spreadsheet is %@", dataFilename);
     
     [self.delegate dataFileSelect:self];
 }
