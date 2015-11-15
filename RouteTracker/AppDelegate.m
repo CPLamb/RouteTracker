@@ -33,14 +33,13 @@
         // NSUserDefault setup for passing info around the app the starting default values.
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"list_filtered"];
         [[NSUserDefaults standardUserDefaults] setObject:@"EdibleMontereyDistributionList" forKey:@"selected_spreadsheet"];
-        NSLog(@"AppDelegate -- initialSpreadsheet = %@",[[NSUserDefaults standardUserDefaults]stringForKey:@"selected_spreadsheet"] );
-
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"selected_map_type"];
         [[NSUserDefaults standardUserDefaults] setObject:@"ALL" forKey:@"selected_driver"];
         [[NSUserDefaults standardUserDefaults] setObject:@"initialString" forKey:@"selected_plist"];
         [[NSUserDefaults standardUserDefaults] setObject:@"initialDictionary" forKey:@"selected_member"];
         [[NSUserDefaults standardUserDefaults] setObject:@"selectedIndexPath" forKey:@"selected_indexPath"];
         
+        NSLog(@"AppDelegate -- initialSpreadsheet = %@",[[NSUserDefaults standardUserDefaults]stringForKey:@"selected_spreadsheet"] );
         // sync the defaults to disk
         [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
         [[NSUserDefaults standardUserDefaults] synchronize];

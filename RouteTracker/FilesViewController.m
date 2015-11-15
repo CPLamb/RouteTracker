@@ -103,7 +103,10 @@ NSString* fileContent;
     {
         NSLog(@"File %d: %@", (Count + 1), [directoryContent objectAtIndex:Count]);
     }
-}
+    
+    [[NSUserDefaults standardUserDefaults] setObject:directoryContent
+                                              forKey:@"downloaded_files"];
+ }
 
 - (IBAction)test04Button:(UIButton *)sender {
     NSLog(@"04 test action - DELETES all files in the directory");
