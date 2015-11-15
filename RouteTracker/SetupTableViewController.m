@@ -25,7 +25,7 @@ int filesCount = 1;
     [super viewDidLoad];
     
 // loads data files onto the pickerView
-    [self loadPickerViewDataFiles];
+//    [self loadPickerViewDataFiles];
 
     // Uncomment the following line to preserve selection between presentations.
     //self.clearsSelectionOnViewWillAppear = NO;
@@ -87,19 +87,23 @@ int filesCount = 1;
     [[NSUserDefaults standardUserDefaults] setInteger:sender.selectedSegmentIndex forKey:@"selected_map_type"];
 }
 
-- (void)loadPickerViewDataFiles {
-    int Count;
-    NSString *path;
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    path = [paths objectAtIndex:0];
-    self.directoryContent = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:NULL];
-    for (Count = 0; Count < (int)[self.directoryContent count]; Count++)
-    {
-        NSLog(@"File %d: %@", Count, [self.directoryContent objectAtIndex:Count]);
-    }
-    filesCount = [self.directoryContent count];
-
+- (void)loadUrlFromDocuments {
+    NSLog(@"WTF - your work is done");
 }
+
+//- (void)loadPickerViewDataFiles {
+//    int Count;
+//    NSString *path;
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    path = [paths objectAtIndex:0];
+//    self.directoryContent = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:NULL];
+//    for (Count = 0; Count < (int)[self.directoryContent count]; Count++)
+//    {
+//        NSLog(@"File %d: %@", Count, [self.directoryContent objectAtIndex:Count]);
+//    }
+//    filesCount = [self.directoryContent count];
+//
+//}
 
 #pragma mark ---- UIPickerViewDataSource delegate methods ----
 
@@ -114,27 +118,34 @@ int filesCount = 1;
 // returns the number of rows
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-  NSLog(@"\npickerView:\n%@ \nnumberOfRowsInComponent:\n%ld  = \n%lu", pickerView, (long)component, [self.directoryContent count]);
-//  return [self.directoryContent count];
-    return filesCount;
+    NSArray *filesList = [[NSUserDefaults standardUserDefaults] objectForKey:@"downloaded_files"];
+    return [filesList count];
+    
+//    NSArray *driversList = [[NSUserDefaults standardUserDefaults] objectForKey:@"drivers_list"];
+//    return [driversList count];
 }
 
 // returns the title of each row
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-  NSLog(@"\npickerView: \n%@ \ntitleForRow: \n%ld \nforComponent: \n%ld = \n%@", pickerView,(long)row, (long)component, [self.directoryContent objectAtIndex:row]);
-    return [self.directoryContent objectAtIndex:row];
+    NSArray *filesList = [[NSUserDefaults standardUserDefaults] objectForKey:@"downloaded_files"];
+    return [filesList objectAtIndex:row];
+    
 //    NSArray *driversList = [[NSUserDefaults standardUserDefaults] objectForKey:@"drivers_list"];
 //    return [driversList objectAtIndex:row];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-// GETs the selected file & SETs it into theUserDefaults
-//    NSString *driver = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"drivers_list"] objectAtIndex:row];
-//    [[NSUserDefaults standardUserDefaults]setObject:driver forKey:@"selected_driver"];
-//    NSLog(@"Driver -> %@", driver);
-//  NSLog(@"\npickerView:\n%@\ndidSelectRow:\n%ld\ninComponent:\n%ld",pickerView,(long)row,(long)component  );
+//  GETs the selected file
+    NSString *file = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"downloaded_files"] objectAtIndex:row];
+    NSLog(@"SetupVC - file selected -> %@", file);
+
+    
+    // use selected filename to load membersArray from documents directory
+    [self loadUrlFromDocuments];
+    // Alloc/init the fileURL outside the boundaries of switch/case statement
+//    fileURL = [mainBundle URLForResource:dataFilename withExtension:@"plist"];
 
 }
 
