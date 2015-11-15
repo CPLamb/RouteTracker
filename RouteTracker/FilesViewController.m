@@ -330,7 +330,7 @@ NSString* fileContent;
 
   AppDelegate *delegate = [UIApplication sharedApplication].delegate;
   [delegate.memberData loadPlistData];
-  NSLog(@"Should reload the dataFile %@", delegate.memberData.description);
+  NSLog(@"FilesVC -- Should reload the dataFile %@", delegate.memberData.description);
 
   return membersArray;
 }
