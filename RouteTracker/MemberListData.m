@@ -30,20 +30,11 @@
     NSURL *fileURL = [[NSURL alloc] init];
     
 // Use NSUserDefault to determine which file to load
-    NSInteger dataFilenameIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_spreadsheet"];
-    switch(dataFilenameIndex) {
-        
+    NSString *dataFilenameIndex = [[NSUserDefaults standardUserDefaults] stringForKey:@"selected_spreadsheet"];
+
 // Alloc/init the fileURL outside the boundaries of switch/case statement
-        case 0:
-            fileURL = [mainBundle URLForResource:@"SCWaveDistributionListCurrent" withExtension:@"plist"];
-            break;
-        case 1:
-            fileURL = [mainBundle URLForResource:@"MontereyWaveDistributionList" withExtension:@"plist"];  //MontereyWaveDistributionList
-            break;
-        case 2:
-            fileURL = [mainBundle URLForResource:@"EdibleMontereyDistributionList" withExtension:@"plist"];
-            break;
-    }
+        fileURL = [mainBundle URLForResource:dataFilenameIndex withExtension:@"plist"];
+
 //    NSLog(@"The Plist filename & directory is %@", fileURL);
     
     // MontereyWaves dropbox link = https://dl.dropboxusercontent.com/u/13142051/MontereyWaveDistributionList.plist

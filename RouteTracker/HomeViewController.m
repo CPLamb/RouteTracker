@@ -31,21 +31,14 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    NSInteger dataFilenameIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_spreadsheet"];
-//    NSLog(@"HomeViewController -- dataFilenameIndex = %ld", dataFilenameIndex);
+    NSString *dataFilenameIndex = [[NSUserDefaults standardUserDefaults]stringForKey:@"selected_spreadsheet"];
+
+    NSLog(@"HomeVC -- dataFilenameIndex = %@", dataFilenameIndex.description);
+
 // Sets up display of magazine loaded
-    switch(dataFilenameIndex) {
-        case 0:
-            self.selectedMagazine.text = @"SCWaveDistributionListCurrent";
-            break;
-        case 1:
-            self.selectedMagazine.text = @"MontereyWaveDistributionList";
-            break;
-        case 2:
-            self.selectedMagazine.text = @"EdibleMontereyDistributionList";
-           break;
-    }
-//    NSLog(@"Listing the loaded spreadsheet %@", self.selectedMagazine.text);
+    self.selectedMagazine.text = dataFilenameIndex.description;
+
+    NSLog(@"HomeVC -- Listing the loaded spreadsheet %@", self.selectedMagazine.text);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -65,5 +58,22 @@
 
 #pragma mark - Custom Methods
 
+- (IBAction)resetLastRead:(UIBarButtonItem *)sender {
+
+    // Show UI Effect
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Last Read Has Been reset"
+                                                                   message:@"Now it is like a new install"
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {}];
+    
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
+
+    [[NSUserDefaults standardUserDefaults]  setObject:NULL forKey:@"dateKey"];
+
+    NSLog(@"HomeVC -- LastReadReset to NULL");
+}
 
 @end

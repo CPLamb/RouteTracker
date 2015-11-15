@@ -62,7 +62,7 @@
     if (!listFiltered) {
         AppDelegate *delegate = [UIApplication sharedApplication].delegate;
         [delegate.memberData loadPlistData];
-        NSLog(@"Should reload the dataFile %@", delegate.memberData.description);
+        NSLog(@"ListTableVC -- Should reload the dataFile %@", delegate.memberData.description);
     
 // Makes up the index array & the sorted array for the cells
         [self makeSectionsIndex:delegate.memberData.membersArray];     // self.membersArray
@@ -326,28 +326,16 @@
     }
     self.driversArray = [driversListSet allObjects];
 
-    NSLog(@"The driversList is %@", self.driversArray);
+    NSLog(@"ListTableVC -- The driversList is %@", self.driversArray);
 
     [[NSUserDefaults standardUserDefaults] setObject:self.driversArray forKey:@"drivers_list"];
 }
 
 - (NSString *)selectProperPlistData {
  
-    NSInteger dataFilenameIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_spreadsheet"];
+    NSString *myFilename = [[NSUserDefaults standardUserDefaults] stringForKey:@"selected_spreadsheet"];
     
-    NSString *myFilename = [[NSString alloc] init];
-    switch(dataFilenameIndex) {
-        case 0:
-            myFilename = @"SCWaveDistributionListCurrent";
-            break;
-        case 1:
-            myFilename = @"MontereyWaveDistributionList";
-            break;
-        case 2:
-            myFilename = @"EdibleMontereyDistributionList";
-            break;
-    }
-    NSLog(@"Loads fileName %@", myFilename);
+    NSLog(@"ListTableVC -- selectProper pList -- Loads fileName %@", myFilename);
     return myFilename;
 }
 
