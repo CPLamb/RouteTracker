@@ -61,6 +61,7 @@
     NSInteger listFiltered = [[NSUserDefaults standardUserDefaults] integerForKey: @"list_filtered"];
     if (!listFiltered) {
         AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+        
         [delegate.memberData loadPlistData];
         NSLog(@"ListTableVC -- Should reload the dataFile %@", delegate.memberData.description);
     
@@ -333,13 +334,12 @@
 
 - (NSString *)selectProperPlistData {
     
-    
-    
-    
-    
- 
     NSString *myFilename = [[NSUserDefaults standardUserDefaults] stringForKey:@"selected_spreadsheet"];
     
+// Alloc/init the fileURL outside the boundaries of switch/case statement
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate.memberData loadPlistData];
+
     NSLog(@"ListTableVC -- selectProper pList -- Loads fileName %@", myFilename);
     return myFilename;
 }

@@ -23,26 +23,23 @@
 #pragma mark - Custom methods
 
 - (void)loadPlistData {
-    // Loads the Plist into member array either from web or locally
+    NSLog(@"Loads the Plist into member array either from web or locally");
     
 // Loads file locally from either sheet
     NSBundle *mainBundle = [NSBundle mainBundle];
     NSURL *fileURL = [[NSURL alloc] init];
     
 // Use NSUserDefault to determine which file to load
-    NSString *dataFilenameIndex = [[NSUserDefaults standardUserDefaults] stringForKey:@"selected_spreadsheet"];
+    NSString *dataFilename = [[NSUserDefaults standardUserDefaults] stringForKey:@"selected_spreadsheet"];
 
 // Alloc/init the fileURL outside the boundaries of switch/case statement
-        fileURL = [mainBundle URLForResource:dataFilenameIndex withExtension:@"plist"];
+        fileURL = [mainBundle URLForResource:dataFilename withExtension:@"plist"];
 
 //    NSLog(@"The Plist filename & directory is %@", fileURL);
     
-    // MontereyWaves dropbox link = https://dl.dropboxusercontent.com/u/13142051/MontereyWaveDistributionList.plist
-    // SCWaves dropbox link - https://dl.dropboxusercontent.com/u/13142051/SCWaveDistributionListCurrent.plist
-    
 // Loads the file from the web
-//    NSString *fileURLString = @"https://dl.dropboxusercontent.com/u/13142051/TLFMemberList.plist";
-//    NSURL *fileURL = [[NSURL alloc]initWithString:fileURLString];
+
+    //    NSURL *fileURL = [[NSURL alloc]initWithString:fileURLString];
 
   NSLog(@"MemberListData -loadPlistData -- fileURL = \n%@", fileURL);
     self.membersArray = [NSArray arrayWithContentsOfURL:fileURL];

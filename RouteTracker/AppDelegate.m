@@ -44,12 +44,10 @@
         // sync the defaults to disk
         [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
         [[NSUserDefaults standardUserDefaults] synchronize];
-
-        // loadPlistData
-        self.memberData = [[MemberListData alloc] init];
-        [self.memberData loadPlistData];
-
     }
+    // loadPlistData
+    self.memberData = [[MemberListData alloc] init];
+    [self.memberData loadPlistData];
 
     [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:dateKey];
     
