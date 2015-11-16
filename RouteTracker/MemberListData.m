@@ -25,7 +25,7 @@
 - (void)loadPlistData {
     NSLog(@"Loads the Plist into member array either from the main bundle (read only) or from the documents directory files downloaded from Google sheets");
     
-//    [self loadFileFromDocuments];
+    [self loadFileFromDocuments];
     
 // Loads file locally from either sheet
     NSBundle *mainBundle = [NSBundle mainBundle];
@@ -60,16 +60,21 @@
 // select the filename from NSUserDefaults
     NSString *selectedFile = [[NSUserDefaults standardUserDefaults] stringForKey:@"selected_plist"];
 
-// Add the directory path to the string & convert to URL
+// Add the directory path to the string
     NSString *path;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     path = [paths objectAtIndex:0];
     path = [path stringByAppendingPathComponent:selectedFile];
 
+    // Get the data from the documents directory
+    NSData *fileData;
+    fileData = [[NSFileManager defaultManager] contentsAtPath:path];
+    NSString *fileDataString = [[NSString alloc] initWithData:fileData encoding:NSUTF8StringEncoding];
     
-    NSURL *fileURL = [[NSURL alloc]initWithString:path];
-    self.membersArray = [NSMutableArray arrayWithContentsOfURL:fileURL];
-
+// Perform the conversion fileURL to array
+//    NSURL *fileURL = [[NSURL alloc]initWithString:path];
+    self.membersArray = [NSMutableArray arrayWithContentsOfFile:fileDataString];
+    NSLog(@"The membersArray = %@", self.membersArray);
 }
 
 - (void)loadPlistURL {
