@@ -69,22 +69,22 @@
         [self makeIndexedArray:delegate.memberData.membersArray withIndex:self.indexArray];
     }
     
-// Saves the edited member (detailItem) to the current array
-    NSDictionary *editedMemberItem = [[NSUserDefaults standardUserDefaults] objectForKey:@"selected_member"];
-    NSLog(@"edited member = %@", editedMemberItem);
-    NSArray *selectedIndexPathArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"selected_indexPath"];
-    NSLog(@"It's indexPath = %@", selectedIndexPathArray);
-    
-// Writes edited detailItem to the filtered Array
-    NSMutableArray *theArray = [self.namesArray objectAtIndex:0];
-
-    long section = [[selectedIndexPathArray objectAtIndex:1] integerValue];
-    long row = [[selectedIndexPathArray objectAtIndex:0] integerValue];
-    NSMutableArray *theSection = [self.namesArray objectAtIndex:section];
-    NSDictionary *theDictionary = [theSection objectAtIndex:row];
-    [theSection replaceObjectAtIndex:[[selectedIndexPathArray objectAtIndex:0] integerValue] withObject:editedMemberItem];
-
-    NSLog(@"ListTableVC - the dictionary = %@", theSection);
+//// Saves the edited member (detailItem) to the current array
+//    NSDictionary *editedMemberItem = [[NSUserDefaults standardUserDefaults] objectForKey:@"selected_member"];
+//    NSLog(@"edited member = %@", editedMemberItem);
+//    NSArray *selectedIndexPathArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"selected_indexPath"];
+//    NSLog(@"It's indexPath = %@", selectedIndexPathArray);
+//    
+//// Writes edited detailItem to the filtered Array
+//    NSMutableArray *theArray = [self.namesArray objectAtIndex:0];
+//
+//    long section = [[selectedIndexPathArray objectAtIndex:1] integerValue];
+//    long row = [[selectedIndexPathArray objectAtIndex:0] integerValue];
+//    NSMutableArray *theSection = [self.namesArray objectAtIndex:section];
+//    NSDictionary *theDictionary = [theSection objectAtIndex:row];
+//    [theSection replaceObjectAtIndex:[[selectedIndexPathArray objectAtIndex:0] integerValue] withObject:editedMemberItem];
+//
+//    NSLog(@"ListTableVC - the dictionary = %@", theSection);
     
 //    sortedByDriver = NO;
     memberTableViewCell = [[MemberTableViewCell alloc] init];
