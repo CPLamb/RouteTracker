@@ -25,7 +25,7 @@
 - (void)loadPlistData {
     NSLog(@"Loads the Plist into member array either from the main bundle (read only) or from the documents directory files downloaded from Google sheets");
     
-    [self loadFileFromDocuments];
+//    [self loadFileFromDocuments];
     
 // Loads file locally from either sheet
     NSBundle *mainBundle = [NSBundle mainBundle];
@@ -37,9 +37,7 @@
 // Alloc/init the fileURL outside the boundaries of switch/case statement
         fileURL = [mainBundle URLForResource:dataFilename withExtension:@"plist"];
 
-//    NSLog(@"The Plist filename & directory is %@", fileURL);
-
-  NSLog(@"MemberListData -loadPlistData -- fileURL = %@", fileURL);
+    NSLog(@"MemberListData -loadPlistData -- fileURL = %@", fileURL);
     
 // The secret JUICE - loads the membersArray from the file
     self.membersArray = [NSArray arrayWithContentsOfURL:fileURL];
