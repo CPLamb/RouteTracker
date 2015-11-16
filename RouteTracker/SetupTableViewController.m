@@ -88,7 +88,23 @@ int filesCount = 1;
 }
 
 - (void)loadUrlFromDocuments {
-    NSLog(@"WTF - your work is done");
+    
+    NSString *selectedFile = [[NSUserDefaults standardUserDefaults] objectForKey:@"selected_plist"];
+    
+    NSLog(@"Takes %@ from the pickerView selection and uploads it into the memberListData array", selectedFile);
+
+    NSString *path;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    path = [paths objectAtIndex:0];
+    path = [path stringByAppendingPathComponent:selectedFile];
+    NSData *theData;
+    theData = [[NSFileManager defaultManager] contentsAtPath:path];
+    NSString *theDataString = [[NSString alloc] initWithData:theData encoding:NSUTF8StringEncoding];
+    NSLog(@"TheData = %@", theDataString);
+    
+// Now goes to the Data model MemberListData and does the actual plist to array conversion
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate.memberData loadPlistData];
 }
 
 //- (void)loadPickerViewDataFiles {
@@ -141,11 +157,9 @@ int filesCount = 1;
     NSString *file = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"downloaded_files"] objectAtIndex:row];
     NSLog(@"SetupVC - file selected -> %@", file);
 
-    
-    // use selected filename to load membersArray from documents directory
+    [[NSUserDefaults standardUserDefaults] setObject:file forKey:@"selected_plist"];
+// use selected filename to load membersArray from documents directory
     [self loadUrlFromDocuments];
-    // Alloc/init the fileURL outside the boundaries of switch/case statement
-//    fileURL = [mainBundle URLForResource:dataFilename withExtension:@"plist"];
 
 }
 

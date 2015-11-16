@@ -23,7 +23,9 @@
 #pragma mark - Custom methods
 
 - (void)loadPlistData {
-    NSLog(@"Loads the Plist into member array either from web or locally");
+    NSLog(@"Loads the Plist into member array either from the main bundle (read only) or from the documents directory files downloaded from Google sheets");
+    
+    [self loadFileFromDocuments];
     
 // Loads file locally from either sheet
     NSBundle *mainBundle = [NSBundle mainBundle];
@@ -36,25 +38,43 @@
         fileURL = [mainBundle URLForResource:dataFilename withExtension:@"plist"];
 
 //    NSLog(@"The Plist filename & directory is %@", fileURL);
+
+  NSLog(@"MemberListData -loadPlistData -- fileURL = %@", fileURL);
     
-// Loads the file from the web
-
-    //    NSURL *fileURL = [[NSURL alloc]initWithString:fileURLString];
-
-  NSLog(@"MemberListData -loadPlistData -- fileURL = \n%@", fileURL);
+// The secret JUICE - loads the membersArray from the file
     self.membersArray = [NSArray arrayWithContentsOfURL:fileURL];
 
-    //  NSLog(@"MemberListData -loadPlistData -- self.membersArray = \n%@", self.membersArray);
+    NSLog(@"MemberListData -loadPlistData -- self.membersArray = \n%@", self.membersArray);
+    NSLog(@"MEMBERLISTDATA Array count %d", [self.membersArray count]);
 
-//    NSLog(@"MEMBERLISTDATA Array count %d", [self.membersArray count]);
-
-    // Copy members array into the names array which can later be sorted for other views
+// Copy members array into the names array which can later be sorted for other views
     self.namesArray = [NSArray arrayWithArray:self.membersArray];
-
-    
     
     // loads the web Plist on another thread
 //    [self loadPlistURL];   temporaary disable 9/16
+}
+
+- (void)loadFileFromDocuments {
+    NSLog(@"MemberListData - Loads a file from the DOCUMENTS directory");
+    
+// select the filename from NSUserDefaults
+    NSString *selectedFile = [[NSUserDefaults standardUserDefaults] stringForKey:@"selected_plist"];
+
+// Add the directory path to the string
+    NSString *path;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    path = [paths objectAtIndex:0];
+    path = [path stringByAppendingPathComponent:selectedFile];
+
+    // Get the data from the documents directory
+    NSData *fileData;
+    fileData = [[NSFileManager defaultManager] contentsAtPath:path];
+    NSString *fileDataString = [[NSString alloc] initWithData:fileData encoding:NSUTF8StringEncoding];
+    
+// Perform the conversion fileURL to array
+//    NSURL *fileURL = [[NSURL alloc]initWithString:path];
+    self.membersArray = [NSMutableArray arrayWithContentsOfFile:fileDataString];
+    NSLog(@"The membersArray = %@", self.membersArray);
 }
 
 - (void)loadPlistURL {
