@@ -23,7 +23,9 @@
 #pragma mark - Custom methods
 
 - (void)loadPlistData {
-    NSLog(@"Loads the Plist into member array either from web or locally");
+    NSLog(@"Loads the Plist into member array either from the main bundle (read only) or from the documents directory files downloaded from Google sheets");
+    
+    [self loadFileFromDocuments];
     
 // Loads file locally from either sheet
     NSBundle *mainBundle = [NSBundle mainBundle];
@@ -41,10 +43,10 @@
 
     //    NSURL *fileURL = [[NSURL alloc]initWithString:fileURLString];
 
-  NSLog(@"MemberListData -loadPlistData -- fileURL = \n%@", fileURL);
+  NSLog(@"MemberListData -loadPlistData -- fileURL = %@", fileURL);
     self.membersArray = [NSArray arrayWithContentsOfURL:fileURL];
 
-    //  NSLog(@"MemberListData -loadPlistData -- self.membersArray = \n%@", self.membersArray);
+//    NSLog(@"MemberListData -loadPlistData -- self.membersArray = \n%@", self.membersArray);
 
 //    NSLog(@"MEMBERLISTDATA Array count %d", [self.membersArray count]);
 
@@ -55,6 +57,11 @@
     
     // loads the web Plist on another thread
 //    [self loadPlistURL];   temporaary disable 9/16
+}
+
+- (void)loadFileFromDocuments {
+    NSLog(@"MemberListData - Loads a file from the DOCUMENTS directory");
+    
 }
 
 - (void)loadPlistURL {

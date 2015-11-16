@@ -61,7 +61,6 @@
     NSInteger listFiltered = [[NSUserDefaults standardUserDefaults] integerForKey: @"list_filtered"];
     if (!listFiltered) {
         AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-        
         [delegate.memberData loadPlistData];
         NSLog(@"ListTableVC -- Should reload the dataFile %@", delegate.memberData.description);
     
