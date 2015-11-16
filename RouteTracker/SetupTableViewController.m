@@ -100,7 +100,7 @@ int filesCount = 1;
     NSData *theData;
     theData = [[NSFileManager defaultManager] contentsAtPath:path];
     NSString *theDataString = [[NSString alloc] initWithData:theData encoding:NSUTF8StringEncoding];
-    NSLog(@"TheData = %@", theDataString);
+//    NSLog(@"TheData = %@", theDataString);
     
 // Now goes to the Data model MemberListData and does the actual plist to array conversion
     AppDelegate *delegate = [UIApplication sharedApplication].delegate;
