@@ -38,7 +38,7 @@ int filesCount = 1;
 - (void)viewWillAppear:(BOOL)animated {
 //  NSLog(@"SetupViewController viewWillAppear");
 
-  self.magazineSelectorControl.selectedSegmentIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_spreadsheet"];
+//  self.magazineSelectorControl.selectedSegmentIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_spreadsheet"];
   
   self.mapSelectorControl.selectedSegmentIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_map_type"];
     
