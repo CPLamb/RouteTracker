@@ -23,7 +23,7 @@
 + (UIAlertView *)showLoadingMessageWithTitle:(NSString *)title 
                                     delegate:(id)delegate {
   UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
-                                                  message:@"nothing"          // @""
+                                                  message:@"Have a Nice day!"          // @""
                                                  delegate:self
                                         cancelButtonTitle:@"Cancel"                  // nil
                                         otherButtonTitles:nil];

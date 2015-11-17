@@ -61,7 +61,7 @@
     NSInteger listFiltered = [[NSUserDefaults standardUserDefaults] integerForKey: @"list_filtered"];
     if (!listFiltered) {
         AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-        [delegate.memberData loadPlistData];
+        [delegate.memberData loadData]; // TODO This is an expensive operation and maybe does not need to be done???
         NSLog(@"ListTableVC -- Should reload the dataFile %@", delegate.memberData.description);
     
 // Makes up the index array & the sorted array for the cells
@@ -275,7 +275,7 @@
         [self makeIndexedArray:self.namesArray withIndex:self.indexArray];
         
         
-        MEMBERLISTDATA.namesArray = [NSArray arrayWithArray:self.namesArray];
+        (((AppDelegate*)[[UIApplication sharedApplication] delegate]).memberData).namesArray = [NSArray arrayWithArray:self.namesArray];
         
         [self.tableView reloadData];
         
@@ -337,7 +337,7 @@
     
 // Alloc/init the fileURL outside the boundaries of switch/case statement
     AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-    [delegate.memberData loadPlistData];
+    [delegate.memberData loadData];
 
     NSLog(@"ListTableVC -- selectProper pList -- Loads fileName %@", myFilename);
     return myFilename;
@@ -438,7 +438,7 @@
     [self makeIndexedArray:self.namesArray withIndex:self.indexArray];
     
     // Store new filtered data in the central data object
-    MEMBERLISTDATA.namesArray = [NSArray arrayWithArray:self.namesArray];
+    (((AppDelegate*)[[UIApplication sharedApplication] delegate]).memberData).namesArray = [NSArray arrayWithArray:self.namesArray];
 
     // Regenerate the data
     [self.tableView reloadData];
@@ -461,7 +461,7 @@
     [self makeIndexedArray:self.namesArray withIndex:self.indexArray];
     
     // Store new filtered data in the central data object
-    MEMBERLISTDATA.namesArray = [NSArray arrayWithArray:self.namesArray];
+    (((AppDelegate*)[[UIApplication sharedApplication] delegate]).memberData).namesArray = [NSArray arrayWithArray:self.namesArray];
     
     // Regenerate the data
     [self.tableView reloadData];
@@ -486,7 +486,7 @@
     [[NSUserDefaults standardUserDefaults] setObject:self.indexArray forKey:@"drivers_list"];
     NSLog(@"%@", self.indexArray);
     // Store new filtered data in the central data object
-    //    MEMBERLISTDATA.namesArray = [NSArray arrayWithArray:self.namesArray];
+    //    (((AppDelegate*)[[UIApplication sharedApplication] delegate]).memberData).namesArray = [NSArray arrayWithArray:self.namesArray];
     
     // Regenerate the data
     [self.tableView reloadData];

@@ -82,7 +82,7 @@ const int  MAX_PINS_TO_DROP = 200;
     NSInteger listFiltered = [[NSUserDefaults standardUserDefaults] integerForKey: @"list_filtered"];
     if (!listFiltered) {
         AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-        [delegate.memberData loadPlistData];
+        [delegate.memberData loadData];
     }
     
 // Loads from data objects
@@ -273,7 +273,7 @@ const int  MAX_PINS_TO_DROP = 200;
     }
     else {
         // Otherwise show all pins in the namesArray
-        for( id arrayOrDict in MEMBERLISTDATA.namesArray ){
+        for( id arrayOrDict in (((AppDelegate*)[[UIApplication sharedApplication] delegate]).memberData).namesArray ){
             // Flatten any arrays (needed in data for sorting lists with categories)
             if( [arrayOrDict isKindOfClass:[NSArray class]] ){
                 [pinsArray addObjectsFromArray:arrayOrDict];

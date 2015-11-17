@@ -104,7 +104,7 @@ int filesCount = 1;
     
 // Now goes to the Data model MemberListData and does the actual plist to array conversion
     AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-    [delegate.memberData loadPlistData];
+    [delegate.memberData loadData];
 }
 
 //- (void)loadPickerViewDataFiles {

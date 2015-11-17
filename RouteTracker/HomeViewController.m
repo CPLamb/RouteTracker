@@ -31,12 +31,12 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    NSString *dataFilenameIndex = [[NSUserDefaults standardUserDefaults]stringForKey:@"selected_spreadsheet"];
+    NSString *dataFilename = [[NSUserDefaults standardUserDefaults]stringForKey:@"selected_spreadsheet"];
 
-    NSLog(@"HomeVC -- dataFilenameIndex = %@", dataFilenameIndex.description);
+    NSLog(@"HomeVC -- dataFilename = %@", dataFilename.description);
 
 // Sets up display of magazine loaded
-    self.selectedMagazine.text = dataFilenameIndex.description;
+    self.selectedMagazine.text = dataFilename.description;
 
     NSLog(@"HomeVC -- Listing the loaded spreadsheet %@", self.selectedMagazine.text);
 }

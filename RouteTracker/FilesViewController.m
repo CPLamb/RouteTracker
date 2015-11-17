@@ -24,7 +24,11 @@ NSString* fileContent;
   // Displays info about the selected file
   self.fileContent.delegate = self;
 
-  [self displayFileName];
+
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    [self displayFileName];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,7 +61,7 @@ NSString* fileContent;
     
 // reloads the file that is selected ***This may not be necessary****
     AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-    [delegate.memberData loadPlistData];
+    [delegate.memberData loadData];
 }
 
 - (IBAction)testButton:(UIButton *)sender // for testing file management stuff
@@ -164,9 +168,10 @@ NSString* fileContent;
 
         self.fileContent.text = fileContent;
 
-        self.membersArray = [self csvDataToArrayOfDictionaries:fileContent]; // convert to plist
+        // parse csv file to Array of Dictionaries
+        self.membersArray = [self csvDataToArrayOfDictionaries:fileContent];
 
-          self.numberOfRowsTextfield.text = [NSString stringWithFormat:@"%lu", (unsigned long)[self.membersArray count]];
+        self.numberOfRowsTextfield.text = [NSString stringWithFormat:@"%lu", (unsigned long)[self.membersArray count]];
           
         NSLog(@"FilesVC loadFileContent - self.membersArray = \n%@", self.membersArray);
 
@@ -332,7 +337,7 @@ NSString* fileContent;
   NSLog(@"FilesVC csvDataToArrayOfDictionaries -- membersArray = \n%@", membersArray);
 
   AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-  [delegate.memberData loadPlistData];
+  [delegate.memberData loadData];
   NSLog(@"FilesVC -- Should reload the dataFile %@", delegate.memberData.description);
 
   return membersArray;

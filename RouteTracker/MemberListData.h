@@ -13,14 +13,11 @@ It can be either read from an embedded pList, or an URL
 #import "AppDelegate.h"
 #import "SortSelectionViewController.h"
 
-// Static call for the singleton of the memberData
-#define MEMBERLISTDATA (((AppDelegate*)[[UIApplication sharedApplication] delegate]).memberData)
-
 @interface MemberListData : NSObject  <SortSelectionViewControllerDelegate>
 
-@property (strong, nonatomic) NSArray *namesArray;  // array of indexed array of dictionaries
+@property (strong, nonatomic) NSMutableArray *namesArray;  // indexed array of dictionaries
 @property (strong, nonatomic) NSMutableArray *membersArray;    // complete list derived from the PList
 
-- (void)loadPlistData;
+- (void)loadData;
 
 @end
