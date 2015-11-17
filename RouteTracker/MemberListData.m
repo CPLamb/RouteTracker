@@ -127,7 +127,7 @@
  * @param
  */
 - (NSArray*)csvDataToArrayOfDictionaries: (NSString *) csvFile {
-  NSLog(@"FilesVC csvDataToArrayOfDictionaries: - The string we're looking at is \n>>>>%@<<<<", csvFile);
+  NSLog(@"MembersListData -csvDataToArrayOfDictionaries: -- The string we're looking at is \n>>>>%@<<<<", csvFile);
 
   //  NSString *csvString = csvFile;
 
@@ -142,7 +142,6 @@
   int tokenCount = 0;
   bool insideQuote = false;
   bool ignoreComma = false;
-  NSString *plistData = [[NSString alloc]init];
   int numberOfFields = 0;
 
   // constants
@@ -188,7 +187,7 @@
       // grab the current tokenWord and add to tokens array. Note, this is the last token on the current line
       tokens[tokenCount] = tokenWord;
 
-      //      NSLog(@"tokens[%d] = %@", tokenCount, tokenWord);
+      //      NSLog(@"MemberListdata tokens[%d] = %@", tokenCount, tokenWord);
       tokenCount++;
 
       // numberOfFields is the number of keys in the spreadsheet. This line of code executes
@@ -208,44 +207,7 @@
 
   // Parsing is complete
 
-  NSLog(@"tokenCount = %d", tokenCount);
-
-  // Build plist string in pieces
-  plistData = [plistData stringByAppendingString:@"\n\n\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>"];
-  plistData = [plistData stringByAppendingString:@"\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">"];
-  plistData = [plistData stringByAppendingString:@"\n<plist version=\"1.0\">"];
-  plistData = [plistData stringByAppendingString:@"\n<array>\n"];
-
-  // loop over entire data set
-  for(int tokenIndex=numberOfFields; tokenIndex < tokenCount; tokenIndex += numberOfFields){
-
-    // create a dictionary entry
-    plistData = [plistData stringByAppendingString:@"\t<dict>\n"];
-
-    for(int i = 0; i < numberOfFields; i++){
-
-      // key
-      plistData = [plistData stringByAppendingString:@"\t\t<key>"];
-      plistData = [plistData stringByAppendingString:tokens[i]];
-      plistData = [plistData stringByAppendingString:@"</key>\n"];
-
-      // value
-      plistData = [plistData stringByAppendingString:@"\t\t<string>"];
-      plistData = [plistData stringByAppendingString:tokens[i + tokenIndex]];
-      plistData = [plistData stringByAppendingString:@"</string>\n"];
-
-    }
-
-    plistData = [plistData stringByAppendingString:@"\t</dict>\n"];
-
-  } // return for-loop over entire data set
-
-  plistData = [plistData stringByAppendingString:@"</array>\n"];
-  plistData = [plistData stringByAppendingString:@"</plist>\n"];
-
-  // The pList is complete
-  NSLog(@"FilesVC csvDataToArrayOfDictionaries -- plistData\n\n%@", plistData);
-
+  NSLog(@"MemberListdata tokenCount = %d", tokenCount);
 
   // Create an array of dictionaries
 
@@ -268,7 +230,7 @@
     [membersArray addObject:currentDictionary];
   }
   
-  NSLog(@"FilesVC csvDataToArrayOfDictionaries -- membersArray = \n%@", membersArray);
+  NSLog(@"MemberListdata -csvDataToArrayOfDictionaries -- membersArray = \n%@", membersArray);
   
   return membersArray;
 }
