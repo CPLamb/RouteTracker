@@ -35,7 +35,7 @@
         [[NSUserDefaults standardUserDefaults] setObject:@"EdibleMontereyDistributionList" forKey:@"selected_spreadsheet"];
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"selected_map_type"];
         [[NSUserDefaults standardUserDefaults] setObject:@"ALL" forKey:@"selected_driver"];
-   //     [[NSUserDefaults standardUserDefaults] setObject:@"initialString" forKey:@"selected_plist"];
+        [[NSUserDefaults standardUserDefaults] setObject:@"EdibleMontereyDistributionList" forKey:@"selected_plist"];
         [[NSUserDefaults standardUserDefaults] setObject:@"initialDictionary" forKey:@"selected_member"];
         [[NSUserDefaults standardUserDefaults] setObject:@"selectedIndexPath" forKey:@"selected_indexPath"];
         

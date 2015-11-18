@@ -25,26 +25,28 @@
 - (void)loadPlistData {
     NSLog(@"Loads the Plist into member array either from the main bundle (read only) or from the documents directory files downloaded from Google sheets");
     
-//    [self loadFileFromDocuments];
+    [self loadFileFromDocuments];
     
-// Loads file locally from either sheet
-    NSBundle *mainBundle = [NSBundle mainBundle];
-    NSURL *fileURL = [[NSURL alloc] init];
+//// Loads file locally from either sheet
+//    NSBundle *mainBundle = [NSBundle mainBundle];
+//    NSURL *fileURL = [[NSURL alloc] init];
+//    
+//// Use NSUserDefault to determine which file to load
+//    NSString *dataFilename = [[NSUserDefaults standardUserDefaults] stringForKey:@"selected_spreadsheet"];
+//
+//// Alloc/init the fileURL outside the boundaries of switch/case statement
+//        fileURL = [mainBundle URLForResource:dataFilename withExtension:@"plist"];
+//
+//    NSLog(@"MemberListData -loadPlistData -- fileURL = %@", fileURL);
+//    
+//// The secret JUICE - loads the membersArray from the file
+//    self.membersArray = [NSArray arrayWithContentsOfURL:fileURL];
+//
+////    NSLog(@"MemberListData -loadPlistData -- self.membersArray = \n%@", self.membersArray);
+//    NSLog(@"MEMBERLISTDATA Array count %d", [self.membersArray count]);
+//
     
-// Use NSUserDefault to determine which file to load
-    NSString *dataFilename = [[NSUserDefaults standardUserDefaults] stringForKey:@"selected_spreadsheet"];
-
-// Alloc/init the fileURL outside the boundaries of switch/case statement
-        fileURL = [mainBundle URLForResource:dataFilename withExtension:@"plist"];
-
-    NSLog(@"MemberListData -loadPlistData -- fileURL = %@", fileURL);
     
-// The secret JUICE - loads the membersArray from the file
-    self.membersArray = [NSArray arrayWithContentsOfURL:fileURL];
-
-//    NSLog(@"MemberListData -loadPlistData -- self.membersArray = \n%@", self.membersArray);
-    NSLog(@"MEMBERLISTDATA Array count %d", [self.membersArray count]);
-
 // Copy members array into the names array which can later be sorted for other views
     self.namesArray = [NSArray arrayWithArray:self.membersArray];
     
@@ -57,6 +59,7 @@
     
 // select the filename from NSUserDefaults
     NSString *selectedFile = [[NSUserDefaults standardUserDefaults] stringForKey:@"selected_plist"];
+ //   NSString *selectedFile = @"MontereyWaveDistributionList";
 
 // Add the directory path to the string
     NSString *path;
