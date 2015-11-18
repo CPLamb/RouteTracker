@@ -257,7 +257,7 @@
             BOOL foundInDriver = [searchDriver rangeOfString:self.searchString options:NSCaseInsensitiveSearch].location == NSNotFound;
             BOOL foundInCategory = [searchCategory rangeOfString:self.searchString options:NSCaseInsensitiveSearch].location == NSNotFound;
             if (!foundInName || !foundInDriver || !foundInCategory) {
-                //           NSLog(@"The Business is #%d %@   %@", i, searchName, searchDescription);
+                           NSLog(@"The Business is #%d %@   %@", i, searchName, self.searchString);
                 
                 [self.filteredArray addObject:[self.membersArray objectAtIndex:i]];
             }
