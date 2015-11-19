@@ -160,7 +160,7 @@
     // read csvString current character and convert to NSString *tokenChar
     NSString *tokenChar = [NSString stringWithFormat:@"%c", [csvFile characterAtIndex: charIndex ]];
 
-    //    NSLog(@"Character[%d] =  %@ unicode = %d", charIndex, tokenChar, [csvString characterAtIndex:charIndex]);
+//    NSLog(@"Character[%d] =  %@", charIndex, tokenChar);
 
 
     // look for quote
@@ -236,10 +236,11 @@
       plistData = [plistData stringByAppendingString:@"\t\t<string>"];
       plistData = [plistData stringByAppendingString:tokens[i + tokenIndex]];
       plistData = [plistData stringByAppendingString:@"</string>\n"];
-
+//        NSLog(@" plist internal loop index %d", i);
     }
 
     plistData = [plistData stringByAppendingString:@"\t</dict>\n"];
+ //     NSLog(@" plist EXTERNAL loop index %d", tokenIndex);
 
   } // return for-loop over entire data set
 
