@@ -73,14 +73,15 @@
     NSString *fileDataString = [[NSString alloc] initWithData:fileData encoding:NSUTF8StringEncoding];
     
 // Parse the csv string file to a plist
-    self.membersArray = [self csvDataToArrayOfDictionaries:fileDataString];
+//    self.membersArray = [self csvDataToArrayOfDictionaries:fileDataString];
     
 // Perform the conversion fileURL to array
 //    NSURL *fileURL = [[NSURL alloc]initWithString:path];
-//    self.membersArray = [NSMutableArray arrayWithContentsOfFile:fileDataString];
+    self.membersArray = [NSMutableArray arrayWithContentsOfFile:fileDataString];
     NSLog(@"The membersArray = %@", self.membersArray);
 }
 
+// Remove this - no longer used
 - (void)loadPlistURL {
     // Loads the Plist from the web on another thread, and if both array counts are
     // equal it copies the web version over the local version. And reloads the data

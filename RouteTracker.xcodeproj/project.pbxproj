@@ -350,7 +350,6 @@
 				83279E7E1A5206B5007496BB /* SetupTableViewController.h */,
 				83279E7F1A5206B5007496BB /* SetupTableViewController.m */,
 				83279E2E1A4F3B23007496BB /* Supporting Files */,
-				83279F3C1A5876C1007496BB /* Google Drive */,
 				83279E991A58684D007496BB /* Frameworks */,
 			);
 			path = RouteTracker;
@@ -359,6 +358,7 @@
 		83279E2E1A4F3B23007496BB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				83279F3C1A5876C1007496BB /* Google Drive */,
 				83BC54871A6319EB00DBDA4A /* DataLists */,
 				83279E571A4F4B85007496BB /* Icons */,
 				83279E401A4F3B23007496BB /* LaunchScreen.xib */,

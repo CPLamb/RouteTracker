@@ -8,6 +8,7 @@
 
 #import "FilesViewController.h"
 #import "AppDelegate.h"
+#import "MemberListData.h"
 #import "DrEditUtilities.h"
 
 @implementation FilesViewController
@@ -126,11 +127,41 @@ NSString* fileContent;
             if (!removeSuccess)
             {
                 // Error handling
-                
             }
         }
     }
+}
 
+- (IBAction)test05Button:(UIButton *)sender {
+    NSLog(@"READS the Plist formatted file & converts it into an array (of dictionaries)");
+    NSError *errorDescr = nil;
+    NSPropertyListFormat format;
+    NSString *plistPath;
+    NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    plistPath = [rootPath stringByAppendingPathComponent:@"MontereyWaveDistributionList"];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
+        NSLog(@"We couldn't find the file");
+    }
+    NSData *plistXML = [[NSFileManager defaultManager] contentsAtPath:plistPath];
+    NSArray *temp = (NSArray *)[NSPropertyListSerialization propertyListWithData:plistXML
+                                                        options:kCFPropertyListXMLFormat_v1_0
+                                                        format:kCFPropertyListImmutable
+                                                        error:&errorDescr];
+//    NSArray *temp = (NSArray *)[NSPropertyListSerialization propertyListWithData:plistXML options:kCFPropertyListXMLFormat_v1_0 format:NSPropertyListImmutable errorDescription:&errorDescr];
+//    NSArray *temp = (NSArray *)[NSPropertyListSerialization
+//                                dataWithPropertyList:plistXML
+//                                format:kCFPropertyListXMLFormat_v1_0
+//                                options:0
+//                                error:&errorDescr];
+//    NSURL *plistURL = [NSURL URLWithString:plistPath];
+//    NSArray *temp = [NSArray arrayWithContentsOfURL:plistURL];
+    
+    if (!temp) {
+        NSLog(@"Error reading plist: %@, format %lu", errorDescr, (unsigned long)format);
+    }
+    NSLog(@"Took no time at all! %@", [temp objectAtIndex:[temp count]-1]);
+    
+    
 }
 
 #pragma mark - Google Drive methods
@@ -179,6 +210,8 @@ NSString* fileContent;
     }];
   }
 }
+
+
 // fileContent is the variable displaying loaded data on the file loaded screen
 
 // http://www.raywenderlich.com/66395/documenting-in-xcode-with-headerdoc-tutorial
@@ -187,7 +220,7 @@ NSString* fileContent;
  * @param
  */
 - (NSArray*)csvDataToArrayOfDictionaries: (NSString *) csvFile {
-      NSLog(@"FilesVC csvDataToArrayOfDictionaries: - The string we're looking at is \n>>>>%@<<<<", csvFile);
+      NSLog(@"FilesVC csvDataToArrayOfDictionaries: - The string we're looking at is \n\n\n>>>>%@<<<<", csvFile);
 
 //  NSString *csvString = csvFile;
 
@@ -219,7 +252,6 @@ NSString* fileContent;
 
     //    NSLog(@"Character[%d] =  %@ unicode = %d", charIndex, tokenChar, [csvString characterAtIndex:charIndex]);
 
-
     // look for quote
     if ([csvFile characterAtIndex:charIndex] == quoteSentinel) {
       if (insideQuote == true) {
@@ -241,6 +273,7 @@ NSString* fileContent;
       tokenWord = @""; // reset tokenWord
       continue;
     }
+      
     // look for end-of-line i.e., a carriageReturn followed by linefeed
     if (([csvFile characterAtIndex:charIndex] == carriageReturnSentinel)
         && ([csvFile characterAtIndex:charIndex+1] == linefeedSentinel)) {
@@ -301,12 +334,28 @@ NSString* fileContent;
 
   } // return for-loop over entire data set
 
-  plistData = [plistData stringByAppendingString:@"</array>\n"];
+//  plistData = [plistData stringByAppendingString:@"</dict>\n"];
+    plistData = [plistData stringByAppendingString:@"</array>\n"];
   plistData = [plistData stringByAppendingString:@"</plist>\n"];
 
 // The pList is complete
-  NSLog(@"FilesVC csvDataToArrayOfDictionaries -- plistData\n\n%@", plistData);
+  NSLog(@"FilesVC csvDataToArrayOfDictionaries -- PLISTDATA\n\n%@", plistData);
 
+    
+// CPL - SAVES the file to the documents directory
+//    NSData *file = [plistData dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *path;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    path = [paths objectAtIndex:0];
+    path = [path stringByAppendingPathComponent:self.filenameLabel.text];
+//    NSLog(@"Path/FilenName = %@", path);
+    
+    BOOL fileConverted = [plistData writeToFile:path atomically:YES];
+    NSLog(@"%@", @(fileConverted));
+    
+//    [[NSFileManager defaultManager] createFileAtPath:path
+//                                            contents:file
+//                                          attributes:nil];
 
 // Create an array of dictionaries
 
