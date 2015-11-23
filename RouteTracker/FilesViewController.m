@@ -134,11 +134,13 @@ NSString* fileContent;
 
 - (IBAction)test05Button:(UIButton *)sender {
     NSLog(@"READS the Plist formatted file & converts it into an array (of dictionaries)");
+    
     NSError *errorDescr = nil;
     NSPropertyListFormat format;
     NSString *plistPath;
     NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    plistPath = [rootPath stringByAppendingPathComponent:@"MontereyWaveDistributionList"];
+    NSString *fileTitle = self.selectedFile.title;
+    plistPath = [rootPath stringByAppendingPathComponent:fileTitle];
     if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
         NSLog(@"We couldn't find the file");
     }
@@ -147,21 +149,11 @@ NSString* fileContent;
                                                         options:kCFPropertyListXMLFormat_v1_0
                                                         format:kCFPropertyListImmutable
                                                         error:&errorDescr];
-//    NSArray *temp = (NSArray *)[NSPropertyListSerialization propertyListWithData:plistXML options:kCFPropertyListXMLFormat_v1_0 format:NSPropertyListImmutable errorDescription:&errorDescr];
-//    NSArray *temp = (NSArray *)[NSPropertyListSerialization
-//                                dataWithPropertyList:plistXML
-//                                format:kCFPropertyListXMLFormat_v1_0
-//                                options:0
-//                                error:&errorDescr];
-//    NSURL *plistURL = [NSURL URLWithString:plistPath];
-//    NSArray *temp = [NSArray arrayWithContentsOfURL:plistURL];
-    
+
     if (!temp) {
         NSLog(@"Error reading plist: %@, format %lu", errorDescr, (unsigned long)format);
     }
     NSLog(@"Took no time at all! %@", [temp objectAtIndex:[temp count]-1]);
-    
-    
 }
 
 #pragma mark - Google Drive methods

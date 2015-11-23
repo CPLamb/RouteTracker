@@ -376,7 +376,7 @@ const int  MAX_PINS_TO_DROP = 200;
     {
         return nil;
     }
-    NSLog(@"The annotation is %@", annotation);
+//    NSLog(@"The annotation is %@", annotation);
     // try to dequeue an existing pin view first
     static NSString *BridgeAnnotationIdentifier = @"bridgeAnnotationIdentifier";
     

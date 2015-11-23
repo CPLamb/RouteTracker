@@ -32,11 +32,13 @@
     [super viewDidLoad];
     
 // Convert data PList to local membersArray from local Plist file
-    [self loadLocalPlistData];
+//    [self loadLocalPlistData];
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate.memberData loadPlistData];
     
 // Makes up the index array & the sorted array for the cells
-    [self makeSectionsIndex:self.membersArray];
-    [self makeIndexedArray:self.membersArray withIndex:self.indexArray];
+//    [self makeSectionsIndex:self.membersArray];
+//    [self makeIndexedArray:self.membersArray withIndex:self.indexArray];
     
     sortedByDriver = NO;
     

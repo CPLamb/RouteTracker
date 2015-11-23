@@ -55,30 +55,57 @@
 }
 
 - (void)loadFileFromDocuments {
-    NSLog(@"MemberListData - Loads a file from the DOCUMENTS directory");
+    NSLog(@"READS the Plist formatted file & converts it into an array (of dictionaries)");
     
-// select the filename from NSUserDefaults
-    NSString *selectedFile = [[NSUserDefaults standardUserDefaults] stringForKey:@"selected_plist"];
- //   NSString *selectedFile = @"MontereyWaveDistributionList";
+    NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"selected_plist"];
+    
+    NSError *errorDescr = nil;
+    NSPropertyListFormat format;
+    NSString *plistPath;
+    NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    plistPath = [rootPath stringByAppendingPathComponent:filename];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
+        NSLog(@"We couldn't find the file so we'll load from the bundle");
+        plistPath = [[NSBundle mainBundle] pathForResource:@"EdibleMontereyDistributionList" ofType:@"plist"];
+    }
+    NSData *plistXML = [[NSFileManager defaultManager] contentsAtPath:plistPath];
+    NSArray *temp = (NSArray *)[NSPropertyListSerialization propertyListWithData:plistXML
+                                                                         options:kCFPropertyListXMLFormat_v1_0
+                                                                          format:kCFPropertyListImmutable
+                                                                           error:&errorDescr];
+    
+    if (!temp) {
+        NSLog(@"Error reading plist: %@, format %lu", errorDescr, (unsigned long)format);
+    }
+    self.membersArray = [NSArray arrayWithArray:temp];
+    NSLog(@"Took no time at all! %@", [temp objectAtIndex:[temp count]-1]);
 
-// Add the directory path to the string
-    NSString *path;
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    path = [paths objectAtIndex:0];
-    path = [path stringByAppendingPathComponent:selectedFile];
-
-// Get the data from the documents directory
-    NSData *fileData;
-    fileData = [[NSFileManager defaultManager] contentsAtPath:path];
-    NSString *fileDataString = [[NSString alloc] initWithData:fileData encoding:NSUTF8StringEncoding];
     
-// Parse the csv string file to a plist
-//    self.membersArray = [self csvDataToArrayOfDictionaries:fileDataString];
     
-// Perform the conversion fileURL to array
-//    NSURL *fileURL = [[NSURL alloc]initWithString:path];
-    self.membersArray = [NSMutableArray arrayWithContentsOfFile:fileDataString];
-    NSLog(@"The membersArray = %@", self.membersArray);
+//    NSLog(@"MemberListData - Loads a file from the DOCUMENTS directory");
+//    
+//// select the filename from NSUserDefaults
+//    NSString *selectedFile = [[NSUserDefaults standardUserDefaults] stringForKey:@"selected_plist"];
+// //   NSString *selectedFile = @"MontereyWaveDistributionList";
+//
+//// Add the directory path to the string
+//    NSString *path;
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    path = [paths objectAtIndex:0];
+//    path = [path stringByAppendingPathComponent:selectedFile];
+//
+//// Get the data from the documents directory
+//    NSData *fileData;
+//    fileData = [[NSFileManager defaultManager] contentsAtPath:path];
+//    NSString *fileDataString = [[NSString alloc] initWithData:fileData encoding:NSUTF8StringEncoding];
+//    
+//// Parse the csv string file to a plist
+////    self.membersArray = [self csvDataToArrayOfDictionaries:fileDataString];
+//    
+//// Perform the conversion fileURL to array
+////    NSURL *fileURL = [[NSURL alloc]initWithString:path];
+//    self.membersArray = [NSMutableArray arrayWithContentsOfFile:fileDataString];
+//    NSLog(@"The membersArray = %@", self.membersArray);
 }
 
 // Remove this - no longer used
