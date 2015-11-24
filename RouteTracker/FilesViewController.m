@@ -153,6 +153,10 @@ NSString* fileContent;
     if (!temp) {
         NSLog(@"Error reading plist: %@, format %lu", errorDescr, (unsigned long)format);
     }
+// Check to see if file is format properly
+    BOOL goodFile = [NSPropertyListSerialization propertyList:plistXML isValidForFormat:kCFPropertyListXMLFormat_v1_0];
+    NSLog(@"File is %d", goodFile);
+    
     NSLog(@"Took no time at all! %@", [temp objectAtIndex:[temp count]-1]);
 }
 
