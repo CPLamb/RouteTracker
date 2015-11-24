@@ -23,7 +23,7 @@
 #pragma mark - Custom methods
 
 - (void)loadPlistData {
-    NSLog(@"Loads the Plist into member array either from the main bundle (read only) or from the documents directory files downloaded from Google sheets");
+//    NSLog(@"Loads the Plist into member array either from the main bundle (read only) or from the documents directory files downloaded from Google sheets");
     
     [self loadFileFromDocuments];
     

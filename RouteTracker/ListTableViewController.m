@@ -137,7 +137,7 @@
 #pragma mark - Custom sort & search methods
 
 - (NSArray *)makeSectionsIndex:(NSArray *)arrayOfDictionaries {
- //       NSLog(@"Takes the array of Dictionaries (PList), and creates an index of first letters for use in the tableview");
+//       NSLog(@"Takes the array of Dictionaries (PList), and creates an index of first letters for use in the tableview");
     
     // Creates a mutable set to read each letter only once
     NSMutableSet *sectionsMutableSet = [NSMutableSet setWithCapacity:36];
@@ -145,7 +145,7 @@
     //Reads each items Name & loads it's first letter into the sections set
     for (int i=0; i<=[arrayOfDictionaries count]-1; i++) {
         NSDictionary *aDictionary = [arrayOfDictionaries objectAtIndex:i];
-        // Allows sort by Name or Category
+        // Allows sort by Name or Category or Driver
         if (sortedByCategory) {
             NSString *aCategory = [aDictionary objectForKey:@"Category"];
             if (aCategory.length > 0) {
