@@ -33,8 +33,8 @@
     
 // Convert data PList to local membersArray from local Plist file
 //    [self loadLocalPlistData];
-    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-    [delegate.memberData loadPlistData];
+//    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+//    [delegate.memberData loadPlistData];
     
 // Makes up the index array & the sorted array for the cells
 //    [self makeSectionsIndex:self.membersArray];
