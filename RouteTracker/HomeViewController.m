@@ -31,7 +31,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    NSString *dataFilenameIndex = [[NSUserDefaults standardUserDefaults]stringForKey:@"selected_spreadsheet"];
+    NSString *dataFilenameIndex = [[NSUserDefaults standardUserDefaults]stringForKey:@"selected_plist"];
 
     NSLog(@"HomeVC -- dataFilenameIndex = %@", dataFilenameIndex.description);
 

@@ -133,7 +133,7 @@ NSString* fileContent;
 }
 
 - (IBAction)test05Button:(UIButton *)sender {
-    NSLog(@"READS the Plist formatted file & converts it into an array (of dictionaries)");
+    NSLog(@"READS the formatted plist file & checks to see if it can be converted into an array (of dictionaries)");
     
     NSError *errorDescr = nil;
     NSPropertyListFormat format;
@@ -153,6 +153,10 @@ NSString* fileContent;
     if (!temp) {
         NSLog(@"Error reading plist: %@, format %lu", errorDescr, (unsigned long)format);
     }
+// Check to see if file is format properly
+    BOOL goodFile = [NSPropertyListSerialization propertyList:plistXML isValidForFormat:kCFPropertyListXMLFormat_v1_0];
+    NSLog(@"File is %d", goodFile);
+    
     NSLog(@"Took no time at all! %@", [temp objectAtIndex:[temp count]-1]);
 }
 
@@ -168,16 +172,17 @@ NSString* fileContent;
   GTLDriveFileExportLinks *myExportLinks = self.selectedFile.exportLinks;
 
   NSString *spreadsheetURL = [[myExportLinks additionalProperties]objectForKey:@"text/csv"];
-  NSLog(@"The export LINKS %@", myExportLinks);
-  NSLog(@"Additional Properties : %@", [myExportLinks additionalProperties]);
-  NSLog(@"-----------------------");
-  NSLog(@"AND the WINNING URL is = %@", spreadsheetURL);
+//  NSLog(@"The export LINKS %@", myExportLinks);
+//  NSLog(@"Additional Properties : %@", [myExportLinks additionalProperties]);
+//  NSLog(@"-----------------------");
+//  NSLog(@"AND the WINNING URL is = %@", spreadsheetURL);
+    
   if (spreadsheetURL) {
     GTMHTTPFetcher *fetcher = [self.driveService.fetcherService fetcherWithURLString:spreadsheetURL];
     //    [self.driveService.fetcherService fetcherWithURLString:self.selectedFile.downloadUrl];
-    NSLog(@"Drive Service = %@",self.driveService);
-    NSLog(@"Fetcher Service = %@",self.driveService.fetcherService);
-    NSLog(@"Fetcher = %@",fetcher);
+//    NSLog(@"Drive Service = %@",self.driveService);
+//    NSLog(@"Fetcher Service = %@",self.driveService.fetcherService);
+//    NSLog(@"Fetcher = %@",fetcher);
     [fetcher beginFetchWithCompletionHandler:^(NSData *data, NSError *error) {
       [alert dismissWithClickedButtonIndex:0 animated:YES];
       if (error == nil) {
@@ -191,7 +196,7 @@ NSString* fileContent;
 
           self.numberOfRowsTextfield.text = [NSString stringWithFormat:@"%lu", (unsigned long)[self.membersArray count]];
           
-        NSLog(@"FilesVC loadFileContent - self.membersArray = \n%@", self.membersArray);
+//        NSLog(@"FilesVC loadFileContent - self.membersArray = \n%@", self.membersArray);
 
       } else {
         NSLog(@"An error occurred: %@", error);
@@ -212,17 +217,16 @@ NSString* fileContent;
  * @param
  */
 - (NSArray*)csvDataToArrayOfDictionaries: (NSString *) csvFile {
-      NSLog(@"FilesVC csvDataToArrayOfDictionaries: - The string we're looking at is \n\n\n>>>>%@<<<<", csvFile);
+//      NSLog(@"FilesVC csvDataToArrayOfDictionaries: - The string we're looking at is \n\n\n>>>>%@<<<<", csvFile);
 
 //  NSString *csvString = csvFile;
 
   // Build tokens array from string
 
   NSUInteger stringLength = [csvFile length];
-  //  NSLog(@"String length = %lu", stringLength);
 
-  // initialization
-  NSString *tokenWord = @"";
+// initialization
+    NSString *tokenWord = @"";
   NSMutableArray *tokens = [[NSMutableArray alloc]init];
   int tokenCount = 0;
   bool insideQuote = false;
@@ -319,19 +323,18 @@ NSString* fileContent;
       plistData = [plistData stringByAppendingString:@"\t\t<string>"];
       plistData = [plistData stringByAppendingString:tokens[i + tokenIndex]];
       plistData = [plistData stringByAppendingString:@"</string>\n"];
-
+        NSLog(@"Token %d   = key %@ value %@", ((i+1)+(tokenIndex-12)), tokens[i], tokens[i + tokenIndex]);
     }
 
     plistData = [plistData stringByAppendingString:@"\t</dict>\n"];
 
   } // return for-loop over entire data set
 
-//  plistData = [plistData stringByAppendingString:@"</dict>\n"];
     plistData = [plistData stringByAppendingString:@"</array>\n"];
   plistData = [plistData stringByAppendingString:@"</plist>\n"];
 
 // The pList is complete
-  NSLog(@"FilesVC csvDataToArrayOfDictionaries -- PLISTDATA\n\n%@", plistData);
+//  NSLog(@"FilesVC csvDataToArrayOfDictionaries -- PLISTDATA\n\n%@", plistData);
 
     
 // CPL - SAVES the file to the documents directory
@@ -370,11 +373,11 @@ NSString* fileContent;
     [membersArray addObject:currentDictionary];
   }
 
-  NSLog(@"FilesVC csvDataToArrayOfDictionaries -- membersArray = \n%@", membersArray);
+//  NSLog(@"FilesVC csvDataToArrayOfDictionaries -- membersArray = \n%@", membersArray);
 
   AppDelegate *delegate = [UIApplication sharedApplication].delegate;
   [delegate.memberData loadPlistData];
-  NSLog(@"FilesVC -- Should reload the dataFile %@", delegate.memberData.description);
+//  NSLog(@"FilesVC -- Should reload the dataFile %@", delegate.memberData.description);
 
   return membersArray;
 }
