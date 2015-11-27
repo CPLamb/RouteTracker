@@ -246,7 +246,7 @@ NSString* fileContent;
     // read csvString current character and convert to NSString *tokenChar
     NSString *tokenChar = [NSString stringWithFormat:@"%c", [csvFile characterAtIndex: charIndex ]];
 
-    NSLog(@"Character[%d] =  %@ unicode = %d", charIndex, tokenChar, [csvString characterAtIndex:charIndex]);
+//    NSLog(@"Character[%d] =  %@ unicode = %d", charIndex, tokenChar, [csvString characterAtIndex:charIndex]);
 
     // look for quote
     if ([csvFile characterAtIndex:charIndex] == quoteSentinel) {

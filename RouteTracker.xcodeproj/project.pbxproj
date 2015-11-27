@@ -307,6 +307,8 @@
 			isa = PBXGroup;
 			children = (
 				83279E2D1A4F3B23007496BB /* RouteTracker */,
+				83279E2E1A4F3B23007496BB /* Supporting Files */,
+				83279E991A58684D007496BB /* Frameworks */,
 				83279E4A1A4F3B23007496BB /* RouteTrackerTests */,
 				83279E2C1A4F3B23007496BB /* Products */,
 			);
@@ -349,8 +351,6 @@
 				83279F4C1A59DDA6007496BB /* FilesViewController.m */,
 				83279E7E1A5206B5007496BB /* SetupTableViewController.h */,
 				83279E7F1A5206B5007496BB /* SetupTableViewController.m */,
-				83279E2E1A4F3B23007496BB /* Supporting Files */,
-				83279E991A58684D007496BB /* Frameworks */,
 			);
 			path = RouteTracker;
 			sourceTree = "<group>";
@@ -367,6 +367,7 @@
 				83279E301A4F3B23007496BB /* main.m */,
 			);
 			name = "Supporting Files";
+			path = RouteTracker;
 			sourceTree = "<group>";
 		};
 		83279E4A1A4F3B23007496BB /* RouteTrackerTests */ = {
@@ -417,7 +418,6 @@
 				83279E911A58683D007496BB /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
-			path = ..;
 			sourceTree = "<group>";
 		};
 		83279EAB1A5875FE007496BB /* Drive API */ = {
