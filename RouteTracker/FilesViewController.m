@@ -219,7 +219,7 @@ NSString* fileContent;
 - (NSArray*)csvDataToArrayOfDictionaries: (NSString *) csvFile {
 //      NSLog(@"FilesVC csvDataToArrayOfDictionaries: - The string we're looking at is \n\n\n>>>>%@<<<<", csvFile);
 
-//  NSString *csvString = csvFile;
+  NSString *csvString = csvFile;
 
   // Build tokens array from string
 
@@ -246,7 +246,7 @@ NSString* fileContent;
     // read csvString current character and convert to NSString *tokenChar
     NSString *tokenChar = [NSString stringWithFormat:@"%c", [csvFile characterAtIndex: charIndex ]];
 
-    //    NSLog(@"Character[%d] =  %@ unicode = %d", charIndex, tokenChar, [csvString characterAtIndex:charIndex]);
+//    NSLog(@"Character[%d] =  %@ unicode = %d", charIndex, tokenChar, [csvString characterAtIndex:charIndex]);
 
     // look for quote
     if ([csvFile characterAtIndex:charIndex] == quoteSentinel) {
@@ -323,7 +323,7 @@ NSString* fileContent;
       plistData = [plistData stringByAppendingString:@"\t\t<string>"];
       plistData = [plistData stringByAppendingString:tokens[i + tokenIndex]];
       plistData = [plistData stringByAppendingString:@"</string>\n"];
-        NSLog(@"Token %d   = key %@ value %@", ((i+1)+(tokenIndex-12)), tokens[i], tokens[i + tokenIndex]);
+//        NSLog(@"Token %d   = key %@ value %@", ((i+1)+(tokenIndex-12)), tokens[i], tokens[i + tokenIndex]);
     }
 
     plistData = [plistData stringByAppendingString:@"\t</dict>\n"];
