@@ -144,6 +144,7 @@
     
     //Reads each items Name & loads it's first letter into the sections set
     for (int i=0; i<=[arrayOfDictionaries count]-1; i++) {
+        NSLog(@"Line %d is working", i);
         NSDictionary *aDictionary = [arrayOfDictionaries objectAtIndex:i];
         // Allows sort by Name or Category or Driver
         if (sortedByCategory) {
@@ -160,8 +161,12 @@
             [sectionsMutableSet addObject:aName];
         } else {
             NSString *aName = [aDictionary objectForKey:@"Name"];
-            NSString *aLetter = [aName substringToIndex:1U];        //uses the first letter of the string
-            [sectionsMutableSet addObject:aLetter];
+            if (aName.length != 0) {
+                NSString *aLetter = [aName substringToIndex:1U];        //uses the first letter of the string
+                [sectionsMutableSet addObject:aLetter];
+            } else {
+                NSLog(@"The line is \n %@", aDictionary);
+            }
         }
     }
     
@@ -225,11 +230,16 @@
             } else if (sortedByDriver) {
                 firstLetterOfWord = [[wordsArray objectAtIndex:j] objectForKey:@"Driver"];
             } else {
-                firstLetterOfWord = [[[wordsArray objectAtIndex:j] objectForKey:@"Name"] substringToIndex:1U];
+                if ([[[wordsArray objectAtIndex:j] objectForKey:@"Name"] length] != 0) {
+                    firstLetterOfWord = [[[wordsArray objectAtIndex:j] objectForKey:@"Name"] substringToIndex:1U];
+                }
             }
             if ([theIndexItem isEqualToString:firstLetterOfWord]) {
-                [aListOfItems addObject:[wordsArray objectAtIndex:j]];
+                if ([[[wordsArray objectAtIndex:j] objectForKey:@"Name"] length] != 0) {
+                    [aListOfItems addObject:[wordsArray objectAtIndex:j]];
+                }
             }
+//            NSLog(@"i & j = %d %d %lu", i, j, (unsigned long)[wordsArray count]);
         }
         //        NSArray *aListOfSortedItems = [aListOfItems sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
         [indexedNameArray addObject:aListOfItems];
