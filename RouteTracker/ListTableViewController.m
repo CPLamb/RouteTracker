@@ -154,15 +154,14 @@
             }
         } else if (sortedByDriver) {
             NSString *aName = [aDictionary objectForKey:@"Driver"];
-            if ([aName length] == 0) {
-                aName = @"XXX";
+            if ([aName length] != 0) {
+                NSString *aLetter = [aName substringToIndex:6U];
+                [sectionsMutableSet addObject:aName];
             }
-   //         NSString *aLetter = [aName substringToIndex:6U];        //uses the first letter of the string
-            [sectionsMutableSet addObject:aName];
         } else {
             NSString *aName = [aDictionary objectForKey:@"Name"];
             if (aName.length != 0) {
-                NSString *aLetter = [aName substringToIndex:1U];        //uses the first letter of the string
+                NSString *aLetter = [aName substringToIndex:1U];  //uses the first letter of the string
                 [sectionsMutableSet addObject:aLetter];
             } else {
                 NSLog(@"The line is \n %@", aDictionary);
@@ -229,6 +228,9 @@
                 firstLetterOfWord = [[wordsArray objectAtIndex:j] objectForKey:@"Category"];
             } else if (sortedByDriver) {
                 firstLetterOfWord = [[wordsArray objectAtIndex:j] objectForKey:@"Driver"];
+                if ([[[wordsArray objectAtIndex:j] objectForKey:@"Driver"] length] == 0) {
+                     firstLetterOfWord = @"XXX";
+                 }
             } else {
                 if ([[[wordsArray objectAtIndex:j] objectForKey:@"Name"] length] != 0) {
                     firstLetterOfWord = [[[wordsArray objectAtIndex:j] objectForKey:@"Name"] substringToIndex:1U];
