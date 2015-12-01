@@ -57,8 +57,8 @@
 - (void)loadFileFromDocuments {
     NSLog(@"READS the Plist formatted file & converts it into an array (of dictionaries)");
     
-    NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"selected_plist"];
-    
+//    NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"selected_plist"];
+    NSString *filename = @"MontereyWaveDistributionListProposed";
     NSError *errorDescr = nil;
     NSPropertyListFormat format;
     NSString *plistPath;
