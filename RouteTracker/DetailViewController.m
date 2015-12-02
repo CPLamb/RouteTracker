@@ -16,7 +16,6 @@
 
 @implementation DetailViewController
 
-
 #pragma mark - Lifecycle Methods
 
 - (void)viewDidLoad {
@@ -35,7 +34,7 @@
 // Assigns values to the text fields
     self.nameTextField.text = [self.detailItem objectForKey:@"Name"];
     self.deliverTextField.text = [self.detailItem objectForKey:@"Total Quantity to Deliver"];
-    self.returnedTextField.text = [self.detailItem objectForKey:@"Quantity Returned"];
+    self.returnedTextField.text = [self.detailItem objectForKey:@"Delivered to Date"];
     self.notesTextField.text = [self.detailItem objectForKey:@"Notes"];
     self.driverTextField.text = [self.detailItem objectForKey:@"Driver"];
     self.categoryTextField.text = [self.detailItem objectForKey:@"Category"];

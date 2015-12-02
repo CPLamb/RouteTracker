@@ -44,7 +44,26 @@
 - (id)initWithCoordinates:(CLLocationCoordinate2D)location memberData:(NSDictionary *)memberData {
     _latitude = [NSNumber numberWithDouble:location.latitude];
     _longitude = [NSNumber numberWithDouble:location.longitude];
-    _title = [memberData objectForKey:@"Name"];
+    
+// Temporary patch to display Qty & Driver on annotation title FIX is adding a 2nd line to the annotation
+    NSString *nameString;
+    if ([[memberData objectForKey:@"Name"] length] > 13) {
+        nameString = [[[memberData objectForKey:@"Name"] substringToIndex:13U] stringByAppendingString:@" "];
+    } else {
+        nameString = [[memberData objectForKey:@"Name"] stringByAppendingString:@" "];
+    }
+    NSString *deliveredString = @"0";
+    if ([[memberData objectForKey:@"Delivered to Date"] length] == 0) {
+        deliveredString = @"0/";
+    } else {
+        deliveredString = [[memberData objectForKey:@"Delivered to Date"] stringByAppendingString:@"/"];
+    }
+    NSString *qtyString = [[memberData objectForKey:@"Total Quantity to Deliver"]stringByAppendingString:@" "];
+    NSString *driverString = [[memberData objectForKey:@"Driver"] substringToIndex:3U];
+    
+    _title = [[[nameString stringByAppendingString:deliveredString] stringByAppendingString:qtyString] stringByAppendingString:driverString];
+//    _title = [memberData objectForKey:@"Name"];
+    
     _subTitle = [memberData objectForKey:@"Driver"];
     hasShop = [[memberData objectForKey:@"hasShop"] boolValue];
 

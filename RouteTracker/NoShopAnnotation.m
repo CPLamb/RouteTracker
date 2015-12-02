@@ -44,7 +44,13 @@
 - (id)initWithCoordinates:(CLLocationCoordinate2D)location memberData:(NSDictionary *)memberData {
     _latitude = [NSNumber numberWithDouble:location.latitude];
     _longitude = [NSNumber numberWithDouble:location.longitude];
-    _title = [memberData objectForKey:@"Name"];
+    
+    NSString *nameString = [memberData objectForKey:@"Name"];
+    
+    NSString *qtyString = [memberData objectForKey:@"Total Quantity to Deliver"];
+    _title = [[nameString stringByAppendingString:@"   "] stringByAppendingString:qtyString];
+    
+ //   _title = [memberData objectForKey:@"Name"];
     _subTitle = [memberData objectForKey:@"Driver"];
     hasShop = [[memberData objectForKey:@"hasShop"] boolValue];
     

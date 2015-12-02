@@ -58,7 +58,7 @@
     NSLog(@"READS the Plist formatted file & converts it into an array (of dictionaries)");
     
 //    NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"selected_plist"];
-    NSString *filename = @"MontereyWaveDistributionListProposed";
+    NSString *filename = @"EdibleMontereyDistributionListCurrent";  // emergency fix DELETE
     NSError *errorDescr = nil;
     NSPropertyListFormat format;
     NSString *plistPath;
