@@ -78,7 +78,7 @@
         NSLog(@"Error reading plist: %@, format %lu", errorDescr, (unsigned long)format);
     }
     self.membersArray = [NSArray arrayWithArray:temp];
-    NSLog(@"Took no time at all! %@", [temp objectAtIndex:[temp count]-1]);
+//    NSLog(@"Took no time at all! %@", [temp objectAtIndex:[temp count]-1]);
 
     
     
