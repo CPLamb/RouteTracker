@@ -16,7 +16,6 @@
 
 @implementation DetailViewController
 
-
 #pragma mark - Lifecycle Methods
 
 - (void)viewDidLoad {
@@ -24,7 +23,7 @@
     // Do any additional setup after loading the view.
     
 // IndexPath of the selected detailItem dictionary
-    NSLog(@"Selected indexPath = %@", self.selectedIndexPath);
+//    NSLog(@"Selected indexPath = %@", self.selectedIndexPath);
      int section = (int)self.selectedIndexPath.section;
     int row = (int)self.selectedIndexPath.row;
 
@@ -35,7 +34,7 @@
 // Assigns values to the text fields
     self.nameTextField.text = [self.detailItem objectForKey:@"Name"];
     self.deliverTextField.text = [self.detailItem objectForKey:@"Total Quantity to Deliver"];
-    self.returnedTextField.text = [self.detailItem objectForKey:@"Quantity Returned"];
+    self.returnedTextField.text = [self.detailItem objectForKey:@"Delivered to Date"];
     self.notesTextField.text = [self.detailItem objectForKey:@"Notes"];
     self.driverTextField.text = [self.detailItem objectForKey:@"Driver"];
     self.categoryTextField.text = [self.detailItem objectForKey:@"Category"];
@@ -58,7 +57,7 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    NSLog(@"Save the modified details to the detailItem mutableDictionary");
+//    NSLog(@"Save the modified details to the detailItem mutableDictionary");
     
 // A mutable Dictionary must be created from the original for editing?
     NSMutableDictionary *mutableDetailItem = [NSMutableDictionary dictionaryWithDictionary:self.detailItem];
@@ -81,7 +80,7 @@
     [mutableDetailItem setValue:self.contactTextField.text forKey:@"Contact Name"];
     [mutableDetailItem setValue:self.phoneTextField.text forKey:@"Contact Phone"];
 
-    NSLog(@"detailItem Name = %@", mutableDetailItem);
+//    NSLog(@"detailItem Name = %@", mutableDetailItem);
     
 // Stores the detailItem to NSUserDefaults
     NSDictionary *myDictionary = [NSDictionary dictionaryWithDictionary:mutableDetailItem];
@@ -99,7 +98,7 @@
 - (void)hideTap:(UIGestureRecognizer *)gestureRecognizer
 {
     [self.view endEditing:YES];
-    NSLog(@"Hides the keyboard");
+//    NSLog(@"Hides the keyboard");
 }
 
 
@@ -112,7 +111,7 @@
     // Pass the selected object to the new view controller.
     // Moves to other view & sets the detailItem to the selected item
     
-    NSLog(@"Segue ID is %@", [segue identifier]);
+//    NSLog(@"Segue ID is %@", [segue identifier]);
     
     if ([[segue identifier] isEqualToString:@"showMap"]) {
         [[segue destinationViewController] setDetailItem:self.detailItem];

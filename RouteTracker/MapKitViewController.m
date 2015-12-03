@@ -31,7 +31,7 @@ const int  MAX_PINS_TO_DROP = 200;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//    NSLog(@"%@ view did load for the first time.", self);
+    NSLog(@"%@ view did load for the first time.", self);
     
     // ** Don't forget to add NSLocationWhenInUseUsageDescription in MyApp-Info.plist and give it a string
     
@@ -62,7 +62,7 @@ const int  MAX_PINS_TO_DROP = 200;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-//    NSLog(@"%@ WILL appear...", self);
+    NSLog(@"%@ WILL appear...", self);
     
 // Changes map type based on setup map control
     NSInteger mapType = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_map_type"];
@@ -118,7 +118,7 @@ const int  MAX_PINS_TO_DROP = 200;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NoShopAnnotation *)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    NSLog(@"Sequeing with memberData item %@", sender.memberData);
+//    NSLog(@"Sequeing with memberData item %@", sender.memberData);
 //    NSArray *object = (NSArray)sender.
 // Sets the detailItem to the selected item
           [[segue destinationViewController] setDetailItem:sender.memberData];

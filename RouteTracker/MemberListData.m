@@ -58,7 +58,7 @@
     NSLog(@"READS the Plist formatted file & converts it into an array (of dictionaries)");
     
 //    NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"selected_plist"];
-    NSString *filename = @"MontereyWaveDistributionListProposed";
+    NSString *filename = @"EdibleMontereyDistributionListCurrent";  // emergency fix DELETE
     NSError *errorDescr = nil;
     NSPropertyListFormat format;
     NSString *plistPath;
@@ -78,7 +78,7 @@
         NSLog(@"Error reading plist: %@, format %lu", errorDescr, (unsigned long)format);
     }
     self.membersArray = [NSArray arrayWithArray:temp];
-    NSLog(@"Took no time at all! %@", [temp objectAtIndex:[temp count]-1]);
+//    NSLog(@"Took no time at all! %@", [temp objectAtIndex:[temp count]-1]);
 
     
     

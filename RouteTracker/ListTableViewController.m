@@ -144,7 +144,7 @@
     
     //Reads each items Name & loads it's first letter into the sections set
     for (int i=0; i<=[arrayOfDictionaries count]-1; i++) {
-        NSLog(@"Line %d is working", i);
+ //       NSLog(@"Line %d is working", i);
         NSDictionary *aDictionary = [arrayOfDictionaries objectAtIndex:i];
         // Allows sort by Name or Category or Driver
         if (sortedByCategory) {
@@ -237,9 +237,7 @@
                 }
             }
             if ([theIndexItem isEqualToString:firstLetterOfWord]) {
-                if ([[[wordsArray objectAtIndex:j] objectForKey:@"Name"] length] != 0) {
                     [aListOfItems addObject:[wordsArray objectAtIndex:j]];
-                }
             }
 //            NSLog(@"i & j = %d %d %lu", i, j, (unsigned long)[wordsArray count]);
         }
@@ -534,6 +532,8 @@
     cell.textLabel.text = [[[self.namesArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"Name"];      // for subclass cell memberTableViewCell.title.text
     
     NSString *subtitleDeliver = [[[self.namesArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"Total Quantity to Deliver"];
+    NSString *subtitleDelivered = [[[self.namesArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"Delived to Date"];
+
     NSString *subtitleDriver = [[[self.namesArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"Driver"];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"Deliver: %@       Driver: %@", subtitleDeliver, subtitleDriver];
     
