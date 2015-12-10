@@ -239,6 +239,10 @@ NSString* fileContent;
   int quoteSentinel = 34;
   int linefeedSentinel = 10;
   int carriageReturnSentinel = 13;
+    
+//CPL patch for nil fields
+    bool priorCharIsComma = false;
+    int commaSentinal = 44;
 
   // loop over string to break-out tokens
   for(int charIndex = 0; charIndex < stringLength; charIndex++) {
@@ -247,6 +251,14 @@ NSString* fileContent;
     NSString *tokenChar = [NSString stringWithFormat:@"%c", [csvFile characterAtIndex: charIndex ]];
       
 #pragma mark TODO - add IF statement to insert blank char[32?] where field in nill
+      
+      if ([csvString characterAtIndex:charIndex] == commaSentinal) {
+          priorCharIsComma = true;
+          NSLog(@"COMMA character!!!!!");
+      } else {
+          priorCharIsComma = false;
+      }
+      
     NSLog(@"Character[%d] =  %@ unicode = %d", charIndex, tokenChar, [csvString characterAtIndex:charIndex]);
 
     // look for quote
