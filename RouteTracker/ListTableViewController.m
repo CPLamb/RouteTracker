@@ -31,15 +31,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-// Convert data PList to local membersArray from local Plist file
-//    [self loadLocalPlistData];
-//    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-//    [delegate.memberData loadPlistData];
-    
-// Makes up the index array & the sorted array for the cells
-//    [self makeSectionsIndex:self.membersArray];
-//    [self makeIndexedArray:self.membersArray withIndex:self.indexArray];
-    
     sortedByDriver = NO;
     
     memberTableViewCell = [[MemberTableViewCell alloc] init];
@@ -48,13 +39,6 @@
     self.searchString = [NSString stringWithFormat:@"Coffee"];
     self.filteredArray = [NSMutableArray arrayWithCapacity:20];
     self.mySearchBar.delegate = self;
-
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -71,23 +55,6 @@
         [self makeIndexedArray:delegate.memberData.membersArray withIndex:self.indexArray];
     }
     
-//// Saves the edited member (detailItem) to the current array
-//    NSDictionary *editedMemberItem = [[NSUserDefaults standardUserDefaults] objectForKey:@"selected_member"];
-//    NSLog(@"edited member = %@", editedMemberItem);
-//    NSArray *selectedIndexPathArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"selected_indexPath"];
-//    NSLog(@"It's indexPath = %@", selectedIndexPathArray);
-//    
-//// Writes edited detailItem to the filtered Array
-//    NSMutableArray *theArray = [self.namesArray objectAtIndex:0];
-//
-//    long section = [[selectedIndexPathArray objectAtIndex:1] integerValue];
-//    long row = [[selectedIndexPathArray objectAtIndex:0] integerValue];
-//    NSMutableArray *theSection = [self.namesArray objectAtIndex:section];
-//    NSDictionary *theDictionary = [theSection objectAtIndex:row];
-//    [theSection replaceObjectAtIndex:[[selectedIndexPathArray objectAtIndex:0] integerValue] withObject:editedMemberItem];
-//
-//    NSLog(@"ListTableVC - the dictionary = %@", theSection);
-    
 //    sortedByDriver = NO;
     memberTableViewCell = [[MemberTableViewCell alloc] init];
     
@@ -102,9 +69,6 @@
 
 #pragma mark - Navigation segue method
 
-/*
- Moves to other views based upon the segue identifier set in Storyboard
- */
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     //    NSLog(@"The segue identifier is %@", [segue identifier]);
@@ -169,7 +133,7 @@
         }
     }
     
-    // Copies the mutable set into a set & then makes a mutable array of the set
+// Copies the mutable set into a set & then makes a mutable array of the set
     NSSet *sectionsSet = [NSSet setWithSet:sectionsMutableSet];
     NSMutableArray *sectionsMutableArray = [[sectionsSet allObjects] mutableCopy];
     
@@ -201,7 +165,6 @@
         }
         [trimmedArray addObject:trimmedWord];
     }
-    //    trimmedArray = [trimmedArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     
     //    NSLog(@"Trimmed words are; %@", trimmedArray);
     return trimmedArray;
@@ -277,7 +240,7 @@
     }
     //    NSLog(@"The resulting filteredArray has %d items", [self.filteredArray count]);
     
-    // Makes sure there is something in the filteredArray
+// Makes sure there is something in the filteredArray
     if ([self.filteredArray count] > 0) {
         // Copy to namesArray and reload the data
         self.namesArray = [NSMutableArray arrayWithArray:self.filteredArray];
@@ -381,31 +344,6 @@
  //   [self loadPlistURL];
 }
 
-// Hides a keyboard by use of an invisible button on view
-// configure UIButton - Custom, no title & size over touch area
--(IBAction)hideButton:(UIButton *)sender
-{
-    NSLog(@"Hides the keyboard");
-    [self.view endEditing:YES];
-}
-
-- (IBAction)deliveredButton:(UIButton *)sender
-{
-    self.delivered = !self.delivered;
-    NSLog(@"Toggles the Delivered switch %hhd", self.delivered);
-
-    if (self.delivered) {
-        sender.titleLabel.text = @"X";
-    } else {
-        sender.titleLabel.text = @"@";
-    }
-}
-
-- (IBAction)showDetailsButton:(UIButton *)sender
-{
-    NSLog(@"Shows the Detail view");
-  //  [self.view endEditing:YES];
-}
 
 #pragma mark - Delegate methods
 
@@ -517,7 +455,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    // Return the number of rows in the section.
+// Return the number of rows in the section.
     return [[self.namesArray objectAtIndex:section] count];
 }
 
@@ -557,48 +495,8 @@
     return index;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
 }
-
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -30,21 +30,20 @@ const int  MAX_PINS_TO_DROP = 200;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
     NSLog(@"%@ view did load for the first time.", self);
     
-    // ** Don't forget to add NSLocationWhenInUseUsageDescription in MyApp-Info.plist and give it a string
+// ** Don't forget to add NSLocationWhenInUseUsageDescription in MyApp-Info.plist and give it a string
     
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
-    
     [self.locationManager requestWhenInUseAuthorization];
-    // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
+    
+// Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
     if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
     {
         [self.locationManager requestWhenInUseAuthorization];
     }
-    
     [self.locationManager startUpdatingLocation];
     
 // Setup for the mapView
@@ -55,7 +54,7 @@ const int  MAX_PINS_TO_DROP = 200;
     [self.mapView setRegion:MKCoordinateRegionMake(CLLocationCoordinate2DMake(theLatitude, theLongitude), MKCoordinateSpanMake(0.5, 0.5)) animated:YES];
     self.mapView.mapType = MKMapTypeStandard;
     
-    // Setup for the annotations & drop a pin at home
+// Setup for the annotations & drop a pin at home
     self.mapAnnotations = [[NSMutableArray alloc] init];
     
     [self enable3DMapping];
@@ -80,10 +79,10 @@ const int  MAX_PINS_TO_DROP = 200;
     
 // Changes the correct spreadsheet based upon the appDelegate memberData property IF the list is NOT filtered
     NSInteger listFiltered = [[NSUserDefaults standardUserDefaults] integerForKey: @"list_filtered"];
-    if (!listFiltered) {
-        AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-        [delegate.memberData loadPlistData];
-    }
+//    if (!listFiltered) {
+//        AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+//        [delegate.memberData loadPlistData];
+//    }
     
 // Loads from data objects
     [self loadPins];
@@ -102,14 +101,6 @@ const int  MAX_PINS_TO_DROP = 200;
     NSLog(@"Pins in the select = %lu", (unsigned long)[self.mapAnnotations count]);
     
     [self.mapView addAnnotations:self.mapAnnotations];
-    
-// Displays an annotation the first object
- //   [self.mapView selectAnnotation:[self.mapAnnotations objectAtIndex:0] animated:YES];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Navigation segue method
@@ -118,11 +109,9 @@ const int  MAX_PINS_TO_DROP = 200;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NoShopAnnotation *)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-//    NSLog(@"Sequeing with memberData item %@", sender.memberData);
-//    NSArray *object = (NSArray)sender.
+    
 // Sets the detailItem to the selected item
           [[segue destinationViewController] setDetailItem:sender.memberData];
-
 }
 
 #pragma mark - Custom Methods
@@ -155,12 +144,13 @@ const int  MAX_PINS_TO_DROP = 200;
 
 - (void)calculateCenter {
     
-    // set min to the highest and max to the lowest so any MIN or MAX calculation will change this value
+// set min to the highest and max to the lowest so any MIN or MAX calculation will change this value
     CLLocationCoordinate2D minCoord = CLLocationCoordinate2DMake(180, 180.0);
     CLLocationCoordinate2D maxCoord = CLLocationCoordinate2DMake(-180.0, -180.0);
     
     NSLog(@"Checking min/max coords for %lu mapAnnotations", (unsigned long)[self.mapAnnotations count]);
-    // checks all annotations for min and max (deprecated -- checking pinsArray instead)
+    
+// checks all annotations for min and max (deprecated -- checking pinsArray instead)
     for (MapItem * item in self.mapAnnotations){
         if ((item.latitude != 0) && (item.longitude != 0)) {
             double lat = [item.latitude doubleValue];
@@ -171,9 +161,8 @@ const int  MAX_PINS_TO_DROP = 200;
             maxCoord.longitude = MAX(maxCoord.longitude, lon);
         }
     }
-    //
     
-    // after checking all
+// after checking all
     if((self.mapView.userLocation.coordinate.latitude != 0.0) && (self.mapView.userLocation.coordinate.latitude != 0.0)) {
         CLLocationCoordinate2D userCoord = self.referenceLocation.coordinate;
         minCoord.latitude = MIN(minCoord.latitude, userCoord.latitude);
@@ -187,7 +176,7 @@ const int  MAX_PINS_TO_DROP = 200;
     
     CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake((minCoord.latitude + maxCoord.latitude)/2, (minCoord.longitude + maxCoord.longitude)/2);
     
-    // Initializes distance at DEFAULT_SPAN if both coordinates are the same
+// Initializes distance at DEFAULT_SPAN if both coordinates are the same
     float distance = 500;
     if ((minCoord.latitude == maxCoord.latitude) && (maxCoord.longitude == maxCoord.longitude)) {
         distance = DEFAULT_SPAN;
@@ -222,7 +211,7 @@ const int  MAX_PINS_TO_DROP = 200;
     NSLog(@"Opens the native Map app's turn-by-turn navigation");
     
 //business location
-    // test location
+// test location
     //    CLLocationCoordinate2D coords = CLLocationCoordinate2DMake(36.9793,-121.9985);
     
     NSString *latitude = [[self.pinsArray objectAtIndex:0] objectForKey:@"Latitude"];
@@ -291,7 +280,7 @@ const int  MAX_PINS_TO_DROP = 200;
 
 - (void)loadPins {
     
-    // Deletes all prior pins
+// Deletes all prior pins
     [self removeAllPins:nil];
     
     // Figure out the closest pin to the user
@@ -387,12 +376,8 @@ const int  MAX_PINS_TO_DROP = 200;
                                           initWithAnnotation:annotation
                                           reuseIdentifier:BridgeAnnotationIdentifier];
     customPinView.pinColor = MKPinAnnotationColorRed;
- //   customPinView.
     
     customPinView.canShowCallout = YES;
-    //            customPinView.image = [UIImage imageNamed:@"lobster.png"];
-    //            NSLog(@"The customPinView is %@", customPinView);
-    
     
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeInfoDark];
     //            [rightButton addTarget:nil action:nil forControlEvents:UIControlEventTouchUpInside];

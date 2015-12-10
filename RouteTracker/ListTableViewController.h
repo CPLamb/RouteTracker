@@ -44,8 +44,4 @@
 
 - (IBAction)sortListButton:(UIBarButtonItem *)sender;
 
-- (IBAction)hideButton:(UIButton *)sender;
-- (IBAction)deliveredButton:(UIButton *)sender;
-- (IBAction)showDetailsButton:(UIButton *)sender;
-
 @end
