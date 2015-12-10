@@ -217,7 +217,7 @@ NSString* fileContent;
  * @param
  */
 - (NSArray*)csvDataToArrayOfDictionaries: (NSString *) csvFile {
-//      NSLog(@"FilesVC csvDataToArrayOfDictionaries: - The string we're looking at is \n\n\n>>>>%@<<<<", csvFile);
+      NSLog(@"FilesVC csvDataToArrayOfDictionaries: - The string we're looking at is \n\n\n>>>>%@<<<<\n\n", csvFile);
 
   NSString *csvString = csvFile;
 
@@ -245,8 +245,9 @@ NSString* fileContent;
 
     // read csvString current character and convert to NSString *tokenChar
     NSString *tokenChar = [NSString stringWithFormat:@"%c", [csvFile characterAtIndex: charIndex ]];
-
-//    NSLog(@"Character[%d] =  %@ unicode = %d", charIndex, tokenChar, [csvString characterAtIndex:charIndex]);
+      
+#pragma mark TODO - add IF statement to insert blank char[32?] where field in nill
+    NSLog(@"Character[%d] =  %@ unicode = %d", charIndex, tokenChar, [csvString characterAtIndex:charIndex]);
 
     // look for quote
     if ([csvFile characterAtIndex:charIndex] == quoteSentinel) {
