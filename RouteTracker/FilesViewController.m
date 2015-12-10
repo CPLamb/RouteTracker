@@ -284,17 +284,23 @@ NSString* fileContent;
       // once following the first time  a carriage return & line feed is detected.
       if (numberOfFields == 0) numberOfFields = tokenCount;
 
-      tokenWord = @""; // reset tokenWord
+      tokenWord = @" "; // reset tokenWord
       charIndex++; // skip over carriage return
       continue; //  skip linefeed
     }
     // Build tokenWord tokenChar-by-tokenChar
     tokenWord = [tokenWord stringByAppendingString:tokenChar];
-  } // for loop
+      NSLog(@"tokenWord = %@", tokenWord);
 
+  } // for loop
+    if ([tokenWord length] == 0) {
+        NSLog(@"Hah! we found an empty word %@", tokenWord);
+        tokenWord = @" ";
+    }
+ 
   // grab the current tokenWord and add to tokens array. Note this is the last token in the file.
   tokens[tokenCount] = tokenWord;
-
+    
   // Parsing is complete
 
   NSLog(@"tokenCount = %d", tokenCount);

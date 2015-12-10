@@ -17,13 +17,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    NSLog(@"AppDelegate -- application didFinishLaunchingWithOptions");
 
 // initialize defaults for app parameters using NSUserDefault
     NSString *dateKey    = @"dateKey";
     NSDate *lastRead    = (NSDate *)[[NSUserDefaults standardUserDefaults] objectForKey:dateKey];
-
-    NSLog(@"AppDelegate -- lastRead = %@", lastRead);
 
     // App first run: set up user defaults.
     if (lastRead == nil)
