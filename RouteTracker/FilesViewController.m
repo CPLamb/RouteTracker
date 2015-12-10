@@ -217,7 +217,7 @@ NSString* fileContent;
  * @param
  */
 - (NSArray*)csvDataToArrayOfDictionaries: (NSString *) csvFile {
-      NSLog(@"FilesVC csvDataToArrayOfDictionaries: - The string we're looking at is \n\n\n>>>>%@<<<<\n\n", csvFile);
+      NSLog(@"FilesVC csvDataToArrayOfDictionaries:XXXX - The string we're looking at is \n\n\n>>>>%@<<<<\n\n", csvFile);
 
   NSString *csvString = csvFile;
 
