@@ -92,13 +92,7 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Home" id="GQx-gB-SCU">
-                        <barButtonItem key="rightBarButtonItem" title="Setup" id="Etw-qi-hSx">
-                            <connections>
-                                <segue destination="0GM-Ui-0MM" kind="show" id="2bE-YB-t9k"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Home" id="GQx-gB-SCU"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="568"/>
                     <connections>
@@ -1216,7 +1210,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="wXl-0J-PM3"/>
-        <segue reference="2bE-YB-t9k"/>
         <segue reference="qPY-Ep-njk"/>
     </inferredMetricsTieBreakers>
 </document>
