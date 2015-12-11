@@ -611,11 +611,11 @@
 				TargetAttributes = {
 					83279E2A1A4F3B23007496BB = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = G3LJ7TD2WN;
+						DevelopmentTeam = PKPC72LMPF;
 					};
 					83279E461A4F3B23007496BB = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = ZYJAM6HZ93;
+						DevelopmentTeam = PKPC72LMPF;
 						TestTargetID = 83279E2A1A4F3B23007496BB;
 					};
 				};
