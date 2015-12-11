@@ -251,7 +251,7 @@ NSString* fileContent;
 
 
         if (([csvFile characterAtIndex: charIndex ] == ampersand) || ([csvFile characterAtIndex: charIndex ] == ellipsoid)){
-            tokenChar = @" ";
+            tokenChar = @"X";
         }
 
         NSLog(@"Character[%d] =  %@ unicode = %d", charIndex, tokenChar, [csvString characterAtIndex:charIndex]);
