@@ -192,9 +192,7 @@ NSString* fileContent;
 
                 self.fileContent.text = fileContent;
 
-                self.membersArray = [self csvDataToArrayOfDictionaries:fileContent]; // convert to plist
-
-                self.numberOfRowsTextfield.text = [NSString stringWithFormat:@"%lu", (unsigned long)[self.membersArray count]];
+                self.numberOfRowsTextfield.text = [[NSNumber numberWithInt:self.recordCount] stringValue];
 
                 //        NSLog(@"FilesVC loadFileContent - self.membersArray = \n%@", self.membersArray);
 
@@ -233,6 +231,7 @@ NSString* fileContent;
     bool ignoreComma = false;
     NSString *plistData = [[NSString alloc]init];
     int numberOfFields = 0;
+    self.recordCount = 0;
 
     // constants
     int commaSentinel = 44;
@@ -241,6 +240,7 @@ NSString* fileContent;
     int carriageReturnSentinel = 13;
     int ampersand = 38;
     int ellipsoid = 8230;
+
 
 
     // loop over string to break-out tokens
@@ -302,6 +302,7 @@ NSString* fileContent;
             if (numberOfFields == 0) numberOfFields = tokenCount;
 
             tokenWord = @""; // reset tokenWord
+            self.recordCount++; // Each <CR><LF> indicates one record loaded
             charIndex++; // skip over carriage return
             continue; //  skip linefeed
         }
@@ -355,6 +356,7 @@ NSString* fileContent;
 
     // The pList is complete
       NSLog(@"FilesVC csvDataToArrayOfDictionaries -- PLISTDATA\n\n%@", plistData);
+    NSLog(@"Files VC - csvDataToArrayOfDictionaries -- #of records downloaded %d", self.recordCount);
 
     // CPL - SAVES the file to the documents directory
     //    NSData *file = [plistData dataUsingEncoding:NSUTF8StringEncoding];
