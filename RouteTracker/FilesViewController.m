@@ -216,7 +216,7 @@ NSString* fileContent;
  * @discussion This method accepts a Google spreadsheet formated as a csv text string and returns an Array of Dictionaries
  * @param
  */
-- (NSArray*)csvDataToArrayOfDictionaries: (NSString *) csvFile {
+- (NSString*)csvDataToArrayOfDictionaries: (NSString *) csvFile {
     NSLog(@"FilesVC csvDataToArrayOfDictionaries: - The string we're looking at is \n\n\n>>>>%@<<<<\n\n", csvFile);
 
     NSString *csvString = csvFile;
@@ -362,8 +362,7 @@ NSString* fileContent;
     plistData = [plistData stringByAppendingString:@"</plist>\n"];
 
     // The pList is complete
-    //  NSLog(@"FilesVC csvDataToArrayOfDictionaries -- PLISTDATA\n\n%@", plistData);
-
+      NSLog(@"FilesVC csvDataToArrayOfDictionaries -- PLISTDATA\n\n%@", plistData);
 
     // CPL - SAVES the file to the documents directory
     //    NSData *file = [plistData dataUsingEncoding:NSUTF8StringEncoding];
@@ -375,39 +374,7 @@ NSString* fileContent;
 
     BOOL fileConverted = [plistData writeToFile:path atomically:YES];
     NSLog(@"%@", @(fileConverted));
-
-    //    [[NSFileManager defaultManager] createFileAtPath:path
-    //                                            contents:file
-    //                                          attributes:nil];
-
-    // Create an array of dictionaries
-
-    // create an empty membersArray
-    NSMutableArray *membersArray = [[NSMutableArray alloc]init];
-
-    // loop over entire data set
-    for(int tokenIndex=numberOfFields; tokenIndex < tokenCount; tokenIndex += numberOfFields){
-
-        // create empty dictionary
-        NSMutableDictionary *currentDictionary = [[NSMutableDictionary alloc]init];
-
-        // loop over fields
-        for(int i = 0; i < numberOfFields; i++){
-            // Adds given key-value pair to the dictionary.
-            [currentDictionary setValue:tokens[i + tokenIndex] forKey:tokens[i]];
-        }
-        
-        // Add dictionary to membersArray
-        [membersArray addObject:currentDictionary];
-    }
-    
-    //  NSLog(@"FilesVC csvDataToArrayOfDictionaries -- membersArray = \n%@", membersArray);
-    
-    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-    [delegate.memberData loadPlistData];
-    //  NSLog(@"FilesVC -- Should reload the dataFile %@", delegate.memberData.description);
-    
-    return membersArray;
+    return plistData;
 }
 
 @end
