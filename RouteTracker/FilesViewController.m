@@ -239,6 +239,9 @@ NSString* fileContent;
     int quoteSentinel = 34;
     int linefeedSentinel = 10;
     int carriageReturnSentinel = 13;
+    int ampersand = 38;
+    int ellipsoid = 8230;
+
 
     //    //CPL patch for nil fields
     //    bool priorCharIsComma = false;
@@ -250,14 +253,10 @@ NSString* fileContent;
         // read csvString current character and convert to NSString *tokenChar
         NSString *tokenChar = [NSString stringWithFormat:@"%c", [csvFile characterAtIndex: charIndex ]];
 
-        //#pragma mark TODO - add IF statement to insert blank char[32?] where field in nill
-        //
-        //        if ([csvString characterAtIndex:charIndex] == commaSentinal) {
-        //            priorCharIsComma = true;
-        //            NSLog(@"COMMA character!!!!!");
-        //        } else {
-        //            priorCharIsComma = false;
-        //        }
+
+        if (([csvFile characterAtIndex: charIndex ] == ampersand) || ([csvFile characterAtIndex: charIndex ] == ellipsoid)){
+            tokenChar = @" ";
+        }
 
         NSLog(@"Character[%d] =  %@ unicode = %d", charIndex, tokenChar, [csvString characterAtIndex:charIndex]);
 
@@ -292,7 +291,7 @@ NSString* fileContent;
         if (([csvFile characterAtIndex:charIndex] == carriageReturnSentinel)
             && ([csvFile characterAtIndex:charIndex+1] == linefeedSentinel)) {
 
-            // deal with empty field that is the last field in the line
+            // deal with an empty field that is the last field in the line
             if(tokenWord.length == 0) tokenWord = [tokenWord stringByAppendingString:@" "]; // add a blank character
 
 
@@ -306,19 +305,16 @@ NSString* fileContent;
             // once following the first time  a carriage return & line feed is detected.
             if (numberOfFields == 0) numberOfFields = tokenCount;
 
-            tokenWord = @" "; // reset tokenWord
+            tokenWord = @""; // reset tokenWord
             charIndex++; // skip over carriage return
             continue; //  skip linefeed
         }
+
         // Build tokenWord tokenChar-by-tokenChar
         tokenWord = [tokenWord stringByAppendingString:tokenChar];
         NSLog(@"tokenWord = %@", tokenWord);
 
     } // for loop
-    if ([tokenWord length] == 0) {
-        NSLog(@"Hah! we found an empty word %@", tokenWord);
-        tokenWord = @" ";
-    }
 
     // grab the current tokenWord and add to tokens array. Note this is the last token in the file.
     tokens[tokenCount] = tokenWord;
