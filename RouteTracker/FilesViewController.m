@@ -217,7 +217,7 @@ NSString* fileContent;
  * @param
  */
 - (NSArray*)csvDataToArrayOfDictionaries: (NSString *) csvFile {
-    NSLog(@"FilesVC csvDataToArrayOfDictionaries: - The string we're looking at is \n\n\n>>>>%@<<<<\n\n", csvFile);
+      NSLog(@"FilesVC csvDataToArrayOfDictionaries:XXXX - The string we're looking at is \n\n\n>>>>%@<<<<\n\n", csvFile);
 
     NSString *csvString = csvFile;
 
@@ -242,10 +242,6 @@ NSString* fileContent;
     int ampersand = 38;
     int ellipsoid = 8230;
 
-
-    //    //CPL patch for nil fields
-    //    bool priorCharIsComma = false;
-    //    int commaSentinal = 44;
 
     // loop over string to break-out tokens
     for(int charIndex = 0; charIndex < stringLength; charIndex++) {
