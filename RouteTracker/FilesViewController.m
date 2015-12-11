@@ -20,43 +20,43 @@ NSString* fileContent;
 #pragma mark - Lifecycle methods
 
 - (void)viewDidLoad {
-  [super viewDidLoad];
+    [super viewDidLoad];
 
-  // Displays info about the selected file
-  self.fileContent.delegate = self;
+    // Displays info about the selected file
+    self.fileContent.delegate = self;
 
-  [self displayFileName];
+    [self displayFileName];
 }
 
 - (void)didReceiveMemoryWarning {
-  [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Custom RouteTracker methods
 
 - (void)displayFileName
 {
-  NSString *fileTitle = self.selectedFile.title;
-  self.filenameLabel.text = fileTitle;
-  self.modifiedDateTextfield.text = [self.selectedFile.modifiedDate stringValue];
+    NSString *fileTitle = self.selectedFile.title;
+    self.filenameLabel.text = fileTitle;
+    self.modifiedDateTextfield.text = [self.selectedFile.modifiedDate stringValue];
     NSLog(@"FilesVC - Selected file %@", self.selectedFile.title);
 }
 
 - (IBAction)downloadSpreadsheetButton:(UIButton *)sender
 {
-  NSLog(@"Let's try to download a file from Google Drive");
-  [self loadFileContent];
+    NSLog(@"Let's try to download a file from Google Drive");
+    [self loadFileContent];
 
-  //    int spreadsheetNumber = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_spreadsheet"];
-  //    NSLog(@"spreadsheet is %d", spreadsheetNumber);
+    //    int spreadsheetNumber = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_spreadsheet"];
+    //    NSLog(@"spreadsheet is %d", spreadsheetNumber);
 }
 
 - (IBAction)saveSpreadsheetButton:(UIButton *)sender
 {
     NSLog(@"Overwrites the local list & then reloads the file");
-    
-// reloads the file that is selected ***This may not be necessary****
+
+    // reloads the file that is selected ***This may not be necessary****
     AppDelegate *delegate = [UIApplication sharedApplication].delegate;
     [delegate.memberData loadPlistData];
 }
@@ -83,7 +83,7 @@ NSString* fileContent;
     path = [paths objectAtIndex:0];
     path = [path stringByAppendingPathComponent:self.filenameLabel.text];
     NSLog(@"Path/FilenName = %@", path);
-    
+
     [[NSFileManager defaultManager] createFileAtPath:path
                                             contents:file
                                           attributes:nil];
@@ -91,10 +91,10 @@ NSString* fileContent;
 
 - (IBAction)test03Button:(UIButton *)sender {
     NSLog(@"03 test action - LIST all files in directory");
-    
+
     //----- LIST ALL FILES -----
     NSLog(@"LISTING ALL FILES FOUND");
-    
+
     int Count;
     NSString *path;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -104,15 +104,15 @@ NSString* fileContent;
     {
         NSLog(@"File %d: %@", (Count + 1), [directoryContent objectAtIndex:Count]);
     }
-    
+
     [[NSUserDefaults standardUserDefaults] setObject:directoryContent
                                               forKey:@"downloaded_files"];
- }
+}
 
 - (IBAction)test04Button:(UIButton *)sender {
     NSLog(@"04 test action - DELETES all files in the directory");
 
-//DELETE ALL FILES IN DIRECTORY
+    //DELETE ALL FILES IN DIRECTORY
     NSString *path;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     path = [paths objectAtIndex:0];
@@ -134,7 +134,7 @@ NSString* fileContent;
 
 - (IBAction)test05Button:(UIButton *)sender {
     NSLog(@"READS the formatted plist file & checks to see if it can be converted into an array (of dictionaries)");
-    
+
     NSError *errorDescr = nil;
     NSPropertyListFormat format;
     NSString *plistPath;
@@ -146,66 +146,66 @@ NSString* fileContent;
     }
     NSData *plistXML = [[NSFileManager defaultManager] contentsAtPath:plistPath];
     NSArray *temp = (NSArray *)[NSPropertyListSerialization propertyListWithData:plistXML
-                                                        options:kCFPropertyListXMLFormat_v1_0
-                                                        format:kCFPropertyListImmutable
-                                                        error:&errorDescr];
+                                                                         options:kCFPropertyListXMLFormat_v1_0
+                                                                          format:kCFPropertyListImmutable
+                                                                           error:&errorDescr];
 
     if (!temp) {
         NSLog(@"Error reading plist: %@, format %lu", errorDescr, (unsigned long)format);
     }
-// Check to see if file is format properly
+    // Check to see if file is format properly
     BOOL goodFile = [NSPropertyListSerialization propertyList:plistXML isValidForFormat:kCFPropertyListXMLFormat_v1_0];
     NSLog(@"File is %d", goodFile);
-    
+
     NSLog(@"Took no time at all! %@", [temp objectAtIndex:[temp count]-1]);
 }
 
 #pragma mark - Google Drive methods
 
 - (void)loadFileContent {
-  // NSLog(@"GONNA TRY n LOAD this files content= %@", self.selectedFile);
+    // NSLog(@"GONNA TRY n LOAD this files content= %@", self.selectedFile);
 
-  UIAlertView *alert = [DrEditUtilities showLoadingMessageWithTitle:@"Loading file content"
-                                                           delegate:self];
+    UIAlertView *alert = [DrEditUtilities showLoadingMessageWithTitle:@"Loading file content"
+                                                             delegate:self];
 
-  // Trying to access spreadsheet files using exportLinks metadata Query for the strings
-  GTLDriveFileExportLinks *myExportLinks = self.selectedFile.exportLinks;
+    // Trying to access spreadsheet files using exportLinks metadata Query for the strings
+    GTLDriveFileExportLinks *myExportLinks = self.selectedFile.exportLinks;
 
-  NSString *spreadsheetURL = [[myExportLinks additionalProperties]objectForKey:@"text/csv"];
-//  NSLog(@"The export LINKS %@", myExportLinks);
-//  NSLog(@"Additional Properties : %@", [myExportLinks additionalProperties]);
-//  NSLog(@"-----------------------");
-//  NSLog(@"AND the WINNING URL is = %@", spreadsheetURL);
-    
-  if (spreadsheetURL) {
-    GTMHTTPFetcher *fetcher = [self.driveService.fetcherService fetcherWithURLString:spreadsheetURL];
-    //    [self.driveService.fetcherService fetcherWithURLString:self.selectedFile.downloadUrl];
-//    NSLog(@"Drive Service = %@",self.driveService);
-//    NSLog(@"Fetcher Service = %@",self.driveService.fetcherService);
-//    NSLog(@"Fetcher = %@",fetcher);
-    [fetcher beginFetchWithCompletionHandler:^(NSData *data, NSError *error) {
-      [alert dismissWithClickedButtonIndex:0 animated:YES];
-      if (error == nil) {
-        NSLog(@"FilesVC - It loaded something");
-        fileContent = [[NSString alloc] initWithData:data
-                                            encoding:NSUTF8StringEncoding];
+    NSString *spreadsheetURL = [[myExportLinks additionalProperties]objectForKey:@"text/csv"];
+    //  NSLog(@"The export LINKS %@", myExportLinks);
+    //  NSLog(@"Additional Properties : %@", [myExportLinks additionalProperties]);
+    //  NSLog(@"-----------------------");
+    //  NSLog(@"AND the WINNING URL is = %@", spreadsheetURL);
 
-        self.fileContent.text = fileContent;
+    if (spreadsheetURL) {
+        GTMHTTPFetcher *fetcher = [self.driveService.fetcherService fetcherWithURLString:spreadsheetURL];
+        //    [self.driveService.fetcherService fetcherWithURLString:self.selectedFile.downloadUrl];
+        //    NSLog(@"Drive Service = %@",self.driveService);
+        //    NSLog(@"Fetcher Service = %@",self.driveService.fetcherService);
+        //    NSLog(@"Fetcher = %@",fetcher);
+        [fetcher beginFetchWithCompletionHandler:^(NSData *data, NSError *error) {
+            [alert dismissWithClickedButtonIndex:0 animated:YES];
+            if (error == nil) {
+                NSLog(@"FilesVC - It loaded something");
+                fileContent = [[NSString alloc] initWithData:data
+                                                    encoding:NSUTF8StringEncoding];
 
-        self.membersArray = [self csvDataToArrayOfDictionaries:fileContent]; // convert to plist
+                self.fileContent.text = fileContent;
 
-          self.numberOfRowsTextfield.text = [NSString stringWithFormat:@"%lu", (unsigned long)[self.membersArray count]];
-          
-//        NSLog(@"FilesVC loadFileContent - self.membersArray = \n%@", self.membersArray);
+                self.membersArray = [self csvDataToArrayOfDictionaries:fileContent]; // convert to plist
 
-      } else {
-        NSLog(@"An error occurred: %@", error);
-        [DrEditUtilities showErrorMessageWithTitle:@"Unable to load file"
-                                           message:[error description]
-                                          delegate:self];
-      }
-    }];
-  }
+                self.numberOfRowsTextfield.text = [NSString stringWithFormat:@"%lu", (unsigned long)[self.membersArray count]];
+
+                //        NSLog(@"FilesVC loadFileContent - self.membersArray = \n%@", self.membersArray);
+
+            } else {
+                NSLog(@"An error occurred: %@", error);
+                [DrEditUtilities showErrorMessageWithTitle:@"Unable to load file"
+                                                   message:[error description]
+                                                  delegate:self];
+            }
+        }];
+    }
 }
 
 
@@ -217,188 +217,197 @@ NSString* fileContent;
  * @param
  */
 - (NSArray*)csvDataToArrayOfDictionaries: (NSString *) csvFile {
-      NSLog(@"FilesVC csvDataToArrayOfDictionaries: - The string we're looking at is \n\n\n>>>>%@<<<<\n\n", csvFile);
+    NSLog(@"FilesVC csvDataToArrayOfDictionaries: - The string we're looking at is \n\n\n>>>>%@<<<<\n\n", csvFile);
 
-  NSString *csvString = csvFile;
+    NSString *csvString = csvFile;
 
-  // Build tokens array from string
+    // Build tokens array from string
 
-  NSUInteger stringLength = [csvFile length];
+    NSUInteger stringLength = [csvFile length];
 
-// initialization
+    // initialization
     NSString *tokenWord = @"";
-  NSMutableArray *tokens = [[NSMutableArray alloc]init];
-  int tokenCount = 0;
-  bool insideQuote = false;
-  bool ignoreComma = false;
-  NSString *plistData = [[NSString alloc]init];
-  int numberOfFields = 0;
+    NSMutableArray *tokens = [[NSMutableArray alloc]init];
+    int tokenCount = 0;
+    bool insideQuote = false;
+    bool ignoreComma = false;
+    NSString *plistData = [[NSString alloc]init];
+    int numberOfFields = 0;
 
-  // constants
-  int commaSentinel = 44;
-  int quoteSentinel = 34;
-  int linefeedSentinel = 10;
-  int carriageReturnSentinel = 13;
-    
-//CPL patch for nil fields
-    bool priorCharIsComma = false;
-    int commaSentinal = 44;
+    // constants
+    int commaSentinel = 44;
+    int quoteSentinel = 34;
+    int linefeedSentinel = 10;
+    int carriageReturnSentinel = 13;
 
-  // loop over string to break-out tokens
-  for(int charIndex = 0; charIndex < stringLength; charIndex++) {
+    //    //CPL patch for nil fields
+    //    bool priorCharIsComma = false;
+    //    int commaSentinal = 44;
 
-    // read csvString current character and convert to NSString *tokenChar
-    NSString *tokenChar = [NSString stringWithFormat:@"%c", [csvFile characterAtIndex: charIndex ]];
-      
-#pragma mark TODO - add IF statement to insert blank char[32?] where field in nill
-      
-      if ([csvString characterAtIndex:charIndex] == commaSentinal) {
-          priorCharIsComma = true;
-          NSLog(@"COMMA character!!!!!");
-      } else {
-          priorCharIsComma = false;
-      }
-      
-    NSLog(@"Character[%d] =  %@ unicode = %d", charIndex, tokenChar, [csvString characterAtIndex:charIndex]);
+    // loop over string to break-out tokens
+    for(int charIndex = 0; charIndex < stringLength; charIndex++) {
 
-    // look for quote
-    if ([csvFile characterAtIndex:charIndex] == quoteSentinel) {
-      if (insideQuote == true) {
-        insideQuote = false; // closing quote
-        ignoreComma = false;
-        continue;
+        // read csvString current character and convert to NSString *tokenChar
+        NSString *tokenChar = [NSString stringWithFormat:@"%c", [csvFile characterAtIndex: charIndex ]];
 
-      } else {
-        ignoreComma = true;
-        insideQuote = true; // opening quote
-        continue;
-      }
-    }
-    // look for comma & ignore comma if inside quote
-    if ([csvFile characterAtIndex:charIndex] == commaSentinel && !ignoreComma) {
-      tokens[tokenCount] = tokenWord; // grab the current tokenWord and add to tokens array
-      //      NSLog(@"tokens[%d] = %@", tokenCount, tokenWord);
-      tokenCount++;
-      tokenWord = @""; // reset tokenWord
-      continue;
-    }
-      
-    // look for end-of-line i.e., a carriageReturn followed by linefeed
-    if (([csvFile characterAtIndex:charIndex] == carriageReturnSentinel)
-        && ([csvFile characterAtIndex:charIndex+1] == linefeedSentinel)) {
+        //#pragma mark TODO - add IF statement to insert blank char[32?] where field in nill
+        //
+        //        if ([csvString characterAtIndex:charIndex] == commaSentinal) {
+        //            priorCharIsComma = true;
+        //            NSLog(@"COMMA character!!!!!");
+        //        } else {
+        //            priorCharIsComma = false;
+        //        }
 
-      // grab the current tokenWord and add to tokens array. Note, this is the last token on the current line
-      tokens[tokenCount] = tokenWord;
+        NSLog(@"Character[%d] =  %@ unicode = %d", charIndex, tokenChar, [csvString characterAtIndex:charIndex]);
 
-      //      NSLog(@"tokens[%d] = %@", tokenCount, tokenWord);
-      tokenCount++;
+        // look for quote
+        if ([csvFile characterAtIndex:charIndex] == quoteSentinel) {
+            if (insideQuote == true) {
+                insideQuote = false; // closing quote
+                ignoreComma = false;
+                continue;
 
-      // numberOfFields is the number of keys in the spreadsheet. This line of code executes
-      // once following the first time  a carriage return & line feed is detected.
-      if (numberOfFields == 0) numberOfFields = tokenCount;
+            } else {
+                ignoreComma = true;
+                insideQuote = true; // opening quote
+                continue;
+            }
+        }
+        // look for comma & ignore comma if inside quote
+        if ([csvFile characterAtIndex:charIndex] == commaSentinel && !ignoreComma) {
 
-      tokenWord = @" "; // reset tokenWord
-      charIndex++; // skip over carriage return
-      continue; //  skip linefeed
-    }
-    // Build tokenWord tokenChar-by-tokenChar
-    tokenWord = [tokenWord stringByAppendingString:tokenChar];
-      NSLog(@"tokenWord = %@", tokenWord);
+            // deal with empty field
+            if(tokenWord.length == 0) tokenWord = [tokenWord stringByAppendingString:@" "]; // add a blank character
 
-  } // for loop
+            tokens[tokenCount] = tokenWord; // grab the current tokenWord and add to tokens array
+
+            //      NSLog(@"tokens[%d] = %@", tokenCount, tokenWord);
+            tokenCount++;
+            tokenWord = @""; // reset tokenWord
+            continue;
+        }
+
+        // look for end-of-line i.e., a carriageReturn followed by linefeed
+        if (([csvFile characterAtIndex:charIndex] == carriageReturnSentinel)
+            && ([csvFile characterAtIndex:charIndex+1] == linefeedSentinel)) {
+
+            // deal with empty field that is the last field in the line
+            if(tokenWord.length == 0) tokenWord = [tokenWord stringByAppendingString:@" "]; // add a blank character
+
+
+            // grab the current tokenWord and add to tokens array. Note, this is the last token on the current line
+            tokens[tokenCount] = tokenWord;
+
+            //      NSLog(@"tokens[%d] = %@", tokenCount, tokenWord);
+            tokenCount++;
+
+            // numberOfFields is the number of keys in the spreadsheet. This line of code executes
+            // once following the first time  a carriage return & line feed is detected.
+            if (numberOfFields == 0) numberOfFields = tokenCount;
+
+            tokenWord = @" "; // reset tokenWord
+            charIndex++; // skip over carriage return
+            continue; //  skip linefeed
+        }
+        // Build tokenWord tokenChar-by-tokenChar
+        tokenWord = [tokenWord stringByAppendingString:tokenChar];
+        NSLog(@"tokenWord = %@", tokenWord);
+
+    } // for loop
     if ([tokenWord length] == 0) {
         NSLog(@"Hah! we found an empty word %@", tokenWord);
         tokenWord = @" ";
     }
- 
-  // grab the current tokenWord and add to tokens array. Note this is the last token in the file.
-  tokens[tokenCount] = tokenWord;
-    
-  // Parsing is complete
 
-  NSLog(@"tokenCount = %d", tokenCount);
-//    NSLog(@"tokens array = %@", tokens);
+    // grab the current tokenWord and add to tokens array. Note this is the last token in the file.
+    tokens[tokenCount] = tokenWord;
 
-// Build plist string in pieces
-  plistData = [plistData stringByAppendingString:@"\n\n\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>"];
-  plistData = [plistData stringByAppendingString:@"\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">"];
-  plistData = [plistData stringByAppendingString:@"\n<plist version=\"1.0\">"];
-  plistData = [plistData stringByAppendingString:@"\n<array>\n"];
+    // Parsing is complete
 
-  // loop over entire data set
-  for(int tokenIndex=numberOfFields; tokenIndex < tokenCount; tokenIndex += numberOfFields){
+    NSLog(@"tokenCount = %d", tokenCount);
+    //    NSLog(@"tokens array = %@", tokens);
 
-    // create a dictionary entry
-    plistData = [plistData stringByAppendingString:@"\t<dict>\n"];
+    // Build plist string in pieces
+    plistData = [plistData stringByAppendingString:@"\n\n\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>"];
+    plistData = [plistData stringByAppendingString:@"\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">"];
+    plistData = [plistData stringByAppendingString:@"\n<plist version=\"1.0\">"];
+    plistData = [plistData stringByAppendingString:@"\n<array>\n"];
 
-    for(int i = 0; i < numberOfFields; i++){
+    // loop over entire data set
+    for(int tokenIndex=numberOfFields; tokenIndex < tokenCount; tokenIndex += numberOfFields){
 
-      // key
-      plistData = [plistData stringByAppendingString:@"\t\t<key>"];
-      plistData = [plistData stringByAppendingString:tokens[i]];
-      plistData = [plistData stringByAppendingString:@"</key>\n"];
+        // create a dictionary entry
+        plistData = [plistData stringByAppendingString:@"\t<dict>\n"];
 
-      // value
-      plistData = [plistData stringByAppendingString:@"\t\t<string>"];
-      plistData = [plistData stringByAppendingString:tokens[i + tokenIndex]];
-      plistData = [plistData stringByAppendingString:@"</string>\n"];
-//        NSLog(@"Token %d   = key %@ value %@", ((i+1)+(tokenIndex-12)), tokens[i], tokens[i + tokenIndex]);
-    }
+        for(int i = 0; i < numberOfFields; i++){
 
-    plistData = [plistData stringByAppendingString:@"\t</dict>\n"];
+            // key
+            plistData = [plistData stringByAppendingString:@"\t\t<key>"];
+            plistData = [plistData stringByAppendingString:tokens[i]];
+            plistData = [plistData stringByAppendingString:@"</key>\n"];
 
-  } // return for-loop over entire data set
+            // value
+            plistData = [plistData stringByAppendingString:@"\t\t<string>"];
+            plistData = [plistData stringByAppendingString:tokens[i + tokenIndex]];
+            plistData = [plistData stringByAppendingString:@"</string>\n"];
+            //        NSLog(@"Token %d   = key %@ value %@", ((i+1)+(tokenIndex-12)), tokens[i], tokens[i + tokenIndex]);
+        }
+
+        plistData = [plistData stringByAppendingString:@"\t</dict>\n"];
+
+    } // return for-loop over entire data set
 
     plistData = [plistData stringByAppendingString:@"</array>\n"];
-  plistData = [plistData stringByAppendingString:@"</plist>\n"];
+    plistData = [plistData stringByAppendingString:@"</plist>\n"];
 
-// The pList is complete
-//  NSLog(@"FilesVC csvDataToArrayOfDictionaries -- PLISTDATA\n\n%@", plistData);
+    // The pList is complete
+    //  NSLog(@"FilesVC csvDataToArrayOfDictionaries -- PLISTDATA\n\n%@", plistData);
 
-    
-// CPL - SAVES the file to the documents directory
-//    NSData *file = [plistData dataUsingEncoding:NSUTF8StringEncoding];
+
+    // CPL - SAVES the file to the documents directory
+    //    NSData *file = [plistData dataUsingEncoding:NSUTF8StringEncoding];
     NSString *path;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     path = [paths objectAtIndex:0];
     path = [path stringByAppendingPathComponent:self.filenameLabel.text];
-//    NSLog(@"Path/FilenName = %@", path);
-    
+    //    NSLog(@"Path/FilenName = %@", path);
+
     BOOL fileConverted = [plistData writeToFile:path atomically:YES];
     NSLog(@"%@", @(fileConverted));
-    
-//    [[NSFileManager defaultManager] createFileAtPath:path
-//                                            contents:file
-//                                          attributes:nil];
 
-// Create an array of dictionaries
+    //    [[NSFileManager defaultManager] createFileAtPath:path
+    //                                            contents:file
+    //                                          attributes:nil];
 
-  // create an empty membersArray
-  NSMutableArray *membersArray = [[NSMutableArray alloc]init];
+    // Create an array of dictionaries
 
-  // loop over entire data set
-  for(int tokenIndex=numberOfFields; tokenIndex < tokenCount; tokenIndex += numberOfFields){
+    // create an empty membersArray
+    NSMutableArray *membersArray = [[NSMutableArray alloc]init];
 
-    // create empty dictionary
-    NSMutableDictionary *currentDictionary = [[NSMutableDictionary alloc]init];
+    // loop over entire data set
+    for(int tokenIndex=numberOfFields; tokenIndex < tokenCount; tokenIndex += numberOfFields){
 
-    // loop over fields
-    for(int i = 0; i < numberOfFields; i++){
-       // Adds given key-value pair to the dictionary.
-      [currentDictionary setValue:tokens[i + tokenIndex] forKey:tokens[i]];
+        // create empty dictionary
+        NSMutableDictionary *currentDictionary = [[NSMutableDictionary alloc]init];
+
+        // loop over fields
+        for(int i = 0; i < numberOfFields; i++){
+            // Adds given key-value pair to the dictionary.
+            [currentDictionary setValue:tokens[i + tokenIndex] forKey:tokens[i]];
+        }
+        
+        // Add dictionary to membersArray
+        [membersArray addObject:currentDictionary];
     }
-
-    // Add dictionary to membersArray
-    [membersArray addObject:currentDictionary];
-  }
-
-//  NSLog(@"FilesVC csvDataToArrayOfDictionaries -- membersArray = \n%@", membersArray);
-
-  AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-  [delegate.memberData loadPlistData];
-//  NSLog(@"FilesVC -- Should reload the dataFile %@", delegate.memberData.description);
-
-  return membersArray;
+    
+    //  NSLog(@"FilesVC csvDataToArrayOfDictionaries -- membersArray = \n%@", membersArray);
+    
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate.memberData loadPlistData];
+    //  NSLog(@"FilesVC -- Should reload the dataFile %@", delegate.memberData.description);
+    
+    return membersArray;
 }
 
 @end
