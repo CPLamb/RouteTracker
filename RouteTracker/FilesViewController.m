@@ -362,7 +362,7 @@ NSString* fileContent;
     plistData = [plistData stringByAppendingString:@"</plist>\n"];
 
     // The pList is complete
-    //  NSLog(@"FilesVC csvDataToArrayOfDictionaries -- PLISTDATA\n\n%@", plistData);
+      NSLog(@"FilesVC csvDataToArrayOfDictionaries -- PLISTDATA\n\n%@", plistData);
 
 
     // CPL - SAVES the file to the documents directory
