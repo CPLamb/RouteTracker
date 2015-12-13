@@ -247,8 +247,10 @@ static NSString *const kClientSecret = @"F2CVzLCS5PQj2T4JazioSL8-";
                                          keychainItemName:kKeychainItemName
                                                  delegate:self
                                          finishedSelector:finishedSelector];
-    [self presentModalViewController:authViewController
-                            animated:YES];
+      [self presentViewController:authViewController
+                         animated:YES
+                       completion:nil];
+
   } else {
     // Sign out
     [GTMOAuth2ViewControllerTouch removeAuthFromKeychainForName:kKeychainItemName];
