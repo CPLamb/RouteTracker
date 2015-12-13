@@ -133,10 +133,11 @@ NSString* fileContent;
 }
 
 - (IBAction)test05Button:(UIButton *)sender {
+
     NSLog(@"READS the formatted plist file & checks to see if it can be converted into an array (of dictionaries)");
 
     NSError *errorDescr = nil;
-    NSPropertyListFormat format;
+    NSPropertyListFormat *format;
     NSString *plistPath;
     NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *fileTitle = self.selectedFile.title;
@@ -146,15 +147,16 @@ NSString* fileContent;
     }
     NSData *plistXML = [[NSFileManager defaultManager] contentsAtPath:plistPath];
     NSArray *temp = (NSArray *)[NSPropertyListSerialization propertyListWithData:plistXML
-                                                                         options:kCFPropertyListXMLFormat_v1_0
-                                                                          format:kCFPropertyListImmutable
+                                                                         options:NSPropertyListImmutable
+                                                                          format:format
                                                                            error:&errorDescr];
 
     if (!temp) {
         NSLog(@"Error reading plist: %@, format %lu", errorDescr, (unsigned long)format);
     }
     // Check to see if file is format properly
-    BOOL goodFile = [NSPropertyListSerialization propertyList:plistXML isValidForFormat:kCFPropertyListXMLFormat_v1_0];
+    BOOL goodFile = [NSPropertyListSerialization propertyList:plistXML
+                                             isValidForFormat:NSPropertyListXMLFormat_v1_0];
     NSLog(@"File is %d", goodFile);
 
     NSLog(@"Took no time at all! %@", [temp objectAtIndex:[temp count]-1]);
