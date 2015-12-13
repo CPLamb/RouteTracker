@@ -13,9 +13,9 @@
 
 @implementation FilesViewController
 NSString* fileContent;
-@synthesize driveService = _driveService;
-@synthesize selectedFile = _selectedFile;
-@synthesize delegate = _delegate;
+//@synthesize driveService = _driveService;
+//@synthesize selectedFile = _selectedFile;
+//@synthesize delegate = _delegate;
 
 #pragma mark - Lifecycle methods
 
@@ -192,7 +192,12 @@ NSString* fileContent;
 
                 self.fileContent.text = fileContent;
 
-                self.numberOfRowsTextfield.text = [[NSNumber numberWithInt:self.recordCount] stringValue];
+                self.membersArray = [self csvDataToArrayOfDictionaries:fileContent]; // convert to plist
+
+                self.numberOfRowsTextfield.text = [NSString stringWithFormat:@"%lu", (unsigned long)[self.membersArray count]];
+
+                NSLog(@"self.recordCount = %d", self.recordCount);
+//                self.numberOfRowsTextfield.text = [[NSNumber numberWithInt:self.recordCount] stringValue];
 
                 //        NSLog(@"FilesVC loadFileContent - self.membersArray = \n%@", self.membersArray);
 
