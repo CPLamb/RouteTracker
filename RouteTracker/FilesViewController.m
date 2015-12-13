@@ -370,8 +370,10 @@ NSString* fileContent;
     path = [paths objectAtIndex:0];
     path = [path stringByAppendingPathComponent:self.filenameLabel.text];
     //    NSLog(@"Path/FilenName = %@", path);
-
-    BOOL fileConverted = [plistData writeToFile:path atomically:YES];
+    BOOL fileConverted = [plistData writeToFile:path
+                                 atomically:YES
+                                   encoding:NSUTF8StringEncoding
+                                      error:NULL];
     NSLog(@"%@", @(fileConverted));
     
     // Create an array of dictionaries
