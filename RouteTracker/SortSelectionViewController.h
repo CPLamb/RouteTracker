@@ -27,7 +27,6 @@
 - (IBAction)sortByCategory:(UIButton *)sender;
 - (IBAction)sortByName:(UIButton *)sender;
 - (IBAction)sortByDriver:(UIButton *)sender;
-- (IBAction)filterForCoupons:(UIButton *)sender;
 - (IBAction)cancelButton:(UIButton *)sender;
 
 @end
