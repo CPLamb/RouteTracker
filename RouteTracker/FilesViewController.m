@@ -185,6 +185,8 @@ NSString* fileContent;
 
                 self.fileContent.text = fileContent;
 
+                [self csvDataToPlist:fileContent]; // read and save file content TODO refactor save
+
                 NSLog(@"self.recordCount = %d", self.recordCount);
                 self.numberOfRowsTextfield.text = [[NSNumber numberWithInt:self.recordCount] stringValue];
 
@@ -194,7 +196,7 @@ NSString* fileContent;
                 NSLog(@"An error occurred: %@", error);
                 [DrEditUtilities showErrorMessageWithTitle:@"Unable to load file"
                                                    message:[error description]
-                                                  delegate:self];
+                                                   delegate:self];
             }
         }];
     }
@@ -308,6 +310,7 @@ NSString* fileContent;
     //    NSLog(@"tokens array = %@", tokens);
 
     // Build plist string in pieces
+    NSLog(@"Files VC -csvToPlist -- Build plist string in pieces");
     plistData = [plistData stringByAppendingString:@"\n\n\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>"];
     plistData = [plistData stringByAppendingString:@"\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">"];
     plistData = [plistData stringByAppendingString:@"\n<plist version=\"1.0\">"];
