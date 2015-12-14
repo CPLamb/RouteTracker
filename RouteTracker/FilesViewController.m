@@ -196,14 +196,14 @@ NSString* fileContent;
                 NSLog(@"An error occurred: %@", error);
                 [DrEditUtilities showErrorMessageWithTitle:@"Unable to load file"
                                                    message:[error description]
-                                                   delegate:self];
+                                                  delegate:self];
             }
         }];
     }
 }
 
 - (NSString*)csvDataToPlist: (NSString *) csvFile {
-      NSLog(@"FilesVC csvDataToPlist:XXXX - The string we're looking at is \n\n\n>>>>%@<<<<\n\n", csvFile);
+    NSLog(@"FilesVC csvDataToPlist:XXXX - The string we're looking at is \n\n\n>>>>%@<<<<\n\n", csvFile);
 
     NSString *csvString = csvFile;
 
@@ -344,7 +344,7 @@ NSString* fileContent;
     plistData = [plistData stringByAppendingString:@"</plist>\n"];
 
     // The pList is complete
-      NSLog(@"FilesVC csvDataToPlist -- PLISTDATA\n\n%@", plistData);
+    //    NSLog(@"FilesVC csvDataToPlist -- PLISTDATA\n\n%@", plistData);
     NSLog(@"Files VC - csvDataToPlist -- #of records downloaded %d", self.recordCount);
 
     // CPL - SAVES the file to the documents directory
@@ -355,13 +355,12 @@ NSString* fileContent;
     path = [path stringByAppendingPathComponent:self.filenameLabel.text];
     //    NSLog(@"Path/FilenName = %@", path);
     BOOL fileConverted = [plistData writeToFile:path
-                                 atomically:YES
-                                   encoding:NSUTF8StringEncoding
-                                      error:NULL];
+                                     atomically:YES
+                                       encoding:NSUTF8StringEncoding
+                                          error:NULL];
     NSLog(@"%@", @(fileConverted));
     
-
-      return plistData;
+    return plistData;
 }
 
 @end
