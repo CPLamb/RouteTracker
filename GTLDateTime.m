@@ -120,7 +120,7 @@
           && [dc1 hour] == [dc2 hour]
           && [dc1 minute] == [dc2 minute]
           && [dc1 second] == [dc2 second]
-          && [dc1 week] == [dc2 week]
+          && [dc1 weekOfMonth] == [dc2 weekOfMonth]
           && [dc1 weekday] == [dc2 weekday]
           && [dc1 weekdayOrdinal] == [dc2 weekdayOrdinal];
 }
@@ -245,7 +245,7 @@
 
     if (self.isUniversalTime) {
      timeOffsetString = @"Z";
-    } else if (offset == NSUndefinedDateComponent) {
+    } else if (offset == NSDateComponentUndefined) {
       // unknown offset is rendered as -00:00 per
       // http://www.ietf.org/rfc/rfc3339.txt section 4.3
       timeOffsetString = @"-00:00";

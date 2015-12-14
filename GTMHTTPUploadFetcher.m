@@ -656,18 +656,18 @@ totalBytesExpectedToSend:0];
     //
     // lack of a range header means the server has no bytes stored for this upload
     NSString *rangeStr = [responseHeaders objectForKey:@"Range"];
-    NSUInteger newOffset = 0;
+    NSInteger newOffset = 0;
     if (rangeStr != nil) {
         // parse a content-range, like "bytes=0-999", to find where our new
         // offset for uploading from the data really is (at the end of the
         // range)
         NSScanner *scanner = [NSScanner scannerWithString:rangeStr];
-        long long rangeStart = 0, rangeEnd = 0;
+        NSInteger rangeStart = 0, rangeEnd = 0;
         if ([scanner scanString:@"bytes=" intoString:nil]
             && [scanner scanLongLong:&rangeStart]
             && [scanner scanString:@"-" intoString:nil]
             && [scanner scanLongLong:&rangeEnd]) {
-            newOffset = rangeEnd + 1;
+            newOffset = rangeEnd++;
         }
     }
     
@@ -820,16 +820,16 @@ totalBytesExpectedToSend:(NSInteger)totalBytesExpected {
 
 #pragma mark -
 
-@synthesize uploadData = uploadData_,
-uploadFileHandle = uploadFileHandle_,
-uploadMIMEType = uploadMIMEType_,
-chunkSize = chunkSize_,
-currentOffset = currentOffset_,
-chunkFetcher = chunkFetcher_;
-
-#if NS_BLOCKS_AVAILABLE
-@synthesize locationChangeBlock = locationChangeBlock_;
-#endif
+//@synthesize uploadData = uploadData_,
+//uploadFileHandle = uploadFileHandle_,
+//uploadMIMEType = uploadMIMEType_,
+//chunkSize = chunkSize_,
+//currentOffset = currentOffset_,
+//chunkFetcher = chunkFetcher_;
+//
+//#if NS_BLOCKS_AVAILABLE
+//@synthesize locationChangeBlock = locationChangeBlock_;
+//#endif
 
 @dynamic activeFetcher;
 @dynamic responseHeaders;

@@ -112,7 +112,7 @@
 @property (retain) NSFileHandle *uploadFileHandle;
 @property (copy) NSString *uploadMIMEType;
 @property (assign) NSUInteger chunkSize;
-@property (assign) NSUInteger currentOffset;
+@property (assign) long long currentOffset;
 
 #if NS_BLOCKS_AVAILABLE
 // When the upload location changes, the optional locationChangeBlock will be

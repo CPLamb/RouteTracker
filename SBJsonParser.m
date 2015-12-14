@@ -240,7 +240,7 @@ static char ctrl[0x22];
     *o = [NSMutableDictionary dictionaryWithCapacity:7];
     
     for (; *c ;) {
-        id k, v;
+        id k = nil, v;
         
         skipWhitespace(c);
         if (*c == '}' && c++) {
@@ -360,7 +360,7 @@ static char ctrl[0x22];
 
 - (BOOL)scanUnicodeChar:(unichar *)x
 {
-    unichar hi, lo;
+    unichar hi, lo = 0;
     
     if (![self scanHexQuad:&hi]) {
         [self addErrorWithCode:EUNICODE description: @"Missing hex quad"];
