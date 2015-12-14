@@ -160,7 +160,7 @@
 
   NSInteger offsetSeconds = self.offsetSeconds;
 
-  if (offsetSeconds != NSUndefinedDateComponent) {
+  if (offsetSeconds != NSDateComponentUndefined) {
     NSTimeZone *tz = [NSTimeZone timeZoneForSecondsFromGMT:offsetSeconds];
     return tz;
   }
@@ -175,12 +175,12 @@
     NSInteger offsetSeconds = [timeZone secondsFromGMTForDate:self.date];
     self.offsetSeconds = offsetSeconds;
   } else {
-    self.offsetSeconds = NSUndefinedDateComponent;
+    self.offsetSeconds = NSDateComponentUndefined;
   }
 }
 
 - (NSCalendar *)calendar {
-  NSCalendar *cal = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+  NSCalendar *cal = [[[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian] autorelease];
   NSTimeZone *tz = self.timeZone;
   if (tz) {
     [cal setTimeZone:tz];
