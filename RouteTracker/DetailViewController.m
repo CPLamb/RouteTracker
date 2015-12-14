@@ -57,6 +57,7 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
 //    NSLog(@"Save the modified details to the detailItem mutableDictionary");
     
 // A mutable Dictionary must be created from the original for editing?

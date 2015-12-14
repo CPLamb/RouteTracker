@@ -43,6 +43,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
 // Changes the correct spreadsheet based upon the appDelegate memberData property IF the list is NOT filtered
     NSInteger listFiltered = [[NSUserDefaults standardUserDefaults] integerForKey: @"list_filtered"];
     if (!listFiltered) {
@@ -140,7 +141,7 @@
 // Now let's sort the array and make it immutable
     NSArray *sortedArray = [[NSArray alloc] init];
     sortedArray = [sectionsMutableArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-    
+
 // Trim the length of the indexes so that they appear as a short index word
     NSArray *anUnsortedArray = [[NSArray alloc] init];
     anUnsortedArray = [self trimWordLength:sectionsMutableArray];

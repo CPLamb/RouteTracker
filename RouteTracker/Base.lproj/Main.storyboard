@@ -959,16 +959,6 @@
                                     <action selector="testButton:" destination="Foq-vK-isD" eventType="touchUpInside" id="Fmf-9V-z5u"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CP0-NA-LoV">
-                                <rect key="frame" x="16" y="285" width="288" height="39"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <state key="normal" title="02 SAVE file">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="test02Button:" destination="Foq-vK-isD" eventType="touchUpInside" id="ZlJ-KI-8Et"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pU5-mL-c9d">
                                 <rect key="frame" x="16" y="332" width="288" height="39"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
