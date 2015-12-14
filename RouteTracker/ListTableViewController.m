@@ -139,12 +139,10 @@
     NSMutableArray *sectionsMutableArray = [[sectionsSet allObjects] mutableCopy];
     
 // Now let's sort the array and make it immutable
-    NSArray *sortedArray = [[NSArray alloc] init];
-    sortedArray = [sectionsMutableArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    NSArray *sortedArray = [sectionsMutableArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
 
 // Trim the length of the indexes so that they appear as a short index word
-    NSArray *anUnsortedArray = [[NSArray alloc] init];
-    anUnsortedArray = [self trimWordLength:sectionsMutableArray];
+    NSArray *anUnsortedArray = [self trimWordLength:sectionsMutableArray];
     self.anArrayOfShortenedWords = [anUnsortedArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     
     self.indexArray = [NSArray arrayWithArray:sortedArray];
@@ -159,8 +157,7 @@
     
     NSMutableArray *trimmedArray = [[NSMutableArray alloc] init];
     for (int i=0; i<=([array count]-1); i++) {
-        NSString *trimmedWord = [[NSString alloc] init];
-        trimmedWord = [array objectAtIndex:i];
+        NSString *trimmedWord = [array objectAtIndex:i];
         if (trimmedWord.length > TRIM_LENGTH) {
             trimmedWord = [trimmedWord substringToIndex:7U];
         }
