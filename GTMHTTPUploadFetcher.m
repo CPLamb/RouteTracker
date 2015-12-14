@@ -656,18 +656,18 @@ totalBytesExpectedToSend:0];
     //
     // lack of a range header means the server has no bytes stored for this upload
     NSString *rangeStr = [responseHeaders objectForKey:@"Range"];
-    NSInteger newOffset = 0;
+   NSUInteger newOffset = 0;
     if (rangeStr != nil) {
         // parse a content-range, like "bytes=0-999", to find where our new
         // offset for uploading from the data really is (at the end of the
         // range)
         NSScanner *scanner = [NSScanner scannerWithString:rangeStr];
-        NSInteger rangeStart = 0, rangeEnd = 0;
+        long long rangeStart = 0, rangeEnd = 0;
         if ([scanner scanString:@"bytes=" intoString:nil]
             && [scanner scanLongLong:&rangeStart]
             && [scanner scanString:@"-" intoString:nil]
             && [scanner scanLongLong:&rangeEnd]) {
-            newOffset = rangeEnd++;
+            newOffset = (NSUInteger)(rangeEnd + 1);
         }
     }
     
