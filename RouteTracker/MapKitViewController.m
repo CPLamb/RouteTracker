@@ -78,7 +78,7 @@ const int  MAX_PINS_TO_DROP = 200;
     }
     
 // Changes the correct spreadsheet based upon the appDelegate memberData property IF the list is NOT filtered
-    NSInteger listFiltered = [[NSUserDefaults standardUserDefaults] integerForKey: @"list_filtered"];
+//    NSInteger listFiltered = [[NSUserDefaults standardUserDefaults] integerForKey: @"list_filtered"];
 //    if (!listFiltered) {
 //        AppDelegate *delegate = [UIApplication sharedApplication].delegate;
 //        [delegate.memberData loadPlistData];
@@ -369,9 +369,9 @@ const int  MAX_PINS_TO_DROP = 200;
     // try to dequeue an existing pin view first
     static NSString *BridgeAnnotationIdentifier = @"bridgeAnnotationIdentifier";
     
-    MKPinAnnotationView *pinView =
-    (MKPinAnnotationView *) [self.mapView dequeueReusableAnnotationViewWithIdentifier:BridgeAnnotationIdentifier];
-    
+//    MKPinAnnotationView *pinView =
+//    (MKPinAnnotationView *) [self.mapView dequeueReusableAnnotationViewWithIdentifier:BridgeAnnotationIdentifier];
+
     MKPinAnnotationView *customPinView = [[MKPinAnnotationView alloc]
                                           initWithAnnotation:annotation
                                           reuseIdentifier:BridgeAnnotationIdentifier];

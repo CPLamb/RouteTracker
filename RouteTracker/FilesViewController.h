@@ -15,6 +15,7 @@
 @property GTLServiceDrive *driveService;
 @property GTLDriveFile *selectedFile;
 @property id<DrEditFileEditDelegate> delegate;
+@property int recordCount;
 
 @property (weak, nonatomic) IBOutlet UILabel *filenameLabel;
 @property (weak, nonatomic) IBOutlet UITextField *modifiedDateTextfield;

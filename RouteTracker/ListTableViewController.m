@@ -85,7 +85,7 @@
     
     // Show Map screen
     if ([[segue identifier] isEqualToString:@"showMap"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+//        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
  //       NSArray *object = [[self.namesArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
         
     // Sets the detailItem to the selected item
@@ -119,7 +119,7 @@
         } else if (sortedByDriver) {
             NSString *aName = [aDictionary objectForKey:@"Driver"];
             if ([aName length] != 0) {
-                NSString *aLetter = [aName substringToIndex:6U];
+//                NSString *aLetter = [aName substringToIndex:6U];
                 [sectionsMutableSet addObject:aName];
             }
         } else {
@@ -292,14 +292,16 @@
 {
    // [self.driversArray removeAllObjects];
     NSMutableSet *driversListSet = [[NSMutableSet alloc] init];
-    for (int i=0; i<=[self.membersArray count]-1; i++)
-    {
-        if ([[[self.membersArray objectAtIndex:i] objectForKey:@"Driver"] length] > 0)
-        {
-    // The set only accepts one instance of each driver
-            [driversListSet addObject:[[self.membersArray objectAtIndex:i] objectForKey:@"Driver"]];                                   }
+    for (int i = 0; i <= [self.membersArray count] - 1; i++) {
+
+        if ([[[self.membersArray objectAtIndex:i] objectForKey:@"Driver"] length] > 0) {
+            // The set only accepts one instance of each driver
+            [driversListSet addObject:[[self.membersArray objectAtIndex:i] objectForKey:@"Driver"]];
+        }
+
     }
-    self.driversArray = [driversListSet allObjects];
+
+    self.driversArray = [NSMutableArray arrayWithArray:[driversListSet allObjects] ];
 
     NSLog(@"ListTableVC -- The driversList is %@", self.driversArray);
 
@@ -470,7 +472,7 @@
     cell.textLabel.text = [[[self.namesArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"Name"];      // for subclass cell memberTableViewCell.title.text
     
     NSString *subtitleDeliver = [[[self.namesArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"Total Quantity to Deliver"];
-    NSString *subtitleDelivered = [[[self.namesArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"Delived to Date"];
+//    NSString *subtitleDelivered = [[[self.namesArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"Delived to Date"];
 
     NSString *subtitleDriver = [[[self.namesArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"Driver"];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"Deliver: %@       Driver: %@", subtitleDeliver, subtitleDriver];

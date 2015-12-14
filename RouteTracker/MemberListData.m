@@ -39,15 +39,15 @@
         plistPath = [[NSBundle mainBundle] pathForResource:@"EdibleMontereyDistributionList" ofType:@"plist"];
     }
     NSData *plistXML = [[NSFileManager defaultManager] contentsAtPath:plistPath];
-    NSArray *temp = (NSArray *)[NSPropertyListSerialization propertyListWithData:plistXML
-                                                                         options:kCFPropertyListXMLFormat_v1_0
-                                                                          format:kCFPropertyListImmutable
+    NSArray *temp = [NSPropertyListSerialization propertyListWithData:plistXML
+                                                                         options:NSPropertyListImmutable
+                                                                          format:NULL
                                                                            error:&errorDescr];
     
     if (!temp) {
         NSLog(@"Error reading plist: %@, format %lu", errorDescr, (unsigned long)format);
     }
-    self.membersArray = [NSArray arrayWithArray:temp];
+    self.membersArray = [NSMutableArray arrayWithArray:temp];
 //    NSLog(@"Took no time at all! %@", [temp objectAtIndex:[temp count]-1]);
     
 }
