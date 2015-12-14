@@ -36,6 +36,7 @@ int filesCount = 1;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
 //  NSLog(@"SetupViewController viewWillAppear");
 
 //  self.magazineSelectorControl.selectedSegmentIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_spreadsheet"];
@@ -48,6 +49,7 @@ int filesCount = 1;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
  //   NSLog(@"view WILL Disappear, used to change the spreadsheet");
 }
 
@@ -93,12 +95,12 @@ int filesCount = 1;
     
     NSLog(@"Takes %@ from the pickerView selection and uploads it into the memberListData array", selectedFile);
 
-    NSString *path;
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    path = [paths objectAtIndex:0];
-    path = [path stringByAppendingPathComponent:selectedFile];
-    NSData *theData;
-    theData = [[NSFileManager defaultManager] contentsAtPath:path];
+//    NSString *path;
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    path = [paths objectAtIndex:0];
+//    path = [path stringByAppendingPathComponent:selectedFile];
+//    NSData *theData;
+//    theData = [[NSFileManager defaultManager] contentsAtPath:path];
 //    NSString *theDataString = [[NSString alloc] initWithData:theData encoding:NSUTF8StringEncoding];
 //    NSLog(@"TheData = %@", theDataString);
     
