@@ -131,7 +131,7 @@ static NSString *const kClientSecret = @"F2CVzLCS5PQj2T4JazioSL8-";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-    NSLog(@"DrEditFilesListVC - Selected file at indexPath %ld %ld", indexPath.section, (long)indexPath.row);
+    NSLog(@"DrEditFilesListVC - Selected file at indexPath %ld %ld", (long)indexPath.section, (long)indexPath.row);
     
     // Assigns proper file to spreadsheet
     self.selectedSpreadsheet = [self.driveFiles objectAtIndex:indexPath.row];
@@ -247,8 +247,10 @@ static NSString *const kClientSecret = @"F2CVzLCS5PQj2T4JazioSL8-";
                                          keychainItemName:kKeychainItemName
                                                  delegate:self
                                          finishedSelector:finishedSelector];
-    [self presentModalViewController:authViewController
-                            animated:YES];
+      [self presentViewController:authViewController
+                         animated:YES
+                       completion:nil];
+
   } else {
     // Sign out
     [GTMOAuth2ViewControllerTouch removeAuthFromKeychainForName:kKeychainItemName];
@@ -274,7 +276,7 @@ static NSString *const kClientSecret = @"F2CVzLCS5PQj2T4JazioSL8-";
 - (void)viewController:(GTMOAuth2ViewControllerTouch *)viewController
       finishedWithAuth:(GTMOAuth2Authentication *)auth
                  error:(NSError *)error {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
     if (error == nil) {
         [self isAuthorizedWithAuthentication:auth];
 

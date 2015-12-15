@@ -597,7 +597,7 @@ totalBytesExpectedToSend:0];
     [self setResponseHeaders:[chunkFetcher responseHeaders]];
     
     if (error) {
-        int status = [error code];
+        long status = [error code];
         
         // status 308 is "resume incomplete", meaning we should get the offset
         // from the Range header and upload the next chunk
@@ -656,7 +656,7 @@ totalBytesExpectedToSend:0];
     //
     // lack of a range header means the server has no bytes stored for this upload
     NSString *rangeStr = [responseHeaders objectForKey:@"Range"];
-    NSUInteger newOffset = 0;
+   NSUInteger newOffset = 0;
     if (rangeStr != nil) {
         // parse a content-range, like "bytes=0-999", to find where our new
         // offset for uploading from the data really is (at the end of the
@@ -667,7 +667,7 @@ totalBytesExpectedToSend:0];
             && [scanner scanLongLong:&rangeStart]
             && [scanner scanString:@"-" intoString:nil]
             && [scanner scanLongLong:&rangeEnd]) {
-            newOffset = rangeEnd + 1;
+            newOffset = (NSUInteger)(rangeEnd + 1);
         }
     }
     
@@ -820,16 +820,16 @@ totalBytesExpectedToSend:(NSInteger)totalBytesExpected {
 
 #pragma mark -
 
-@synthesize uploadData = uploadData_,
-uploadFileHandle = uploadFileHandle_,
-uploadMIMEType = uploadMIMEType_,
-chunkSize = chunkSize_,
-currentOffset = currentOffset_,
-chunkFetcher = chunkFetcher_;
-
-#if NS_BLOCKS_AVAILABLE
-@synthesize locationChangeBlock = locationChangeBlock_;
-#endif
+//@synthesize uploadData = uploadData_,
+//uploadFileHandle = uploadFileHandle_,
+//uploadMIMEType = uploadMIMEType_,
+//chunkSize = chunkSize_,
+//currentOffset = currentOffset_,
+//chunkFetcher = chunkFetcher_;
+//
+//#if NS_BLOCKS_AVAILABLE
+//@synthesize locationChangeBlock = locationChangeBlock_;
+//#endif
 
 @dynamic activeFetcher;
 @dynamic responseHeaders;

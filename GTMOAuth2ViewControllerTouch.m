@@ -320,8 +320,7 @@ finishedWithAuth:(GTMOAuth2Authentication *)auth
   // don't save unless we have a token that can really authorize requests
   if (![auth canAuthorize]) return NO;
 
-  if (accessibility == NULL
-      && &kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly != NULL) {
+  if (accessibility == NULL) {
     accessibility = kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly;
   }
 
@@ -363,6 +362,7 @@ finishedWithAuth:(GTMOAuth2Authentication *)auth
 
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
   rightBarButtonItem_.customView = navButtonsView_;
   self.navigationItem.rightBarButtonItem = rightBarButtonItem_;
 }
@@ -981,7 +981,7 @@ static Class gSignInClass = Nil;
       NSData *passwordData = [password dataUsingEncoding:NSUTF8StringEncoding];
       [keychainQuery setObject:passwordData forKey:(id)kSecValueData];
 
-      if (accessibility != NULL && &kSecAttrAccessible != NULL) {
+      if (accessibility != NULL) {
         [keychainQuery setObject:(id)accessibility
                           forKey:(id)kSecAttrAccessible];
       }

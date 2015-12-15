@@ -31,9 +31,9 @@
 - (IBAction)deleteButtonClicked:(id)sender;
 - (IBAction)renameButtonClicked:(id)sender;
 */
-- (IBAction)downloadButton:(UIButton *)sender;
-- (IBAction)uploadButton:(UIButton *)sender;
-- (IBAction)changeFolderButton:(UIButton *)sender;
+//- (IBAction)downloadButton:(UIButton *)sender;
+//- (IBAction)uploadButton:(UIButton *)sender;
+//- (IBAction)changeFolderButton:(UIButton *)sender;
 
 - (void)loadFileContent;
 - (void)saveFile;

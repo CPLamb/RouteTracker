@@ -61,6 +61,7 @@ const int  MAX_PINS_TO_DROP = 200;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     NSLog(@"%@ WILL appear...", self);
     
 // Changes map type based on setup map control
@@ -78,7 +79,7 @@ const int  MAX_PINS_TO_DROP = 200;
     }
     
 // Changes the correct spreadsheet based upon the appDelegate memberData property IF the list is NOT filtered
-    NSInteger listFiltered = [[NSUserDefaults standardUserDefaults] integerForKey: @"list_filtered"];
+//    NSInteger listFiltered = [[NSUserDefaults standardUserDefaults] integerForKey: @"list_filtered"];
 //    if (!listFiltered) {
 //        AppDelegate *delegate = [UIApplication sharedApplication].delegate;
 //        [delegate.memberData loadPlistData];
@@ -92,6 +93,7 @@ const int  MAX_PINS_TO_DROP = 200;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
   //  NSLog(@"%@ DID appear...", self);
     
     [self.mapView setRegion:self.centerRegion animated:YES];
@@ -243,7 +245,7 @@ const int  MAX_PINS_TO_DROP = 200;
         if( self.mapView.userLocation.location == nil ||
            (userCoord.latitude == 0.0 && userCoord.longitude == 0.0) ){
             // If user location can't be found, fake it
-            userCoord = CLLocationCoordinate2DMake(36.9665, -122.0237);
+//            userCoord = CLLocationCoordinate2DMake(36.9665, -122.0237);
         } else {
             _referenceLocation = self.mapView.userLocation.location;
         }
@@ -369,9 +371,9 @@ const int  MAX_PINS_TO_DROP = 200;
     // try to dequeue an existing pin view first
     static NSString *BridgeAnnotationIdentifier = @"bridgeAnnotationIdentifier";
     
-    MKPinAnnotationView *pinView =
-    (MKPinAnnotationView *) [self.mapView dequeueReusableAnnotationViewWithIdentifier:BridgeAnnotationIdentifier];
-    
+//    MKPinAnnotationView *pinView =
+//    (MKPinAnnotationView *) [self.mapView dequeueReusableAnnotationViewWithIdentifier:BridgeAnnotationIdentifier];
+
     MKPinAnnotationView *customPinView = [[MKPinAnnotationView alloc]
                                           initWithAnnotation:annotation
                                           reuseIdentifier:BridgeAnnotationIdentifier];
