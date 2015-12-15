@@ -153,6 +153,19 @@ NSString* fileContent;
     NSLog(@"Took no time at all! %@", [temp objectAtIndex:[temp count]-1]);
 }
 
+- (void)loadInBackground
+{
+    NSLog(@"This is for a background thread");
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self csvDataToPlist:fileContent];
+        //update UI on the main thread
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //Add the screenMarker array to the layer
+  //          [theViewC addScreenMarkers:theMarkers desc:nil];
+        });
+    });
+}
+
 #pragma mark - Google Drive methods
 
 - (void)loadFileContent {
@@ -182,11 +195,13 @@ NSString* fileContent;
                 NSLog(@"FilesVC - It loaded something");
                 fileContent = [[NSString alloc] initWithData:data
                                                     encoding:NSUTF8StringEncoding];
-
                 self.fileContent.text = fileContent;
 
-                [self csvDataToPlist:fileContent]; // read and save file content TODO refactor save
-
+    // read file, convert to pList format and save file content
+           //     [self csvDataToPlist:fileContent];
+                
+                [self loadInBackground];
+                
                 NSLog(@"self.recordCount = %d", self.recordCount);
                 self.numberOfRowsTextfield.text = [[NSNumber numberWithInt:self.recordCount] stringValue];
 
