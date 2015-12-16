@@ -258,19 +258,22 @@ const int  MAX_PINS_TO_DROP = 200;
 - (NSArray*)pinsArray {
     NSMutableArray *pinsArray = [NSMutableArray array];
     
-    // If a single detailItem is set, prefer that to the list of all pins
-    if (self.detailItem != nil) {
-        [pinsArray addObject:self.detailItem];
-    }
-    else {
-        // Otherwise show all pins in the namesArray
-        for( id arrayOrDict in MEMBERLISTDATA.namesArray ){
-            // Flatten any arrays (needed in data for sorting lists with categories)
-            if( [arrayOrDict isKindOfClass:[NSArray class]] ){
-                [pinsArray addObjectsFromArray:arrayOrDict];
-            }
-            else {
-                [pinsArray addObject:arrayOrDict];
+    // if coordinates are non zero add object
+    if (!([[self.detailItem objectForKey:@"Latitude"]  isEqual: @" "] || [[self.detailItem objectForKey:@"Longitude"]  isEqual: @" "])) {
+
+        // If a single detailItem is set, prefer that to the list of all pins
+        if (self.detailItem != nil) {
+            [pinsArray addObject:self.detailItem];
+        } else {
+            // Otherwise show all pins in the namesArray
+            for( id arrayOrDict in MEMBERLISTDATA.namesArray ){
+                // Flatten any arrays (needed in data for sorting lists with categories)
+                if( [arrayOrDict isKindOfClass:[NSArray class]] ){
+                    [pinsArray addObjectsFromArray:arrayOrDict];
+                }
+                else {
+                    [pinsArray addObject:arrayOrDict];
+                }
             }
         }
     }
