@@ -62,6 +62,7 @@
 }
 
 - (IBAction)sortByDriver:(UIButton *)sender {
+    NSLog(@"SortSelectionVC -sortByDriver -- self.membersArray");
     
     [self.delegate driverSort:self];
 }
