@@ -380,8 +380,15 @@
     
 // Initialization
     sortedByCategory = NO;
+    sortedByDriver = NO;
     
-    self.namesArray = [NSMutableArray arrayWithArray:self.membersArray];
+// Gets the initial list
+    [self selectProperPlistData];
+    
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    self.namesArray = [NSMutableArray arrayWithArray:delegate.memberData.namesArray];
+
+//    self.namesArray = [NSMutableArray arrayWithArray:self.membersArray];
     
     // Reworks the index & cells
     [self makeSectionsIndex:self.namesArray];
