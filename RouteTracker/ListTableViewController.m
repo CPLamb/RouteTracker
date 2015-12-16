@@ -108,7 +108,7 @@
     NSMutableSet *sectionsMutableSet = [NSMutableSet setWithCapacity:36];
 
     //Reads each items Name & loads it's first letter into the sections set
-    for (int i=0; i<=[arrayOfDictionaries count]-1; i++) {
+    for (int i = 0; i < [arrayOfDictionaries count]; i++) {
         //       NSLog(@"Line %d is working", i);
         NSDictionary *aDictionary = [arrayOfDictionaries objectAtIndex:i];
         // Allows sort by Name or Category or Driver
@@ -156,7 +156,7 @@
     //    NSLog(@"Trims the words in this array %@ to display on the index", array);
 
     NSMutableArray *trimmedArray = [[NSMutableArray alloc] init];
-    for (int i=0; i<=([array count]-1); i++) {
+    for (int i = 0; i < ([array count]); i++) {
         NSString *trimmedWord = [array objectAtIndex:i];
         if (trimmedWord.length > TRIM_LENGTH) {
             trimmedWord = [trimmedWord substringToIndex:7U];
@@ -423,14 +423,16 @@
 - (void)driverSort:(SortSelectionViewController *)controller {
     NSLog(@"ListTableVC - Sorts the table by driver");
 
+    // reload data
+    [self loadLocalPlistData];
+
     // Initialization
     sortedByDriver = YES;
     sortedByCategory = NO;
     //    self.sortSelectionView.alpha = 0.0;
 
 #pragma mark - TODO - this is where the problem lies, me thinks?
-    //  self.namesArray = [NSMutableArray arrayWithArray:self.membersArray];
-    self.namesArray = self.membersArray;  // This is a WAG!?
+      self.namesArray = [NSMutableArray arrayWithArray:self.membersArray];
 
     // Reworks the index & cells
     [self makeSectionsIndex:self.namesArray];
