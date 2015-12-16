@@ -19,7 +19,7 @@
 
 @synthesize delegate = _delegate;
 @synthesize directoryContent = _directoryContent;
-int filesCount = 1;
+NSUInteger filesCount = 1;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
