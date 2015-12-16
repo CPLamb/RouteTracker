@@ -427,7 +427,10 @@
     sortedByDriver = YES;
     sortedByCategory = NO;
     //    self.sortSelectionView.alpha = 0.0;
-    self.namesArray = [NSMutableArray arrayWithArray:self.membersArray];
+    
+#pragma mark - TODO - this is where the problem lies, me thinks?
+  //  self.namesArray = [NSMutableArray arrayWithArray:self.membersArray];
+    self.namesArray = self.membersArray;  // This is a WAG!?
     
     // Reworks the index & cells
     [self makeSectionsIndex:self.namesArray];

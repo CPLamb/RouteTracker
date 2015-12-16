@@ -36,7 +36,7 @@
     plistPath = [rootPath stringByAppendingPathComponent:filename];
     if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
         NSLog(@"We couldn't find the file so we'll load from the bundle");
-        plistPath = [[NSBundle mainBundle] pathForResource:@"EdibleMontereyDistributionList" ofType:@"plist"];
+        plistPath = [[NSBundle mainBundle] pathForResource:@"SCWaveDistributionListCurrent" ofType:@"plist"];
     }
     NSData *plistXML = [[NSFileManager defaultManager] contentsAtPath:plistPath];
     NSArray *temp = [NSPropertyListSerialization propertyListWithData:plistXML
