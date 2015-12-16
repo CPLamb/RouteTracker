@@ -108,7 +108,7 @@
     NSMutableSet *sectionsMutableSet = [NSMutableSet setWithCapacity:36];
 
     //Reads each items Name & loads it's first letter into the sections set
-    for (int i = 0; i < [arrayOfDictionaries count] - 1; i++) {
+    for (int i = 0; i < [arrayOfDictionaries count]; i++) {
         //       NSLog(@"Line %d is working", i);
         NSDictionary *aDictionary = [arrayOfDictionaries objectAtIndex:i];
         // Allows sort by Name or Category or Driver
