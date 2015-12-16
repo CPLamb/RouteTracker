@@ -266,11 +266,11 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     
     self.searchString = self.mySearchBar.text;
-    //    NSLog(@"TRYing to search Now for ---> %@", self.searchString);
+        NSLog(@"TRYing to search Now for ---> %@", self.searchString);
     
     [self filterContentForSearchText:self.searchString scope:@"All"];
     
-    //    NSLog(@"Now we're SEARCHING baby!");
+        NSLog(@"Now we're SEARCHING baby!");
     self.navigationItem.title = [NSString stringWithFormat:@"%@'s route", self.searchString];
     [self.mySearchBar resignFirstResponder];            // dismisses the keyboard
     
@@ -370,7 +370,7 @@
 
 - (void)cancelSortView:(SortSelectionViewController *)controller
 {
-    NSLog(@"This is the delegate (MasterVC) responding with %@", controller);
+//    NSLog(@"This is the delegate (MasterVC) responding with %@", controller);
     
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
