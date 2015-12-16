@@ -404,7 +404,14 @@
     sortedByCategory = YES;
     sortedByDriver = NO;
     //    self.sortSelectionView.alpha = 0.0;
-    self.namesArray = [NSMutableArray arrayWithArray:self.membersArray];
+    
+// Gets the initial list
+    [self selectProperPlistData];
+    
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    self.namesArray = [NSMutableArray arrayWithArray:delegate.memberData.namesArray];
+    
+//    self.namesArray = [NSMutableArray arrayWithArray:self.membersArray];
     
     // Reworks the index & cells
     [self makeSectionsIndex:self.namesArray];
@@ -428,14 +435,13 @@
     sortedByCategory = NO;
     //    self.sortSelectionView.alpha = 0.0;
     
-#pragma mark - TODO - this is where the problem lies, me thinks?
+#pragma mark - TODO - this is where the FIX is in!
     
     [self selectProperPlistData];
     
     AppDelegate *delegate = [UIApplication sharedApplication].delegate;
     self.namesArray = [NSMutableArray arrayWithArray:delegate.memberData.namesArray];
  //   self.namesArray = [NSMutableArray arrayWithArray:self.membersArray];
-  //  self.namesArray = self.membersArray;  // This is a WAG!?
     
     // Reworks the index & cells
     [self makeSectionsIndex:self.namesArray];
