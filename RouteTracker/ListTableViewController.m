@@ -108,7 +108,7 @@
     NSMutableSet *sectionsMutableSet = [NSMutableSet setWithCapacity:36];
 
     //Reads each items Name & loads it's first letter into the sections set
-    for (int i = 0; i < [arrayOfDictionaries count]; i++) {
+    for (int i = 0; i < [arrayOfDictionaries count] - 1; i++) {
         //       NSLog(@"Line %d is working", i);
         NSDictionary *aDictionary = [arrayOfDictionaries objectAtIndex:i];
         // Allows sort by Name or Category or Driver
@@ -177,12 +177,12 @@
     NSMutableArray *indexedNameArray = [NSMutableArray arrayWithCapacity:600];
 
     // Create an indexed array start with the first index letter
-    for (int i=0; i <=([indexArray count] - 1); i++) {
+    for (int i=0; i < ([indexArray count]); i++) {
         NSString *theIndexItem = [indexArray objectAtIndex:i];
         NSMutableArray *aListOfItems = [NSMutableArray arrayWithCapacity:50];
 
         // Now page thru all of the names
-        for (int j=0; j<=([wordsArray count]-1); j++) {
+        for (int j = 0; j < ([wordsArray count]); j++) {
             // sorts by Name or Category
             NSString *firstLetterOfWord = [[NSString alloc] init];
             if (sortedByCategory) {
