@@ -258,11 +258,8 @@ const int  MAX_PINS_TO_DROP = 200;
 - (NSArray*)pinsArray {
     NSMutableArray *pinsArray = [NSMutableArray array];
     
-    // if coordinates are non zero add object
-    if (!([[self.detailItem objectForKey:@"Latitude"]  isEqual: @" "] || [[self.detailItem objectForKey:@"Longitude"]  isEqual: @" "])) {
-
-        // If a single detailItem is set, prefer that to the list of all pins
-        if (self.detailItem != nil) {
+         // If a single detailItem is set and if coordinates are non zero, prefer that to the list of all pins
+        if ((self.detailItem != nil) && !([[self.detailItem objectForKey:@"Latitude"]  isEqual: @" "]||[[self.detailItem objectForKey:@"Longitude"]  isEqual: @" "])) {
             [pinsArray addObject:self.detailItem];
         } else {
             // Otherwise show all pins in the namesArray
@@ -270,13 +267,12 @@ const int  MAX_PINS_TO_DROP = 200;
                 // Flatten any arrays (needed in data for sorting lists with categories)
                 if( [arrayOrDict isKindOfClass:[NSArray class]] ){
                     [pinsArray addObjectsFromArray:arrayOrDict];
-                }
-                else {
+                } else {
                     [pinsArray addObject:arrayOrDict];
                 }
             }
         }
-    }
+
 //    [pinsArray addObject:self.mapView.userLocation];
 
     NSLog(@"ACCESSING pinsArray with count = %lu", (unsigned long)[pinsArray count]);
