@@ -25,7 +25,7 @@ int filesCount = 1;
     [super viewDidLoad];
     
 // loads data files onto the pickerView
-//    [self loadPickerViewDataFiles];
+    [self loadPickerViewDataFiles];
 
     // Uncomment the following line to preserve selection between presentations.
     //self.clearsSelectionOnViewWillAppear = NO;
@@ -109,19 +109,19 @@ int filesCount = 1;
     [delegate.memberData loadPlistData];
 }
 
-//- (void)loadPickerViewDataFiles {
-//    int Count;
-//    NSString *path;
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    path = [paths objectAtIndex:0];
-//    self.directoryContent = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:NULL];
-//    for (Count = 0; Count < (int)[self.directoryContent count]; Count++)
-//    {
-//        NSLog(@"File %d: %@", Count, [self.directoryContent objectAtIndex:Count]);
-//    }
-//    filesCount = [self.directoryContent count];
-//
-//}
+- (void)loadPickerViewDataFiles {
+    int Count;
+    NSString *path;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    path = [paths objectAtIndex:0];
+    self.directoryContent = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:NULL];
+    for (Count = 0; Count < (int)[self.directoryContent count]; Count++)
+    {
+        NSLog(@"File %d: %@", Count, [self.directoryContent objectAtIndex:Count]);
+    }
+    filesCount = [self.directoryContent count];
+
+}
 
 #pragma mark ---- UIPickerViewDataSource delegate methods ----
 
