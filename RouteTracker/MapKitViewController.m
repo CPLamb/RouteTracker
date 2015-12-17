@@ -259,7 +259,14 @@ const int  MAX_PINS_TO_DROP = 200;
     NSMutableArray *pinsArray = [NSMutableArray array];
     
          // If a single detailItem is set and if coordinates are non zero, prefer that to the list of all pins
-        if ((self.detailItem != nil) && !([[self.detailItem objectForKey:@"Latitude"]  isEqual: @" "]||[[self.detailItem objectForKey:@"Longitude"]  isEqual: @" "])) {
+    
+        if ([[self.detailItem objectForKey:@"Latitude"] intValue] == 0)
+        {
+            NSLog(@"It's empty be-atch");
+        }
+    
+        if ((self.detailItem != nil) && !([[self.detailItem objectForKey:@"Latitude"]  isEqual: @" "]||[[self.detailItem objectForKey:@"Longitude"]  isEqual: @" "]))
+        {
             [pinsArray addObject:self.detailItem];
         } else {
             // Otherwise show all pins in the namesArray
