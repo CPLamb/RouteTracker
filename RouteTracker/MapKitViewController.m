@@ -255,6 +255,32 @@ const int  MAX_PINS_TO_DROP = 200;
 
 #pragma mark - Custom Annotation methods
 
+//- (NSArray*)pinsArray {
+//    NSMutableArray *pinsArray = [NSMutableArray array];
+//    
+//    // If a single detailItem is set, prefer that to the list of all pins
+//    if (self.detailItem != nil) {
+//        [pinsArray addObject:self.detailItem];
+//    }
+//    else {
+//        // Otherwise show all pins in the namesArray
+//        for( id arrayOrDict in MEMBERLISTDATA.namesArray ){
+//            // Flatten any arrays (needed in data for sorting lists with categories)
+//            if( [arrayOrDict isKindOfClass:[NSArray class]] ){
+//                [pinsArray addObjectsFromArray:arrayOrDict];
+//            }
+//            else {
+//                [pinsArray addObject:arrayOrDict];
+//            }
+//        }
+//    }
+//    //    [pinsArray addObject:self.mapView.userLocation];
+//    
+//    NSLog(@"ACCESSING pinsArray with count = %lu", (unsigned long)[pinsArray count]);
+//    return pinsArray;
+//}
+
+
 - (NSArray*)pinsArray {
     NSMutableArray *pinsArray = [NSMutableArray array];
     
