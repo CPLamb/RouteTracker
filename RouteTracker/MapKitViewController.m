@@ -57,12 +57,16 @@ const int  MAX_PINS_TO_DROP = 200;
 // Setup for the annotations & drop a pin at home
     self.mapAnnotations = [[NSMutableArray alloc] init];
     
+    // Loads from data objects
+        [self loadPins];
+
+    
     [self enable3DMapping];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    NSLog(@"%@ WILL appear...", self);
+    NSLog(@"%@ view WILL appear...", self);
     
 // Changes map type based on setup map control
     NSInteger mapType = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_map_type"];
@@ -86,7 +90,7 @@ const int  MAX_PINS_TO_DROP = 200;
 //    }
     
 // Loads from data objects
-    [self loadPins];
+//    [self loadPins];
     
 // Centers the view on the box containing all visible pins
     [self calculateCenter];
@@ -94,7 +98,7 @@ const int  MAX_PINS_TO_DROP = 200;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-  //  NSLog(@"%@ DID appear...", self);
+    NSLog(@"%@ DID appear...", self);
     
     [self.mapView setRegion:self.centerRegion animated:YES];
     
@@ -102,7 +106,7 @@ const int  MAX_PINS_TO_DROP = 200;
     // Limit the total number pins to drop to MAX_PINS_TO_DROP so that map view is not too cluttered
     NSLog(@"Pins in the select = %lu", (unsigned long)[self.mapAnnotations count]);
     
-    [self.mapView addAnnotations:self.mapAnnotations];
+//    [self.mapView addAnnotations:self.mapAnnotations];
 }
 
 #pragma mark - Navigation segue method
@@ -323,7 +327,7 @@ const int  MAX_PINS_TO_DROP = 200;
     
     for( NSDictionary* d in self.pinsArray ){
         
-        NSLog(@"[map] adding pin with data (%@ type): %@", NSStringFromClass([d class]), d);
+ //       NSLog(@"[map] adding pin with data (%@ type): %@", NSStringFromClass([d class]), d);
         
         NSString *aLatitudeString = [d objectForKey:@"Latitude"];
         NSString *aLongitudeString = [d objectForKey:@"Longitude"];
@@ -363,6 +367,9 @@ const int  MAX_PINS_TO_DROP = 200;
     }
     // If defaultPin is set, select it when we view the map
     [self.mapView selectAnnotation:self.defaultPin animated:YES];
+    
+// loads the pins into the view
+    [self.mapView addAnnotations:self.mapAnnotations];
 }
 
 - (void)removeAllPins:(UIButton *)sender {
