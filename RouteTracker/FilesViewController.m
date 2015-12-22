@@ -218,7 +218,7 @@ NSString* fileContent;
 }
 
 - (NSString*)csvDataToPlist: (NSString *) csvFile {
-    NSLog(@"FilesVC csvDataToPlist:XXXX - The string we're looking at is \n\n\n>>>>%@<<<<\n\n", csvFile);
+//    NSLog(@"FilesVC csvDataToPlist:XXXX - The string we're looking at is \n\n\n>>>>%@<<<<\n\n", csvFile);
 
     NSString *csvString = csvFile;
 
@@ -257,7 +257,7 @@ NSString* fileContent;
             tokenChar = @"X";
         }
 
-        NSLog(@"Character[%d] =  %@ unicode = %d", charIndex, tokenChar, [csvString characterAtIndex:charIndex]);
+  //      NSLog(@"Character[%d] =  %@ unicode = %d", charIndex, tokenChar, [csvString characterAtIndex:charIndex]);
 
         // look for quote
         if ([csvFile characterAtIndex:charIndex] == quoteSentinel) {
@@ -312,7 +312,7 @@ NSString* fileContent;
 
         // Build tokenWord tokenChar-by-tokenChar
         tokenWord = [tokenWord stringByAppendingString:tokenChar];
-        NSLog(@"tokenWord = %@", tokenWord);
+ //       NSLog(@"tokenWord = %@", tokenWord);
 
     } // for loop
 

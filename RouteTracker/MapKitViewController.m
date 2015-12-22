@@ -90,7 +90,7 @@ const int  MAX_PINS_TO_DROP = 200;
 //    }
     
 // Loads from data objects
-//    [self loadPins];
+    [self loadPins];
     
 // Centers the view on the box containing all visible pins
     [self calculateCenter];
@@ -106,7 +106,7 @@ const int  MAX_PINS_TO_DROP = 200;
     // Limit the total number pins to drop to MAX_PINS_TO_DROP so that map view is not too cluttered
     NSLog(@"Pins in the select = %lu", (unsigned long)[self.mapAnnotations count]);
     
-//    [self.mapView addAnnotations:self.mapAnnotations];
+    [self.mapView addAnnotations:self.mapAnnotations];
 }
 
 #pragma mark - Navigation segue method
@@ -369,7 +369,7 @@ const int  MAX_PINS_TO_DROP = 200;
     [self.mapView selectAnnotation:self.defaultPin animated:YES];
     
 // loads the pins into the view
-    [self.mapView addAnnotations:self.mapAnnotations];
+//    [self.mapView addAnnotations:self.mapAnnotations];
 }
 
 - (void)removeAllPins:(UIButton *)sender {
