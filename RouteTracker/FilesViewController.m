@@ -321,7 +321,7 @@ NSString* fileContent;
 
     // Parsing is complete
 
-    NSLog(@"tokenCount = %d", tokenCount);
+    NSLog(@"Number of sheet cells = %d", tokenCount);
     //    NSLog(@"tokens array = %@", tokens);
 
     // Build plist string in pieces
@@ -348,7 +348,7 @@ NSString* fileContent;
             plistData = [plistData stringByAppendingString:@"\t\t<string>"];
             plistData = [plistData stringByAppendingString:tokens[i + tokenIndex]];
             plistData = [plistData stringByAppendingString:@"</string>\n"];
-            //        NSLog(@"Token %d   = key %@ value %@", ((i+1)+(tokenIndex-12)), tokens[i], tokens[i + tokenIndex]);
+      //      NSLog(@"Token %d   = key %@ value %@", ((i+1)+(tokenIndex-12)), tokens[i], tokens[i + tokenIndex]);
         }
 
         plistData = [plistData stringByAppendingString:@"\t</dict>\n"];
@@ -373,8 +373,9 @@ NSString* fileContent;
                                      atomically:YES
                                        encoding:NSUTF8StringEncoding
                                           error:NULL];
-    NSLog(@"%@", @(fileConverted));
-    
+    NSLog(@"Files converted = %@", @(fileConverted));
+    self.numberOfRowsTextfield.text = [[NSNumber numberWithInt:self.recordCount] stringValue];
+
     return plistData;
 }
 

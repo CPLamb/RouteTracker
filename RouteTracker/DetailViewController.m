@@ -48,7 +48,8 @@
     self.stateTextField.text = [self.detailItem objectForKey:@"State"];
     self.zipTextField.text = [self.detailItem objectForKey:@"Zipcode"];
     
-    self.contactTextField.text = [self.detailItem objectForKey:@"Contact Name"];
+    self.contactTextField.text = [self.detailItem objectForKey:@"Contact"];
+ //   self.contactTextField.text = [self.detailItem objectForKey:@"Contact Name"];
     self.phoneTextField.text = [self.detailItem objectForKey:@"Contact Phone"];
 
 // Tap to hide keyboard
@@ -78,7 +79,8 @@
     [mutableDetailItem setValue:self.stateTextField.text forKey:@"State"];
     [mutableDetailItem setValue:self.zipTextField.text forKey:@"Zipcode"];
     
-    [mutableDetailItem setValue:self.contactTextField.text forKey:@"Contact Name"];
+    [mutableDetailItem setValue:self.contactTextField.text forKey:@"Contact"];
+ //   [mutableDetailItem setValue:self.contactTextField.text forKey:@"Contact Name"];
     [mutableDetailItem setValue:self.phoneTextField.text forKey:@"Contact Phone"];
 
 //    NSLog(@"detailItem Name = %@", mutableDetailItem);

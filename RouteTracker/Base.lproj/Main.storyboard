@@ -355,7 +355,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kbD-bb-Fqx">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kbD-bb-Fqx">
                                         <rect key="frame" x="64" y="159" width="240" height="56"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -421,18 +421,13 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WKh-8A-ACG">
-                                        <rect key="frame" x="81" y="229" width="183" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                                    </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Phone:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="unS-DE-yE6">
                                         <rect key="frame" x="12" y="266" width="59" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l2e-53-ac7">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l2e-53-ac7">
                                         <rect key="frame" x="79" y="267" width="118" height="30"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -547,11 +542,17 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                     </textField>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Photo URL" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="B5n-g4-HCJ">
+                                        <rect key="frame" x="87" y="225" width="217" height="36"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
+                                    </textView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="2Tf-ae-dzm" firstAttribute="leading" secondItem="dns-sz-iEZ" secondAttribute="trailing" id="0Jw-h0-mQe"/>
                                     <constraint firstItem="K8G-F4-khf" firstAttribute="centerY" secondItem="wMO-qL-jCZ" secondAttribute="centerY" id="14B-vD-Csf"/>
-                                    <constraint firstItem="WKh-8A-ACG" firstAttribute="top" secondItem="kbD-bb-Fqx" secondAttribute="bottom" constant="14" id="3oS-cy-OBK"/>
                                     <constraint firstItem="kbD-bb-Fqx" firstAttribute="trailing" secondItem="2Tf-ae-dzm" secondAttribute="trailing" id="4D6-ki-rou"/>
                                     <constraint firstItem="nVq-62-RtS" firstAttribute="top" secondItem="9Tv-qY-1C5" secondAttribute="bottom" constant="5" id="4Tt-lx-EE0"/>
                                     <constraint firstItem="6bS-ei-xKt" firstAttribute="baseline" secondItem="DtY-zi-Hp9" secondAttribute="baseline" id="6TT-HJ-jQa"/>
@@ -564,7 +565,6 @@
                                     <constraint firstItem="DtY-zi-Hp9" firstAttribute="trailing" secondItem="rCS-W2-2ac" secondAttribute="trailing" id="Aig-25-hXd"/>
                                     <constraint firstItem="be7-eM-SGS" firstAttribute="trailing" secondItem="8VS-MF-HK0" secondAttribute="trailing" id="Cr7-Ph-IBw"/>
                                     <constraint firstItem="lJF-Nh-z3o" firstAttribute="centerX" secondItem="o4b-wk-uP6" secondAttribute="centerX" id="Cw7-nR-HST"/>
-                                    <constraint firstItem="WKh-8A-ACG" firstAttribute="leading" secondItem="YE5-PR-bVm" secondAttribute="leading" constant="81" id="DxH-0N-rNx"/>
                                     <constraint firstItem="kRK-VQ-jD3" firstAttribute="trailing" secondItem="kbD-bb-Fqx" secondAttribute="trailing" id="E0Y-dg-Gqv"/>
                                     <constraint firstItem="4Cs-KW-por" firstAttribute="top" secondItem="be7-eM-SGS" secondAttribute="bottom" constant="14" id="EaO-SO-7S9"/>
                                     <constraint firstItem="grJ-h9-nXe" firstAttribute="leading" secondItem="wMO-qL-jCZ" secondAttribute="trailing" constant="63" id="FU6-yl-d9I"/>
@@ -593,11 +593,9 @@
                                     <constraint firstItem="DtY-zi-Hp9" firstAttribute="top" secondItem="2Tf-ae-dzm" secondAttribute="bottom" constant="5" id="cqm-iU-M88"/>
                                     <constraint firstItem="ver-ad-Aon" firstAttribute="baseline" secondItem="kRK-VQ-jD3" secondAttribute="baseline" id="d44-sd-mnC"/>
                                     <constraint firstItem="kbD-bb-Fqx" firstAttribute="leading" secondItem="dxK-sq-kKp" secondAttribute="trailing" constant="2" id="d6R-ZP-lmj"/>
-                                    <constraint firstItem="l2e-53-ac7" firstAttribute="top" secondItem="WKh-8A-ACG" secondAttribute="bottom" constant="8" symbolic="YES" id="dTE-6Z-EQh"/>
                                     <constraint firstItem="dns-sz-iEZ" firstAttribute="centerY" secondItem="2Tf-ae-dzm" secondAttribute="centerY" id="eEY-aR-bYs"/>
                                     <constraint firstItem="lJF-Nh-z3o" firstAttribute="leading" secondItem="XBW-fX-kSf" secondAttribute="leading" id="g3D-nx-JsR"/>
                                     <constraint firstItem="nVq-62-RtS" firstAttribute="trailing" secondItem="grJ-h9-nXe" secondAttribute="trailing" id="gTc-Tp-t1w"/>
-                                    <constraint firstItem="WKh-8A-ACG" firstAttribute="baseline" secondItem="oYb-PJ-aUp" secondAttribute="baseline" id="iWD-hl-n3x"/>
                                     <constraint firstItem="lJF-Nh-z3o" firstAttribute="leading" secondItem="be7-eM-SGS" secondAttribute="trailing" id="jsL-Am-JGe"/>
                                     <constraint firstItem="ver-ad-Aon" firstAttribute="baseline" secondItem="XBW-fX-kSf" secondAttribute="baseline" id="kAl-Wd-tr8"/>
                                     <constraint firstAttribute="trailing" secondItem="lJF-Nh-z3o" secondAttribute="trailing" constant="16" id="kNo-2l-8d0"/>
@@ -628,7 +626,6 @@
                                     <constraint firstItem="kbD-bb-Fqx" firstAttribute="top" secondItem="XBW-fX-kSf" secondAttribute="bottom" constant="8" symbolic="YES" id="we9-Sk-KpC"/>
                                     <constraint firstAttribute="bottom" secondItem="rCS-W2-2ac" secondAttribute="bottom" constant="219" id="x5K-3J-VKb"/>
                                     <constraint firstItem="unS-DE-yE6" firstAttribute="leading" secondItem="oYb-PJ-aUp" secondAttribute="leading" id="x5s-jg-DB9"/>
-                                    <constraint firstAttribute="trailing" secondItem="WKh-8A-ACG" secondAttribute="trailing" constant="56" id="xtE-6D-ogU"/>
                                     <constraint firstItem="kRK-VQ-jD3" firstAttribute="trailing" secondItem="9pi-Hi-QJ6" secondAttribute="trailing" id="xwP-qe-fzR"/>
                                     <constraint firstItem="rCS-W2-2ac" firstAttribute="top" secondItem="wMO-qL-jCZ" secondAttribute="bottom" constant="1" id="yQn-sX-ikS"/>
                                     <constraint firstItem="dxK-sq-kKp" firstAttribute="top" secondItem="kbD-bb-Fqx" secondAttribute="top" id="yeK-mj-I6R"/>
@@ -664,7 +661,7 @@
                         <outlet property="advertiserTextField" destination="kRK-VQ-jD3" id="yi9-05-bvX"/>
                         <outlet property="categoryTextField" destination="9pi-Hi-QJ6" id="G1k-sq-pES"/>
                         <outlet property="cityTextField" destination="DtY-zi-Hp9" id="vHJ-If-k2q"/>
-                        <outlet property="contactTextField" destination="WKh-8A-ACG" id="nQ4-SA-5IB"/>
+                        <outlet property="contactTextField" destination="B5n-g4-HCJ" id="y9p-r0-QOd"/>
                         <outlet property="deliverTextField" destination="ZPX-7s-43Z" id="NNv-ld-scL"/>
                         <outlet property="driverTextField" destination="XBW-fX-kSf" id="DlF-ZM-rBE"/>
                         <outlet property="latitudeTextField" destination="wMO-qL-jCZ" id="GOg-Ra-Xpm"/>
@@ -1221,6 +1218,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="hGG-Lb-Gts"/>
-        <segue reference="iFG-n3-Skd"/>
+        <segue reference="fec-gw-sch"/>
     </inferredMetricsTieBreakers>
 </document>
