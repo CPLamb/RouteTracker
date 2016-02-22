@@ -35,6 +35,9 @@
     
     memberTableViewCell = [[MemberTableViewCell alloc] init];
     
+    // Assigns the data object to the local membersArray
+    self.membersArray = [NSArray arrayWithArray: MEMBERLISTDATA.membersArray];
+    
     // Initializes Search properties with values
     self.searchString = [NSString stringWithFormat:@"Coffee"];
     self.filteredArray = [NSMutableArray arrayWithCapacity:20];

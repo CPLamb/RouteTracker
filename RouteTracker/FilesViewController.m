@@ -348,7 +348,9 @@ NSString* fileContent;
             plistData = [plistData stringByAppendingString:@"\t\t<string>"];
             plistData = [plistData stringByAppendingString:tokens[i + tokenIndex]];
             plistData = [plistData stringByAppendingString:@"</string>\n"];
-      //      NSLog(@"Token %d   = key %@ value %@", ((i+1)+(tokenIndex-12)), tokens[i], tokens[i + tokenIndex]);
+            
+      // Uncomment to look at charcter strings
+ //           NSLog(@"Token %d   = key %@ value %@", ((i+1)+(tokenIndex-12)), tokens[i], tokens[i + tokenIndex]);
         }
 
         plistData = [plistData stringByAppendingString:@"\t</dict>\n"];
