@@ -327,7 +327,7 @@ const int  MAX_PINS_TO_DROP = 200;
     
     for( NSDictionary* d in self.pinsArray ){
         
- //       NSLog(@"[map] adding pin with data (%@ type): %@", NSStringFromClass([d class]), d);
+  //      NSLog(@"[map] adding pin with data (%@ type): %@", NSStringFromClass([d class]), d);
         
         NSString *aLatitudeString = [d objectForKey:@"Latitude"];
         NSString *aLongitudeString = [d objectForKey:@"Longitude"];
