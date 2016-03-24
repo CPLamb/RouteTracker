@@ -38,7 +38,7 @@
     self.notesTextField.text = [self.detailItem objectForKey:@"Notes"];
     self.driverTextField.text = [self.detailItem objectForKey:@"Driver"];
     self.categoryTextField.text = [self.detailItem objectForKey:@"Category"];
-    self.advertiserTextField.text = [self.detailItem objectForKey:@"Advert iser"];
+    self.advertiserTextField.text = [self.detailItem objectForKey:@"Advertiser"];
 
     self.latitudeTextField.text = [self.detailItem objectForKey:@"Latitude"];
     self.longitudeTextField.text = [self.detailItem objectForKey:@"Longitude"];
@@ -48,9 +48,9 @@
     self.stateTextField.text = [self.detailItem objectForKey:@"State"];
     self.zipTextField.text = [self.detailItem objectForKey:@"Zipcode"];
     
-    self.contactTextField.text = [self.detailItem objectForKey:@"Contact"];
- //   self.contactTextField.text = [self.detailItem objectForKey:@"Contact Name"];
-    self.phoneTextField.text = [self.detailItem objectForKey:@"Contact Phone"];
+ //   self.contactTextField.text = [self.detailItem objectForKey:@"Contact"];
+    self.contactTextField.text = [self.detailItem objectForKey:@"Contact Name"];
+    self.phoneTextField.text = [self.detailItem objectForKey:@"Contact Number"];
 
 // Tap to hide keyboard
     UITapGestureRecognizer *hideKeyboardTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideTap:)];
