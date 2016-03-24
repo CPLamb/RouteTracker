@@ -96,6 +96,7 @@
 		83279F501A5C4E2D007496BB /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83279F4F1A5C4E2D007496BB /* HomeViewController.m */; };
 		836141911BF7DF64003F3D7A /* EdibleMontereyDistributionList.csv in Resources */ = {isa = PBXBuildFile; fileRef = 8361418F1BF7DF64003F3D7A /* EdibleMontereyDistributionList.csv */; };
 		836141921BF7DF64003F3D7A /* EdibleMontereyDistributionList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 836141901BF7DF64003F3D7A /* EdibleMontereyDistributionList.plist */; };
+		839695311CA47F6C00DF55C6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 839695301CA47F6C00DF55C6 /* ViewController.m */; };
 		83B86BB51BE816C20017DA31 /* RouteTrackerTestCSV.csv in Resources */ = {isa = PBXBuildFile; fileRef = 83B86BB31BE816C20017DA31 /* RouteTrackerTestCSV.csv */; };
 		83B86BB61BE816C20017DA31 /* RouteTrackerTestCSV.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83B86BB41BE816C20017DA31 /* RouteTrackerTestCSV.plist */; };
 		83BC548D1A631E1600DBDA4A /* logo_SantaCruzNewspaperTaxi.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BC548C1A631E1600DBDA4A /* logo_SantaCruzNewspaperTaxi.png */; };
@@ -273,6 +274,8 @@
 		83279F4F1A5C4E2D007496BB /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		8361418F1BF7DF64003F3D7A /* EdibleMontereyDistributionList.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = EdibleMontereyDistributionList.csv; sourceTree = "<group>"; };
 		836141901BF7DF64003F3D7A /* EdibleMontereyDistributionList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = EdibleMontereyDistributionList.plist; sourceTree = "<group>"; };
+		8396952F1CA47F6C00DF55C6 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		839695301CA47F6C00DF55C6 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		83B86BB31BE816C20017DA31 /* RouteTrackerTestCSV.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RouteTrackerTestCSV.csv; sourceTree = "<group>"; };
 		83B86BB41BE816C20017DA31 /* RouteTrackerTestCSV.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RouteTrackerTestCSV.plist; sourceTree = "<group>"; };
 		83BC548C1A631E1600DBDA4A /* logo_SantaCruzNewspaperTaxi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_SantaCruzNewspaperTaxi.png; sourceTree = "<group>"; };
@@ -353,6 +356,8 @@
 				83279F4C1A59DDA6007496BB /* FilesViewController.m */,
 				83279E7E1A5206B5007496BB /* SetupTableViewController.h */,
 				83279E7F1A5206B5007496BB /* SetupTableViewController.m */,
+				8396952F1CA47F6C00DF55C6 /* ViewController.h */,
+				839695301CA47F6C00DF55C6 /* ViewController.m */,
 			);
 			path = RouteTracker;
 			sourceTree = "<group>";
@@ -695,6 +700,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				839695311CA47F6C00DF55C6 /* ViewController.m in Sources */,
 				83279F041A587674007496BB /* GTMOAuth2ViewControllerTouch.m in Sources */,
 				83279F021A587674007496BB /* GTMOAuth2SignIn.m in Sources */,
 				83279EFC1A587674007496BB /* GTMMIMEDocument.m in Sources */,
