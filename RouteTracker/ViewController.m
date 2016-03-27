@@ -7,6 +7,13 @@
 //
 #import "ViewController.h"
 
+
+/* Constants used for OAuth 2.0 authorization EXAMPLE from DrEditFiles code
+static NSString *const kKeychainItemName = @"iOSDriveSample: Google Drive";
+static NSString *const kClientId = @"853135828925-8t9bfsueorssgrv9jtqka6gq0o8vb4vr.apps.googleusercontent.com";
+static NSString *const kClientSecret = @"F2CVzLCS5PQj2T4JazioSL8-";
+*/
+
 static NSString *const kKeychainItemName = @"Google Apps Script Execution API";
 static NSString *const kClientID = @"756894447473-0ho4dumd7rgi646hstkvc8p3octk0pqo.apps.googleusercontent.com";  //YOUR_CLIENT_ID_HERE
 static NSString *const kScriptID = @"Mir2lNxwUvDuYxMtwHhqWu00vNRSAENjV"; //ENTER_YOUR_SCRIPT_ID_HERE
@@ -36,13 +43,20 @@ static NSString *const kScriptID = @"Mir2lNxwUvDuYxMtwHhqWu00vNRSAENjV"; //ENTER
 
 // When the view appears, ensure that the Google Apps Script Execution API service is authorized, and perform API calls.
 - (void)viewDidAppear:(BOOL)animated {
-//    if (!self.service.authorizer.canAuthorize) {
+    
+    GTMOAuth2Authentication *auth =
+    [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:kKeychainItemName
+                                                          clientID:kClientID
+                                                      clientSecret:kScriptID];
+//    if (!self.service.authorizer.canAuthorize) {  //ORIGINAL if statement
+
+    if (![auth canAuthorize]) {     //from DrEditFilesList auth
         // Not yet authorized, request authorization by pushing the login UI onto the UI stack.
-//        [self presentViewController:[self createAuthController] animated:YES completion:nil];
+        [self presentViewController:[self createAuthController] animated:YES completion:nil];
         
-//    } else {
+    } else {
         [self callAppsScript];
-//    }
+    }
 }
 
 // Calls an Apps Script function to list the folders in the user's
