@@ -235,7 +235,7 @@ static NSString *const kClientSecret = @"F2CVzLCS5PQj2T4JazioSL8-";
   return service;
 }
 
-- (IBAction)authButtonClicked:(id)sender {
+- (IBAction)authButtonClicked:(id)sender {      //Sign In button
   if (!self.isAuthorized) {
       NSLog(@"SIGNing IN!");
     // Sign in.

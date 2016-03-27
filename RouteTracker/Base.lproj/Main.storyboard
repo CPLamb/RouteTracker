@@ -952,11 +952,11 @@
             </objects>
             <point key="canvasLocation" x="755" y="2521"/>
         </scene>
-        <!--Files-->
+        <!--Google Apps Script-->
         <scene sceneID="72a-Kf-6Tx">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="c52-Nu-dr6" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Files" image="docs24.png" id="Hp0-ra-2kw"/>
+                    <tabBarItem key="tabBarItem" title="Google Apps Script" image="docs24.png" id="Hp0-ra-2kw"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="K0a-1C-jXk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
