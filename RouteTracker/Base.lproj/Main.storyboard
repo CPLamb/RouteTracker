@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="5" width="320" height="700"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo_SantaCruzNewspaperTaxi.png" translatesAutoresizingMaskIntoConstraints="NO" id="dJn-su-da5">
-                                        <rect key="frame" x="0.0" y="65" width="320" height="99"/>
+                                        <rect key="frame" x="0.0" y="121" width="320" height="99"/>
                                     </imageView>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tnc-Hz-bHv">
                                         <rect key="frame" x="40" y="257" width="240" height="70"/>
@@ -178,8 +178,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsBuildings="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dUl-CY-pRf">
-                                <rect key="frame" x="0.0" y="64" width="326" height="457"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dUl-CY-pRf">
+                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                                 <connections>
                                     <outlet property="delegate" destination="8rJ-Kc-sve" id="O6e-NV-p2R"/>
                                 </connections>
@@ -1033,6 +1033,16 @@
                                             <action selector="sortByName:" destination="YiI-Pk-2d9" eventType="touchUpInside" id="f0h-Gd-irm"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hzf-9d-ilB">
+                                        <rect key="frame" x="65" y="215" width="190" height="37"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <state key="normal" title="Reset List">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="sortByName:" destination="YiI-Pk-2d9" eventType="touchUpInside" id="Icc-SJ-n4z"/>
+                                        </connections>
+                                    </button>
                                     <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4d3-q0-AVj">
                                         <rect key="frame" x="65" y="166" width="190" height="37"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
@@ -1063,7 +1073,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rmK-Ip-qMS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1664" y="355"/>
+            <point key="canvasLocation" x="1663" y="341"/>
         </scene>
         <!--Help-->
         <scene sceneID="7gP-6y-p2X">
@@ -1097,7 +1107,7 @@
         <image name="questions1.png" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hGG-Lb-Gts"/>
-        <segue reference="fec-gw-sch"/>
+        <segue reference="wXl-0J-PM3"/>
+        <segue reference="qPY-Ep-njk"/>
     </inferredMetricsTieBreakers>
 </document>
