@@ -169,7 +169,7 @@ NSString* fileContent;
 #pragma mark - Google Drive methods
 
 - (void)loadFileContent {
-    // NSLog(@"GONNA TRY n LOAD this files content= %@", self.selectedFile);
+    NSLog(@"GONNA TRY n LOAD this files content= %@", self.selectedFile);
 
     UIAlertView *alert = [DrEditUtilities showLoadingMessageWithTitle:@"Loading file content"
                                                              delegate:self];
@@ -205,7 +205,7 @@ NSString* fileContent;
                 NSLog(@"self.recordCount = %d", self.recordCount);
                 self.numberOfRowsTextfield.text = [[NSNumber numberWithInt:self.recordCount] stringValue];
 
-                //        NSLog(@"FilesVC loadFileContent - self.membersArray = \n%@", self.membersArray);
+                NSLog(@"FilesVC loadFileContent - self.membersArray = \n%@", self.membersArray);
 
             } else {
                 NSLog(@"An error occurred: %@", error);
@@ -218,7 +218,7 @@ NSString* fileContent;
 }
 
 - (NSString*)csvDataToPlist: (NSString *) csvFile {
-//    NSLog(@"FilesVC csvDataToPlist:XXXX - The string we're looking at is \n\n\n>>>>%@<<<<\n\n", csvFile);
+    NSLog(@"FilesVC csvDataToPlist:XXXX - The string we're looking at is \n\n\n>>>>%@<<<<\n\n", csvFile);
 
     NSString *csvString = csvFile;
 
@@ -312,7 +312,7 @@ NSString* fileContent;
 
         // Build tokenWord tokenChar-by-tokenChar
         tokenWord = [tokenWord stringByAppendingString:tokenChar];
- //       NSLog(@"tokenWord = %@", tokenWord);
+        NSLog(@"tokenWord = %@", tokenWord);
 
     } // for loop
 
@@ -350,7 +350,7 @@ NSString* fileContent;
             plistData = [plistData stringByAppendingString:@"</string>\n"];
             
       // Uncomment to look at charcter strings
- //           NSLog(@"Token %d   = key %@ value %@", ((i+1)+(tokenIndex-12)), tokens[i], tokens[i + tokenIndex]);
+            NSLog(@"Token %d   = key %@ value %@", ((i+1)+(tokenIndex-12)), tokens[i], tokens[i + tokenIndex]);
         }
 
         plistData = [plistData stringByAppendingString:@"\t</dict>\n"];
