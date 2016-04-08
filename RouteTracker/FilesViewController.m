@@ -160,6 +160,7 @@ NSString* fileContent;
         [self csvDataToPlist:fileContent];
         //update UI on the main thread
         dispatch_async(dispatch_get_main_queue(), ^{
+            self.numberOfRowsTextfield.text = [[NSNumber numberWithInt:self.recordCount] stringValue];
             //Add the screenMarker array to the layer
   //          [theViewC addScreenMarkers:theMarkers desc:nil];
         });
@@ -376,7 +377,6 @@ NSString* fileContent;
                                        encoding:NSUTF8StringEncoding
                                           error:NULL];
     NSLog(@"Files converted = %@", @(fileConverted));
-    self.numberOfRowsTextfield.text = [[NSNumber numberWithInt:self.recordCount] stringValue];
 
     return plistData;
 }

@@ -15,7 +15,7 @@
 
 @implementation MapItem
 @synthesize title = _title;
-@synthesize subTitle = _subTitle;
+@synthesize subtitle = _subtitle;
 @synthesize latitude = _latitude;
 @synthesize longitude = _longitude;
 @synthesize memberData = _memberData;
@@ -36,7 +36,7 @@
     _latitude = [NSNumber numberWithDouble:location.latitude];
     _longitude = [NSNumber numberWithDouble:location.longitude];
     _title = placeName;
-    _subTitle = description;
+    _subtitle = description;
     
     return self;
 }
@@ -61,10 +61,11 @@
     NSString *qtyString = [[memberData objectForKey:@"Total Quantity to Deliver"]stringByAppendingString:@" "];
     NSString *driverString = [[memberData objectForKey:@"Driver"] substringToIndex:3U];
     
-    _title = [[[nameString stringByAppendingString:deliveredString] stringByAppendingString:qtyString] stringByAppendingString:driverString];
-//    _title = [memberData objectForKey:@"Name"];
+    _title = nameString;
+   // _title = [[[nameString stringByAppendingString:deliveredString] stringByAppendingString:qtyString] stringByAppendingString:driverString];
+   //    _title = [memberData objectForKey:@"Name"];
     
-    _subTitle = [memberData objectForKey:@"Driver"];
+    _subtitle = [[deliveredString stringByAppendingString:qtyString] stringByAppendingString:driverString];
     hasShop = [[memberData objectForKey:@"hasShop"] boolValue];
 
     return self;

@@ -185,6 +185,9 @@ static NSString *const kClientSecret = @"F2CVzLCS5PQj2T4JazioSL8-";
 //  viewController.driveService = [self driveService];
 //  viewController.delegate = self;
   
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    self.selectedSpreadsheet = [self.driveFiles objectAtIndex:indexPath.row];
+    
   if ([segueIdentifier isEqualToString:@"editFile"]) {                  // tap a cell
       
 //      NSLog(@"DrEditFilesListVC selcted file = %@", self.selectedSpreadsheet);

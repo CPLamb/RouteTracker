@@ -22,7 +22,7 @@
 @property (nonatomic, strong) NSNumber *longitude;
 
 @property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSString *subTitle;
+@property (nonatomic, copy) NSString *subtitle;
 
 - (id)initWithCoordinates:(CLLocationCoordinate2D )location placeName:(NSString *)placeName description:(NSString *)description;
 - (id)initWithCoordinates:(CLLocationCoordinate2D )location memberData:(NSDictionary *)memberData;
