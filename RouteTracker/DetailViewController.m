@@ -23,8 +23,8 @@
     // Do any additional setup after loading the view.
     
 // IndexPath of the selected detailItem dictionary
-//    NSLog(@"Selected indexPath = %@", self.selectedIndexPath);
-     int section = (int)self.selectedIndexPath.section;
+    NSLog(@"Selected indexPath = %@", self.selectedIndexPath);
+    int section = (int)self.selectedIndexPath.section;
     int row = (int)self.selectedIndexPath.row;
 
     NSArray *indexPathArray = [NSArray arrayWithObjects:[NSNumber numberWithInt:row] , [NSNumber numberWithInt:section], nil];
@@ -59,7 +59,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-//    NSLog(@"Save the modified details to the detailItem mutableDictionary");
+    NSLog(@"Save the modified details to the detailItem mutableDictionary");
     
 // A mutable Dictionary must be created from the original for editing?
     NSMutableDictionary *mutableDetailItem = [NSMutableDictionary dictionaryWithDictionary:self.detailItem];
@@ -83,7 +83,7 @@
  //   [mutableDetailItem setValue:self.contactTextField.text forKey:@"Contact Name"];
     [mutableDetailItem setValue:self.phoneTextField.text forKey:@"Contact Phone"];
 
-//    NSLog(@"detailItem Name = %@", mutableDetailItem);
+    NSLog(@"detailItem Name = %@", mutableDetailItem);
     
 // Stores the detailItem to NSUserDefaults
     NSDictionary *myDictionary = [NSDictionary dictionaryWithDictionary:mutableDetailItem];
@@ -104,6 +104,9 @@
 //    NSLog(@"Hides the keyboard");
 }
 
+- (IBAction)geocodeButton:(UIButton *)sender {
+    NSLog(@"Changes location's lat/long values");
+}
 
 
 #pragma mark - Navigation
@@ -120,6 +123,5 @@
         [[segue destinationViewController] setDetailItem:self.detailItem];
     }
 }
-
 
 @end
