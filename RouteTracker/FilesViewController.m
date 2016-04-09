@@ -313,7 +313,7 @@ NSString* fileContent;
 
         // Build tokenWord tokenChar-by-tokenChar
         tokenWord = [tokenWord stringByAppendingString:tokenChar];
-        NSLog(@"tokenWord = %@", tokenWord);
+      //  NSLog(@"tokenWord = %@", tokenWord);
 
     } // for loop
 
@@ -351,7 +351,7 @@ NSString* fileContent;
             plistData = [plistData stringByAppendingString:@"</string>\n"];
             
       // Uncomment to look at charcter strings
-            NSLog(@"Token %d   = key %@ value %@", ((i+1)+(tokenIndex-12)), tokens[i], tokens[i + tokenIndex]);
+       //     NSLog(@"Token %d   = key %@ value %@", ((i+1)+(tokenIndex-12)), tokens[i], tokens[i + tokenIndex]);
         }
 
         plistData = [plistData stringByAppendingString:@"\t</dict>\n"];
