@@ -33,10 +33,14 @@
     
     sortedByDriver = NO;
     
+    self.memberListAll = [[MemberListData alloc] init];
+    [self.memberListAll loadPlistData];
+    
     memberTableViewCell = [[MemberTableViewCell alloc] init];
     
     // Assigns the data object to the local membersArray
-    self.membersArray = [NSArray arrayWithArray: MEMBERLISTDATA.membersArray];
+    
+    self.membersArray = [NSArray arrayWithArray: self.memberListAll.membersArray];
     
     // Initializes Search properties with values
     self.searchString = [NSString stringWithFormat:@"Coffee"];

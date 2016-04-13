@@ -7,6 +7,9 @@
 //
 
 #import "DetailViewController.h"
+#import "MemberListData.h"
+#import "AppDelegate.h"
+
 
 @interface DetailViewController ()
 
@@ -88,6 +91,9 @@
 // Stores the detailItem to NSUserDefaults
     NSDictionary *myDictionary = [NSDictionary dictionaryWithDictionary:mutableDetailItem];
     [[NSUserDefaults standardUserDefaults] setObject:myDictionary forKey:@"selected_member"];
+    
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate.memberData modifyMemberListFile:myDictionary];
 
 }
 
