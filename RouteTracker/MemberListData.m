@@ -78,7 +78,7 @@
     NSMutableArray *plistEdibleContent = [[NSMutableArray alloc] initWithArray:temp];
     for (int i = 0; i < [plistEdibleContent count]; i++){
         NSDictionary *currentEntry = [plistEdibleContent objectAtIndex:i];
-        if([[currentEntry objectForKey:@"Name"] isEqualToString:[entry objectForKey:@"Name"]]) {
+        if([[currentEntry objectForKey:@"Index"] isEqualToString:[entry objectForKey:@"Index"]]) {
             [plistEdibleContent replaceObjectAtIndex:i withObject:entry];
             break;
         }

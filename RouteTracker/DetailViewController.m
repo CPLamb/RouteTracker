@@ -9,9 +9,9 @@
 #import "DetailViewController.h"
 #import "MemberListData.h"
 #import "AppDelegate.h"
+#import <MapKit/MapKit.h>
 
-
-@interface DetailViewController ()
+@interface DetailViewController ()<CLLocationManagerDelegate>
 
 - (void)hideTap:(UIGestureRecognizer *)gestureRecognizer;
 
@@ -68,7 +68,7 @@
     NSMutableDictionary *mutableDetailItem = [NSMutableDictionary dictionaryWithDictionary:self.detailItem];
     [mutableDetailItem setValue:self.nameTextField.text forKey:@"Name"];
     [mutableDetailItem setValue:self.deliverTextField.text forKey:@"Total Quantity to Deliver"];
-    [mutableDetailItem setValue:self.returnedTextField.text forKey:@"Quantity Returned"];
+    [mutableDetailItem setValue:self.returnedTextField.text forKey:@"Delivered to Date"];
     [mutableDetailItem setValue:self.notesTextField.text forKey:@"Notes"];
     [mutableDetailItem setValue:self.driverTextField.text forKey:@"Driver"];
     [mutableDetailItem setValue:self.categoryTextField.text forKey:@"Category"];
@@ -112,6 +112,28 @@
 
 - (IBAction)geocodeButton:(UIButton *)sender {
     NSLog(@"Changes location's lat/long values");
+    NSDictionary *dict = [[NSUserDefaults standardUserDefaults] objectForKey:@"selected_member"];
+    
+    NSMutableDictionary *myDictionary = [[NSMutableDictionary alloc] initWithDictionary:dict];
+    
+    CLLocationManager *lm = [[CLLocationManager alloc] init];
+    lm.delegate = self;
+    lm.desiredAccuracy = kCLLocationAccuracyBest;
+    lm.distanceFilter = kCLDistanceFilterNone;
+    [lm startUpdatingLocation];
+
+    NSString *userLatitude = [NSString stringWithFormat:@"%f",
+                              lm.location.coordinate.latitude];
+    NSString *userLongitude = [NSString stringWithFormat:@"%f",lm.location.coordinate.longitude];
+    
+    self.latitudeTextField.text = userLatitude;
+    self.longitudeTextField.text = userLongitude;
+
+    
+    [myDictionary setValue:userLatitude forKey:@"Latitude"];
+    [myDictionary setValue:userLongitude forKey:@"Longitude"];
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate.memberData modifyMemberListFile:myDictionary];
 }
 
 
