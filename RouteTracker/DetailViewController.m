@@ -25,16 +25,38 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-// IndexPath of the selected detailItem dictionary
+    [self initializeDetailItem];
+    
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [self initializeDetailItem];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    NSLog(@"Save the modified details to the detailItem mutableDictionary");
+    
+    [self updateDetailItem];
+    
+
+}
+
+-(void)initializeDetailItem
+{
+    self.textFieldChanged = FALSE;
+    
+    // IndexPath of the selected detailItem dictionary
     NSLog(@"Selected indexPath = %@", self.selectedIndexPath);
     int section = (int)self.selectedIndexPath.section;
     int row = (int)self.selectedIndexPath.row;
-
+    
     NSArray *indexPathArray = [NSArray arrayWithObjects:[NSNumber numberWithInt:row] , [NSNumber numberWithInt:section], nil];
     [[NSUserDefaults standardUserDefaults] setObject:indexPathArray forKey:@"selected_indexPath"];
-
     
-// Assigns values to the text fields
+    
+    // Assigns values to the text fields
     self.nameTextField.text = [self.detailItem objectForKey:@"Name"];
     self.deliverTextField.text = [self.detailItem objectForKey:@"Total Quantity to Deliver"];
     self.returnedTextField.text = [self.detailItem objectForKey:@"Delivered to Date"];
@@ -42,7 +64,7 @@
     self.driverTextField.text = [self.detailItem objectForKey:@"Driver"];
     self.categoryTextField.text = [self.detailItem objectForKey:@"Category"];
     self.advertiserTextField.text = [self.detailItem objectForKey:@"Advertiser"];
-
+    
     self.latitudeTextField.text = [self.detailItem objectForKey:@"Latitude"];
     self.longitudeTextField.text = [self.detailItem objectForKey:@"Longitude"];
     
@@ -51,50 +73,54 @@
     self.stateTextField.text = [self.detailItem objectForKey:@"State"];
     self.zipTextField.text = [self.detailItem objectForKey:@"Zipcode"];
     
- //   self.contactTextField.text = [self.detailItem objectForKey:@"Contact"];
+    //   self.contactTextField.text = [self.detailItem objectForKey:@"Contact"];
     self.contactTextField.text = [self.detailItem objectForKey:@"Contact Name"];
     self.phoneTextField.text = [self.detailItem objectForKey:@"Contact Number"];
-
-// Tap to hide keyboard
+    
+    // Tap to hide keyboard
     UITapGestureRecognizer *hideKeyboardTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideTap:)];
     [self.view addGestureRecognizer:hideKeyboardTap];
 }
+-(void)updateDetailItem
+{
+    if (self.textFieldChanged) {
+        // A mutable Dictionary must be created from the original for editing?
+        NSMutableDictionary *mutableDetailItem = [NSMutableDictionary dictionaryWithDictionary:self.detailItem];
+        [mutableDetailItem setValue:self.nameTextField.text forKey:@"Name"];
+        [mutableDetailItem setValue:self.deliverTextField.text forKey:@"Total Quantity to Deliver"];
+        [mutableDetailItem setValue:self.returnedTextField.text forKey:@"Delivered to Date"];
+        [mutableDetailItem setValue:self.notesTextField.text forKey:@"Notes"];
+        [mutableDetailItem setValue:self.driverTextField.text forKey:@"Driver"];
+        [mutableDetailItem setValue:self.categoryTextField.text forKey:@"Category"];
+        [mutableDetailItem setValue:self.advertiserTextField.text forKey:@"Advert iser"];
+        
+        [mutableDetailItem setValue:self.latitudeTextField.text forKey:@"Latitude"];
+        [mutableDetailItem setValue:self.longitudeTextField.text forKey:@"Longitude"];
+        
+        [mutableDetailItem setValue:self.addressTextField.text forKey:@"Street"];
+        [mutableDetailItem setValue:self.cityTextField.text forKey:@"City"];
+        [mutableDetailItem setValue:self.stateTextField.text forKey:@"State"];
+        [mutableDetailItem setValue:self.zipTextField.text forKey:@"Zipcode"];
+        
+        [mutableDetailItem setValue:self.contactTextField.text forKey:@"Contact"];
+        //   [mutableDetailItem setValue:self.contactTextField.text forKey:@"Contact Name"];
+        [mutableDetailItem setValue:self.phoneTextField.text forKey:@"Contact Phone"];
+        
+        NSLog(@"detailItem Name = %@", mutableDetailItem);
+        
+        // Stores the detailItem to NSUserDefaults
+        NSDictionary *myDictionary = [NSDictionary dictionaryWithDictionary:mutableDetailItem];
+        [[NSUserDefaults standardUserDefaults] setObject:mutableDetailItem forKey:@"selected_member"];
+        
+        AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+        [delegate.memberData modifyMemberListFile:myDictionary];
+        [delegate.arrayToBeUploaded addObject:myDictionary];
+    }
+}
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    NSLog(@"Save the modified details to the detailItem mutableDictionary");
-    
-// A mutable Dictionary must be created from the original for editing?
-    NSMutableDictionary *mutableDetailItem = [NSMutableDictionary dictionaryWithDictionary:self.detailItem];
-    [mutableDetailItem setValue:self.nameTextField.text forKey:@"Name"];
-    [mutableDetailItem setValue:self.deliverTextField.text forKey:@"Total Quantity to Deliver"];
-    [mutableDetailItem setValue:self.returnedTextField.text forKey:@"Delivered to Date"];
-    [mutableDetailItem setValue:self.notesTextField.text forKey:@"Notes"];
-    [mutableDetailItem setValue:self.driverTextField.text forKey:@"Driver"];
-    [mutableDetailItem setValue:self.categoryTextField.text forKey:@"Category"];
-    [mutableDetailItem setValue:self.advertiserTextField.text forKey:@"Advert iser"];
-    
-    [mutableDetailItem setValue:self.latitudeTextField.text forKey:@"Latitude"];
-    [mutableDetailItem setValue:self.longitudeTextField.text forKey:@"Longitude"];
-
-    [mutableDetailItem setValue:self.addressTextField.text forKey:@"Street"];
-    [mutableDetailItem setValue:self.cityTextField.text forKey:@"City"];
-    [mutableDetailItem setValue:self.stateTextField.text forKey:@"State"];
-    [mutableDetailItem setValue:self.zipTextField.text forKey:@"Zipcode"];
-    
-    [mutableDetailItem setValue:self.contactTextField.text forKey:@"Contact"];
- //   [mutableDetailItem setValue:self.contactTextField.text forKey:@"Contact Name"];
-    [mutableDetailItem setValue:self.phoneTextField.text forKey:@"Contact Phone"];
-
-    NSLog(@"detailItem Name = %@", mutableDetailItem);
-    
-// Stores the detailItem to NSUserDefaults
-    NSDictionary *myDictionary = [NSDictionary dictionaryWithDictionary:mutableDetailItem];
-    [[NSUserDefaults standardUserDefaults] setObject:myDictionary forKey:@"selected_member"];
-    
-    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-    [delegate.memberData modifyMemberListFile:myDictionary];
-
+- (IBAction)textFieldDidChange:(id)sender {
+    self.textFieldChanged = TRUE;
+    [self updateDetailItem];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -134,6 +160,8 @@
     [myDictionary setValue:userLongitude forKey:@"Longitude"];
     AppDelegate *delegate = [UIApplication sharedApplication].delegate;
     [delegate.memberData modifyMemberListFile:myDictionary];
+    
+    
 }
 
 

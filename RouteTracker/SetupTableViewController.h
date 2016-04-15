@@ -27,6 +27,8 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *mapSelectorControl;
 @property (weak, nonatomic) IBOutlet UIPickerView *filePicker;
 @property (weak, nonatomic) IBOutlet UIPickerView *driverPicker;
+@property (weak, nonatomic) IBOutlet UIButton *uploadToGoogleButton;
+
 
 - (IBAction)mapTypeControl:(UISegmentedControl *)sender;
 

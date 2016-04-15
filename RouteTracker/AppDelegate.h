@@ -16,6 +16,7 @@
     MemberListData *_memberData;
 }
 @property (strong, nonatomic) MemberListData *memberData;
+@property (strong, nonatomic) NSMutableArray *arrayToBeUploaded;
 @property (strong, nonatomic) UIWindow *window;
 
 @end
