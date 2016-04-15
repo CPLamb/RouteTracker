@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -180,7 +180,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dUl-CY-pRf">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dUl-CY-pRf">
                                 <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                                 <connections>
                                     <outlet property="delegate" destination="8rJ-Kc-sve" id="O6e-NV-p2R"/>
@@ -322,6 +322,9 @@
                                         <rect key="frame" x="62" y="18" width="242" height="30"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                        <connections>
+                                            <action selector="textFieldDidChange:" destination="ehp-uA-B6h" eventType="editingChanged" id="ERY-Wn-LqD"/>
+                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deliver:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Cs-KW-por">
                                         <rect key="frame" x="8" y="56" width="58" height="21"/>
@@ -336,6 +339,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <connections>
+                                            <action selector="textFieldDidChange:" destination="ehp-uA-B6h" eventType="editingDidEnd" id="lJm-gi-91h"/>
+                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delivered:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8eI-QB-H3Q">
                                         <rect key="frame" x="157" y="56" width="89" height="20"/>
@@ -350,6 +356,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                        <connections>
+                                            <action selector="textFieldDidChange:" destination="ehp-uA-B6h" eventType="editingDidEnd" id="N1y-Ie-hMm"/>
+                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dxK-sq-kKp">
                                         <rect key="frame" x="8" y="159" width="54" height="20"/>
@@ -391,6 +400,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="done"/>
+                                        <connections>
+                                            <action selector="textFieldDidChange:" destination="ehp-uA-B6h" eventType="editingDidEnd" id="HZ8-hq-Kqh"/>
+                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Driver:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8VS-MF-HK0">
                                         <rect key="frame" x="8" y="124" width="54" height="21"/>
@@ -402,6 +414,9 @@
                                         <rect key="frame" x="62" y="121" width="114" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                        <connections>
+                                            <action selector="textFieldDidChange:" destination="ehp-uA-B6h" eventType="editingDidEnd" id="6FB-x8-ArH"/>
+                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x8d-0v-dbd">
                                         <rect key="frame" x="8" y="91" width="80" height="21"/>
@@ -416,6 +431,9 @@
                                         <rect key="frame" x="87" y="88" width="217" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                        <connections>
+                                            <action selector="textFieldDidChange:" destination="ehp-uA-B6h" eventType="editingDidEnd" id="rOP-sI-5Bd"/>
+                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oYb-PJ-aUp">
                                         <rect key="frame" x="12" y="232" width="80" height="21"/>
@@ -476,6 +494,9 @@
                                         <rect key="frame" x="44" y="419" width="100" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                        <connections>
+                                            <action selector="textFieldDidChange:" destination="ehp-uA-B6h" eventType="editingDidEnd" id="sgN-ho-x8W"/>
+                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Long:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o4b-wk-uP6">
                                         <rect key="frame" x="157" y="422" width="52" height="21"/>
@@ -490,6 +511,9 @@
                                         <rect key="frame" x="207" y="418" width="97" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                        <connections>
+                                            <action selector="textFieldDidChange:" destination="ehp-uA-B6h" eventType="editingDidEnd" id="HxF-4D-qK7"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rCS-W2-2ac">
                                         <rect key="frame" x="119" y="450" width="82" height="30"/>
@@ -517,6 +541,9 @@
                                         <rect key="frame" x="79" y="307" width="225" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="textFieldDidChange:" destination="ehp-uA-B6h" eventType="editingDidEnd" id="m5h-ZD-Wkg"/>
+                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6bS-ei-xKt">
                                         <rect key="frame" x="8" y="345" width="44" height="21"/>
@@ -531,6 +558,9 @@
                                         <rect key="frame" x="44" y="342" width="157" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                        <connections>
+                                            <action selector="textFieldDidChange:" destination="ehp-uA-B6h" eventType="editingDidEnd" id="84j-iT-clw"/>
+                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="State:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wUk-PT-CwN">
                                         <rect key="frame" x="210" y="346" width="52" height="21"/>
@@ -545,6 +575,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                        <connections>
+                                            <action selector="textFieldDidChange:" destination="ehp-uA-B6h" eventType="editingDidEnd" id="IKf-gg-bFi"/>
+                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zip:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tb6-Zl-ehH">
                                         <rect key="frame" x="183" y="381" width="37" height="21"/>
@@ -562,6 +595,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                        <connections>
+                                            <action selector="textFieldDidChange:" destination="ehp-uA-B6h" eventType="editingDidEnd" id="6iU-4x-wiS"/>
+                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="unS-DE-yE6">
                                         <rect key="frame" x="12" y="268" width="59" height="21"/>
@@ -774,26 +810,25 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Access Google Drive:" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="33f-1S-nLb">
-                                                    <rect key="frame" x="8" y="0.0" width="169" height="36"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e2p-ZA-Dg0">
-                                                    <rect key="frame" x="226" y="19" width="51" height="31"/>
+                                                <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gcX-p2-RwP">
+                                                    <rect key="frame" x="18" y="28" width="134" height="30"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="49" id="X7u-eB-gqe"/>
+                                                        <constraint firstAttribute="width" constant="134" id="d0J-s1-OAZ"/>
                                                     </constraints>
-                                                </switch>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <state key="normal" title="Upload to Google">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="geocodeButton:" destination="ehp-uA-B6h" eventType="touchUpInside" id="sNB-Mc-5Bi"/>
+                                                        <action selector="uploadToGoogleButtonPressed:" destination="0GM-Ui-0MM" eventType="touchUpInside" id="i10-1c-kVf"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="33f-1S-nLb" firstAttribute="leading" secondItem="p4Q-Bo-0B4" secondAttribute="leadingMargin" id="40u-yA-jWc"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="33f-1S-nLb" secondAttribute="bottom" constant="25.5" id="S4h-Nb-zzh"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="e2p-ZA-Dg0" secondAttribute="trailing" constant="37" id="e8x-9U-0iY"/>
-                                                <constraint firstItem="e2p-ZA-Dg0" firstAttribute="leading" secondItem="33f-1S-nLb" secondAttribute="trailing" constant="49" id="eI3-FV-xOr"/>
-                                                <constraint firstItem="33f-1S-nLb" firstAttribute="top" secondItem="p4Q-Bo-0B4" secondAttribute="top" id="jwg-DB-GhH"/>
-                                                <constraint firstItem="e2p-ZA-Dg0" firstAttribute="centerY" secondItem="p4Q-Bo-0B4" secondAttribute="centerY" id="mdV-ch-bbW"/>
+                                                <constraint firstItem="gcX-p2-RwP" firstAttribute="top" secondItem="p4Q-Bo-0B4" secondAttribute="topMargin" constant="20" id="ThP-uf-AYf"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="gcX-p2-RwP" secondAttribute="bottom" constant="3.5" id="a1n-mR-g71"/>
+                                                <constraint firstItem="gcX-p2-RwP" firstAttribute="leading" secondItem="p4Q-Bo-0B4" secondAttribute="leadingMargin" constant="10" id="xFw-GK-33Z"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -938,6 +973,7 @@
                         <outlet property="filePicker" destination="B2x-Yg-t4U" id="rsF-TB-rhY"/>
                         <outlet property="magazineSelectorControl" destination="0Q6-C8-aH6" id="AkR-1c-dIF"/>
                         <outlet property="mapSelectorControl" destination="vKe-Ls-2dq" id="t6H-nn-V3i"/>
+                        <outlet property="uploadToGoogleButton" destination="gcX-p2-RwP" id="beU-X4-1oM"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nvt-3u-Wgh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -986,7 +1022,7 @@
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RVB-SV-crH" id="o8B-wY-h4X">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
@@ -1410,6 +1446,85 @@
             </objects>
             <point key="canvasLocation" x="768" y="4670"/>
         </scene>
+        <!--Home-->
+        <scene sceneID="vlr-mT-5bE">
+            <objects>
+                <viewController title="Home" id="ru3-I2-VUZ" customClass="HomeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cBg-lM-ffv"/>
+                        <viewControllerLayoutGuide type="bottom" id="We6-sb-bKZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qPi-CR-AoY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo_SantaCruzNewspaperTaxi.png" translatesAutoresizingMaskIntoConstraints="NO" id="8FF-wm-4rk">
+                                <rect key="frame" x="0.0" y="85" width="320" height="99"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Message:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="65f-Kh-quJ">
+                                <rect key="frame" x="22" y="196" width="96" height="27"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XCw-fj-n20">
+                                <rect key="frame" x="40" y="233" width="240" height="70"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Special instructions, notes and reminders from each other. Includes special alerts that create a 'notification button' on the app icon w/alert</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColorFromUIColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Current List Selected:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rG8-Pm-uBK">
+                                <rect key="frame" x="24" y="338" width="272" height="27"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Overview screen with Name, Logo, mission statement &amp; simple animation" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xZh-tN-ADt">
+                                <rect key="frame" x="62" y="384" width="195" height="82"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SCWaves" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pd0-ae-Sea">
+                                <rect key="frame" x="24" y="360" width="272" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Developed by: ChrisPLamb Labs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ja8-DE-CGU">
+                                <rect key="frame" x="8" y="495" width="304" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Home" id="RPJ-8w-s0h"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="568"/>
+                    <connections>
+                        <outlet property="selectedMagazine" destination="Pd0-ae-Sea" id="Tnq-dn-Cp8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DvP-O9-UWI" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1623" y="-316"/>
+        </scene>
     </scenes>
     <resources>
         <image name="IconSetup24.png" width="24" height="24"/>
@@ -1423,7 +1538,7 @@
         <image name="questions1.png" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qPY-Ep-njk"/>
+        <segue reference="hGG-Lb-Gts"/>
         <segue reference="fec-gw-sch"/>
     </inferredMetricsTieBreakers>
 </document>
