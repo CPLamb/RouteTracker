@@ -17,8 +17,10 @@
 @property (strong, nonatomic) id detailItem;
 @property (strong, nonatomic) id<MKAnnotation> defaultPin;
 @property (nonatomic) MKCoordinateRegion centerRegion;
+@property  MKMapRect currentRect;
 @property (strong, nonatomic) CLLocation *referenceLocation;
 @property (nonatomic, readonly) NSArray* pinsArray;
+
 
 - (IBAction)turnByRouting:(UIBarButtonItem *)sender;
 

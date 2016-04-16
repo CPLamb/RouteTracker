@@ -85,6 +85,17 @@
     }
     [plistEdibleContent writeToFile:plistPath atomically:YES];
     
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate.arrayToBeUploaded addObject:entry];
+    
+    NSString *modifiedFilename = [[NSUserDefaults standardUserDefaults] stringForKey:@"updated_plist"];
+    
+    NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentFolder = [path objectAtIndex:0];
+    NSString *filePath = [documentFolder stringByAppendingPathComponent:modifiedFilename];
+    [delegate.arrayToBeUploaded writeToFile:filePath atomically:YES];
+    
+    
 }
 
  @end

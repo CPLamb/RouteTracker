@@ -31,7 +31,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    NSString *dataFilenameIndex = [[NSUserDefaults standardUserDefaults]stringForKey:@"selected_plist"];
+    NSString *dataFilenameIndex = [[NSUserDefaults standardUserDefaults] stringForKey:@"selected_plist"];
 
     NSLog(@"HomeVC -- dataFilenameIndex = %@", dataFilenameIndex.description);
 

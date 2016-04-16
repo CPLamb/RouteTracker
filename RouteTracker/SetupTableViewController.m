@@ -8,7 +8,12 @@
 
 #import "SetupTableViewController.h"
 
-@interface SetupTableViewController ()
+@import MessageUI;
+
+//#define EMAILID @"guna.iosdev@gmail.com"
+#define   EMAILID @"cplamb@pacbell.net"
+
+@interface SetupTableViewController ()<MFMailComposeViewControllerDelegate>
 @property NSArray *driverList;
 
 - (IBAction)selectSpreadsheetControl:(UISegmentedControl *)sender;
@@ -59,6 +64,84 @@ NSUInteger filesCount = 1;
 }
 
 #pragma mark - Custom methods
+
+- (IBAction)uploadToGoogleButtonPressed:(id)sender {
+    
+    MFMailComposeViewController *emailVC = [[MFMailComposeViewController alloc] init];
+    
+    emailVC.mailComposeDelegate = self;
+    
+    [emailVC setSubject:@"Updated Distribution list"];
+    
+    NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"updated_plist"];
+    
+    NSString *plistPath;
+    NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    plistPath = [rootPath stringByAppendingPathComponent:filename];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
+        NSLog(@"We couldn't find the file, there are no changes to upload");
+        
+        UIAlertView *alert;
+        alert = [[UIAlertView alloc] initWithTitle:@"Upload Error"
+                                           message:@"There is no updates to email"
+                                          delegate:nil
+                                 cancelButtonTitle:@"OK"
+                                 otherButtonTitles:nil];
+        [alert show];
+        
+        return;
+    }
+    NSData *updatedPlistXML = [[NSFileManager defaultManager] contentsAtPath:plistPath];
+    
+    NSArray *toRecipients	= [NSArray arrayWithObject:EMAILID];
+    [emailVC setToRecipients:toRecipients];
+    
+    
+    [emailVC addAttachmentData:updatedPlistXML mimeType:@"text/xml" fileName:plistPath];
+    
+    // Fill out the email body text
+    NSString *emailBody = @"Attached updated distribution plist file";
+    [emailVC setMessageBody:emailBody isHTML:NO];
+    
+    [self presentViewController:emailVC animated:YES completion:NULL];
+    
+}
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail cancelled");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail saved");
+            break;
+        case MFMailComposeResultSent:
+            {
+                NSLog(@"Mail sent");
+                AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+                [delegate.arrayToBeUploaded removeAllObjects];
+                NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"updated_plist"];
+                NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                NSString *documentsDirectory = [paths objectAtIndex:0];
+                NSString *path = [documentsDirectory stringByAppendingPathComponent:filename];
+                NSError *error;
+                if(![[NSFileManager defaultManager] removeItemAtPath:path error:&error]){
+                    NSLog(@"Error deleting modifiedPlist file");
+                }
+            }
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+            break;
+        default:
+            break;
+    }
+    
+    // Close the Mail Interface
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
 
 
 - (IBAction)selectSpreadsheetControl:(UISegmentedControl *)sender

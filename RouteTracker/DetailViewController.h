@@ -28,6 +28,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *zipTextField;
 @property (weak, nonatomic) IBOutlet UITextView *contactTextField;
 @property (weak, nonatomic) IBOutlet UITextView *phoneTextField;
+@property BOOL textFieldChanged;
+
 - (IBAction)geocodeButton:(UIButton *)sender;
 
 @end
