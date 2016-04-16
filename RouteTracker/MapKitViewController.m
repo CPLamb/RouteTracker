@@ -100,13 +100,23 @@ const int  MAX_PINS_TO_DROP = 200;
     [super viewDidAppear:animated];
     NSLog(@"%@ DID appear...", self);
     
-    [self.mapView setRegion:self.centerRegion animated:YES];
+    
+    if (self.currentRect.size.width != 0) {
+        [self.mapView setVisibleMapRect:self.currentRect animated:YES];
+    } else {
+        [self.mapView setRegion:self.centerRegion animated:YES];
+    }
     
     
     // Limit the total number pins to drop to MAX_PINS_TO_DROP so that map view is not too cluttered
     NSLog(@"Pins in the select = %lu", (unsigned long)[self.mapAnnotations count]);
     
     [self.mapView addAnnotations:self.mapAnnotations];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    self.currentRect = self.mapView.visibleMapRect;
 }
 
 #pragma mark - Navigation segue method
