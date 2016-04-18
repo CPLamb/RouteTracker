@@ -52,7 +52,7 @@
     
 }
 
--(void)modifyMemberListFile :(NSDictionary*)entry
+-(void)modifyMemberListFile :(NSDictionary*)completeEntry withUpdates:(NSDictionary*)updatedEntry
 {
     
     NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"selected_plist"];
@@ -78,17 +78,22 @@
     NSMutableArray *plistEdibleContent = [[NSMutableArray alloc] initWithArray:temp];
     for (int i = 0; i < [plistEdibleContent count]; i++){
         NSDictionary *currentEntry = [plistEdibleContent objectAtIndex:i];
-        if([[currentEntry objectForKey:@"Index"] isEqualToString:[entry objectForKey:@"Index"]]) {
-            [plistEdibleContent replaceObjectAtIndex:i withObject:entry];
+        if([[currentEntry objectForKey:@"Index"] isEqualToString:[completeEntry objectForKey:@"Index"]]) {
+            [plistEdibleContent replaceObjectAtIndex:i withObject:completeEntry];
             break;
         }
     }
     [plistEdibleContent writeToFile:plistPath atomically:YES];
     
     AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-    [delegate.arrayToBeUploaded addObject:entry];
+    [delegate.arrayToBeUploaded addObject:updatedEntry];
     
-    NSString *modifiedFilename = [[NSUserDefaults standardUserDefaults] stringForKey:@"updated_plist"];
+    NSDateFormatter *df = [[NSDateFormatter alloc]init];
+    [df setDateFormat:@"yyyy-MM-dd"];
+    NSString    *strTime = [df stringFromDate:[NSDate date]];
+    NSString *modifiedFilename = [NSString stringWithFormat:@"%@-%@",filename, strTime];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:modifiedFilename forKey:@"updated_plist"];
     
     NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentFolder = [path objectAtIndex:0];
