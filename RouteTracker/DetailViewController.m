@@ -83,7 +83,6 @@
 }
 -(void)updateDetailItem
 {
-    if (self.textFieldChanged) {
         // A mutable Dictionary must be created from the original for editing?
         NSMutableDictionary *mutableDetailItem = [NSMutableDictionary dictionaryWithDictionary:self.detailItem];
         [mutableDetailItem setValue:self.nameTextField.text forKey:@"Name"];
@@ -92,7 +91,7 @@
         [mutableDetailItem setValue:self.notesTextField.text forKey:@"Notes"];
         [mutableDetailItem setValue:self.driverTextField.text forKey:@"Driver"];
         [mutableDetailItem setValue:self.categoryTextField.text forKey:@"Category"];
-        [mutableDetailItem setValue:self.advertiserTextField.text forKey:@"Advert iser"];
+        [mutableDetailItem setValue:self.advertiserTextField.text forKey:@"Advertiser"];
         
         [mutableDetailItem setValue:self.latitudeTextField.text forKey:@"Latitude"];
         [mutableDetailItem setValue:self.longitudeTextField.text forKey:@"Longitude"];
@@ -109,18 +108,54 @@
         NSLog(@"detailItem Name = %@", mutableDetailItem);
         
         // Stores the detailItem to NSUserDefaults
-        NSDictionary *myDictionary = [NSDictionary dictionaryWithDictionary:mutableDetailItem];
-        [[NSUserDefaults standardUserDefaults] setObject:mutableDetailItem forKey:@"selected_member"];
+      //  NSDictionary *modifiedDictionary = [NSDictionary dictionaryWithDictionary:mutableDetailItem];
+        NSMutableDictionary *modifiedDictionary = [[NSMutableDictionary alloc] init];
+        [modifiedDictionary setValue:[self.detailItem objectForKey:@"Index"] forKey:@"Index"];
         
-        AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-        [delegate.memberData modifyMemberListFile:myDictionary];
-        [delegate.arrayToBeUploaded addObject:myDictionary];
-    }
+        if (![[self.detailItem objectForKey:@"Name"] isEqualToString:self.nameTextField.text]) {
+            [modifiedDictionary setValue:self.nameTextField.text forKey:@"Name"];
+        } else if (![[self.detailItem objectForKey:@"Total Quantity to Deliver"] isEqualToString:self.deliverTextField.text]) {
+            [modifiedDictionary setValue:self.deliverTextField.text forKey:@"Total Quantity to Deliver"];
+        } else if (![[self.detailItem objectForKey:@"Delivered to Date"] isEqualToString:self.returnedTextField.text]) {
+            [modifiedDictionary setValue:self.returnedTextField.text forKey:@"Delivered to Date"];
+        } else if (![[self.detailItem objectForKey:@"Notes"] isEqualToString:self.notesTextField.text]) {
+            [modifiedDictionary setValue:self.notesTextField.text forKey:@"Notes"];
+        } else if (![[self.detailItem objectForKey:@"Driver"] isEqualToString:self.driverTextField.text]) {
+            [modifiedDictionary setValue:self.driverTextField.text forKey:@"Driver"];
+        } else if (![[self.detailItem objectForKey:@"Category"] isEqualToString:self.categoryTextField.text]) {
+            [modifiedDictionary setValue:self.categoryTextField.text forKey:@"Category"];
+        } else if (![[self.detailItem objectForKey:@"Advertiser"] isEqualToString:self.advertiserTextField.text]) {
+            [modifiedDictionary setValue:self.advertiserTextField.text forKey:@"Advertiser"];
+        } else if (![[self.detailItem objectForKey:@"Latitude"] isEqualToString:self.latitudeTextField.text]) {
+            [modifiedDictionary setValue:self.latitudeTextField.text forKey:@"Latitude"];
+        } else if (![[self.detailItem objectForKey:@"Longitude"] isEqualToString:self.longitudeTextField.text]) {
+            [modifiedDictionary setValue:self.latitudeTextField.text forKey:@"Longitude"];
+        } else if (![[self.detailItem objectForKey:@"Street"] isEqualToString:self.addressTextField.text]) {
+            [modifiedDictionary setValue:self.addressTextField.text forKey:@"Street"];
+        } else if (![[self.detailItem objectForKey:@"City"] isEqualToString:self.cityTextField.text]) {
+            [modifiedDictionary setValue:self.cityTextField.text forKey:@"City"];
+        } else if (![[self.detailItem objectForKey:@"State"] isEqualToString:self.stateTextField.text]) {
+            [modifiedDictionary setValue:self.stateTextField.text forKey:@"State"];
+        } else if (![[self.detailItem objectForKey:@"Zipcode"] isEqualToString:self.zipTextField.text]) {
+            [modifiedDictionary setValue:self.zipTextField.text forKey:@"Zipcode"];
+        } else if (![[self.detailItem objectForKey:@"Contact"] isEqualToString:self.contactTextField.text]) {
+            [modifiedDictionary setValue:self.contactTextField.text forKey:@"Contact"];
+        } else if (![[self.detailItem objectForKey:@"Contact Phone"] isEqualToString:self.phoneTextField.text]) {
+            [modifiedDictionary setValue:self.phoneTextField.text forKey:@"Contact Phone"];
+        }
+        
+        
+        [[NSUserDefaults standardUserDefaults] setObject:mutableDetailItem forKey:@"selected_member"];
+        if ([[modifiedDictionary allKeys] count] > 1) {
+            AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+            [delegate.memberData modifyMemberListFile:mutableDetailItem withUpdates:modifiedDictionary];
+            [delegate.arrayToBeUploaded addObject:modifiedDictionary];
+        }
+
 }
 
 - (IBAction)textFieldDidChange:(id)sender {
     self.textFieldChanged = TRUE;
-    [self updateDetailItem];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -138,9 +173,8 @@
 
 - (IBAction)geocodeButton:(UIButton *)sender {
     NSLog(@"Changes location's lat/long values");
-    NSDictionary *dict = [[NSUserDefaults standardUserDefaults] objectForKey:@"selected_member"];
     
-    NSMutableDictionary *myDictionary = [[NSMutableDictionary alloc] initWithDictionary:dict];
+   // NSMutableDictionary *myDictionary = [[NSMutableDictionary alloc] initWithDictionary:self.detailItem];
     
     CLLocationManager *lm = [[CLLocationManager alloc] init];
     lm.delegate = self;
@@ -155,11 +189,12 @@
     self.latitudeTextField.text = userLatitude;
     self.longitudeTextField.text = userLongitude;
 
-    
+    /*
+    [myDictionary setValue:[self.detailItem objectForKey:@"Index"] forKey:@"Index"];
     [myDictionary setValue:userLatitude forKey:@"Latitude"];
     [myDictionary setValue:userLongitude forKey:@"Longitude"];
     AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-    [delegate.memberData modifyMemberListFile:myDictionary];
+    [delegate.memberData modifyMemberListFile:self.detailItem withUpdates:myDictionary];*/
     
     
 }
