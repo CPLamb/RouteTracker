@@ -74,7 +74,7 @@
     self.zipTextField.text = [self.detailItem objectForKey:@"Zipcode"];
     
     //   self.contactTextField.text = [self.detailItem objectForKey:@"Contact"];
-    self.contactTextField.text = [self.detailItem objectForKey:@"Contact Name"];
+    self.commentsTextField.text = [self.detailItem objectForKey:@"Contact Name"];
     self.phoneTextField.text = [self.detailItem objectForKey:@"Contact Number"];
     
     // Tap to hide keyboard
@@ -101,9 +101,9 @@
         [mutableDetailItem setValue:self.stateTextField.text forKey:@"State"];
         [mutableDetailItem setValue:self.zipTextField.text forKey:@"Zipcode"];
         
-        [mutableDetailItem setValue:self.contactTextField.text forKey:@"Contact"];
+        [mutableDetailItem setValue:self.commentsTextField.text forKey:@"Contact Name"];
         //   [mutableDetailItem setValue:self.contactTextField.text forKey:@"Contact Name"];
-        [mutableDetailItem setValue:self.phoneTextField.text forKey:@"Contact Phone"];
+        [mutableDetailItem setValue:self.phoneTextField.text forKey:@"Contact Number"];
         
         NSLog(@"detailItem Name = %@", mutableDetailItem);
         
@@ -114,34 +114,48 @@
         
         if (![[self.detailItem objectForKey:@"Name"] isEqualToString:self.nameTextField.text]) {
             [modifiedDictionary setValue:self.nameTextField.text forKey:@"Name"];
-        } else if (![[self.detailItem objectForKey:@"Total Quantity to Deliver"] isEqualToString:self.deliverTextField.text]) {
+        }
+        if (![[self.detailItem objectForKey:@"Total Quantity to Deliver"] isEqualToString:self.deliverTextField.text]) {
             [modifiedDictionary setValue:self.deliverTextField.text forKey:@"Total Quantity to Deliver"];
-        } else if (![[self.detailItem objectForKey:@"Delivered to Date"] isEqualToString:self.returnedTextField.text]) {
+        }
+        if (![[self.detailItem objectForKey:@"Delivered to Date"] isEqualToString:self.returnedTextField.text]) {
             [modifiedDictionary setValue:self.returnedTextField.text forKey:@"Delivered to Date"];
-        } else if (![[self.detailItem objectForKey:@"Notes"] isEqualToString:self.notesTextField.text]) {
+        }
+        if (![[self.detailItem objectForKey:@"Notes"] isEqualToString:self.notesTextField.text]) {
             [modifiedDictionary setValue:self.notesTextField.text forKey:@"Notes"];
-        } else if (![[self.detailItem objectForKey:@"Driver"] isEqualToString:self.driverTextField.text]) {
+        }
+        if (![[self.detailItem objectForKey:@"Driver"] isEqualToString:self.driverTextField.text]) {
             [modifiedDictionary setValue:self.driverTextField.text forKey:@"Driver"];
-        } else if (![[self.detailItem objectForKey:@"Category"] isEqualToString:self.categoryTextField.text]) {
+        }
+        if (![[self.detailItem objectForKey:@"Category"] isEqualToString:self.categoryTextField.text]) {
             [modifiedDictionary setValue:self.categoryTextField.text forKey:@"Category"];
-        } else if (![[self.detailItem objectForKey:@"Advertiser"] isEqualToString:self.advertiserTextField.text]) {
+        }
+        if (![[self.detailItem objectForKey:@"Advertiser"] isEqualToString:self.advertiserTextField.text]) {
             [modifiedDictionary setValue:self.advertiserTextField.text forKey:@"Advertiser"];
-        } else if (![[self.detailItem objectForKey:@"Latitude"] isEqualToString:self.latitudeTextField.text]) {
+        }
+        if (![[self.detailItem objectForKey:@"Latitude"] isEqualToString:self.latitudeTextField.text]) {
             [modifiedDictionary setValue:self.latitudeTextField.text forKey:@"Latitude"];
-        } else if (![[self.detailItem objectForKey:@"Longitude"] isEqualToString:self.longitudeTextField.text]) {
-            [modifiedDictionary setValue:self.latitudeTextField.text forKey:@"Longitude"];
-        } else if (![[self.detailItem objectForKey:@"Street"] isEqualToString:self.addressTextField.text]) {
+        }
+        if (![[self.detailItem objectForKey:@"Longitude"] isEqualToString:self.longitudeTextField.text]) {
+            [modifiedDictionary setValue:self.longitudeTextField.text forKey:@"Longitude"];
+        }
+        if (![[self.detailItem objectForKey:@"Street"] isEqualToString:self.addressTextField.text]) {
             [modifiedDictionary setValue:self.addressTextField.text forKey:@"Street"];
-        } else if (![[self.detailItem objectForKey:@"City"] isEqualToString:self.cityTextField.text]) {
+        }
+        if (![[self.detailItem objectForKey:@"City"] isEqualToString:self.cityTextField.text]) {
             [modifiedDictionary setValue:self.cityTextField.text forKey:@"City"];
-        } else if (![[self.detailItem objectForKey:@"State"] isEqualToString:self.stateTextField.text]) {
+        }
+        if (![[self.detailItem objectForKey:@"State"] isEqualToString:self.stateTextField.text]) {
             [modifiedDictionary setValue:self.stateTextField.text forKey:@"State"];
-        } else if (![[self.detailItem objectForKey:@"Zipcode"] isEqualToString:self.zipTextField.text]) {
+        }
+        if (![[self.detailItem objectForKey:@"Zipcode"] isEqualToString:self.zipTextField.text]) {
             [modifiedDictionary setValue:self.zipTextField.text forKey:@"Zipcode"];
-        } else if (![[self.detailItem objectForKey:@"Contact"] isEqualToString:self.contactTextField.text]) {
-            [modifiedDictionary setValue:self.contactTextField.text forKey:@"Contact"];
-        } else if (![[self.detailItem objectForKey:@"Contact Phone"] isEqualToString:self.phoneTextField.text]) {
-            [modifiedDictionary setValue:self.phoneTextField.text forKey:@"Contact Phone"];
+        }
+        if (![[self.detailItem objectForKey:@"Contact Name"] isEqualToString:self.commentsTextField.text]) {
+            [modifiedDictionary setValue:self.commentsTextField.text forKey:@"Contact Name"];
+        }
+        if (![[self.detailItem objectForKey:@"Contact Number"] isEqualToString:self.phoneTextField.text]) {
+            [modifiedDictionary setValue:self.phoneTextField.text forKey:@"Contact Number"];
         }
         
         
@@ -149,7 +163,6 @@
         if ([[modifiedDictionary allKeys] count] > 1) {
             AppDelegate *delegate = [UIApplication sharedApplication].delegate;
             [delegate.memberData modifyMemberListFile:mutableDetailItem withUpdates:modifiedDictionary];
-            [delegate.arrayToBeUploaded addObject:modifiedDictionary];
         }
 
 }

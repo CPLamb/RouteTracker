@@ -435,18 +435,18 @@
                                             <action selector="textFieldDidChange:" destination="ehp-uA-B6h" eventType="editingDidEnd" id="rOP-sI-5Bd"/>
                                         </connections>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oYb-PJ-aUp">
-                                        <rect key="frame" x="12" y="232" width="80" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comments:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oYb-PJ-aUp">
+                                        <rect key="frame" x="12" y="232" width="88" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="fAB-eH-Zbd"/>
-                                            <constraint firstAttribute="width" constant="80" id="hSU-Ro-e1Q"/>
+                                            <constraint firstAttribute="width" constant="88" id="hSU-Ro-e1Q"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5n-g4-HCJ">
-                                        <rect key="frame" x="86" y="229" width="219" height="31"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B5n-g4-HCJ">
+                                        <rect key="frame" x="108" y="229" width="197" height="31"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -463,7 +463,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l2e-53-ac7">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l2e-53-ac7">
                                         <rect key="frame" x="79" y="265" width="118" height="28"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -557,7 +557,7 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Santa Cruz" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DtY-zi-Hp9">
                                         <rect key="frame" x="44" y="342" width="157" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="namePhonePad"/>
                                         <connections>
                                             <action selector="textFieldDidChange:" destination="ehp-uA-B6h" eventType="editingDidEnd" id="84j-iT-clw"/>
                                         </connections>
@@ -574,7 +574,7 @@
                                             <constraint firstAttribute="width" constant="44" id="Iuz-cD-SYA"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="namePhonePad"/>
                                         <connections>
                                             <action selector="textFieldDidChange:" destination="ehp-uA-B6h" eventType="editingDidEnd" id="IKf-gg-bFi"/>
                                         </connections>
@@ -678,8 +678,8 @@
                                     <constraint firstItem="K8G-F4-khf" firstAttribute="top" secondItem="DtY-zi-Hp9" secondAttribute="bottom" constant="51" id="dOa-WG-s88"/>
                                     <constraint firstItem="8eI-QB-H3Q" firstAttribute="firstBaseline" secondItem="4Cs-KW-por" secondAttribute="firstBaseline" id="eEZ-Eu-ffu"/>
                                     <constraint firstItem="2Tf-ae-dzm" firstAttribute="leading" secondItem="l2e-53-ac7" secondAttribute="leading" id="eh2-ow-UJ2"/>
-                                    <constraint firstItem="B5n-g4-HCJ" firstAttribute="leading" secondItem="YE5-PR-bVm" secondAttribute="leading" constant="86" id="eqo-Z2-NGi"/>
-                                    <constraint firstItem="B5n-g4-HCJ" firstAttribute="centerX" secondItem="9pi-Hi-QJ6" secondAttribute="centerX" id="gWt-wH-WKp"/>
+                                    <constraint firstItem="B5n-g4-HCJ" firstAttribute="leading" secondItem="YE5-PR-bVm" secondAttribute="leading" constant="108" id="eqo-Z2-NGi"/>
+                                    <constraint firstItem="B5n-g4-HCJ" firstAttribute="centerX" secondItem="9pi-Hi-QJ6" secondAttribute="centerX" constant="11" id="gWt-wH-WKp"/>
                                     <constraint firstItem="l2e-53-ac7" firstAttribute="leading" secondItem="unS-DE-yE6" secondAttribute="trailing" constant="8" symbolic="YES" id="gjd-dp-lK2"/>
                                     <constraint firstItem="dns-sz-iEZ" firstAttribute="leading" secondItem="dxK-sq-kKp" secondAttribute="leading" id="hA1-sS-SfI"/>
                                     <constraint firstItem="B5n-g4-HCJ" firstAttribute="top" secondItem="kbD-bb-Fqx" secondAttribute="bottom" constant="5" id="hCt-ut-0zg"/>
@@ -737,7 +737,7 @@
                         <outlet property="advertiserTextField" destination="kRK-VQ-jD3" id="yi9-05-bvX"/>
                         <outlet property="categoryTextField" destination="9pi-Hi-QJ6" id="G1k-sq-pES"/>
                         <outlet property="cityTextField" destination="DtY-zi-Hp9" id="vHJ-If-k2q"/>
-                        <outlet property="contactTextField" destination="B5n-g4-HCJ" id="y9p-r0-QOd"/>
+                        <outlet property="commentsTextField" destination="B5n-g4-HCJ" id="WK2-wC-oeO"/>
                         <outlet property="deliverTextField" destination="ZPX-7s-43Z" id="NNv-ld-scL"/>
                         <outlet property="driverTextField" destination="XBW-fX-kSf" id="DlF-ZM-rBE"/>
                         <outlet property="latitudeTextField" destination="wMO-qL-jCZ" id="GOg-Ra-Xpm"/>
