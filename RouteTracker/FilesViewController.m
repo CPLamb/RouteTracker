@@ -16,6 +16,7 @@ NSString* fileContent;
 //@synthesize driveService = _driveService;
 //@synthesize selectedFile = _selectedFile;
 //@synthesize delegate = _delegate;
+@synthesize activityIndicatorView;
 
 #pragma mark - Lifecycle methods
 
@@ -26,6 +27,16 @@ NSString* fileContent;
     self.fileContent.delegate = self;
 
     [self displayFileName];
+    
+    activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    
+    // Set Center Position for ActivityIndicator
+    
+    activityIndicatorView.center = self.view.center;
+    
+    // Add ActivityIndicator to your view
+    
+    [self.view addSubview:activityIndicatorView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -156,11 +167,14 @@ NSString* fileContent;
 - (void)loadInBackground
 {
     NSLog(@"This is for a background thread");
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self csvDataToPlist:fileContent];
         //update UI on the main thread
         dispatch_async(dispatch_get_main_queue(), ^{
             self.numberOfRowsTextfield.text = [[NSNumber numberWithInt:self.recordCount] stringValue];
+            [activityIndicatorView stopAnimating];
+            
             //Add the screenMarker array to the layer
   //          [theViewC addScreenMarkers:theMarkers desc:nil];
         });
@@ -172,6 +186,8 @@ NSString* fileContent;
 - (void)loadFileContent {
     NSLog(@"GONNA TRY n LOAD this files content= %@", self.selectedFile);
 
+    [activityIndicatorView startAnimating];
+    
     UIAlertView *alert = [DrEditUtilities showLoadingMessageWithTitle:@"Loading file content"
                                                              delegate:self];
 

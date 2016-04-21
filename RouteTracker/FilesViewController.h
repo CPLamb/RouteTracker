@@ -26,6 +26,8 @@
 @property (strong, nonatomic) NSArray *namesArray;  // array of indexed array of dictionaries
 @property (strong, nonatomic) NSArray *membersArray;    // complete list derived from the PList
 
+@property (nonatomic,retain) UIActivityIndicatorView *activityIndicatorView;
+
 - (IBAction)downloadSpreadsheetButton:(UIButton *)sender;
 - (IBAction)testButton:(UIButton *)sender;
 - (IBAction)test02Button:(UIButton *)sender;
