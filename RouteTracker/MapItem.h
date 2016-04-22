@@ -23,6 +23,7 @@
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *subtitle;
+@property (nonatomic, copy) NSString *pinColor;
 
 - (id)initWithCoordinates:(CLLocationCoordinate2D )location placeName:(NSString *)placeName description:(NSString *)description;
 - (id)initWithCoordinates:(CLLocationCoordinate2D )location memberData:(NSDictionary *)memberData;

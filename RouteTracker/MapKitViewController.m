@@ -413,10 +413,15 @@ const int  MAX_PINS_TO_DROP = 200;
 // Configures the Annotation popup
 - (MKAnnotationView *)mapView:(MKMapView *)theMapView viewForAnnotation:(id <MKAnnotation>)annotation
 {
-    // in case it's the user location, we already have an annotation, so just return nil
+    // in case it's the user location, we already have an annotation, so just return ni
     if ([annotation isKindOfClass:[MKUserLocation class]])
     {
         return nil;
+    }
+    MapItem *currentItem;
+    if ([annotation isKindOfClass:[MapItem class]]) {
+        currentItem = (MapItem*)annotation;
+        
     }
 //    NSLog(@"The annotation is %@", annotation);
     // try to dequeue an existing pin view first
@@ -428,7 +433,16 @@ const int  MAX_PINS_TO_DROP = 200;
     MKPinAnnotationView *customPinView = [[MKPinAnnotationView alloc]
                                           initWithAnnotation:annotation
                                           reuseIdentifier:BridgeAnnotationIdentifier];
-    customPinView.pinColor = MKPinAnnotationColorRed;
+    
+    if ([currentItem.pinColor isEqualToString:@"Red"]) {
+        customPinView.pinColor = MKPinAnnotationColorRed;
+    } else if ([currentItem.pinColor isEqualToString:@"blue"]) {
+        customPinView.pinColor = MKPinAnnotationColorPurple;
+        
+    } else if ([currentItem.pinColor isEqualToString:@"Green"]) {
+        customPinView.pinColor = MKPinAnnotationColorGreen;
+        
+    }
     
     customPinView.canShowCallout = YES;
     
