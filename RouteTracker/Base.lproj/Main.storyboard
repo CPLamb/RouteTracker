@@ -1076,20 +1076,7 @@
                                     <action selector="downloadSpreadsheetButton:" destination="Foq-vK-isD" eventType="touchUpInside" id="o2T-zS-j05"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ppK-9o-GwP">
-                                <rect key="frame" x="16" y="295" width="288" height="39"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="39" id="UVk-92-Hmb"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <state key="normal" title="01 PRINT file ">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="testButton:" destination="Foq-vK-isD" eventType="touchUpInside" id="Fmf-9V-z5u"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6t3-8N-pLt">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6t3-8N-pLt">
                                 <rect key="frame" x="16" y="342" width="288" height="39"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="39" id="WJR-pM-Ovy"/>
@@ -1102,8 +1089,8 @@
                                     <action selector="test03Button:" destination="Foq-vK-isD" eventType="touchUpInside" id="dma-QX-DmG"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z4g-4P-Rpc">
-                                <rect key="frame" x="16" y="388" width="288" height="39"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z4g-4P-Rpc">
+                                <rect key="frame" x="16" y="458" width="288" height="39"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="39" id="gnC-Lc-6cd"/>
                                 </constraints>
@@ -1153,7 +1140,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="This text is a list of the Columns from the spreadsheet, to confirm that the proper file has been downloaded" translatesAutoresizingMaskIntoConstraints="NO" id="we9-TB-Xtu">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" text="This text is a list of the Columns from the spreadsheet, to confirm that the proper file has been downloaded" translatesAutoresizingMaskIntoConstraints="NO" id="we9-TB-Xtu">
                                 <rect key="frame" x="16" y="218" width="288" height="59"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1164,31 +1151,25 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="gVX-0l-E7Z" firstAttribute="leading" secondItem="pTc-PE-Fzx" secondAttribute="leadingMargin" id="0ry-dN-dEt"/>
-                            <constraint firstItem="ppK-9o-GwP" firstAttribute="top" secondItem="we9-TB-Xtu" secondAttribute="bottom" constant="18" id="2lq-X1-Ntj"/>
                             <constraint firstItem="we9-TB-Xtu" firstAttribute="top" secondItem="YVa-qK-LC1" secondAttribute="bottom" constant="8" symbolic="YES" id="3Yt-u8-BYB"/>
                             <constraint firstItem="YVa-qK-LC1" firstAttribute="top" secondItem="gVX-0l-E7Z" secondAttribute="bottom" constant="8" symbolic="YES" id="5Rx-K3-hkz"/>
                             <constraint firstItem="Z4g-4P-Rpc" firstAttribute="leading" secondItem="6t3-8N-pLt" secondAttribute="leading" id="8np-HB-rF3"/>
-                            <constraint firstItem="ppK-9o-GwP" firstAttribute="leading" secondItem="we9-TB-Xtu" secondAttribute="leading" id="Aex-Yj-Tef"/>
                             <constraint firstItem="gVX-0l-E7Z" firstAttribute="leading" secondItem="oxZ-2v-YQh" secondAttribute="leading" id="An0-iH-aQZ"/>
                             <constraint firstItem="8fb-Sq-RIz" firstAttribute="top" secondItem="vra-XP-1Kk" secondAttribute="bottom" constant="11" id="CcM-yO-xvE"/>
-                            <constraint firstItem="ppK-9o-GwP" firstAttribute="leading" secondItem="6t3-8N-pLt" secondAttribute="leading" id="GZN-6d-xaV"/>
                             <constraint firstItem="BV5-dg-37o" firstAttribute="top" secondItem="Z4g-4P-Rpc" secondAttribute="bottom" constant="92" id="Ggh-tT-7LJ"/>
                             <constraint firstItem="gy5-5d-Zhj" firstAttribute="top" secondItem="vra-XP-1Kk" secondAttribute="bottom" constant="8" symbolic="YES" id="Goe-rD-QaF"/>
                             <constraint firstItem="we9-TB-Xtu" firstAttribute="trailing" secondItem="gVX-0l-E7Z" secondAttribute="trailing" id="ITe-YI-hkp"/>
                             <constraint firstItem="YVa-qK-LC1" firstAttribute="leading" secondItem="oxZ-2v-YQh" secondAttribute="trailing" constant="8" symbolic="YES" id="JuK-Zb-Alr"/>
                             <constraint firstItem="oxZ-2v-YQh" firstAttribute="leading" secondItem="we9-TB-Xtu" secondAttribute="leading" id="M7e-Y4-bJW"/>
-                            <constraint firstItem="we9-TB-Xtu" firstAttribute="trailing" secondItem="ppK-9o-GwP" secondAttribute="trailing" id="Qxm-cb-SgT"/>
                             <constraint firstItem="vra-XP-1Kk" firstAttribute="trailing" secondItem="gy5-5d-Zhj" secondAttribute="trailing" id="RhD-wq-dHc"/>
                             <constraint firstItem="Z4g-4P-Rpc" firstAttribute="top" secondItem="6t3-8N-pLt" secondAttribute="bottom" constant="7" id="Wep-4x-pZW"/>
                             <constraint firstItem="Z4g-4P-Rpc" firstAttribute="trailing" secondItem="6t3-8N-pLt" secondAttribute="trailing" id="XsT-f4-CJg"/>
                             <constraint firstItem="gVX-0l-E7Z" firstAttribute="trailing" secondItem="gy5-5d-Zhj" secondAttribute="trailing" id="YtS-7W-ad6"/>
                             <constraint firstItem="vra-XP-1Kk" firstAttribute="leading" secondItem="8fb-Sq-RIz" secondAttribute="leading" id="ZDt-AT-XeA"/>
-                            <constraint firstItem="6t3-8N-pLt" firstAttribute="top" secondItem="ppK-9o-GwP" secondAttribute="bottom" constant="8" symbolic="YES" id="ZyM-zz-DVp"/>
                             <constraint firstItem="vra-XP-1Kk" firstAttribute="top" secondItem="mXy-dg-U5r" secondAttribute="bottom" constant="8" symbolic="YES" id="d74-Ud-nuR"/>
                             <constraint firstItem="8fb-Sq-RIz" firstAttribute="baseline" secondItem="gy5-5d-Zhj" secondAttribute="baseline" id="fEb-LE-jdd"/>
                             <constraint firstItem="gy5-5d-Zhj" firstAttribute="leading" secondItem="8fb-Sq-RIz" secondAttribute="trailing" constant="8" symbolic="YES" id="iHs-Y5-yBg"/>
                             <constraint firstItem="gVX-0l-E7Z" firstAttribute="top" secondItem="8fb-Sq-RIz" secondAttribute="bottom" constant="8" symbolic="YES" id="iQg-wq-l6b"/>
-                            <constraint firstItem="6t3-8N-pLt" firstAttribute="trailing" secondItem="ppK-9o-GwP" secondAttribute="trailing" id="jKB-Y5-zal"/>
                             <constraint firstItem="we9-TB-Xtu" firstAttribute="trailing" secondItem="pTc-PE-Fzx" secondAttribute="trailingMargin" id="lsc-bO-rxX"/>
                             <constraint firstItem="oxZ-2v-YQh" firstAttribute="top" secondItem="gVX-0l-E7Z" secondAttribute="bottom" constant="11" id="nT4-vo-Z6O"/>
                             <constraint firstItem="8fb-Sq-RIz" firstAttribute="leading" secondItem="gVX-0l-E7Z" secondAttribute="leading" id="nZ8-qw-4S6"/>
