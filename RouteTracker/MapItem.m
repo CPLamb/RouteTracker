@@ -18,6 +18,7 @@
 @synthesize subtitle = _subtitle;
 @synthesize latitude = _latitude;
 @synthesize longitude = _longitude;
+@synthesize pinColor = _pinColor;
 @synthesize memberData = _memberData;
 
 #pragma mark Overidden getter
@@ -67,6 +68,7 @@
     
     _subtitle = [[deliveredString stringByAppendingString:qtyString] stringByAppendingString:driverString];
     hasShop = [[memberData objectForKey:@"hasShop"] boolValue];
+    _pinColor = [memberData objectForKey:@"Color"];
 
     return self;
 }
