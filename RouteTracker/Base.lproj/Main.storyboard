@@ -450,7 +450,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                        <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                        <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                 <integer key="value" value="4"/>
@@ -737,7 +737,7 @@
                         <outlet property="advertiserTextField" destination="kRK-VQ-jD3" id="yi9-05-bvX"/>
                         <outlet property="categoryTextField" destination="9pi-Hi-QJ6" id="G1k-sq-pES"/>
                         <outlet property="cityTextField" destination="DtY-zi-Hp9" id="vHJ-If-k2q"/>
-                        <outlet property="commentsTextField" destination="B5n-g4-HCJ" id="WK2-wC-oeO"/>
+                        <outlet property="commentsTextField" destination="B5n-g4-HCJ" id="Shp-kK-yl1"/>
                         <outlet property="deliverTextField" destination="ZPX-7s-43Z" id="NNv-ld-scL"/>
                         <outlet property="driverTextField" destination="XBW-fX-kSf" id="DlF-ZM-rBE"/>
                         <outlet property="latitudeTextField" destination="wMO-qL-jCZ" id="GOg-Ra-Xpm"/>
