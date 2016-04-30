@@ -73,8 +73,8 @@
     self.stateTextField.text = [self.detailItem objectForKey:@"State"];
     self.zipTextField.text = [self.detailItem objectForKey:@"Zipcode"];
     
-    //   self.contactTextField.text = [self.detailItem objectForKey:@"Contact"];
-    self.commentsTextField.text = [self.detailItem objectForKey:@"Contact Name"];
+    self.commentsTextField.text = [self.detailItem objectForKey:@"Comment"];
+   // self.commentsTextField.text = [self.detailItem objectForKey:@"Contact Name"];
     self.phoneTextField.text = [self.detailItem objectForKey:@"Contact Number"];
     
     // Tap to hide keyboard
@@ -101,7 +101,7 @@
         [mutableDetailItem setValue:self.stateTextField.text forKey:@"State"];
         [mutableDetailItem setValue:self.zipTextField.text forKey:@"Zipcode"];
         
-        [mutableDetailItem setValue:self.commentsTextField.text forKey:@"Contact Name"];
+        [mutableDetailItem setValue:self.commentsTextField.text forKey:@"Comment"];
         //   [mutableDetailItem setValue:self.contactTextField.text forKey:@"Contact Name"];
         [mutableDetailItem setValue:self.phoneTextField.text forKey:@"Contact Number"];
         
@@ -151,8 +151,9 @@
         if (![[self.detailItem objectForKey:@"Zipcode"] isEqualToString:self.zipTextField.text]) {
             [modifiedDictionary setValue:self.zipTextField.text forKey:@"Zipcode"];
         }
-        if (![[self.detailItem objectForKey:@"Contact Name"] isEqualToString:self.commentsTextField.text]) {
-            [modifiedDictionary setValue:self.commentsTextField.text forKey:@"Contact Name"];
+        if (![[self.detailItem objectForKey:@"Comment"] isEqualToString:self.commentsTextField.text]) {
+       // if (![[self.detailItem objectForKey:@"Contact Name"] isEqualToString:self.commentsTextField.text]) {
+            [modifiedDictionary setValue:self.commentsTextField.text forKey:@"Comment"];
         }
         if (![[self.detailItem objectForKey:@"Contact Number"] isEqualToString:self.phoneTextField.text]) {
             [modifiedDictionary setValue:self.phoneTextField.text forKey:@"Contact Number"];
