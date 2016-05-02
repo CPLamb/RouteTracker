@@ -179,20 +179,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dUl-CY-pRf">
-                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dUl-CY-pRf">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <connections>
                                     <outlet property="delegate" destination="8rJ-Kc-sve" id="O6e-NV-p2R"/>
                                 </connections>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="dUl-CY-pRf" secondAttribute="trailing" id="Vum-QO-Xxc"/>
-                            <constraint firstItem="dUl-CY-pRf" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="44" id="X9L-Tn-Lye"/>
-                            <constraint firstItem="dUl-CY-pRf" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" id="dYx-Vt-kOr"/>
-                            <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="dUl-CY-pRf" secondAttribute="bottom" constant="49" id="q7O-kD-hRp"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Map" id="Jjq-SM-0XZ">
                         <barButtonItem key="rightBarButtonItem" title="Directions" id="wE8-2d-PzV">
