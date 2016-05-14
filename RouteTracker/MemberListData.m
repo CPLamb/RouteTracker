@@ -140,13 +140,17 @@
         for (id key in entry) {
             id value = [entry objectForKey:key];
             if ([key isEqualToString:@"Name"]) {
-                entryString = [[entryString stringByAppendingFormat:@"%@",value] mutableCopy];
+                NSString * newName = [value stringByReplacingOccurrencesOfString:@"," withString:@""];
+                entryString = [[entryString stringByAppendingString:newName] mutableCopy];
             } else if ([key isEqualToString:@"Address"]) {
-                entryString = [[entryString stringByAppendingFormat:@"%@",value] mutableCopy];
+                NSString * newAddress = [value stringByReplacingOccurrencesOfString:@"," withString:@""];
+                entryString = [[entryString stringByAppendingString:newAddress] mutableCopy];
             } else if ([key isEqualToString:@"Comments"]) {
-                entryString = [[entryString stringByAppendingString:[NSString stringWithFormat:@"%@",value]] mutableCopy];
+                NSString * newComments = [value stringByReplacingOccurrencesOfString:@"," withString:@""];
+                entryString = [[entryString stringByAppendingString:newComments] mutableCopy];
             } else if ([key isEqualToString:@"Notes"]) {
-                entryString = [[entryString stringByAppendingString:[NSString stringWithFormat:@"%@",value]] mutableCopy];
+                NSString * newNotes = [value stringByReplacingOccurrencesOfString:@"," withString:@""];
+                entryString = [[entryString stringByAppendingString:newNotes] mutableCopy];
             } else {
                 entryString = [[entryString stringByAppendingString:[NSString stringWithFormat:@"%@",value]] mutableCopy];
             }
