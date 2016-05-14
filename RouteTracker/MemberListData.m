@@ -107,7 +107,6 @@
 -(void)createCSVFile:(NSDictionary*)updatedEntry
 {
     AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-    [delegate.arrayToBeUploaded addObject:updatedEntry];
     
     NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"selected_plist"];
     
@@ -135,30 +134,29 @@
     [csvString writeToFile:filePath atomically:YES encoding:NSStringEncodingConversionAllowLossy error:nil];
     
     for (int i = 0; i < [delegate.arrayToBeUploaded count]; i++){
-        NSMutableString *entryString = [[NSMutableString alloc] init];
         NSDictionary *entry = [delegate.arrayToBeUploaded objectAtIndex:i];
         for (id key in entry) {
             id value = [entry objectForKey:key];
             if ([key isEqualToString:@"Name"]) {
                 NSString * newName = [value stringByReplacingOccurrencesOfString:@"," withString:@""];
-                entryString = [[entryString stringByAppendingString:newName] mutableCopy];
+                csvString = [[csvString stringByAppendingString:newName] mutableCopy];
             } else if ([key isEqualToString:@"Address"]) {
                 NSString * newAddress = [value stringByReplacingOccurrencesOfString:@"," withString:@""];
-                entryString = [[entryString stringByAppendingString:newAddress] mutableCopy];
+                csvString = [[csvString stringByAppendingString:newAddress] mutableCopy];
             } else if ([key isEqualToString:@"Comments"]) {
                 NSString * newComments = [value stringByReplacingOccurrencesOfString:@"," withString:@""];
-                entryString = [[entryString stringByAppendingString:newComments] mutableCopy];
+                csvString = [[csvString stringByAppendingString:newComments] mutableCopy];
             } else if ([key isEqualToString:@"Notes"]) {
                 NSString * newNotes = [value stringByReplacingOccurrencesOfString:@"," withString:@""];
-                entryString = [[entryString stringByAppendingString:newNotes] mutableCopy];
+                csvString = [[csvString stringByAppendingString:newNotes] mutableCopy];
             } else {
-                entryString = [[entryString stringByAppendingString:[NSString stringWithFormat:@"%@",value]] mutableCopy];
+                csvString = [[csvString stringByAppendingString:[NSString stringWithFormat:@"%@",value]] mutableCopy];
             }
-            entryString = [[entryString stringByAppendingString:@","] mutableCopy];
+            csvString = [[csvString stringByAppendingString:@","] mutableCopy];
         }
-        [entryString deleteCharactersInRange:NSMakeRange([entryString length]-1, 1)];
-         entryString = [[entryString stringByAppendingString:@"\n"] mutableCopy];
-        [entryString writeToFile:filePath atomically:YES encoding:NSStringEncodingConversionAllowLossy error:nil];
+        [csvString deleteCharactersInRange:NSMakeRange([csvString length]-1, 1)];
+         csvString = [[csvString stringByAppendingString:@"\n"] mutableCopy];
+        [csvString writeToFile:filePath atomically:YES encoding:NSStringEncodingConversionAllowLossy error:nil];
     }
 }
 
