@@ -433,17 +433,23 @@ const int  MAX_PINS_TO_DROP = 200;
     MKPinAnnotationView *customPinView = [[MKPinAnnotationView alloc]
                                           initWithAnnotation:annotation
                                           reuseIdentifier:BridgeAnnotationIdentifier];
+
+// Make everything Green unless it' Red
+    if ([currentItem.pinColor isEqualToString:@"Red"])
+    customPinView.pinColor = MKPinAnnotationColorRed;
+    else
+    customPinView.pinColor = MKPinAnnotationColorGreen;
     
-    if ([currentItem.pinColor isEqualToString:@"Red"]) {
+/*    if ([currentItem.pinColor isEqualToString:@"Red"]) {
         customPinView.pinColor = MKPinAnnotationColorRed;
-    } else if ([currentItem.pinColor isEqualToString:@"blue"]) {
+    } else if ([currentItem.pinColor isEqualToString:@"Blue"]||[currentItem.pinColor isEqualToString:@"Coral"]) {
         customPinView.pinColor = MKPinAnnotationColorPurple;
         
-    } else if ([currentItem.pinColor isEqualToString:@"Green"]) {
+    } else if ([currentItem.pinColor isEqualToString:@"Green"]||[currentItem.pinColor isEqualToString:@"Yellow"]) {
         customPinView.pinColor = MKPinAnnotationColorGreen;
         
     }
-    
+*/
     customPinView.canShowCallout = YES;
     
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeInfoDark];
