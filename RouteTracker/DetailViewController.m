@@ -38,7 +38,7 @@
     [super viewWillDisappear:animated];
     NSLog(@"Save the modified details to the detailItem mutableDictionary");
     
-    [self updateDetailItem];
+    [self updateDetailItem1];
     
 
 }
@@ -167,6 +167,59 @@
 
 }
 
+-(void)updateDetailItem1
+{
+    // A mutable Dictionary must be created from the original for editing?
+    NSMutableDictionary *mutableDetailItem = [NSMutableDictionary dictionaryWithDictionary:self.detailItem];
+    [mutableDetailItem setValue:self.nameTextField.text forKey:@"Name"];
+    [mutableDetailItem setValue:self.deliverTextField.text forKey:@"Total Quantity to Deliver"];
+    [mutableDetailItem setValue:self.returnedTextField.text forKey:@"Delivered to Date"];
+    [mutableDetailItem setValue:self.notesTextField.text forKey:@"Notes"];
+    [mutableDetailItem setValue:self.driverTextField.text forKey:@"Driver"];
+    [mutableDetailItem setValue:self.categoryTextField.text forKey:@"Category"];
+    [mutableDetailItem setValue:self.advertiserTextField.text forKey:@"Advertiser"];
+    
+    [mutableDetailItem setValue:self.latitudeTextField.text forKey:@"Latitude"];
+    [mutableDetailItem setValue:self.longitudeTextField.text forKey:@"Longitude"];
+    
+    [mutableDetailItem setValue:self.addressTextField.text forKey:@"Street"];
+    [mutableDetailItem setValue:self.cityTextField.text forKey:@"City"];
+    [mutableDetailItem setValue:self.stateTextField.text forKey:@"State"];
+    [mutableDetailItem setValue:self.zipTextField.text forKey:@"Zipcode"];
+    
+    [mutableDetailItem setValue:self.commentsTextField.text forKey:@"Contact Name"];
+    //   [mutableDetailItem setValue:self.contactTextField.text forKey:@"Contact Name"];
+    [mutableDetailItem setValue:self.phoneTextField.text forKey:@"Contact Number"];
+    
+    NSLog(@"detailItem Name = %@", mutableDetailItem);
+    
+    // Stores the detailItem to NSUserDefaults
+    //  NSDictionary *modifiedDictionary = [NSDictionary dictionaryWithDictionary:mutableDetailItem];
+    NSMutableDictionary *modifiedDictionary = [[NSMutableDictionary alloc] init];
+    [modifiedDictionary setValue:[self.detailItem objectForKey:@"Index"] forKey:@"Index"];
+    
+    if (![[self.detailItem objectForKey:@"Name"] isEqualToString:self.nameTextField.text] ||
+        ![[self.detailItem objectForKey:@"Total Quantity to Deliver"] isEqualToString:self.deliverTextField.text] ||
+        ![[self.detailItem objectForKey:@"Delivered to Date"] isEqualToString:self.returnedTextField.text] ||
+        ![[self.detailItem objectForKey:@"Notes"] isEqualToString:self.notesTextField.text] ||
+        ![[self.detailItem objectForKey:@"Driver"] isEqualToString:self.driverTextField.text] ||
+        ![[self.detailItem objectForKey:@"Category"] isEqualToString:self.categoryTextField.text] ||
+        ![[self.detailItem objectForKey:@"Advertiser"] isEqualToString:self.advertiserTextField.text] ||
+        ![[self.detailItem objectForKey:@"Latitude"] isEqualToString:self.latitudeTextField.text] ||
+        ![[self.detailItem objectForKey:@"Longitude"] isEqualToString:self.longitudeTextField.text] ||
+        ![[self.detailItem objectForKey:@"Street"] isEqualToString:self.addressTextField.text] ||
+        ![[self.detailItem objectForKey:@"City"] isEqualToString:self.cityTextField.text] ||
+        ![[self.detailItem objectForKey:@"State"] isEqualToString:self.stateTextField.text] ||
+        ![[self.detailItem objectForKey:@"Zipcode"] isEqualToString:self.zipTextField.text] ||
+        ![[self.detailItem objectForKey:@"Contact Name"] isEqualToString:self.commentsTextField.text] ||
+        ![[self.detailItem objectForKey:@"Contact Number"] isEqualToString:self.phoneTextField.text]) {
+        AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+        [delegate.memberData modifyMemberListFile:mutableDetailItem withUpdates:mutableDetailItem];
+
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:mutableDetailItem forKey:@"selected_member"];
+    
+}
 - (IBAction)textFieldDidChange:(id)sender {
     self.textFieldChanged = TRUE;
 }
