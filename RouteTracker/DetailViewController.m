@@ -81,98 +81,6 @@
     UITapGestureRecognizer *hideKeyboardTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideTap:)];
     [self.view addGestureRecognizer:hideKeyboardTap];
 }
--(void)updateDetailItem
-{
-        // A mutable Dictionary must be created from the original for editing?
-        NSMutableDictionary *mutableDetailItem = [NSMutableDictionary dictionaryWithDictionary:self.detailItem];
-        [mutableDetailItem setValue:self.nameTextField.text forKey:@"Name"];
-        [mutableDetailItem setValue:self.deliverTextField.text forKey:@"Total Quantity to Deliver"];
-        [mutableDetailItem setValue:self.returnedTextField.text forKey:@"Delivered to Date"];
-        [mutableDetailItem setValue:self.notesTextField.text forKey:@"Notes"];
-        [mutableDetailItem setValue:self.driverTextField.text forKey:@"Driver"];
-        [mutableDetailItem setValue:self.categoryTextField.text forKey:@"Category"];
-        [mutableDetailItem setValue:self.advertiserTextField.text forKey:@"Advertiser"];
-        [mutableDetailItem setValue:self.advertiserTextField.text forKey:@"Audited"];
-
-        [mutableDetailItem setValue:self.latitudeTextField.text forKey:@"Latitude"];
-        [mutableDetailItem setValue:self.longitudeTextField.text forKey:@"Longitude"];
-        
-        [mutableDetailItem setValue:self.addressTextField.text forKey:@"Street"];
-        [mutableDetailItem setValue:self.cityTextField.text forKey:@"City"];
-        [mutableDetailItem setValue:self.stateTextField.text forKey:@"State"];
-        [mutableDetailItem setValue:self.zipTextField.text forKey:@"Zipcode"];
-        
-        [mutableDetailItem setValue:self.commentTextField.text forKey:@"Comment"];
-        [mutableDetailItem setValue:self.contactTextField.text forKey:@"Contact Name"];
-        [mutableDetailItem setValue:self.phoneTextField.text forKey:@"Contact Number"];
-        
-        NSLog(@"detailItem Name = %@", mutableDetailItem);
-        
-        // Stores the detailItem to NSUserDefaults
-      //  NSDictionary *modifiedDictionary = [NSDictionary dictionaryWithDictionary:mutableDetailItem];
-        NSMutableDictionary *modifiedDictionary = [[NSMutableDictionary alloc] init];
-        [modifiedDictionary setValue:[self.detailItem objectForKey:@"Index"] forKey:@"Index"];
-        
-        if (![[self.detailItem objectForKey:@"Name"] isEqualToString:self.nameTextField.text]) {
-            [modifiedDictionary setValue:self.nameTextField.text forKey:@"Name"];
-        }
-        if (![[self.detailItem objectForKey:@"Total Quantity to Deliver"] isEqualToString:self.deliverTextField.text]) {
-            [modifiedDictionary setValue:self.deliverTextField.text forKey:@"Total Quantity to Deliver"];
-        }
-        if (![[self.detailItem objectForKey:@"Delivered to Date"] isEqualToString:self.returnedTextField.text]) {
-            [modifiedDictionary setValue:self.returnedTextField.text forKey:@"Delivered to Date"];
-        }
-        if (![[self.detailItem objectForKey:@"Notes"] isEqualToString:self.notesTextField.text]) {
-            [modifiedDictionary setValue:self.notesTextField.text forKey:@"Notes"];
-        }
-        if (![[self.detailItem objectForKey:@"Driver"] isEqualToString:self.driverTextField.text]) {
-            [modifiedDictionary setValue:self.driverTextField.text forKey:@"Driver"];
-        }
-        if (![[self.detailItem objectForKey:@"Category"] isEqualToString:self.categoryTextField.text]) {
-            [modifiedDictionary setValue:self.categoryTextField.text forKey:@"Category"];
-        }
-        if (![[self.detailItem objectForKey:@"Advertiser"] isEqualToString:self.advertiserTextField.text]) {
-            [modifiedDictionary setValue:self.advertiserTextField.text forKey:@"Advertiser"];
-        }
-        if (![[self.detailItem objectForKey:@"Latitude"] isEqualToString:self.latitudeTextField.text]) {
-            [modifiedDictionary setValue:self.latitudeTextField.text forKey:@"Latitude"];
-        }
-        if (![[self.detailItem objectForKey:@"Longitude"] isEqualToString:self.longitudeTextField.text]) {
-            [modifiedDictionary setValue:self.longitudeTextField.text forKey:@"Longitude"];
-        }
-        if (![[self.detailItem objectForKey:@"Street"] isEqualToString:self.addressTextField.text]) {
-            [modifiedDictionary setValue:self.addressTextField.text forKey:@"Street"];
-        }
-        if (![[self.detailItem objectForKey:@"City"] isEqualToString:self.cityTextField.text]) {
-            [modifiedDictionary setValue:self.cityTextField.text forKey:@"City"];
-        }
-        if (![[self.detailItem objectForKey:@"State"] isEqualToString:self.stateTextField.text]) {
-            [modifiedDictionary setValue:self.stateTextField.text forKey:@"State"];
-        }
-        if (![[self.detailItem objectForKey:@"Zipcode"] isEqualToString:self.zipTextField.text]) {
-            [modifiedDictionary setValue:self.zipTextField.text forKey:@"Zipcode"];
-        }
-        if (![[self.detailItem objectForKey:@"Audited"] isEqualToString:self.auditedTextField.text]) {
-        [modifiedDictionary setValue:self.auditedTextField.text forKey:@"Audited"];
-        }
-        if (![[self.detailItem objectForKey:@"Comment"] isEqualToString:self.commentTextField.text]) {
-            [modifiedDictionary setValue:self.commentTextField.text forKey:@"Comment"];
-        }
-        if (![[self.detailItem objectForKey:@"Contact"] isEqualToString:self.contactTextField.text]) {
-        [modifiedDictionary setValue:self.contactTextField.text forKey:@"Contact"];
-        }
-        if (![[self.detailItem objectForKey:@"Contact Number"] isEqualToString:self.phoneTextField.text]) {
-            [modifiedDictionary setValue:self.phoneTextField.text forKey:@"Contact Number"];
-        }
-        
-        
-        [[NSUserDefaults standardUserDefaults] setObject:mutableDetailItem forKey:@"selected_member"];
-        if ([[modifiedDictionary allKeys] count] > 1) {
-            AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-            [delegate.memberData modifyMemberListFile:mutableDetailItem withUpdates:modifiedDictionary];
-        }
-
-}
 
 -(void)updateDetailItem
 {
@@ -181,7 +89,7 @@
     [mutableDetailItem setValue:self.nameTextField.text forKey:@"Name"];
     [mutableDetailItem setValue:self.deliverTextField.text forKey:@"Total Quantity to Deliver"];
     [mutableDetailItem setValue:self.returnedTextField.text forKey:@"Delivered to Date"];
-    [mutableDetailItem setValue:self.commentsTextField.text forKey:@"Comment"];
+    [mutableDetailItem setValue:self.commentTextField.text forKey:@"Comment"];
     [mutableDetailItem setValue:self.notesTextField.text forKey:@"Notes"];
     [mutableDetailItem setValue:self.driverTextField.text forKey:@"Driver"];
     [mutableDetailItem setValue:self.categoryTextField.text forKey:@"Category"];
@@ -211,7 +119,7 @@
         ![[self.detailItem objectForKey:@"Total Quantity to Deliver"] isEqualToString:self.deliverTextField.text] ||
         ![[self.detailItem objectForKey:@"Delivered to Date"] isEqualToString:self.returnedTextField.text] ||
         ![[self.detailItem objectForKey:@"Notes"] isEqualToString:self.notesTextField.text] ||
-        ![[self.detailItem objectForKey:@"Comment"] isEqualToString:self.commentsTextField.text] ||
+        ![[self.detailItem objectForKey:@"Comment"] isEqualToString:self.commentTextField.text] ||
         ![[self.detailItem objectForKey:@"Driver"] isEqualToString:self.driverTextField.text] ||
         ![[self.detailItem objectForKey:@"Category"] isEqualToString:self.categoryTextField.text] ||
         ![[self.detailItem objectForKey:@"Audited"] isEqualToString:self.auditedTextField.text] ||
