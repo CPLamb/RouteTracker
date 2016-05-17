@@ -38,7 +38,7 @@
     [super viewWillDisappear:animated];
     NSLog(@"Save the modified details to the detailItem mutableDictionary");
     
-    [self updateDetailItem1];
+    [self updateDetailItem];
     
 
 }
@@ -54,7 +54,6 @@
     
     NSArray *indexPathArray = [NSArray arrayWithObjects:[NSNumber numberWithInt:row] , [NSNumber numberWithInt:section], nil];
     [[NSUserDefaults standardUserDefaults] setObject:indexPathArray forKey:@"selected_indexPath"];
-    
     
     // Assigns values to the text fields
     self.nameTextField.text = [self.detailItem objectForKey:@"Name"];
@@ -175,13 +174,14 @@
 
 }
 
--(void)updateDetailItem1
+-(void)updateDetailItem
 {
     // A mutable Dictionary must be created from the original for editing?
     NSMutableDictionary *mutableDetailItem = [NSMutableDictionary dictionaryWithDictionary:self.detailItem];
     [mutableDetailItem setValue:self.nameTextField.text forKey:@"Name"];
     [mutableDetailItem setValue:self.deliverTextField.text forKey:@"Total Quantity to Deliver"];
     [mutableDetailItem setValue:self.returnedTextField.text forKey:@"Delivered to Date"];
+    [mutableDetailItem setValue:self.commentsTextField.text forKey:@"Comment"];
     [mutableDetailItem setValue:self.notesTextField.text forKey:@"Notes"];
     [mutableDetailItem setValue:self.driverTextField.text forKey:@"Driver"];
     [mutableDetailItem setValue:self.categoryTextField.text forKey:@"Category"];
@@ -211,6 +211,7 @@
         ![[self.detailItem objectForKey:@"Total Quantity to Deliver"] isEqualToString:self.deliverTextField.text] ||
         ![[self.detailItem objectForKey:@"Delivered to Date"] isEqualToString:self.returnedTextField.text] ||
         ![[self.detailItem objectForKey:@"Notes"] isEqualToString:self.notesTextField.text] ||
+        ![[self.detailItem objectForKey:@"Comment"] isEqualToString:self.commentsTextField.text] ||
         ![[self.detailItem objectForKey:@"Driver"] isEqualToString:self.driverTextField.text] ||
         ![[self.detailItem objectForKey:@"Category"] isEqualToString:self.categoryTextField.text] ||
         ![[self.detailItem objectForKey:@"Audited"] isEqualToString:self.auditedTextField.text] ||
@@ -233,6 +234,12 @@
 }
 - (IBAction)textFieldDidChange:(id)sender {
     self.textFieldChanged = TRUE;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning {

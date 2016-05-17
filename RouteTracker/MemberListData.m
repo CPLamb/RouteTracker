@@ -7,6 +7,7 @@
 //
 
 #import "MemberListData.h"
+#import "CHCSVParser.h"
 
 @implementation MemberListData
 @synthesize namesArray = _namesArray;
@@ -86,25 +87,24 @@
     [plistEdibleContent writeToFile:plistPath atomically:YES];
     
     AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-    [delegate.arrayToBeUploaded addObject:updatedEntry];
     
-    /*
-    NSDateFormatter *df = [[NSDateFormatter alloc]init];
-    [df setDateFormat:@"yyyy-MM-dd"];
-    NSString    *strTime = [df stringFromDate:[NSDate date]];
-    NSString *modifiedFilename = [NSString stringWithFormat:@"%@-%@",filename, strTime];
+    BOOL entryFound = FALSE;
+    for (int i = 0; i < [delegate.arrayToBeUploaded count]; i++){
+        NSDictionary *entry = [delegate.arrayToBeUploaded objectAtIndex:i];
+        if ([[entry objectForKey:@"Index"] isEqualToString:[updatedEntry objectForKey:@"Index"]]) {
+            [delegate.arrayToBeUploaded replaceObjectAtIndex:i withObject:updatedEntry];
+            entryFound = TRUE;
+            break;
+        }
+    }
+    if (!entryFound) {
+        [delegate.arrayToBeUploaded addObject:updatedEntry];
+    }
     
-    [[NSUserDefaults standardUserDefaults] setObject:modifiedFilename forKey:@"updated_plist"];
-    
-    NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentFolder = [path objectAtIndex:0];
-    NSString *filePath = [documentFolder stringByAppendingPathComponent:modifiedFilename];
-    [delegate.arrayToBeUploaded writeToFile:filePath atomically:YES];
-    */
-    [self createCSVFile:updatedEntry];
+    [self createCSVFile];
 }
 
--(void)createCSVFile:(NSDictionary*)updatedEntry
+-(void)createCSVFile
 {
     AppDelegate *delegate = [UIApplication sharedApplication].delegate;
     
@@ -123,41 +123,34 @@
     
     [[NSUserDefaults standardUserDefaults] setObject:modifiedFilename forKey:@"updated_plist"];
     
-    NSArray *keysArray = [updatedEntry allKeys];
+    // Create in memory writer
+    NSOutputStream *stream = [NSOutputStream outputStreamToMemory];
+    CHCSVWriter *writer = [[CHCSVWriter alloc] initWithOutputStream:stream
+                                                           encoding:NSUTF8StringEncoding
+                                                          delimiter:','];
     
-    NSString *firstLine = [keysArray componentsJoinedByString:@","];
+    // Construct csv
     
-    NSMutableString *csvString = [[NSMutableString alloc] initWithString:firstLine];
-    csvString = [[csvString stringByAppendingString:@"\n"] mutableCopy];
+    // Write header...
+    NSArray *keys = [delegate.arrayToBeUploaded[0] allKeys];
+    [writer writeLineOfFields:keys];
     
-    //save field names in the first line of the CSV file
-    [csvString writeToFile:filePath atomically:YES encoding:NSStringEncodingConversionAllowLossy error:nil];
-    
-    for (int i = 0; i < [delegate.arrayToBeUploaded count]; i++){
-        NSDictionary *entry = [delegate.arrayToBeUploaded objectAtIndex:i];
-        for (id key in entry) {
-            id value = [entry objectForKey:key];
-            if ([key isEqualToString:@"Name"]) {
-                NSString * newName = [value stringByReplacingOccurrencesOfString:@"," withString:@""];
-                csvString = [[csvString stringByAppendingString:newName] mutableCopy];
-            } else if ([key isEqualToString:@"Address"]) {
-                NSString * newAddress = [value stringByReplacingOccurrencesOfString:@"," withString:@""];
-                csvString = [[csvString stringByAppendingString:newAddress] mutableCopy];
-            } else if ([key isEqualToString:@"Comments"]) {
-                NSString * newComments = [value stringByReplacingOccurrencesOfString:@"," withString:@""];
-                csvString = [[csvString stringByAppendingString:newComments] mutableCopy];
-            } else if ([key isEqualToString:@"Notes"]) {
-                NSString * newNotes = [value stringByReplacingOccurrencesOfString:@"," withString:@""];
-                csvString = [[csvString stringByAppendingString:newNotes] mutableCopy];
-            } else {
-                csvString = [[csvString stringByAppendingString:[NSString stringWithFormat:@"%@",value]] mutableCopy];
-            }
-            csvString = [[csvString stringByAppendingString:@","] mutableCopy];
+    // ...then fill the rows
+    for (NSDictionary *item in delegate.arrayToBeUploaded) {
+        for (NSString *key in keys) {
+            NSString *value = [item objectForKey:key];
+            [writer writeField:value];
         }
-        [csvString deleteCharactersInRange:NSMakeRange([csvString length]-1, 1)];
-         csvString = [[csvString stringByAppendingString:@"\n"] mutableCopy];
-        [csvString writeToFile:filePath atomically:YES encoding:NSStringEncodingConversionAllowLossy error:nil];
+        
+        [writer finishLine];
     }
-}
+    [writer closeStream];
+    
+    NSData *contents = [stream propertyForKey:NSStreamDataWrittenToMemoryStreamKey];
+    
+    NSString *csvString = [[NSString alloc] initWithData:contents
+                                                encoding:NSUTF8StringEncoding];
+    [csvString writeToFile:filePath atomically:YES encoding:NSStringEncodingConversionAllowLossy error:nil];
 
+}
  @end
