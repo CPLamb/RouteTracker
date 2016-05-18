@@ -129,6 +129,22 @@
         ![[self.detailItem objectForKey:@"Zipcode"] isEqualToString:self.zipTextField.text] ||
         ![[self.detailItem objectForKey:@"Contact Name"] isEqualToString:self.commentsTextField.text] ||
         ![[self.detailItem objectForKey:@"Contact Number"] isEqualToString:self.phoneTextField.text]) {
+        [self.detailItem setValue:self.nameTextField.text forKey:@"Name"];
+        [self.detailItem setValue:self.deliverTextField.text forKey:@"Total Quantity to Deliver"];
+        [self.detailItem setValue:self.returnedTextField.text forKey:@"Delivered to Date"];
+        [self.detailItem setValue:self.commentsTextField.text forKey:@"Comment"];
+        [self.detailItem setValue:self.notesTextField.text forKey:@"Notes"];
+        [self.detailItem setValue:self.driverTextField.text forKey:@"Driver"];
+        [self.detailItem setValue:self.categoryTextField.text forKey:@"Category"];
+        [self.detailItem setValue:self.advertiserTextField.text forKey:@"Advertiser"];
+        [self.detailItem setValue:self.latitudeTextField.text forKey:@"Latitude"];
+        [self.detailItem setValue:self.longitudeTextField.text forKey:@"Longitude"];
+        [self.detailItem setValue:self.addressTextField.text forKey:@"Street"];
+        [self.detailItem setValue:self.cityTextField.text forKey:@"City"];
+        [self.detailItem setValue:self.stateTextField.text forKey:@"State"];
+        [self.detailItem setValue:self.zipTextField.text forKey:@"Zipcode"];
+        [self.detailItem setValue:self.commentsTextField.text forKey:@"Contact Name"];
+        [self.detailItem setValue:self.phoneTextField.text forKey:@"Contact Number"];
         AppDelegate *delegate = [UIApplication sharedApplication].delegate;
         [delegate.memberData modifyMemberListFile:mutableDetailItem withUpdates:mutableDetailItem];
 
@@ -197,7 +213,7 @@
     // Moves to other view & sets the detailItem to the selected item
     
 //    NSLog(@"Segue ID is %@", [segue identifier]);
-    
+    [self updateDetailItem];
     if ([[segue identifier] isEqualToString:@"showMap"]) {
         [[segue destinationViewController] setDetailItem:self.detailItem];
     }
