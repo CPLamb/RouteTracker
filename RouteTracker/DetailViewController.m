@@ -104,7 +104,6 @@
     [mutableDetailItem setValue:self.stateTextField.text forKey:@"State"];
     [mutableDetailItem setValue:self.zipTextField.text forKey:@"Zipcode"];
     
-    [mutableDetailItem setValue:self.commentTextField.text forKey:@"Comment"];
     [mutableDetailItem setValue:self.contactTextField.text forKey:@"Contact Name"];
     [mutableDetailItem setValue:self.phoneTextField.text forKey:@"Contact Number"];
     
@@ -136,7 +135,7 @@
         [self.detailItem setValue:self.nameTextField.text forKey:@"Name"];
         [self.detailItem setValue:self.deliverTextField.text forKey:@"Total Quantity to Deliver"];
         [self.detailItem setValue:self.returnedTextField.text forKey:@"Delivered to Date"];
-        [self.detailItem setValue:self.commentsTextField.text forKey:@"Comment"];
+        [self.detailItem setValue:self.commentTextField.text forKey:@"Comment"];
         [self.detailItem setValue:self.notesTextField.text forKey:@"Notes"];
         [self.detailItem setValue:self.driverTextField.text forKey:@"Driver"];
         [self.detailItem setValue:self.categoryTextField.text forKey:@"Category"];
@@ -147,7 +146,7 @@
         [self.detailItem setValue:self.cityTextField.text forKey:@"City"];
         [self.detailItem setValue:self.stateTextField.text forKey:@"State"];
         [self.detailItem setValue:self.zipTextField.text forKey:@"Zipcode"];
-        [self.detailItem setValue:self.commentsTextField.text forKey:@"Contact Name"];
+        [self.detailItem setValue:self.commentTextField.text forKey:@"Comment"];
         [self.detailItem setValue:self.phoneTextField.text forKey:@"Contact Number"];
         AppDelegate *delegate = [UIApplication sharedApplication].delegate;
         [delegate.memberData modifyMemberListFile:mutableDetailItem withUpdates:mutableDetailItem];
