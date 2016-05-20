@@ -96,8 +96,8 @@ NSUInteger filesCount = 1;
     NSArray *toRecipients	= [NSArray arrayWithObject:EMAILID];
     [emailVC setToRecipients:toRecipients];
     
-    
-    [emailVC addAttachmentData:updatedPlistXML mimeType:@"text/xml" fileName:plistPath];
+    [emailVC addAttachmentData:updatedPlistXML mimeType:@"text/xml" fileName:filename];
+ //   [emailVC addAttachmentData:updatedPlistXML mimeType:@"text/xml" fileName:plistPath];
     
     // Fill out the email body text
     NSString *emailBody = @"Attached updated distribution plist file";
