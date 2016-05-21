@@ -26,7 +26,7 @@
                                     </imageView>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tnc-Hz-bHv">
                                         <rect key="frame" x="40" y="161" width="240" height="70"/>
-                                        <color key="backgroundColor" red="1" green="0.98528813687558214" blue="0.34374986032123689" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <string key="text">Please upload any edited changes to Google                  * Special instructions;             1) Notes and reminders from each other. Includes special alerts that create a 'notification button' on the app icon w/alert</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
