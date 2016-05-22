@@ -14,9 +14,9 @@
 #import "HomeViewController.h"
 
 @interface HomeViewController ()
-
-@property (weak, nonatomic) IBOutlet UILabel *selectedMagazine;
-@property (weak, nonatomic) IBOutlet UIImage *selectedMagazineLogo;
+@property (weak, nonatomic) IBOutlet UIImageView *AppMainLogo;
+@property (weak, nonatomic) IBOutlet UILabel *selectedMagazineLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *selectedMagazineLogo;
 @end
 
 @implementation HomeViewController
@@ -36,9 +36,13 @@
     NSLog(@"HomeVC -- dataFilenameIndex = %@", dataFilenameIndex.description);
 
 // Sets up display of magazine loaded
-    self.selectedMagazine.text = dataFilenameIndex.description;
+    self.selectedMagazineLabel.text = dataFilenameIndex.description;
+    
+    NSString *selectedMagazinePhotoName = [[NSUserDefaults standardUserDefaults] stringForKey:@"selected_photo"];
+    
+    self.selectedMagazineLogo.image = [UIImage imageNamed:selectedMagazinePhotoName];
 
-    NSLog(@"HomeVC -- Listing the loaded spreadsheet %@", self.selectedMagazine.text);
+    NSLog(@"HomeVC -- Listing the loaded spreadsheet %@", self.selectedMagazineLabel.text);
 }
 
 - (void)didReceiveMemoryWarning {
