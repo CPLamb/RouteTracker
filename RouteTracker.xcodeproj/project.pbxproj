@@ -112,7 +112,7 @@
 		B0E7D37F1CC52EBF00B1D5E7 /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E7D37E1CC52EBE00B1D5E7 /* CHCSVParser.m */; };
 		B0E7EAAA1CF262660069D8A5 /* AutoShopperDistributionList.png in Resources */ = {isa = PBXBuildFile; fileRef = B0E7EAA21CF262660069D8A5 /* AutoShopperDistributionList.png */; };
 		B0E7EAAB1CF262660069D8A5 /* BohemianDistributionList.png in Resources */ = {isa = PBXBuildFile; fileRef = B0E7EAA31CF262660069D8A5 /* BohemianDistributionList.png */; };
-		B0E7EAAC1CF262660069D8A5 /* EdibleMontereyDistributionList.png in Resources */ = {isa = PBXBuildFile; fileRef = B0E7EAA41CF262660069D8A5 /* EdibleMontereyDistributionList.png */; };
+		B0E7EAAC1CF262660069D8A5 /* EdibleMontereyDistributionListCurrent.png in Resources */ = {isa = PBXBuildFile; fileRef = B0E7EAA41CF262660069D8A5 /* EdibleMontereyDistributionListCurrent.png */; };
 		B0E7EAAD1CF262660069D8A5 /* GoodTimesDistributionList.png in Resources */ = {isa = PBXBuildFile; fileRef = B0E7EAA51CF262660069D8A5 /* GoodTimesDistributionList.png */; };
 		B0E7EAAE1CF262660069D8A5 /* SanJoseMetroDistributionList.png in Resources */ = {isa = PBXBuildFile; fileRef = B0E7EAA61CF262660069D8A5 /* SanJoseMetroDistributionList.png */; };
 		B0E7EAAF1CF262660069D8A5 /* SCWavesDistributionListCurrent.png in Resources */ = {isa = PBXBuildFile; fileRef = B0E7EAA71CF262660069D8A5 /* SCWavesDistributionListCurrent.png */; };
@@ -309,7 +309,7 @@
 		B0E7D37E1CC52EBE00B1D5E7 /* CHCSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCSVParser.m; sourceTree = "<group>"; };
 		B0E7EAA21CF262660069D8A5 /* AutoShopperDistributionList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AutoShopperDistributionList.png; sourceTree = "<group>"; };
 		B0E7EAA31CF262660069D8A5 /* BohemianDistributionList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BohemianDistributionList.png; sourceTree = "<group>"; };
-		B0E7EAA41CF262660069D8A5 /* EdibleMontereyDistributionList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EdibleMontereyDistributionList.png; sourceTree = "<group>"; };
+		B0E7EAA41CF262660069D8A5 /* EdibleMontereyDistributionListCurrent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EdibleMontereyDistributionListCurrent.png; sourceTree = "<group>"; };
 		B0E7EAA51CF262660069D8A5 /* GoodTimesDistributionList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GoodTimesDistributionList.png; sourceTree = "<group>"; };
 		B0E7EAA61CF262660069D8A5 /* SanJoseMetroDistributionList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SanJoseMetroDistributionList.png; sourceTree = "<group>"; };
 		B0E7EAA71CF262660069D8A5 /* SCWavesDistributionListCurrent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SCWavesDistributionListCurrent.png; sourceTree = "<group>"; };
@@ -596,7 +596,7 @@
 			children = (
 				B0E7EAA21CF262660069D8A5 /* AutoShopperDistributionList.png */,
 				B0E7EAA31CF262660069D8A5 /* BohemianDistributionList.png */,
-				B0E7EAA41CF262660069D8A5 /* EdibleMontereyDistributionList.png */,
+				B0E7EAA41CF262660069D8A5 /* EdibleMontereyDistributionListCurrent.png */,
 				B0E7EAA51CF262660069D8A5 /* GoodTimesDistributionList.png */,
 				B0E7EAA61CF262660069D8A5 /* SanJoseMetroDistributionList.png */,
 				B0E7EAA71CF262660069D8A5 /* SCWavesDistributionListCurrent.png */,
@@ -695,7 +695,7 @@
 				TargetAttributes = {
 					83279E2A1A4F3B23007496BB = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = RM247WN54B;
+						DevelopmentTeam = PKPC72LMPF;
 					};
 					83279E461A4F3B23007496BB = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -755,7 +755,7 @@
 				83279E5B1A4F4C05007496BB /* house.png in Resources */,
 				83279E5D1A4F4C16007496BB /* globe.png in Resources */,
 				83279E641A4F4F2A007496BB /* key24.png in Resources */,
-				B0E7EAAC1CF262660069D8A5 /* EdibleMontereyDistributionList.png in Resources */,
+				B0E7EAAC1CF262660069D8A5 /* EdibleMontereyDistributionListCurrent.png in Resources */,
 				83279E5F1A4F4C2B007496BB /* magnifier.png in Resources */,
 				83725EF31CF0DE8500CD16A2 /* LogoSantaCruzWaves.png in Resources */,
 				836141911BF7DF64003F3D7A /* EdibleMontereyDistributionList.csv in Resources */,
