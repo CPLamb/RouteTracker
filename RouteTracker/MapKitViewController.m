@@ -57,6 +57,8 @@ const int  MAX_PINS_TO_DROP = 200;
 // Setup for the annotations & drop a pin at home
     self.mapAnnotations = [[NSMutableArray alloc] init];
 
+    // Loads from data objects
+    [self loadPins];
     
     [self enable3DMapping];
 }
@@ -105,8 +107,6 @@ const int  MAX_PINS_TO_DROP = 200;
     } else {
         [self.mapView setRegion:self.centerRegion animated:YES];
     }
-    // Loads from data objects
-    [self loadPins];
     
     // Limit the total number pins to drop to MAX_PINS_TO_DROP so that map view is not too cluttered
     NSLog(@"Pins in the select = %lu", (unsigned long)[self.mapAnnotations count]);
