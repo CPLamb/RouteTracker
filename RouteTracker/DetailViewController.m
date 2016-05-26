@@ -58,7 +58,9 @@
     // Assigns values to the text fields
     self.nameTextField.text = [self.detailItem objectForKey:@"Name"];
     self.deliverTextField.text = [self.detailItem objectForKey:@"Total Quantity to Deliver"];
-    self.returnedTextField.text = [self.detailItem objectForKey:@"Delivered to Date"];
+    self.returnedTextField.text = [self.detailItem objectForKey:@"Returns"];
+    self.qtyToDateTextField.text = [self.detailItem objectForKey:@"Delivered to Date"];
+    self.timesDeliveredTextField.text = [self.detailItem objectForKey:@"Number Times Delivered"];
     self.notesTextField.text = [self.detailItem objectForKey:@"Notes"];
     self.driverTextField.text = [self.detailItem objectForKey:@"Driver"];
     self.categoryTextField.text = [self.detailItem objectForKey:@"Category"];
@@ -85,7 +87,9 @@
     NSMutableDictionary *mutableDetailItem = [NSMutableDictionary dictionaryWithDictionary:self.detailItem];
     [mutableDetailItem setValue:self.nameTextField.text forKey:@"Name"];
     [mutableDetailItem setValue:self.deliverTextField.text forKey:@"Total Quantity to Deliver"];
-    [mutableDetailItem setValue:self.returnedTextField.text forKey:@"Delivered to Date"];
+    [mutableDetailItem setValue:self.returnedTextField.text forKey:@"Returns"];
+    [mutableDetailItem setValue:self.qtyToDateTextField.text forKey:@"Delivered to Date"];
+    [mutableDetailItem setValue:self.timesDeliveredTextField.text forKey:@"Number Times Delivered"];
     [mutableDetailItem setValue:self.commentTextField.text forKey:@"Comment"];
     [mutableDetailItem setValue:self.notesTextField.text forKey:@"Notes"];
     [mutableDetailItem setValue:self.driverTextField.text forKey:@"Driver"];
@@ -110,7 +114,9 @@
     
     if (![[self.detailItem objectForKey:@"Name"] isEqualToString:self.nameTextField.text] ||
         ![[self.detailItem objectForKey:@"Total Quantity to Deliver"] isEqualToString:self.deliverTextField.text] ||
-        ![[self.detailItem objectForKey:@"Delivered to Date"] isEqualToString:self.returnedTextField.text] ||
+        ![[self.detailItem objectForKey:@"Returns"] isEqualToString:self.returnedTextField.text] ||
+        ![[self.detailItem objectForKey:@"Delivered to Date"] isEqualToString:self.qtyToDateTextField.text] ||
+        ![[self.detailItem objectForKey:@"Number Times Delivered"] isEqualToString:self.timesDeliveredTextField.text] ||
         ![[self.detailItem objectForKey:@"Notes"] isEqualToString:self.notesTextField.text] ||
         ![[self.detailItem objectForKey:@"Comment"] isEqualToString:self.commentTextField.text] ||
         ![[self.detailItem objectForKey:@"Driver"] isEqualToString:self.driverTextField.text] ||
@@ -127,7 +133,9 @@
         ![[self.detailItem objectForKey:@"Contact Number"] isEqualToString:self.phoneTextField.text]) {
         [self.detailItem setValue:self.nameTextField.text forKey:@"Name"];
         [self.detailItem setValue:self.deliverTextField.text forKey:@"Total Quantity to Deliver"];
-        [self.detailItem setValue:self.returnedTextField.text forKey:@"Delivered to Date"];
+        [self.detailItem setValue:self.returnedTextField.text forKey:@"Returns"];
+        [self.detailItem setValue:self.qtyToDateTextField.text forKey:@"Delivered to Date"];
+        [self.detailItem setValue:self.timesDeliveredTextField.text forKey:@"Number Times Delivered"];
         [self.detailItem setValue:self.notesTextField.text forKey:@"Notes"];
         [self.detailItem setValue:self.commentTextField.text forKey:@"Comment"];
         [self.detailItem setValue:self.driverTextField.text forKey:@"Driver"];

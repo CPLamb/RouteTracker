@@ -107,8 +107,6 @@ const int  MAX_PINS_TO_DROP = 200;
     } else {
         [self.mapView setRegion:self.centerRegion animated:YES];
     }
-    // Loads from data objects
-//    [self loadPins];
     
     // Limit the total number pins to drop to MAX_PINS_TO_DROP so that map view is not too cluttered
     NSLog(@"Pins in the select = %lu", (unsigned long)[self.mapAnnotations count]);
@@ -437,26 +435,28 @@ const int  MAX_PINS_TO_DROP = 200;
     
 // Make the pin heads matches colors specified on the List & the GPSVisulaizer map
 
-    if ([currentItem.pinColor isEqualToString:@"Red"]) {
+    if ([currentItem.pinColor isEqualToString:@"Red"] || [currentItem.pinColor isEqualToString:@"red"]) {
         customPinView.pinTintColor = UIColor.redColor;
-    } else if ([currentItem.pinColor isEqualToString:@"Blue"]) {
+    } else if ([currentItem.pinColor isEqualToString:@"Blue"] || [currentItem.pinColor isEqualToString:@"blue"]) {
         customPinView.pinTintColor = UIColor.blueColor;
-    } else if ([currentItem.pinColor isEqualToString:@"Green"]) {
+    } else if ([currentItem.pinColor isEqualToString:@"Green"] || [currentItem.pinColor isEqualToString:@"green"]) {
         customPinView.pinTintColor = UIColor.greenColor;
-    } else if ([currentItem.pinColor isEqualToString:@"Gray"]) {
+    } else if ([currentItem.pinColor isEqualToString:@"Gray"] || [currentItem.pinColor isEqualToString:@"gray"]) {
         customPinView.pinTintColor = UIColor.grayColor;
-    } else if ([currentItem.pinColor isEqualToString:@"Orange"]) {
+    } else if ([currentItem.pinColor isEqualToString:@"Orange"] || [currentItem.pinColor isEqualToString:@"orange"]) {
         customPinView.pinTintColor = UIColor.orangeColor;
-    } else if ([currentItem.pinColor isEqualToString:@"Purple"]) {
+    } else if ([currentItem.pinColor isEqualToString:@"Purple"] || [currentItem.pinColor isEqualToString:@"purple"]) {
         customPinView.pinTintColor = UIColor.purpleColor;
-    } else if ([currentItem.pinColor isEqualToString:@"Cyan"]) {
+    } else if ([currentItem.pinColor isEqualToString:@"Cyan"] || [currentItem.pinColor isEqualToString:@"cyan"]) {
         customPinView.pinTintColor = UIColor.cyanColor;
-    } else if ([currentItem.pinColor isEqualToString:@"Yellow"]) {
+    } else if ([currentItem.pinColor isEqualToString:@"Yellow"] || [currentItem.pinColor isEqualToString:@"yellow"]) {
         customPinView.pinTintColor = UIColor.yellowColor;
-    } else if ([currentItem.pinColor isEqualToString:@"Black"]) {
+    } else if ([currentItem.pinColor isEqualToString:@"Black"] || [currentItem.pinColor isEqualToString:@"black"]) {
         customPinView.pinTintColor = UIColor.blackColor;
-    } else if ([currentItem.pinColor isEqualToString:@"Magenta"]) {
+    } else if ([currentItem.pinColor isEqualToString:@"Magenta"] || [currentItem.pinColor isEqualToString:@"magenta"]) {
         customPinView.pinTintColor = UIColor.magentaColor;
+    } else if ([currentItem.pinColor isEqualToString:@"White"] || [currentItem.pinColor isEqualToString:@"white"]) {
+        customPinView.pinTintColor = UIColor.whiteColor;
     }
 
     customPinView.canShowCallout = YES;

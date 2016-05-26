@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *deliverTextField;
 @property (weak, nonatomic) IBOutlet UITextField *returnedTextField;
+@property (weak, nonatomic) IBOutlet UITextField *qtyToDateTextField;
+@property (weak, nonatomic) IBOutlet UITextField *timesDeliveredTextField;
 @property (weak, nonatomic) IBOutlet UITextView *notesTextField;
 @property (weak, nonatomic) IBOutlet UITextField *driverTextField;
 @property (weak, nonatomic) IBOutlet UITextField *categoryTextField;
