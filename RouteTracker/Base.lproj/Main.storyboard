@@ -9,7 +9,6 @@
         <!--Home-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
                 <viewController title="Home" id="9pv-A4-QxB" customClass="HomeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="byv-jZ-mF5"/>
@@ -109,6 +108,7 @@
                         <outlet property="selectedMagazineLogo" destination="Yfo-bM-7mR" id="uHK-yp-uiX"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1270" y="-316"/>
         </scene>
@@ -196,7 +196,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dUl-CY-pRf">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dUl-CY-pRf">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <connections>
                                     <outlet property="delegate" destination="8rJ-Kc-sve" id="O6e-NV-p2R"/>
@@ -659,7 +659,7 @@
                         <sections>
                             <tableViewSection headerTitle="The Basics" id="vFq-YA-oiB">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="RNZ-5U-dms">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MapSetupCell" rowHeight="70" id="RNZ-5U-dms">
                                         <rect key="frame" x="0.0" y="114" width="320" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RNZ-5U-dms" id="aSE-ra-3dI">
@@ -697,7 +697,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="x58-dn-1CU">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UploadSetupCell" rowHeight="70" id="x58-dn-1CU" userLabel="UploadSetupCell">
                                         <rect key="frame" x="0.0" y="184" width="320" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="x58-dn-1CU" id="p4Q-Bo-0B4">
@@ -732,7 +732,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="230" id="sms-yX-0kH">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="fileSelectorCell" rowHeight="230" id="sms-yX-0kH" userLabel="fileSelectorCell">
                                         <rect key="frame" x="0.0" y="254" width="320" height="230"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sms-yX-0kH" id="WwW-am-Qh5">
@@ -767,7 +767,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="K5K-ni-oqd">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MagazineSetupCell" rowHeight="70" id="K5K-ni-oqd">
                                         <rect key="frame" x="0.0" y="484" width="320" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K5K-ni-oqd" id="JCg-oq-WJa">
@@ -864,6 +864,7 @@
                             </tableViewSection>
                         </sections>
                         <connections>
+                            <outlet property="dataSource" destination="0GM-Ui-0MM" id="Cl0-Ji-ao4"/>
                             <outlet property="delegate" destination="0GM-Ui-0MM" id="6E8-uT-uZ4"/>
                         </connections>
                     </tableView>
@@ -871,8 +872,11 @@
                     <connections>
                         <outlet property="driverPicker" destination="11K-as-cON" id="n0u-sz-B5D"/>
                         <outlet property="filePicker" destination="B2x-Yg-t4U" id="rsF-TB-rhY"/>
+                        <outlet property="fileSelectorCell" destination="sms-yX-0kH" id="6Cw-sJ-gcS"/>
                         <outlet property="magazineSelectorControl" destination="0Q6-C8-aH6" id="AkR-1c-dIF"/>
                         <outlet property="mapSelectorControl" destination="vKe-Ls-2dq" id="t6H-nn-V3i"/>
+                        <outlet property="mapSetupCell" destination="RNZ-5U-dms" id="hh4-LB-9gJ"/>
+                        <outlet property="setupTableView" destination="KUD-nq-620" id="kBJ-8q-6F7"/>
                         <outlet property="uploadToGoogleButton" destination="gcX-p2-RwP" id="beU-X4-1oM"/>
                     </connections>
                 </tableViewController>
@@ -1295,7 +1299,7 @@
         <image name="questions1.png" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fec-gw-sch"/>
-        <segue reference="qPY-Ep-njk"/>
+        <segue reference="wXl-0J-PM3"/>
+        <segue reference="hGG-Lb-Gts"/>
     </inferredMetricsTieBreakers>
 </document>

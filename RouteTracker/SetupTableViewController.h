@@ -21,8 +21,9 @@
 @interface SetupTableViewController : UITableViewController
 
 @property (weak, nonatomic) id <SetupTableViewControllerDelegate> delegate;
-@property (weak, nonatomic) NSArray *directoryContent;
+@property (strong, nonatomic) NSMutableArray *directoryContent;
 
+@property (weak, nonatomic) IBOutlet UITableView *setupTableView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *magazineSelectorControl;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *mapSelectorControl;
 @property (weak, nonatomic) IBOutlet UIPickerView *filePicker;

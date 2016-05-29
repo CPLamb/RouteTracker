@@ -29,9 +29,6 @@ NSUInteger filesCount = 1;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-// loads data files onto the pickerView
-    [self loadPickerViewDataFiles];
-
     // Uncomment the following line to preserve selection between presentations.
     //self.clearsSelectionOnViewWillAppear = NO;
     
@@ -48,8 +45,7 @@ NSUInteger filesCount = 1;
   
   self.mapSelectorControl.selectedSegmentIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_map_type"];
     
-    // Gets the directoryContent before the view appears???
- //   [self TestButton:self.
+    [self loadPickerViewDataFiles];
 
 }
 
@@ -77,7 +73,8 @@ NSUInteger filesCount = 1;
     
     NSString *plistPath;
     NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    plistPath = [rootPath stringByAppendingPathComponent:filename];
+    NSString *completePath = [NSString stringWithFormat:@"%@/ModifiedFiles/",rootPath];
+    plistPath = [completePath stringByAppendingPathComponent:filename];
     if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
         NSLog(@"We couldn't find the file, there are no changes to upload");
         
@@ -125,7 +122,8 @@ NSUInteger filesCount = 1;
                 NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"updated_plist"];
                 NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
                 NSString *documentsDirectory = [paths objectAtIndex:0];
-                NSString *path = [documentsDirectory stringByAppendingPathComponent:filename];
+                NSString *completePath = [NSString stringWithFormat:@"%@/ModifiedFiles/",documentsDirectory];
+                NSString *path = [completePath stringByAppendingPathComponent:filename];
                 NSError *error;
                 if(![[NSFileManager defaultManager] removeItemAtPath:path error:&error]){
                     NSLog(@"Error deleting modifiedPlist file");
@@ -197,12 +195,24 @@ NSUInteger filesCount = 1;
     NSString *path;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     path = [paths objectAtIndex:0];
-    self.directoryContent = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:NULL];
-    for (Count = 0; Count < (int)[self.directoryContent count]; Count++)
-    {
-        NSLog(@"File %d: %@", Count, [self.directoryContent objectAtIndex:Count]);
+    
+    self.directoryContent = [[NSMutableArray alloc] init];
+    NSMutableArray *contentsOfFolder = [[NSMutableArray alloc] initWithArray:[[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:NULL]];
+    
+    for (NSString *item in contentsOfFolder) {
+        BOOL isDirectory;
+        BOOL fileExistsAtPath = [[NSFileManager defaultManager] fileExistsAtPath:item isDirectory:&isDirectory];
+            if (fileExistsAtPath) {
+                NSLog(@"%@ is a directory", item);
+            } else {
+                [self.directoryContent addObject:item];
+            }
     }
+    [[NSUserDefaults standardUserDefaults] setObject:self.directoryContent
+                                              forKey:@"downloaded_files"];
     filesCount = [self.directoryContent count];
+    [self.setupTableView reloadData];
+    [self.filePicker reloadAllComponents];
 
 }
 
@@ -214,13 +224,22 @@ NSUInteger filesCount = 1;
     return 1;
 }
 
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return  1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return  4;
+}
+
 #pragma mark ---- UIPickerViewDelegate delegate methods ----
 
 // returns the number of rows
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    NSArray *filesList = [[NSUserDefaults standardUserDefaults] objectForKey:@"downloaded_files"];
-    return [filesList count];
+    return [self.directoryContent count];
     
 //    NSArray *driversList = [[NSUserDefaults standardUserDefaults] objectForKey:@"drivers_list"];
 //    return [driversList count];
@@ -229,8 +248,7 @@ NSUInteger filesCount = 1;
 // returns the title of each row
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    NSArray *filesList = [[NSUserDefaults standardUserDefaults] objectForKey:@"downloaded_files"];
-    return [filesList objectAtIndex:row];
+    return [self.directoryContent objectAtIndex:row];
     
 //    NSArray *driversList = [[NSUserDefaults standardUserDefaults] objectForKey:@"drivers_list"];
 //    return [driversList objectAtIndex:row];
@@ -239,7 +257,7 @@ NSUInteger filesCount = 1;
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
 //  GETs the selected file
-    NSString *file = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"downloaded_files"] objectAtIndex:row];
+    NSString *file = [self.directoryContent objectAtIndex:row];
     NSLog(@"SetupVC - file selected -> %@", file);
 
     [[NSUserDefaults standardUserDefaults] setObject:file forKey:@"selected_photo"];
