@@ -89,6 +89,8 @@ const int  MAX_PINS_TO_DROP = 200;
 //    }
     
 // Loads from data objects
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate.memberData loadPlistData];
     [self loadPins];
     
 // Centers the view on the box containing all visible pins

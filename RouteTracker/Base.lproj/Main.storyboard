@@ -196,7 +196,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dUl-CY-pRf">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dUl-CY-pRf">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <connections>
                                     <outlet property="delegate" destination="8rJ-Kc-sve" id="O6e-NV-p2R"/>
@@ -872,10 +872,8 @@
                     <connections>
                         <outlet property="driverPicker" destination="11K-as-cON" id="n0u-sz-B5D"/>
                         <outlet property="filePicker" destination="B2x-Yg-t4U" id="rsF-TB-rhY"/>
-                        <outlet property="fileSelectorCell" destination="sms-yX-0kH" id="6Cw-sJ-gcS"/>
                         <outlet property="magazineSelectorControl" destination="0Q6-C8-aH6" id="AkR-1c-dIF"/>
                         <outlet property="mapSelectorControl" destination="vKe-Ls-2dq" id="t6H-nn-V3i"/>
-                        <outlet property="mapSetupCell" destination="RNZ-5U-dms" id="hh4-LB-9gJ"/>
                         <outlet property="setupTableView" destination="KUD-nq-620" id="kBJ-8q-6F7"/>
                         <outlet property="uploadToGoogleButton" destination="gcX-p2-RwP" id="beU-X4-1oM"/>
                     </connections>
@@ -1299,7 +1297,7 @@
         <image name="questions1.png" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="wXl-0J-PM3"/>
-        <segue reference="hGG-Lb-Gts"/>
+        <segue reference="qPY-Ep-njk"/>
+        <segue reference="fec-gw-sch"/>
     </inferredMetricsTieBreakers>
 </document>
