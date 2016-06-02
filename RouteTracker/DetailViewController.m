@@ -105,7 +105,7 @@
     [mutableDetailItem setValue:self.contactTextField.text forKey:@"Contact Name"];
     [mutableDetailItem setValue:self.phoneTextField.text forKey:@"Contact Number"];
     
-    NSLog(@"detailItem Name = %@", mutableDetailItem);
+    NSLog(@"detailItem VALUES = %@", mutableDetailItem);
     
     // Stores the detailItem to NSUserDefaults
     //  NSDictionary *modifiedDictionary = [NSDictionary dictionaryWithDictionary:mutableDetailItem];
