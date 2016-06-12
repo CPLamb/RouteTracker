@@ -74,7 +74,7 @@
     self.zipTextField.text = [self.detailItem objectForKey:@"Zipcode"];
     self.commentTextField.text = [self.detailItem objectForKey:@"Comment"];
     self.contactTextField.text = [self.detailItem objectForKey:@"Contact Name"];
-    self.phoneTextField.text = [self.detailItem objectForKey:@"Contact Number"];
+    self.phoneTextField.text = [self.detailItem objectForKey:@"Contact Phone"];
     
     // Tap to hide keyboard
     UITapGestureRecognizer *hideKeyboardTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideTap:)];
@@ -103,7 +103,7 @@
     [mutableDetailItem setValue:self.stateTextField.text forKey:@"State"];
     [mutableDetailItem setValue:self.zipTextField.text forKey:@"Zipcode"];
     [mutableDetailItem setValue:self.contactTextField.text forKey:@"Contact Name"];
-    [mutableDetailItem setValue:self.phoneTextField.text forKey:@"Contact Number"];
+    [mutableDetailItem setValue:self.phoneTextField.text forKey:@"Contact Phone"];
     
     NSLog(@"detailItem VALUES = %@", mutableDetailItem);
     
@@ -130,7 +130,7 @@
         ![[self.detailItem objectForKey:@"State"] isEqualToString:self.stateTextField.text] ||
         ![[self.detailItem objectForKey:@"Zipcode"] isEqualToString:self.zipTextField.text] ||
         ![[self.detailItem objectForKey:@"Contact Name"] isEqualToString:self.contactTextField.text] ||
-        ![[self.detailItem objectForKey:@"Contact Number"] isEqualToString:self.phoneTextField.text]) {
+        ![[self.detailItem objectForKey:@"Contact Phone"] isEqualToString:self.phoneTextField.text]) {
         [self.detailItem setValue:self.nameTextField.text forKey:@"Name"];
         [self.detailItem setValue:self.deliverTextField.text forKey:@"Total Quantity to Deliver"];
         [self.detailItem setValue:self.returnedTextField.text forKey:@"Returns"];
@@ -149,7 +149,7 @@
         [self.detailItem setValue:self.stateTextField.text forKey:@"State"];
         [self.detailItem setValue:self.zipTextField.text forKey:@"Zipcode"];
         [self.detailItem setValue:self.contactTextField.text forKey:@"Contact Name"];
-        [self.detailItem setValue:self.phoneTextField.text forKey:@"Contact Number"];
+        [self.detailItem setValue:self.phoneTextField.text forKey:@"Contact Phone"];
         AppDelegate *delegate = [UIApplication sharedApplication].delegate;
         [delegate.memberData modifyMemberListFile:mutableDetailItem withUpdates:mutableDetailItem];
 
