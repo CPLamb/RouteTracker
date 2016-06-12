@@ -10,8 +10,9 @@
 
 @import MessageUI;
 
-//#define EMAILID @"guna.iosdev@gmail.com"
-#define   EMAILID @"cplamb@pacbell.net"
+// This needs to be an NSArray of email addresses
+#define EMAILID01 @"guna.iosdev@gmail.com"
+#define   EMAILID02 @"cplamb@pacbell.net"
 
 @interface SetupTableViewController ()<MFMailComposeViewControllerDelegate>
 @property NSArray *driverList;
@@ -93,7 +94,7 @@ NSUInteger filesCount = 1;
     }
     NSData *updatedPlistXML = [[NSFileManager defaultManager] contentsAtPath:plistPath];
     
-    NSArray *toRecipients	= [NSArray arrayWithObject:EMAILID];
+    NSArray *toRecipients	= [NSArray arrayWithObjects:EMAILID01, EMAILID02, nil];
     [emailVC setToRecipients:toRecipients];
     
     [emailVC addAttachmentData:updatedPlistXML mimeType:@"text/xml" fileName:filename];
