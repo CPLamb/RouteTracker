@@ -394,14 +394,14 @@ const int  MAX_PINS_TO_DROP = 200;
     //    NSLog(@"Removing %d annotations from mapView annotations", [self.mapView.annotations count]);
     [self.mapView removeAnnotations:self.mapView.annotations];
 }
-
-//- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
-//    [self zoomToFitMapAnnotations];
-//    
-//    // If defaultPin is set, select it when we view the map
-//    [self.mapView selectAnnotation:self.defaultPin animated:YES];    
-//}
-
+/*
+- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
+    [self zoomToFitMapAnnotations];
+    
+    // If defaultPin is set, select it when we view the map
+    [self.mapView selectAnnotation:self.defaultPin animated:YES];
+}
+*/
 #pragma mark - MapView Annotation Methods
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
