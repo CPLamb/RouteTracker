@@ -88,7 +88,7 @@ const int  MAX_PINS_TO_DROP = 200;
         [delegate.memberData loadPlistData];
   //      [self loadPins];
     }
-    
+
 // Loads from data objects
 //    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
 //    [delegate.memberData loadPlistData];
@@ -103,8 +103,8 @@ const int  MAX_PINS_TO_DROP = 200;
     [super viewDidAppear:animated];
     NSLog(@"%@ DID appear...", self);
     
-    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-    [delegate.memberData loadPlistData];
+//    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+//    [delegate.memberData loadPlistData];
     
     if (self.currentRect.size.width != 0) {
         [self.mapView setVisibleMapRect:self.currentRect animated:YES];
