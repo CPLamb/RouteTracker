@@ -270,6 +270,9 @@
 // sets the global BOOL list_filtered to 1
     [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"list_filtered"];
 
+// calculates the total for the filtered list
+    [self calculateTotals];
+    
 }
 
 #pragma mark - UISearchBarDelegate methods
@@ -296,6 +299,23 @@
 }
 */
 #pragma mark - Custom methods
+
+- (void) calculateTotals
+{
+    NSInteger stops = [self.filteredArray count];
+    NSInteger copies = 0;
+    NSInteger *bundles = 0;
+    NSInteger returns = 0;
+    
+// loop thru the array & total values
+    for (int i=0;i<=stops-1;i++) {
+        copies = copies + [[[self.filteredArray objectAtIndex:i] valueForKey:@"Total Quantity to Deliver"] integerValue];
+        returns = returns + [[[self.filteredArray objectAtIndex:i] valueForKey:@"Returns"] integerValue];
+    }
+    bundles = copies/50;
+    NSLog(@"Total stops %ld  & returns %ld", stops, returns);
+    NSLog(@"Total copies %ld  & bundles = %ld", copies, bundles);
+}
 
 - (void)buildDriversList
 {
@@ -361,12 +381,12 @@
 - (void)fieldFilter:(SortSelectionViewController *)controller
 {
     NSString *selectedDriver = [[NSUserDefaults standardUserDefaults] objectForKey:@"selected_driver"];
-    NSLog(@"Filtering by driver %@", selectedDriver);
+//    NSLog(@"Filtering by driver %@", selectedDriver);
 }
 
 - (void)dataFileSelect:(SetupTableViewController *)controller
 {
-    NSLog(@"Changing the data file!!");
+ //   NSLog(@"Changing the data file!!");
     [self selectProperPlistData];
 }
 
