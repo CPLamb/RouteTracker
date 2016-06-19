@@ -173,6 +173,8 @@ NSString* fileContent;
         //update UI on the main thread
         dispatch_async(dispatch_get_main_queue(), ^{
             self.numberOfRowsTextfield.text = [[NSNumber numberWithInt:self.recordCount] stringValue];
+            UIAlertView *downloadCmplt = [DrEditUtilities showLoadingMessageWithTitle:@"Downloading the file is complete" delegate:self];
+
             [activityIndicatorView stopAnimating];
             
             //Add the screenMarker array to the layer
@@ -221,7 +223,6 @@ NSString* fileContent;
                 
                 NSLog(@"self.recordCount = %d", self.recordCount);
                 self.numberOfRowsTextfield.text = [[NSNumber numberWithInt:self.recordCount] stringValue];
-
                 NSLog(@"FilesVC loadFileContent - self.membersArray = \n%@", self.membersArray);
 
             } else {
