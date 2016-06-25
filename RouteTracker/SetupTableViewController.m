@@ -11,8 +11,8 @@
 @import MessageUI;
 
 // This needs to be an NSArray of email addresses
-#define EMAILID01 @"guna.iosdev@gmail.com"
-#define   EMAILID02 @"cplamb@pacbell.net"
+// #define EMAILID02 @"guna.iosdev@gmail.com"
+#define   EMAILID01 @"cplamb@pacbell.net"
 
 @interface SetupTableViewController ()<MFMailComposeViewControllerDelegate>
 @property NSArray *driverList;
@@ -43,11 +43,14 @@ NSUInteger filesCount = 1;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//  NSLog(@"SetupViewController viewWillAppear");
+  NSLog(@"SetupViewController viewWillAppear");
 
 //  self.magazineSelectorControl.selectedSegmentIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_spreadsheet"];
   
-  self.mapSelectorControl.selectedSegmentIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_map_type"];
+    self.mapSelectorControl.selectedSegmentIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_map_type"];
+    
+// Ensures pickerView is current
+    [self.filePicker reloadAllComponents];
     
     // Gets the directoryContent before the view appears???
  //   [self TestButton:self.
@@ -94,7 +97,7 @@ NSUInteger filesCount = 1;
     }
     NSData *updatedPlistXML = [[NSFileManager defaultManager] contentsAtPath:plistPath];
     
-    NSArray *toRecipients	= [NSArray arrayWithObjects:EMAILID01, EMAILID02, nil];
+    NSArray *toRecipients	= [NSArray arrayWithObjects:EMAILID01, nil];
     [emailVC setToRecipients:toRecipients];
     
     [emailVC addAttachmentData:updatedPlistXML mimeType:@"text/xml" fileName:filename];
