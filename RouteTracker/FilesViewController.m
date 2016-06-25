@@ -18,6 +18,14 @@ NSString* fileContent;
 //@synthesize delegate = _delegate;
 @synthesize activityIndicatorView;
 
+// Additional constants for Liang to implement
+#define   defaultDriver @"00A-Misc"
+#define   defaultCategory @"xxx"
+// can we make Latitude/longitude random to the 3rd fraction (ie 35.851,35.857,etc)
+// this makes sure that all pin do not lie on top of each other
+#define   defaultLat @"35.85"
+#define   defaultLong @"-122.01"
+
 #pragma mark - Lifecycle methods
 
 - (void)viewDidLoad {
