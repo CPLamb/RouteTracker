@@ -402,8 +402,68 @@ NSString* fileContent;
                                        encoding:NSUTF8StringEncoding
                                           error:NULL];
     NSLog(@"Files converted = %@", @(fileConverted));
+    
+    [self replaceNullWithDefaultValueToPlistPath:path];
 
     return plistData;
+}
+
+- (void)replaceNullWithDefaultValueToPlistPath:(NSString *)plistPath {
+    if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
+        NSLog(@"We couldn't find the file so we'll load from the bundle");
+        plistPath = [[NSBundle mainBundle] pathForResource:@"SCWaveDistributionListCurrent" ofType:@"plist"];
+    }
+    NSData *plistXML = [[NSFileManager defaultManager] contentsAtPath:plistPath];
+    NSError *errorDescr = nil;
+    NSArray *temp = [NSPropertyListSerialization propertyListWithData:plistXML
+                                                              options:NSPropertyListImmutable
+                                                               format:NULL
+                                                                error:&errorDescr];
+    
+    if (!errorDescr) {
+        NSMutableArray *mutableTemp = [NSMutableArray new];
+        for (NSDictionary *dict in temp) {
+            NSMutableDictionary *mutableDict = [dict mutableCopy];
+            NSString *categoryValue = dict[@"Category"];
+            if (categoryValue && categoryValue.length > 0) {
+                if ([categoryValue isEqualToString:@" "]) {
+                    mutableDict[@"Category"] = defaultCategory;
+                }
+            } else {
+                mutableDict[@"Category"] = defaultCategory;
+            }
+            NSString *driverValue = dict[@"Driver"];
+            if (driverValue && driverValue.length > 0) {
+                if ([driverValue isEqualToString:@" "]) {
+                    mutableDict[@"Driver"] = defaultDriver;
+                }
+            } else {
+                mutableDict[@"Driver"] = defaultDriver;
+            }
+            
+            NSString *latitudeValue = dict[@"Latitude"];
+            if (latitudeValue && latitudeValue.length > 0) {
+                if ([latitudeValue isEqualToString:@" "]) {
+                    mutableDict[@"Latitude"] = defaultLat;
+                }
+            } else {
+                mutableDict[@"Latitude"] = defaultLat;
+            }
+            
+            NSString *longitudeValue = dict[@"Longitude"];
+            if (longitudeValue && longitudeValue.length > 0) {
+                if ([longitudeValue isEqualToString:@" "]) {
+                    mutableDict[@"Longitude"] = defaultLong;
+                }
+            } else {
+                mutableDict[@"Longitude"] = defaultLong;
+            }
+            
+            [mutableTemp addObject:mutableDict];
+        }
+        
+        [mutableTemp writeToFile:plistPath atomically:YES];
+    }
 }
 
 @end
