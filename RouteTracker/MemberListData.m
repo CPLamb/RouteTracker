@@ -17,11 +17,11 @@
 #pragma mark - Custom methods
 
 - (void)loadPlistData {
-//    NSLog(@"Loads the Plist into member array either from the main bundle (read only) or from the documents directory files downloaded from Google sheets");
+    //    NSLog(@"Loads the Plist into member array either from the main bundle (read only) or from the documents directory files downloaded from Google sheets");
     
     [self loadFileFromDocuments];
     
-// Copy members array into the names array which can later be sorted for other views
+    // Copy members array into the names array which can later be sorted for other views
     self.namesArray = [NSArray arrayWithArray:self.membersArray];
 }
 
@@ -29,9 +29,15 @@
     NSLog(@"READS the Plist formatted file & converts it into an array (of dictionaries)");
     
     NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"selected_plist"];
-//    NSString *filename = @"EdibleMontereyDistributionListCurrent";  // emergency fix DELETE
+    //    NSString *filename = @"EdibleMontereyDistributionListCurrent";  // emergency fix DELETE
     NSError *errorDescr = nil;
     NSPropertyListFormat format;
+    // will crash, so make sure file name != nil
+    if (!filename) {
+        filename = @"SCWaveDistributionListCurrent.plist";
+        [[NSUserDefaults standardUserDefaults] setObject:filename forKey:@"selected_plist"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
     NSString *plistPath;
     NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     plistPath = [rootPath stringByAppendingPathComponent:filename];
@@ -41,15 +47,15 @@
     }
     NSData *plistXML = [[NSFileManager defaultManager] contentsAtPath:plistPath];
     NSArray *temp = [NSPropertyListSerialization propertyListWithData:plistXML
-                                                                         options:NSPropertyListImmutable
-                                                                          format:NULL
-                                                                           error:&errorDescr];
+                                                              options:NSPropertyListImmutable
+                                                               format:NULL
+                                                                error:&errorDescr];
     
     if (!temp) {
         NSLog(@"Error reading plist: %@, format %lu", errorDescr, (unsigned long)format);
     }
     self.membersArray = [NSMutableArray arrayWithArray:temp];
-//    NSLog(@"Took no time at all! %@", [temp objectAtIndex:[temp count]-1]);
+    //    NSLog(@"Took no time at all! %@", [temp objectAtIndex:[temp count]-1]);
     
 }
 
@@ -72,7 +78,7 @@
                                                               options:NSPropertyListImmutable
                                                                format:NULL
                                                                 error:&errorDescr];
-
+    
     if (!temp) {
         NSLog(@"Error reading plist: %@, format %lu", errorDescr, (unsigned long)format);
     }
@@ -151,6 +157,6 @@
     NSString *csvString = [[NSString alloc] initWithData:contents
                                                 encoding:NSUTF8StringEncoding];
     [csvString writeToFile:filePath atomically:YES encoding:NSStringEncodingConversionAllowLossy error:nil];
-
+    
 }
- @end
+@end
