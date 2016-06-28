@@ -40,7 +40,7 @@
     
     [self updateDetailItem];
     
-
+    
 }
 
 -(void)initializeDetailItem
@@ -110,53 +110,35 @@
     // Stores the detailItem to NSUserDefaults
     //  NSDictionary *modifiedDictionary = [NSDictionary dictionaryWithDictionary:mutableDetailItem];
     NSMutableDictionary *modifiedDictionary = [[NSMutableDictionary alloc] init];
-    [modifiedDictionary setValue:[self.detailItem objectForKey:@"Index"] forKey:@"Index"];
+    [modifiedDictionary setValue:[mutableDetailItem objectForKey:@"Index"] forKey:@"Index"];
     
-    if (![[self.detailItem objectForKey:@"Name"] isEqualToString:self.nameTextField.text] ||
-        ![[self.detailItem objectForKey:@"Total Quantity to Deliver"] isEqualToString:self.deliverTextField.text] ||
-        ![[self.detailItem objectForKey:@"Returns"] isEqualToString:self.returnedTextField.text] ||
-        ![[self.detailItem objectForKey:@"Delivered to Date"] isEqualToString:self.qtyToDateTextField.text] ||
-        ![[self.detailItem objectForKey:@"Number Times Delivered"] isEqualToString:self.timesDeliveredTextField.text] ||
-        ![[self.detailItem objectForKey:@"Notes"] isEqualToString:self.notesTextField.text] ||
-        ![[self.detailItem objectForKey:@"Comment"] isEqualToString:self.commentTextField.text] ||
-        ![[self.detailItem objectForKey:@"Driver"] isEqualToString:self.driverTextField.text] ||
-        ![[self.detailItem objectForKey:@"Category"] isEqualToString:self.categoryTextField.text] ||
-        ![[self.detailItem objectForKey:@"Audited"] isEqualToString:self.auditedTextField.text] ||
-        ![[self.detailItem objectForKey:@"Advertiser"] isEqualToString:self.advertiserTextField.text] ||
-        ![[self.detailItem objectForKey:@"Latitude"] isEqualToString:self.latitudeTextField.text] ||
-        ![[self.detailItem objectForKey:@"Longitude"] isEqualToString:self.longitudeTextField.text] ||
-        ![[self.detailItem objectForKey:@"Street"] isEqualToString:self.addressTextField.text] ||
-        ![[self.detailItem objectForKey:@"City"] isEqualToString:self.cityTextField.text] ||
-        ![[self.detailItem objectForKey:@"State"] isEqualToString:self.stateTextField.text] ||
-        ![[self.detailItem objectForKey:@"Zipcode"] isEqualToString:self.zipTextField.text] ||
-        ![[self.detailItem objectForKey:@"Contact Name"] isEqualToString:self.contactTextField.text] ||
-        ![[self.detailItem objectForKey:@"Contact Phone"] isEqualToString:self.phoneTextField.text]) {
-        [self.detailItem setValue:self.nameTextField.text forKey:@"Name"];
-        [self.detailItem setValue:self.deliverTextField.text forKey:@"Total Quantity to Deliver"];
-        [self.detailItem setValue:self.returnedTextField.text forKey:@"Returns"];
-        [self.detailItem setValue:self.qtyToDateTextField.text forKey:@"Delivered to Date"];
-        [self.detailItem setValue:self.timesDeliveredTextField.text forKey:@"Number Times Delivered"];
-        [self.detailItem setValue:self.notesTextField.text forKey:@"Notes"];
-        [self.detailItem setValue:self.commentTextField.text forKey:@"Comment"];
-        [self.detailItem setValue:self.driverTextField.text forKey:@"Driver"];
-        [self.detailItem setValue:self.categoryTextField.text forKey:@"Category"];
-        [self.detailItem setValue:self.auditedTextField.text forKey:@"Audited"];
-        [self.detailItem setValue:self.advertiserTextField.text forKey:@"Advertiser"];
-        [self.detailItem setValue:self.latitudeTextField.text forKey:@"Latitude"];
-        [self.detailItem setValue:self.longitudeTextField.text forKey:@"Longitude"];
-        [self.detailItem setValue:self.addressTextField.text forKey:@"Street"];
-        [self.detailItem setValue:self.cityTextField.text forKey:@"City"];
-        [self.detailItem setValue:self.stateTextField.text forKey:@"State"];
-        [self.detailItem setValue:self.zipTextField.text forKey:@"Zipcode"];
-        [self.detailItem setValue:self.contactTextField.text forKey:@"Contact Name"];
-        [self.detailItem setValue:self.phoneTextField.text forKey:@"Contact Phone"];
+    if (self.textFieldChanged) {
+        [mutableDetailItem setValue:self.nameTextField.text forKey:@"Name"];
+        [mutableDetailItem setValue:self.deliverTextField.text forKey:@"Total Quantity to Deliver"];
+        [mutableDetailItem setValue:self.returnedTextField.text forKey:@"Returns"];
+        [mutableDetailItem setValue:self.qtyToDateTextField.text forKey:@"Delivered to Date"];
+        [mutableDetailItem setValue:self.timesDeliveredTextField.text forKey:@"Number Times Delivered"];
+        [mutableDetailItem setValue:self.notesTextField.text forKey:@"Notes"];
+        [mutableDetailItem setValue:self.commentTextField.text forKey:@"Comment"];
+        [mutableDetailItem setValue:self.driverTextField.text forKey:@"Driver"];
+        [mutableDetailItem setValue:self.categoryTextField.text forKey:@"Category"];
+        [mutableDetailItem setValue:self.auditedTextField.text forKey:@"Audited"];
+        [mutableDetailItem setValue:self.advertiserTextField.text forKey:@"Advertiser"];
+        [mutableDetailItem setValue:self.latitudeTextField.text forKey:@"Latitude"];
+        [mutableDetailItem setValue:self.longitudeTextField.text forKey:@"Longitude"];
+        [mutableDetailItem setValue:self.addressTextField.text forKey:@"Street"];
+        [mutableDetailItem setValue:self.cityTextField.text forKey:@"City"];
+        [mutableDetailItem setValue:self.stateTextField.text forKey:@"State"];
+        [mutableDetailItem setValue:self.zipTextField.text forKey:@"Zipcode"];
+        [mutableDetailItem setValue:self.contactTextField.text forKey:@"Contact Name"];
+        [mutableDetailItem setValue:self.phoneTextField.text forKey:@"Contact Phone"];
         AppDelegate *delegate = [UIApplication sharedApplication].delegate;
         [delegate.memberData modifyMemberListFile:mutableDetailItem withUpdates:mutableDetailItem];
-
+        
     }
     [[NSUserDefaults standardUserDefaults] setObject:mutableDetailItem forKey:@"selected_member"];
-    
 }
+
 - (IBAction)textFieldDidChange:(id)sender {
     self.textFieldChanged = TRUE;
 }
@@ -177,33 +159,33 @@
 - (void)hideTap:(UIGestureRecognizer *)gestureRecognizer
 {
     [self.view endEditing:YES];
-//    NSLog(@"Hides the keyboard");
+    //    NSLog(@"Hides the keyboard");
 }
 
 - (IBAction)geocodeButton:(UIButton *)sender {
     NSLog(@"Changes location's lat/long values");
     
-   // NSMutableDictionary *myDictionary = [[NSMutableDictionary alloc] initWithDictionary:self.detailItem];
+    // NSMutableDictionary *myDictionary = [[NSMutableDictionary alloc] initWithDictionary:self.detailItem];
     
     CLLocationManager *lm = [[CLLocationManager alloc] init];
     lm.delegate = self;
     lm.desiredAccuracy = kCLLocationAccuracyBest;
     lm.distanceFilter = kCLDistanceFilterNone;
     [lm startUpdatingLocation];
-
+    
     NSString *userLatitude = [NSString stringWithFormat:@"%f",
                               lm.location.coordinate.latitude];
     NSString *userLongitude = [NSString stringWithFormat:@"%f",lm.location.coordinate.longitude];
     
     self.latitudeTextField.text = userLatitude;
     self.longitudeTextField.text = userLongitude;
-
+    
     /*
-    [myDictionary setValue:[self.detailItem objectForKey:@"Index"] forKey:@"Index"];
-    [myDictionary setValue:userLatitude forKey:@"Latitude"];
-    [myDictionary setValue:userLongitude forKey:@"Longitude"];
-    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-    [delegate.memberData modifyMemberListFile:self.detailItem withUpdates:myDictionary];*/
+     [myDictionary setValue:[self.detailItem objectForKey:@"Index"] forKey:@"Index"];
+     [myDictionary setValue:userLatitude forKey:@"Latitude"];
+     [myDictionary setValue:userLongitude forKey:@"Longitude"];
+     AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+     [delegate.memberData modifyMemberListFile:self.detailItem withUpdates:myDictionary];*/
     
     
 }
@@ -217,7 +199,7 @@
     // Pass the selected object to the new view controller.
     // Moves to other view & sets the detailItem to the selected item
     
-//    NSLog(@"Segue ID is %@", [segue identifier]);
+    //    NSLog(@"Segue ID is %@", [segue identifier]);
     [self updateDetailItem];
     if ([[segue identifier] isEqualToString:@"showMap"]) {
         [[segue destinationViewController] setDetailItem:self.detailItem];

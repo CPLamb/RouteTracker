@@ -11,8 +11,8 @@
 @import MessageUI;
 
 // This needs to be an NSArray of email addresses
-// #define EMAILID02 @"guna.iosdev@gmail.com"
-#define   EMAILID01 @"cplamb@pacbell.net"
+#define EMAILID01 @"guna.iosdev@gmail.com"
+#define   EMAILID02 @"cplamb@pacbell.net"
 
 @interface SetupTableViewController ()<MFMailComposeViewControllerDelegate>
 @property NSArray *driverList;
@@ -30,9 +30,9 @@ NSUInteger filesCount = 1;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-// loads data files onto the pickerView
+    // loads data files onto the pickerView
     [self loadPickerViewDataFiles];
-
+    
     // Uncomment the following line to preserve selection between presentations.
     //self.clearsSelectionOnViewWillAppear = NO;
     
@@ -43,23 +43,24 @@ NSUInteger filesCount = 1;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-  NSLog(@"SetupViewController viewWillAppear");
-
-//  self.magazineSelectorControl.selectedSegmentIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_spreadsheet"];
-  
-    self.mapSelectorControl.selectedSegmentIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_map_type"];
     
-// Ensures pickerView is current
+    [self hardcodedListWhenFirstLaunchOrClearList];
     [self.filePicker reloadAllComponents];
     
+    //  NSLog(@"SetupViewController viewWillAppear");
+    
+    //  self.magazineSelectorControl.selectedSegmentIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_spreadsheet"];
+    
+    self.mapSelectorControl.selectedSegmentIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_map_type"];
+    
     // Gets the directoryContent before the view appears???
- //   [self TestButton:self.
-
+    //   [self TestButton:self.
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
- //   NSLog(@"view WILL Disappear, used to change the spreadsheet");
+    //   NSLog(@"view WILL Disappear, used to change the spreadsheet");
 }
 
 - (void)didReceiveMemoryWarning {
@@ -68,6 +69,24 @@ NSUInteger filesCount = 1;
 }
 
 #pragma mark - Custom methods
+
+- (void)hardcodedListWhenFirstLaunchOrClearList {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *path = [paths objectAtIndex:0];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *directoryContent = [fileManager contentsOfDirectoryAtPath:path error:NULL];
+    if (directoryContent.count <= 0) {
+        NSString *hardcodedFilePath = [[NSBundle mainBundle] pathForResource:@"EdibleMontereyDistributionList" ofType:@"plist"];
+        NSError *error = nil;
+        NSString *copyPath = [NSString stringWithFormat:@"%@/%@", path, @"EdibleMontereyDistributionListDefault"];
+        if([fileManager copyItemAtPath:hardcodedFilePath toPath:copyPath error:&error]==NO){
+            NSLog(@"error = %@", error);
+            return;
+        }
+        [[NSUserDefaults standardUserDefaults] setObject:@[@"EdibleMontereyDistributionList"]
+                                                  forKey:@"downloaded_files"];
+    }
+}
 
 - (IBAction)uploadToGoogleButtonPressed:(id)sender {
     
@@ -97,11 +116,11 @@ NSUInteger filesCount = 1;
     }
     NSData *updatedPlistXML = [[NSFileManager defaultManager] contentsAtPath:plistPath];
     
-    NSArray *toRecipients	= [NSArray arrayWithObjects:EMAILID01, nil];
+    NSArray *toRecipients	= [NSArray arrayWithObjects:EMAILID01, EMAILID02, nil];
     [emailVC setToRecipients:toRecipients];
     
     [emailVC addAttachmentData:updatedPlistXML mimeType:@"text/xml" fileName:filename];
- //   [emailVC addAttachmentData:updatedPlistXML mimeType:@"text/xml" fileName:plistPath];
+    //   [emailVC addAttachmentData:updatedPlistXML mimeType:@"text/xml" fileName:plistPath];
     
     // Fill out the email body text
     NSString *emailBody = @"Attached updated distribution plist file";
@@ -122,19 +141,19 @@ NSUInteger filesCount = 1;
             NSLog(@"Mail saved");
             break;
         case MFMailComposeResultSent:
-            {
-                NSLog(@"Mail sent");
-                AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-                [delegate.arrayToBeUploaded removeAllObjects];
-                NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"updated_plist"];
-                NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-                NSString *documentsDirectory = [paths objectAtIndex:0];
-                NSString *path = [documentsDirectory stringByAppendingPathComponent:filename];
-                NSError *error;
-                if(![[NSFileManager defaultManager] removeItemAtPath:path error:&error]){
-                    NSLog(@"Error deleting modifiedPlist file");
-                }
+        {
+            NSLog(@"Mail sent");
+            AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+            [delegate.arrayToBeUploaded removeAllObjects];
+            NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"updated_plist"];
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *documentsDirectory = [paths objectAtIndex:0];
+            NSString *path = [documentsDirectory stringByAppendingPathComponent:filename];
+            NSError *error;
+            if(![[NSFileManager defaultManager] removeItemAtPath:path error:&error]){
+                NSLog(@"Error deleting modifiedPlist file");
             }
+        }
             break;
         case MFMailComposeResultFailed:
             NSLog(@"Mail sent failure: %@", [error localizedDescription]);
@@ -150,7 +169,7 @@ NSUInteger filesCount = 1;
 
 - (IBAction)selectSpreadsheetControl:(UISegmentedControl *)sender
 {
-//    [[NSUserDefaults standardUserDefaults] setInteger:sender.selectedSegmentIndex forKey:@"selected_spreadsheet"];
+    //    [[NSUserDefaults standardUserDefaults] setInteger:sender.selectedSegmentIndex forKey:@"selected_spreadsheet"];
     
     NSString *dataFilename = [[NSString alloc] init];
     switch(sender.selectedSegmentIndex) {
@@ -181,17 +200,17 @@ NSUInteger filesCount = 1;
     NSString *selectedFile = [[NSUserDefaults standardUserDefaults] objectForKey:@"selected_plist"];
     
     NSLog(@"Takes %@ from the pickerView selection and uploads it into the memberListData array", selectedFile);
-
-//    NSString *path;
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    path = [paths objectAtIndex:0];
-//    path = [path stringByAppendingPathComponent:selectedFile];
-//    NSData *theData;
-//    theData = [[NSFileManager defaultManager] contentsAtPath:path];
-//    NSString *theDataString = [[NSString alloc] initWithData:theData encoding:NSUTF8StringEncoding];
-//    NSLog(@"TheData = %@", theDataString);
     
-// Now goes to the Data model MemberListData and does the actual plist to array conversion
+    //    NSString *path;
+    //    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    //    path = [paths objectAtIndex:0];
+    //    path = [path stringByAppendingPathComponent:selectedFile];
+    //    NSData *theData;
+    //    theData = [[NSFileManager defaultManager] contentsAtPath:path];
+    //    NSString *theDataString = [[NSString alloc] initWithData:theData encoding:NSUTF8StringEncoding];
+    //    NSLog(@"TheData = %@", theDataString);
+    
+    // Now goes to the Data model MemberListData and does the actual plist to array conversion
     AppDelegate *delegate = [UIApplication sharedApplication].delegate;
     [delegate.memberData loadPlistData];
 }
@@ -207,7 +226,7 @@ NSUInteger filesCount = 1;
         NSLog(@"File %d: %@", Count, [self.directoryContent objectAtIndex:Count]);
     }
     filesCount = [self.directoryContent count];
-
+    
 }
 
 #pragma mark ---- UIPickerViewDataSource delegate methods ----
@@ -226,8 +245,8 @@ NSUInteger filesCount = 1;
     NSArray *filesList = [[NSUserDefaults standardUserDefaults] objectForKey:@"downloaded_files"];
     return [filesList count];
     
-//    NSArray *driversList = [[NSUserDefaults standardUserDefaults] objectForKey:@"drivers_list"];
-//    return [driversList count];
+    //    NSArray *driversList = [[NSUserDefaults standardUserDefaults] objectForKey:@"drivers_list"];
+    //    return [driversList count];
 }
 
 // returns the title of each row
@@ -236,21 +255,22 @@ NSUInteger filesCount = 1;
     NSArray *filesList = [[NSUserDefaults standardUserDefaults] objectForKey:@"downloaded_files"];
     return [filesList objectAtIndex:row];
     
-//    NSArray *driversList = [[NSUserDefaults standardUserDefaults] objectForKey:@"drivers_list"];
-//    return [driversList objectAtIndex:row];
+    //    NSArray *driversList = [[NSUserDefaults standardUserDefaults] objectForKey:@"drivers_list"];
+    //    return [driversList objectAtIndex:row];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-//  GETs the selected file
+    //  GETs the selected file
+#warning check here later
     NSString *file = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"downloaded_files"] objectAtIndex:row];
     NSLog(@"SetupVC - file selected -> %@", file);
-
+    
     [[NSUserDefaults standardUserDefaults] setObject:file forKey:@"selected_photo"];
     [[NSUserDefaults standardUserDefaults] setObject:file forKey:@"selected_plist"];
-// use selected filename to load membersArray from documents directory
+    // use selected filename to load membersArray from documents directory
     [self loadUrlFromDocuments];
-
+    
 }
 
 
