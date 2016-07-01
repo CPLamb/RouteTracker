@@ -13,8 +13,8 @@
 
 #define kDefaultCategoryValue @"00A-Misc"
 #define kDefaultDriverValue @"00A-Misc"
-#define kDefaultLatitudeValue @"36.964397"
-#define kDefaultLongitudeValue @"-121.989267"
+#define kDefaultLatitudeValue [NSString stringWithFormat:@"%f", 36.960097 + arc4random_uniform(99) * 0.0001]
+#define kDefaultLongitudeValue [NSString stringWithFormat:@"%f", -121.980067 - arc4random_uniform(99) * 0.0001]
 
 @implementation FilesViewController
 NSString* fileContent;
