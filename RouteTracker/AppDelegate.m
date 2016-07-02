@@ -37,6 +37,7 @@
         [[NSUserDefaults standardUserDefaults] setObject:@"modifiedData" forKey:@"updated_plist"];
         [[NSUserDefaults standardUserDefaults] setObject:@"initialDictionary" forKey:@"selected_member"];
         [[NSUserDefaults standardUserDefaults] setObject:@"selectedIndexPath" forKey:@"selected_indexPath"];
+        [[NSUserDefaults standardUserDefaults] setObject:@"ALL" forKey:@"selected_route"];
         
         NSLog(@"AppDelegate -- initialSpreadsheet = %@",[[NSUserDefaults standardUserDefaults]stringForKey:@"selected_spreadsheet"] );
         // sync the defaults to disk

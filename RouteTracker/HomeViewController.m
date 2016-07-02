@@ -18,6 +18,7 @@
 @interface HomeViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *AppMainLogo;
 @property (weak, nonatomic) IBOutlet UILabel *selectedMagazineLabel;
+@property (weak, nonatomic) IBOutlet UILabel *selectedRouteLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *selectedMagazineLogo;
 
 @property (nonnull, strong) CLLocationManager *locationManager;
@@ -47,12 +48,14 @@
 {
     [super viewWillAppear:animated];
     NSString *dataFilenameIndex = [[NSUserDefaults standardUserDefaults] stringForKey:@"selected_plist"];
+    NSString *routeSelectedText = [[NSUserDefaults standardUserDefaults] stringForKey:@"selected_route"];
 
     NSLog(@"HomeVC -- dataFilenameIndex = %@", dataFilenameIndex.description);
 
-// Sets up display of magazine loaded
+// Sets up display of magazine loaded & route selected
     self.selectedMagazineLabel.text = dataFilenameIndex.description;
-    
+    self.selectedRouteLabel.text = routeSelectedText.description;
+
     NSString *selectedMagazinePhotoName = [[NSUserDefaults standardUserDefaults] stringForKey:@"selected_photo"];
     
     self.selectedMagazineLogo.image = [UIImage imageNamed:selectedMagazinePhotoName];

@@ -313,6 +313,8 @@
         returns = returns + [[[self.filteredArray objectAtIndex:i] valueForKey:@"Returns"] integerValue];
     }
     bundles = copies/50;
+    [[NSUserDefaults standardUserDefaults] setObject:self.searchString                                              forKey:@"selected_route"];
+
     NSLog(@"Total stops %ld  & returns %ld", stops, returns);
     NSLog(@"Total copies %ld  & bundles = %ld", copies, bundles);
 }
