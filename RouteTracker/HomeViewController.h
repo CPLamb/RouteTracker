@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+static NSString* kListTableStartNewSearchNotification = @"router.tarchker.new.serach";
+
 @interface HomeViewController : UIViewController
 
 @end
