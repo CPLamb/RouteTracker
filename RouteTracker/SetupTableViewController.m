@@ -266,6 +266,8 @@ NSUInteger filesCount = 1;
     NSString *file = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"downloaded_files"] objectAtIndex:row];
     NSLog(@"SetupVC - file selected -> %@", file);
     
+    // sets the global BOOL list_filtered to 0
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"list_filtered"];
     [[NSUserDefaults standardUserDefaults] setObject:file forKey:@"selected_photo"];
     [[NSUserDefaults standardUserDefaults] setObject:file forKey:@"selected_plist"];
     // use selected filename to load membersArray from documents directory
