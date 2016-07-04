@@ -237,6 +237,7 @@
                         <outlet property="copiesTextField" destination="q2s-cX-2CO" id="7Zi-pP-aoc"/>
                         <outlet property="homeScrollView" destination="GrF-HL-ltL" id="63X-Bh-kMh"/>
                         <outlet property="returnTextField" destination="HkQ-jL-thJ" id="R54-b8-0fa"/>
+                        <outlet property="routeSelectedLabel" destination="Z2m-MM-doR" id="RMa-p3-VEw"/>
                         <outlet property="selectedMagazineLabel" destination="z9v-4s-HW2" id="kji-AL-Lfk"/>
                         <outlet property="selectedMagazineLogo" destination="mq1-jY-MqK" id="N6d-ae-9MI"/>
                         <outlet property="stopTextField" destination="4AV-mQ-jpC" id="HD4-OB-HFS"/>

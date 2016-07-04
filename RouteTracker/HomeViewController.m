@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *bundleTextField;
 @property (weak, nonatomic) IBOutlet UITextField *copiesTextField;
 @property (weak, nonatomic) IBOutlet UIScrollView *homeScrollView;
+@property (weak, nonatomic) IBOutlet UILabel *routeSelectedLabel;
 
 @property (copy, nonnull) NSString* searchString;
 @end
@@ -103,6 +104,11 @@
 - (void)newSearchFromList: (NSNotification *)notification {
     if (notification.object) {
         _searchString = notification.object;
+        self.routeSelectedLabel.text = _searchString;
+    }
+    
+    if (_searchString.length <= 0) {
+        self.routeSelectedLabel.text = @"All";
     }
 }
 
