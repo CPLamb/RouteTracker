@@ -31,7 +31,7 @@ const int  MAX_PINS_TO_DROP = 200;
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    NSLog(@"%@ view did load for the first time.", self);
+// NSLog(@"%@ view did load for the first time.", self);
     
 // ** Don't forget to add NSLocationWhenInUseUsageDescription in MyApp-Info.plist and give it a string
     
