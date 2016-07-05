@@ -29,7 +29,8 @@
         
 // NSUserDefault setup for passing info around the app the starting default values.
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"list_filtered"];
-        [[NSUserDefaults standardUserDefaults] setObject:@"EdibleMontereyDistributionListCurrent" forKey:@"selected_spreadsheet"];
+        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"initial_filter"];
+       [[NSUserDefaults standardUserDefaults] setObject:@"EdibleMontereyDistributionListCurrent" forKey:@"selected_spreadsheet"];
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"selected_map_type"];
         [[NSUserDefaults standardUserDefaults] setObject:@"ALL" forKey:@"selected_driver"];
         [[NSUserDefaults standardUserDefaults] setObject:@"EdibleMontereyDistributionList" forKey:@"selected_plist"];

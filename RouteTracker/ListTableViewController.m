@@ -304,7 +304,8 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kListTableStartNewSearchNotification object:self.searchString];
     // sets the global BOOL list_filtered to TRUE
     [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"list_filtered"];
-    
+    [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"initial_filter"];
+
 }
 /*
  - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {

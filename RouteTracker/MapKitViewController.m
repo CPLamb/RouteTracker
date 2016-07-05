@@ -31,7 +31,7 @@ const int  MAX_PINS_TO_DROP = 200;
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-// NSLog(@"%@ view did load for the first time.", self);
+ NSLog(@"%@ view DID LOAD for the first time.", self);
     
     // ** Don't forget to add NSLocationWhenInUseUsageDescription in MyApp-Info.plist and give it a string
     
@@ -94,7 +94,12 @@ const int  MAX_PINS_TO_DROP = 200;
     //    [delegate.memberData loadPlistData];
     
     [self loadPins];
-    
+
+    NSInteger initialFilter = [[NSUserDefaults standardUserDefaults] integerForKey: @"initial_filter"];
+// Centers the view on the box containing all visible pins THIS prevents initial zoom
+    if (!initialFilter) {
+        [self calculateCenter];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -115,13 +120,17 @@ const int  MAX_PINS_TO_DROP = 200;
     
     [self.mapView addAnnotations:self.mapAnnotations];
     
-    // Centers the view on the box containing all visible pins
-    [self calculateCenter];
+    NSInteger initialFilter = [[NSUserDefaults standardUserDefaults] integerForKey: @"initial_filter"];
+// Centers the view on the box containing all visible pins THIS overrides persistant zoom
+    if (initialFilter) {
+        [self calculateCenter];
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
     self.currentRect = self.mapView.visibleMapRect;
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"initial_filter"];
 }
 
 #pragma mark - Navigation segue method
@@ -217,6 +226,7 @@ const int  MAX_PINS_TO_DROP = 200;
             distance = distanceLat > distanceLong ? distanceLat : distanceLong;
         } else {
             distance = sqrt(distanceLat * distanceLat + distanceLong * distanceLong) * 0.65f;
+            distance = distance * 1.1;      //provides a better overall view
         }
         
         NSLog(@"distance difference = %f, long = %f, lat = %f, ", distanceLong - distanceLat, distanceLong, distanceLat);
