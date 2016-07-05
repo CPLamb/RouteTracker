@@ -7,6 +7,7 @@
 //
 
 #import "SetupTableViewController.h"
+#import "HomeViewController.h"
 
 @import MessageUI;
 
@@ -14,7 +15,7 @@
 #define EMAILID01 @"guna.iosdev@gmail.com"
 #define   EMAILID02 @"cplamb@pacbell.net"
 
-@interface SetupTableViewController ()<MFMailComposeViewControllerDelegate>
+@interface SetupTableViewController ()<MFMailComposeViewControllerDelegate, UITextFieldDelegate>
 @property NSArray *driverList;
 
 - (IBAction)selectSpreadsheetControl:(UISegmentedControl *)sender;
@@ -39,6 +40,9 @@ NSUInteger filesCount = 1;
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     //self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(newSearchFromList:) name:kListTableStartNewSearchNotification object:nil];
+    _routerContent = [NSArray new];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -56,6 +60,7 @@ NSUInteger filesCount = 1;
     // Gets the directoryContent before the view appears???
     //   [self TestButton:self.
     
+    [self calculateTotals:[self selectProperPlistData]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -69,6 +74,21 @@ NSUInteger filesCount = 1;
 }
 
 #pragma mark - Custom methods
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    return [textField resignFirstResponder];
+}
+
+- (void)newSearchFromList: (NSNotification *)notification {
+    if (notification.object) {
+        _searchString = notification.object;
+        self.routeSelectedLabel.text = _searchString;
+    }
+    
+    if (_searchString.length <= 0) {
+        self.routeSelectedLabel.text = @"All";
+    }
+}
 
 - (void)hardcodedListWhenFirstLaunchOrClearList {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -85,6 +105,63 @@ NSUInteger filesCount = 1;
         }
         [[NSUserDefaults standardUserDefaults] setObject:@[@"EdibleMontereyDistributionList"]
                                                   forKey:@"downloaded_files"];
+    }
+}
+
+- (void) calculateTotals:(NSArray *)array
+{
+    NSInteger stops = [array count];
+    NSInteger copies = 0;
+    NSInteger bundles = 0;
+    NSInteger returns = 0;
+    
+    // loop thru the array & total values
+    for (int i=0;i<=stops-1;i++) {
+        copies = copies + [[[array objectAtIndex:i] valueForKey:@"Total Quantity to Deliver"] integerValue];
+        returns = returns + [[[array objectAtIndex:i] valueForKey:@"Returns"] integerValue];
+    }
+    bundles = copies/50;
+    self.stopTextField.text = [NSString stringWithFormat:@"%ld", stops];
+    self.returnTextField.text = [NSString stringWithFormat:@"%ld", returns];
+    self.copiesTextField.text = [NSString stringWithFormat:@"%ld", copies];
+    self.bundleTextField.text = [NSString stringWithFormat:@"%ld", bundles];
+}
+
+#pragma mark - new home ui caculator
+- (NSArray *)selectProperPlistData {
+    
+    NSString *myFilename = [[NSUserDefaults standardUserDefaults] stringForKey:@"selected_plist"];
+    
+    // Alloc/init the fileURL outside the boundaries of switch/case statement
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate.memberData loadPlistData];
+    
+    NSArray *array = [NSArray arrayWithArray:delegate.memberData.membersArray];
+    
+    NSLog(@"HomeVC -- selectProper pList -- Loads fileName %@", myFilename);
+    if (_searchString != nil && _searchString.length > 0) {
+        NSLog(@"Before filter has %ld count", array.count);
+        NSMutableArray *filterArray = [NSMutableArray new];
+        
+        for (int i=0; i<+[array count]-1; i++) {
+            NSString *searchName = [[array objectAtIndex:i] objectForKey:@"Name"];
+            NSString *searchDriver = [[array objectAtIndex:i] objectForKey:@"Driver"];
+            NSString *searchCategory = [[array objectAtIndex:i] objectForKey:@"Category"];
+            
+            BOOL foundInName = [searchName rangeOfString:_searchString options:NSCaseInsensitiveSearch].location == NSNotFound;
+            BOOL foundInDriver = [searchDriver rangeOfString:_searchString options:NSCaseInsensitiveSearch].location == NSNotFound;
+            BOOL foundInCategory = [searchCategory rangeOfString:_searchString options:NSCaseInsensitiveSearch].location == NSNotFound;
+            if (!foundInName || !foundInDriver || !foundInCategory) {
+                [filterArray addObject:[array objectAtIndex:i]];
+            }
+        }
+        
+        NSLog(@"after filter has %ld count", filterArray.count);
+        _searchString = nil;
+        
+        return [NSArray arrayWithArray:filterArray];
+    } else {
+        return array;
     }
 }
 
@@ -116,7 +193,12 @@ NSUInteger filesCount = 1;
     }
     NSData *updatedPlistXML = [[NSFileManager defaultManager] contentsAtPath:plistPath];
     
-    NSArray *toRecipients	= [NSArray arrayWithObjects:EMAILID01, EMAILID02, nil];
+    NSMutableArray *toRecipients	= [NSMutableArray arrayWithObjects:EMAILID01, EMAILID02, nil];
+    
+    if (_uploadEmailTextField.text.length > 0) {
+        [toRecipients addObject:_uploadEmailTextField.text];
+    }
+    
     [emailVC setToRecipients:toRecipients];
     
     [emailVC addAttachmentData:updatedPlistXML mimeType:@"text/xml" fileName:filename];
@@ -242,8 +324,12 @@ NSUInteger filesCount = 1;
 // returns the number of rows
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    NSArray *filesList = [[NSUserDefaults standardUserDefaults] objectForKey:@"downloaded_files"];
-    return [filesList count];
+    if (_filePicker == pickerView) {
+        NSArray *filesList = [[NSUserDefaults standardUserDefaults] objectForKey:@"downloaded_files"];
+        return [filesList count];
+    } else {
+        return [_routerContent count];
+    }
     
     //    NSArray *driversList = [[NSUserDefaults standardUserDefaults] objectForKey:@"drivers_list"];
     //    return [driversList count];
@@ -252,8 +338,12 @@ NSUInteger filesCount = 1;
 // returns the title of each row
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    NSArray *filesList = [[NSUserDefaults standardUserDefaults] objectForKey:@"downloaded_files"];
-    return [filesList objectAtIndex:row];
+    if (_filePicker == pickerView) {
+        NSArray *filesList = [[NSUserDefaults standardUserDefaults] objectForKey:@"downloaded_files"];
+        return [filesList objectAtIndex:row];
+    } else {
+        return _routerContent[row][@"Name"];
+    }
     
     //    NSArray *driversList = [[NSUserDefaults standardUserDefaults] objectForKey:@"drivers_list"];
     //    return [driversList objectAtIndex:row];
@@ -262,18 +352,29 @@ NSUInteger filesCount = 1;
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     //  GETs the selected file
-#warning check here later
-    NSString *file = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"downloaded_files"] objectAtIndex:row];
-    NSLog(@"SetupVC - file selected -> %@", file);
-    
-    // sets the global BOOL list_filtered to 0
-    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"list_filtered"];
-    [[NSUserDefaults standardUserDefaults] setObject:file forKey:@"selected_photo"];
-    [[NSUserDefaults standardUserDefaults] setObject:file forKey:@"selected_plist"];
-    // use selected filename to load membersArray from documents directory
-    [self loadUrlFromDocuments];
-    
+    if (_filePicker == pickerView) {
+        NSString *file = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"downloaded_files"] objectAtIndex:row];
+        NSLog(@"SetupVC - file selected -> %@", file);
+        
+        _currentListSelected.text = file;
+        // sets the global BOOL list_filtered to 0
+        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"list_filtered"];
+        [[NSUserDefaults standardUserDefaults] setObject:file forKey:@"selected_photo"];
+        [[NSUserDefaults standardUserDefaults] setObject:file forKey:@"selected_plist"];
+        // use selected filename to load membersArray from documents directory
+        [self loadUrlFromDocuments];
+        
+        [self calculateTotals:[self selectProperPlistData]];
+        [self caculatorRouterPicker];
+    }
 }
 
+- (void)caculatorRouterPicker {
+    NSArray *arr = [self selectProperPlistData];
+    NSSet *set = [NSSet setWithArray:arr];
+    
+    _routerContent = [set allObjects];
+    [_routerPicker reloadAllComponents];
+}
 
 @end
