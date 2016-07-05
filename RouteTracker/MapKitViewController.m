@@ -33,20 +33,20 @@ const int  MAX_PINS_TO_DROP = 200;
 
 // NSLog(@"%@ view did load for the first time.", self);
     
-// ** Don't forget to add NSLocationWhenInUseUsageDescription in MyApp-Info.plist and give it a string
+    // ** Don't forget to add NSLocationWhenInUseUsageDescription in MyApp-Info.plist and give it a string
     
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     [self.locationManager requestWhenInUseAuthorization];
     
-// Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
+    // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
     if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
     {
         [self.locationManager requestWhenInUseAuthorization];
     }
     [self.locationManager startUpdatingLocation];
     
-// Setup for the mapView
+    // Setup for the mapView
     self.mapView.showsUserLocation = YES;
     [self.mapView setDelegate:self];            // set by storyboard
     CLLocationDegrees theLatitude = 36.9665;
@@ -54,7 +54,7 @@ const int  MAX_PINS_TO_DROP = 200;
     [self.mapView setRegion:MKCoordinateRegionMake(CLLocationCoordinate2DMake(theLatitude, theLongitude), MKCoordinateSpanMake(0.5, 0.5)) animated:YES];
     self.mapView.mapType = MKMapTypeStandard;
     
-// Setup for the annotations & drop a pin at home
+    // Setup for the annotations & drop a pin at home
     self.mapAnnotations = [[NSMutableArray alloc] init];
     
     // Loads from data objects
@@ -67,7 +67,7 @@ const int  MAX_PINS_TO_DROP = 200;
     [super viewWillAppear:animated];
     NSLog(@"%@ view WILL appear...", self);
     
-// Changes map type based on setup map control
+    // Changes map type based on setup map control
     NSInteger mapType = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_map_type"];
     switch(mapType) {
         case 0:
@@ -81,30 +81,28 @@ const int  MAX_PINS_TO_DROP = 200;
             break;
     }
     
-// Changes the correct spreadsheet based upon the appDelegate memberData property IF the list is NOT filtered
+    // Changes the correct spreadsheet based upon the appDelegate memberData property IF the list is NOT filtered
     NSInteger listFiltered = [[NSUserDefaults standardUserDefaults] integerForKey: @"list_filtered"];
     if (!listFiltered) {
         AppDelegate *delegate = [UIApplication sharedApplication].delegate;
         [delegate.memberData loadPlistData];
-  //      [self loadPins];
+        //      [self loadPins];
     }
-
-// Loads from data objects
-//    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-//    [delegate.memberData loadPlistData];
+    
+    // Loads from data objects
+    //    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    //    [delegate.memberData loadPlistData];
     
     [self loadPins];
     
-// Centers the view on the box containing all visible pins
-    [self calculateCenter];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     NSLog(@"%@ DID appear...", self);
     
-//    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-//    [delegate.memberData loadPlistData];
+    //    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    //    [delegate.memberData loadPlistData];
     
     if (self.currentRect.size.width != 0) {
         [self.mapView setVisibleMapRect:self.currentRect animated:YES];
@@ -116,6 +114,9 @@ const int  MAX_PINS_TO_DROP = 200;
     NSLog(@"Pins in the select = %lu", (unsigned long)[self.mapAnnotations count]);
     
     [self.mapView addAnnotations:self.mapAnnotations];
+    
+    // Centers the view on the box containing all visible pins
+    [self calculateCenter];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -130,16 +131,16 @@ const int  MAX_PINS_TO_DROP = 200;
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
-// Sets the detailItem to the selected item
-          [[segue destinationViewController] setDetailItem:sender.memberData];
+    // Sets the detailItem to the selected item
+    [[segue destinationViewController] setDetailItem:sender.memberData];
 }
 
 #pragma mark - Custom Methods
 
 - (void)enable3DMapping  //partial implementationof 3D mapping!!!!
 {
-//Blog Post - http://nscookbook.com/2013/10/ios-programming-recipe-30-using-3d-mapping/
-//Set a few MKMapView Properties to allow pitch, building view, points of interest, and zooming.
+    //Blog Post - http://nscookbook.com/2013/10/ios-programming-recipe-30-using-3d-mapping/
+    //Set a few MKMapView Properties to allow pitch, building view, points of interest, and zooming.
     self.mapView.pitchEnabled = YES;
     self.mapView.showsBuildings = YES;
     self.mapView.showsPointsOfInterest = YES;
@@ -147,31 +148,34 @@ const int  MAX_PINS_TO_DROP = 200;
     self.mapView.scrollEnabled = YES;
     self.mapView.zoomEnabled = YES;
     
-//set up initial location
+    //set up initial location
     CLLocationCoordinate2D ground = CLLocationCoordinate2DMake(40.6892, -74.0444);
     CLLocationCoordinate2D eye = CLLocationCoordinate2DMake(40.6892, -74.0442);
     MKMapCamera *mapCamera = [MKMapCamera cameraLookingAtCenterCoordinate:ground
-                                                fromEyeCoordinate:eye
-                                                eyeAltitude:50];
+                                                        fromEyeCoordinate:eye
+                                                              eyeAltitude:50];
     self.mapView.camera = mapCamera;
 }
 
 // Location Manager Delegate Methods
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
-  //  NSLog(@"%@", [locations lastObject]);
+    //  NSLog(@"%@", [locations lastObject]);
 }
 
 - (void)calculateCenter {
     
-// set min to the highest and max to the lowest so any MIN or MAX calculation will change this value
-    CLLocationCoordinate2D minCoord = CLLocationCoordinate2DMake(180, 180.0);
+    // set min to the highest and max to the lowest so any MIN or MAX calculation will change this value
+    CLLocationCoordinate2D minCoord = CLLocationCoordinate2DMake(180.0, 180.0);
     CLLocationCoordinate2D maxCoord = CLLocationCoordinate2DMake(-180.0, -180.0);
     
     NSLog(@"Checking min/max coords for %lu mapAnnotations", (unsigned long)[self.mapAnnotations count]);
     
-// checks all annotations for min and max (deprecated -- checking pinsArray instead)
-    for (MapItem * item in self.mapAnnotations){
+    // checks all annotations for min and max (deprecated -- checking pinsArray instead)
+    // in case multi thread crash. use a array to replace mutable array.
+    NSArray *mapArray = [NSArray arrayWithArray:self.mapAnnotations];
+    
+    for (MapItem * item in mapArray){
         if ((item.latitude != 0) && (item.longitude != 0)) {
             double lat = [item.latitude doubleValue];
             double lon = [item.longitude doubleValue];
@@ -181,8 +185,9 @@ const int  MAX_PINS_TO_DROP = 200;
             maxCoord.longitude = MAX(maxCoord.longitude, lon);
         }
     }
+    mapArray = nil;
     
-// after checking all
+    // after checking all
     if((self.mapView.userLocation.coordinate.latitude != 0.0) && (self.mapView.userLocation.coordinate.latitude != 0.0)) {
         CLLocationCoordinate2D userCoord = self.referenceLocation.coordinate;
         minCoord.latitude = MIN(minCoord.latitude, userCoord.latitude);
@@ -191,47 +196,43 @@ const int  MAX_PINS_TO_DROP = 200;
         maxCoord.longitude = MAX(maxCoord.longitude, userCoord.longitude);
     }
     
-    CLLocation *minLocation = [[CLLocation alloc] initWithLatitude:minCoord.latitude longitude:minCoord.longitude];
-    CLLocation *maxLocation = [[CLLocation alloc] initWithLatitude:maxCoord.latitude longitude:maxCoord.longitude];
-    
     CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake((minCoord.latitude + maxCoord.latitude)/2, (minCoord.longitude + maxCoord.longitude)/2);
     
-// Initializes distance at DEFAULT_SPAN if both coordinates are the same
-    float distance = 500;
+    // Initializes distance at DEFAULT_SPAN if both coordinates are the same
+    float distance;
     if ((minCoord.latitude == maxCoord.latitude) && (maxCoord.longitude == maxCoord.longitude)) {
         distance = DEFAULT_SPAN;
     } else {
-        distance = [minLocation distanceFromLocation:maxLocation];
+        
+        CLLocation *minLocationLat = [[CLLocation alloc] initWithLatitude:minCoord.latitude longitude:minCoord.longitude];
+        CLLocation *maxLocationLat = [[CLLocation alloc] initWithLatitude:maxCoord.latitude longitude:minCoord.longitude];
+        
+        CLLocation *minLocationLong = [[CLLocation alloc] initWithLatitude:minCoord.latitude longitude:minCoord.longitude];
+        CLLocation *maxLocationLong = [[CLLocation alloc] initWithLatitude:minCoord.latitude longitude:maxCoord.longitude];
+        
+        double distanceLat = ceil([minLocationLat distanceFromLocation:maxLocationLat]);
+        double distanceLong = ceil([minLocationLong distanceFromLocation:maxLocationLong]);
+        
+        if (ceil(distanceLong - distanceLat) > 1000000) {
+            distance = distanceLat > distanceLong ? distanceLat : distanceLong;
+        } else {
+            distance = sqrt(distanceLat * distanceLat + distanceLong * distanceLong) * 0.65f;
+        }
+        
+        NSLog(@"distance difference = %f, long = %f, lat = %f, ", distanceLong - distanceLat, distanceLong, distanceLat);
+        //
     }
-    distance = distance * 1.1; // make actual map region slightly larger than distance between points
-    //    distance = MIN( MAX_MAP_ZOOM_METERS, MAX( distance, MIN_MAP_ZOOM_METERS ) );
-    
-    //    NSLog(@"Setting mapView.centerRegion to (%f, %f) with distance %f", centerCoordinate.latitude , centerCoordinate.longitude, distance);
     
     self.centerRegion = MKCoordinateRegionMakeWithDistance(centerCoordinate, distance, distance);
-}
-
-- (void)zoomToFitMapAnnotations {
-    
-    if ([self.mapView.annotations count] == 0) return;
-    int i = 0;
-    MKMapPoint points[[self.mapView.annotations count]];
-    
-    //build array of annotation points
-    for (id<MKAnnotation> annotation in [self.mapView annotations]){
-        points[i++] = MKMapPointForCoordinate(annotation.coordinate);
-    }
-    
-    //    MKPolygon *poly = [MKPolygon polygonWithPoints:points count:i];
-    //    [self.mapView setRegion:MKCoordinateRegionForMapRect([poly boundingMapRect]) animated:YES];
+    [self.mapView setRegion:self.centerRegion animated:true];
 }
 
 - (IBAction)turnByRouting:(UIBarButtonItem *)sender
 {
     NSLog(@"Opens the native Map app's turn-by-turn navigation");
     
-//business location
-// test location
+    //business location
+    // test location
     //    CLLocationCoordinate2D coords = CLLocationCoordinate2DMake(36.9793,-121.9985);
     
     NSString *latitude = [[self.pinsArray objectAtIndex:0] objectForKey:@"Latitude"];
@@ -242,7 +243,7 @@ const int  MAX_PINS_TO_DROP = 200;
     MKPlacemark *place = [[MKPlacemark alloc] initWithCoordinate:coords addressDictionary:nil];
     MKMapItem *mapItemDestination = [[MKMapItem alloc]initWithPlacemark:place];
     
-//current location
+    //current location
     MKMapItem *mapItemCurrent = [MKMapItem mapItemForCurrentLocation];
     
     NSArray *mapItems = @[mapItemCurrent, mapItemDestination];
@@ -251,9 +252,9 @@ const int  MAX_PINS_TO_DROP = 200;
                               MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeDriving,
                               MKLaunchOptionsMapTypeKey:[NSNumber numberWithInteger:MKMapTypeStandard],
                               MKLaunchOptionsShowsTrafficKey:@YES
-                              };        
+                              };
     [MKMapItem openMapsWithItems:mapItems launchOptions:options];
-
+    
 }
 
 // Getter function checks to see if user location is enabled & if not zooms to CPL Labs location
@@ -263,7 +264,7 @@ const int  MAX_PINS_TO_DROP = 200;
         if( self.mapView.userLocation.location == nil ||
            (userCoord.latitude == 0.0 && userCoord.longitude == 0.0) ){
             // If user location can't be found, fake it
-//            userCoord = CLLocationCoordinate2DMake(36.9665, -122.0237);
+            //            userCoord = CLLocationCoordinate2DMake(36.9665, -122.0237);
         } else {
             _referenceLocation = self.mapView.userLocation.location;
         }
@@ -273,67 +274,67 @@ const int  MAX_PINS_TO_DROP = 200;
 
 #pragma mark - Custom Annotation methods
 /*
+ - (NSArray*)pinsArray {
+ NSMutableArray *pinsArray = [NSMutableArray array];
+ 
+ // If a single detailItem is set, prefer that to the list of all pins
+ if (self.detailItem != nil) {
+ [pinsArray addObject:self.detailItem];
+ }
+ else {
+ // Otherwise show all pins in the namesArray
+ for( id arrayOrDict in MEMBERLISTDATA.namesArray ){
+ // Flatten any arrays (needed in data for sorting lists with categories)
+ if( [arrayOrDict isKindOfClass:[NSArray class]] ){
+ [pinsArray addObjectsFromArray:arrayOrDict];
+ }
+ else {
+ [pinsArray addObject:arrayOrDict];
+ }
+ }
+ }
+ //    [pinsArray addObject:self.mapView.userLocation];
+ 
+ NSLog(@"ACCESSING pinsArray with count = %lu", (unsigned long)[pinsArray count]);
+ return pinsArray;
+ }
+ */
+
 - (NSArray*)pinsArray {
     NSMutableArray *pinsArray = [NSMutableArray array];
     
-    // If a single detailItem is set, prefer that to the list of all pins
-    if (self.detailItem != nil) {
-        [pinsArray addObject:self.detailItem];
+    // If a single detailItem is set and if coordinates are non zero, prefer that to the list of all pins
+    
+    if ([[self.detailItem objectForKey:@"Latitude"] intValue] == 0)
+    {
+        NSLog(@"It's empty be-atch");
     }
-    else {
+    
+    if ((self.detailItem != nil) && !([[self.detailItem objectForKey:@"Latitude"]  isEqual: @" "]||[[self.detailItem objectForKey:@"Longitude"]  isEqual: @" "]))
+    {
+        [pinsArray addObject:self.detailItem];
+    } else {
         // Otherwise show all pins in the namesArray
         for( id arrayOrDict in MEMBERLISTDATA.namesArray ){
             // Flatten any arrays (needed in data for sorting lists with categories)
             if( [arrayOrDict isKindOfClass:[NSArray class]] ){
                 [pinsArray addObjectsFromArray:arrayOrDict];
-            }
-            else {
+            } else {
                 [pinsArray addObject:arrayOrDict];
             }
         }
     }
+    
     //    [pinsArray addObject:self.mapView.userLocation];
     
     NSLog(@"ACCESSING pinsArray with count = %lu", (unsigned long)[pinsArray count]);
     return pinsArray;
 }
-*/
 
-- (NSArray*)pinsArray {
-    NSMutableArray *pinsArray = [NSMutableArray array];
-    
-         // If a single detailItem is set and if coordinates are non zero, prefer that to the list of all pins
-    
-        if ([[self.detailItem objectForKey:@"Latitude"] intValue] == 0)
-        {
-            NSLog(@"It's empty be-atch");
-        }
-    
-        if ((self.detailItem != nil) && !([[self.detailItem objectForKey:@"Latitude"]  isEqual: @" "]||[[self.detailItem objectForKey:@"Longitude"]  isEqual: @" "]))
-        {
-            [pinsArray addObject:self.detailItem];
-        } else {
-            // Otherwise show all pins in the namesArray
-            for( id arrayOrDict in MEMBERLISTDATA.namesArray ){
-                // Flatten any arrays (needed in data for sorting lists with categories)
-                if( [arrayOrDict isKindOfClass:[NSArray class]] ){
-                    [pinsArray addObjectsFromArray:arrayOrDict];
-                } else {
-                    [pinsArray addObject:arrayOrDict];
-                }
-            }
-        }
 
-//    [pinsArray addObject:self.mapView.userLocation];
-
-    NSLog(@"ACCESSING pinsArray with count = %lu", (unsigned long)[pinsArray count]);
-    return pinsArray;
-}
-
- 
 - (void)loadPins {
     NSLog(@"Running LOADPINS method");
-// Deletes all prior pins
+    // Deletes all prior pins
     [self removeAllPins:nil];
     
     // Figure out the closest pin to the user
@@ -342,7 +343,7 @@ const int  MAX_PINS_TO_DROP = 200;
     
     for( NSDictionary* d in self.pinsArray ){
         
-  //      NSLog(@"[map] adding pin with data (%@ type): %@", NSStringFromClass([d class]), d);
+        //      NSLog(@"[map] adding pin with data (%@ type): %@", NSStringFromClass([d class]), d);
         
         NSString *aLatitudeString = [d objectForKey:@"Latitude"];
         NSString *aLongitudeString = [d objectForKey:@"Longitude"];
@@ -362,12 +363,12 @@ const int  MAX_PINS_TO_DROP = 200;
             MapItem *aNewPin = [[MapItem alloc] initWithCoordinates:coordinates memberData:d];
             aNewPin.memberData = d; // set data about the member so it can be passed to annotations and disclosures
             [self.mapAnnotations addObject:aNewPin];
-       //               NSLog(@"HAS SHOP %@", aNewPin);
+            //               NSLog(@"HAS SHOP %@", aNewPin);
         } else {
             NoShopAnnotation *aNewPin = [[NoShopAnnotation alloc] initWithCoordinates:coordinates memberData:d];
             aNewPin.memberData = d; // set data about the member so it can be passed to annotations and disclosures
             [self.mapAnnotations addObject:aNewPin];
-        //               NSLog(@"NO SHOP %@", aNewPin);
+            //               NSLog(@"NO SHOP %@", aNewPin);
         }
         
         // Get distance between this new pin and the stored reference location (the user location or a faked Santa Cruz lat/long if location is disabled)
@@ -383,8 +384,8 @@ const int  MAX_PINS_TO_DROP = 200;
     // If defaultPin is set, select it when we view the map
     [self.mapView selectAnnotation:self.defaultPin animated:YES];
     
-// loads the pins into the view
-//    [self.mapView addAnnotations:self.mapAnnotations];
+    // loads the pins into the view
+    //    [self.mapView addAnnotations:self.mapAnnotations];
 }
 
 - (void)removeAllPins:(UIButton *)sender {
@@ -395,22 +396,22 @@ const int  MAX_PINS_TO_DROP = 200;
     [self.mapView removeAnnotations:self.mapView.annotations];
 }
 /*
-- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
-    [self zoomToFitMapAnnotations];
-    
-    // If defaultPin is set, select it when we view the map
-    [self.mapView selectAnnotation:self.defaultPin animated:YES];
-}
-*/
+ - (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
+ [self zoomToFitMapAnnotations];
+ 
+ // If defaultPin is set, select it when we view the map
+ [self.mapView selectAnnotation:self.defaultPin animated:YES];
+ }
+ */
 #pragma mark - MapView Annotation Methods
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
     
-// Sends User to the DetailViewController
+    // Sends User to the DetailViewController
     id<MKAnnotation> sender = view.annotation;
-        NSLog(@"Performing SEGUE to detail view for annotation view: %@", sender);
+    NSLog(@"Performing SEGUE to detail view for annotation view: %@", sender);
     [self performSegueWithIdentifier:@"showDetail" sender:sender];
-
+    
 }
 
 // Configures the Annotation popup
@@ -426,20 +427,20 @@ const int  MAX_PINS_TO_DROP = 200;
         currentItem = (MapItem*)annotation;
         
     }
-//    NSLog(@"The annotation is %@", annotation);
+    //    NSLog(@"The annotation is %@", annotation);
     // try to dequeue an existing pin view first
     static NSString *BridgeAnnotationIdentifier = @"bridgeAnnotationIdentifier";
     
-//    MKPinAnnotationView *pinView =
-//    (MKPinAnnotationView *) [self.mapView dequeueReusableAnnotationViewWithIdentifier:BridgeAnnotationIdentifier];
-
+    //    MKPinAnnotationView *pinView =
+    //    (MKPinAnnotationView *) [self.mapView dequeueReusableAnnotationViewWithIdentifier:BridgeAnnotationIdentifier];
+    
     MKPinAnnotationView *customPinView = [[MKPinAnnotationView alloc]
                                           initWithAnnotation:annotation
                                           reuseIdentifier:BridgeAnnotationIdentifier];
-
     
-// Make the pin heads matches colors specified on the List & the GPSVisulaizer map
-
+    
+    // Make the pin heads matches colors specified on the List & the GPSVisulaizer map
+    
     if ([currentItem.pinColor isEqualToString:@"Red"] || [currentItem.pinColor isEqualToString:@"red"]) {
         customPinView.pinTintColor = UIColor.redColor;
     } else if ([currentItem.pinColor isEqualToString:@"Blue"] || [currentItem.pinColor isEqualToString:@"blue"]) {
@@ -463,7 +464,7 @@ const int  MAX_PINS_TO_DROP = 200;
     } else if ([currentItem.pinColor isEqualToString:@"White"] || [currentItem.pinColor isEqualToString:@"white"]) {
         customPinView.pinTintColor = UIColor.whiteColor;
     }
-
+    
     customPinView.canShowCallout = YES;
     
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeInfoDark];

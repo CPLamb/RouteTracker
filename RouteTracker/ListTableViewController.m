@@ -278,6 +278,17 @@
 
 #pragma mark - UISearchBarDelegate methods
 
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:true animated:true];
+    return true;
+}
+
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [searchBar resignFirstResponder];
+    searchBar.text = @"";
+    [searchBar setShowsCancelButton:false animated:true];
+}
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     
     self.searchString = self.mySearchBar.text;
