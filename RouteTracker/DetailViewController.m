@@ -11,7 +11,7 @@
 #import "AppDelegate.h"
 #import <MapKit/MapKit.h>
 
-@interface DetailViewController ()<CLLocationManagerDelegate>
+@interface DetailViewController ()<CLLocationManagerDelegate, UITextFieldDelegate>
 
 - (void)hideTap:(UIGestureRecognizer *)gestureRecognizer;
 
