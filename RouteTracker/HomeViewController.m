@@ -43,6 +43,14 @@
         [self.locationManager requestAlwaysAuthorization];
         [self.locationManager startUpdatingLocation];
     }
+    
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    UITabBarController *c = (UITabBarController *)delegate.window.rootViewController;
+    c.selectedIndex = 1;
+    //    UINavigationController *nav = c.viewControllers[1];
+    //    MapKitViewController *map = nav.viewControllers.firstObject;
+    //    [map viewDidLoad];
+    
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(newSearchFromList:) name:kListTableStartNewSearchNotification object:nil];

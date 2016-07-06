@@ -89,11 +89,13 @@
     // Show Details screen
     if ([[segue identifier] isEqualToString:@"showDetails"]) {
         self.selectedMemberPath = [self.tableView indexPathForCell:sender];
-        NSArray *object = [[self.namesArray objectAtIndex:self.selectedMemberPath.section] objectAtIndex:self.selectedMemberPath.row];
+        NSDictionary *object = [[self.namesArray objectAtIndex:self.selectedMemberPath.section] objectAtIndex:self.selectedMemberPath.row];
         
         // Sets the detailItem to the selected item
         [[segue destinationViewController] setSelectedIndexPath:self.selectedMemberPath];
         [[segue destinationViewController] setDetailItem:object];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kListTableStartNewDetailNotification object:object];
     }
     
     // Show Map screen
@@ -287,9 +289,19 @@
     [searchBar resignFirstResponder];
     searchBar.text = @"";
     [searchBar setShowsCancelButton:false animated:true];
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate.memberData loadPlistData];
+    NSLog(@"ListTableVC -- Should reload the dataFile %@", delegate.memberData.description);
+    
+    // Makes up the index array & the sorted array for the cells
+    [self makeSectionsIndex:delegate.memberData.membersArray];     // self.membersArray
+    [self makeIndexedArray:delegate.memberData.membersArray withIndex:self.indexArray];
+    [self.tableView reloadData];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    
+    [searchBar setShowsCancelButton:false animated:true];
     
     self.searchString = self.mySearchBar.text;
     NSLog(@"TRYing to search Now for ---> %@", self.searchString);

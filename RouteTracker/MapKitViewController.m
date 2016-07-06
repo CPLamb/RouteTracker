@@ -24,20 +24,26 @@
 const float MIN_MAP_ZOOM_METERS = 1500.0;
 const float MAX_MAP_ZOOM_METERS = 75000.0;
 const float DEFAULT_SPAN = 10000.0;
+const float DEFAULT_DETAIL_SPAN = 5000.0;
 const int  MAX_PINS_TO_DROP = 200;
 
 #pragma mark - Lifecycle Methods
 
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-
- NSLog(@"%@ view DID LOAD for the first time.", self);
+    
+    NSLog(@"%@ view did load for the first time.", self);
     
     // ** Don't forget to add NSLocationWhenInUseUsageDescription in MyApp-Info.plist and give it a string
     
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     [self.locationManager requestWhenInUseAuthorization];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enterNewDetail:) name:kListTableStartNewDetailNotification object:nil];
     
     // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
     if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
@@ -47,11 +53,11 @@ const int  MAX_PINS_TO_DROP = 200;
     [self.locationManager startUpdatingLocation];
     
     // Setup for the mapView
-    self.mapView.showsUserLocation = YES;
+    self.mapView.showsUserLocation = false;
     [self.mapView setDelegate:self];            // set by storyboard
-    CLLocationDegrees theLatitude = 36.9665;
-    CLLocationDegrees theLongitude = -122.0237;
-    [self.mapView setRegion:MKCoordinateRegionMake(CLLocationCoordinate2DMake(theLatitude, theLongitude), MKCoordinateSpanMake(0.5, 0.5)) animated:YES];
+    //    CLLocationDegrees theLatitude = 36.9665;
+    //    CLLocationDegrees theLongitude = -122.0237;
+    //    [self.mapView setRegion:MKCoordinateRegionMake(CLLocationCoordinate2DMake(theLatitude, theLongitude), MKCoordinateSpanMake(0.5, 0.5)) animated:YES];
     self.mapView.mapType = MKMapTypeStandard;
     
     // Setup for the annotations & drop a pin at home
@@ -93,13 +99,17 @@ const int  MAX_PINS_TO_DROP = 200;
     //    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
     //    [delegate.memberData loadPlistData];
     
-    [self loadPins];
-
-    NSInteger initialFilter = [[NSUserDefaults standardUserDefaults] integerForKey: @"initial_filter"];
-// Centers the view on the box containing all visible pins THIS prevents initial zoom
+    NSInteger detailFiltered = [[NSUserDefaults standardUserDefaults] integerForKey: @"list_detail"];
+    if (!detailFiltered) {
+        [self loadPins];
+    }
+    
+    /*NSInteger initialFilter = [[NSUserDefaults standardUserDefaults] integerForKey: @"initial_filter"];
+    // Centers the view on the box containing all visible pins THIS prevents initial zoom
     if (!initialFilter) {
         [self calculateCenter];
-    }
+    }*/
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -108,23 +118,28 @@ const int  MAX_PINS_TO_DROP = 200;
     
     //    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
     //    [delegate.memberData loadPlistData];
-    
-    if (self.currentRect.size.width != 0) {
-        [self.mapView setVisibleMapRect:self.currentRect animated:YES];
-    } else {
-        [self.mapView setRegion:self.centerRegion animated:YES];
-    }
-    
-    // Limit the total number pins to drop to MAX_PINS_TO_DROP so that map view is not too cluttered
-    NSLog(@"Pins in the select = %lu", (unsigned long)[self.mapAnnotations count]);
-    
-    [self.mapView addAnnotations:self.mapAnnotations];
-    
-    NSInteger initialFilter = [[NSUserDefaults standardUserDefaults] integerForKey: @"initial_filter"];
-// Centers the view on the box containing all visible pins THIS overrides persistant zoom
-    if (initialFilter) {
+    NSInteger detailFiltered = [[NSUserDefaults standardUserDefaults] integerForKey: @"list_detail"];
+    if (!detailFiltered) {
+        if (self.currentRect.size.width != 0) {
+            [self.mapView setVisibleMapRect:self.currentRect animated:YES];
+        } else {
+            [self.mapView setRegion:self.centerRegion animated:YES];
+        }
+        
+        // Limit the total number pins to drop to MAX_PINS_TO_DROP so that map view is not too cluttered
+        NSLog(@"Pins in the select = %lu", (unsigned long)[self.mapAnnotations count]);
+        
+        [self.mapView addAnnotations:self.mapAnnotations];
+        
+        // Centers the view on the box containing all visible pins
         [self calculateCenter];
     }
+    
+    /*NSInteger initialFilter = [[NSUserDefaults standardUserDefaults] integerForKey: @"initial_filter"];
+    // Centers the view on the box containing all visible pins THIS overrides persistant zoom
+    if (initialFilter) {
+        [self calculateCenter];
+    }*/
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -145,6 +160,13 @@ const int  MAX_PINS_TO_DROP = 200;
 }
 
 #pragma mark - Custom Methods
+
+- (void) enterNewDetail: (NSNotification *) notification {
+    if ([notification.object isKindOfClass:[NSDictionary class]]) {
+        NSDictionary *dict = notification.object;
+        [self loadDetailPin:dict];
+    }
+}
 
 - (void)enable3DMapping  //partial implementationof 3D mapping!!!!
 {
@@ -341,6 +363,43 @@ const int  MAX_PINS_TO_DROP = 200;
     return pinsArray;
 }
 
+
+- (void)loadDetailPin: (NSDictionary *)detailDict {
+    [self removeAllPins:nil];
+    
+    for(NSDictionary *dict in self.pinsArray){
+        if ([self dictionary:dict isEqualTo:detailDict]) {
+            [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"list_detail"];
+            NSString *aLatitudeString = [dict objectForKey:@"Latitude"];
+            NSString *aLongitudeString = [dict objectForKey:@"Longitude"];
+            double aLatitude = [aLatitudeString doubleValue];
+            double aLongitude = [aLongitudeString doubleValue];
+            CLLocationCoordinate2D coordinates = CLLocationCoordinate2DMake(aLatitude, aLongitude);
+            NoShopAnnotation *aNewPin = [[NoShopAnnotation alloc] initWithCoordinates:coordinates memberData:dict];
+            aNewPin.memberData = dict;
+            
+            MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinates, DEFAULT_DETAIL_SPAN, DEFAULT_DETAIL_SPAN);
+            [self.mapView setRegion:region animated:true];
+            [self.mapView addAnnotation:aNewPin];
+            
+            return;
+        }
+    }
+}
+
+- (BOOL)dictionary: (NSDictionary *)dict isEqualTo: (NSDictionary *)detailDict {
+    return detailDict[@"Advertiser Color"] == dict[@"Advertiser Color"] &&
+    detailDict[@"Contact Name"] == dict[@"Contact Name"] &&
+    detailDict[@"Driver"] == dict[@"Driver"] &&
+    detailDict[@"Name"] == dict[@"Name"] &&
+    detailDict[@"Notes"] == dict[@"Notes"] &&
+    detailDict[@"Latitude"] == dict[@"Latitude"] &&
+    detailDict[@"Longitude"] == dict[@"Longitude"] &&
+    detailDict[@"Street"] == dict[@"Street"] &&
+    detailDict[@"City"] == dict[@"City"] &&
+    detailDict[@"Total Quantity to Deliver"] == dict[@"Total Quantity to Deliver"] &&
+    detailDict[@"Category"] == dict[@"Category"];
+}
 
 - (void)loadPins {
     NSLog(@"Running LOADPINS method");
