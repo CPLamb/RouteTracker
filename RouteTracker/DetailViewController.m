@@ -34,6 +34,10 @@
     [self initializeDetailItem];
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     NSLog(@"Save the modified details to the detailItem mutableDictionary");
@@ -41,6 +45,11 @@
     [self updateDetailItem];
     
     
+}
+
+
+-(void)dealloc {
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"list_detail"];
 }
 
 -(void)initializeDetailItem
