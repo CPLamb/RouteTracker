@@ -59,6 +59,9 @@
     
 // sets the global BOOL list_filtered to 0
     [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"list_filtered"];
+// sets up a zoom 'extents' of the map
+    [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"initial_filter"];
+
 }
 
 - (IBAction)sortByDriver:(UIButton *)sender {
