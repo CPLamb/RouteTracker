@@ -73,10 +73,6 @@ const int  MAX_PINS_TO_DROP = 200;
     [super viewWillAppear:animated];
     NSLog(@"%@ view WILL appear...", self);
     
-    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-    UITabBarController *c = (UITabBarController *)delegate.window.rootViewController;
-    c.selectedIndex = 0;
-    
     // Changes map type based on setup map control
     NSInteger mapType = [[NSUserDefaults standardUserDefaults] integerForKey:@"selected_map_type"];
     switch(mapType) {
@@ -108,11 +104,11 @@ const int  MAX_PINS_TO_DROP = 200;
         [self loadPins];
     }
     
-    NSInteger initialFilter = [[NSUserDefaults standardUserDefaults] integerForKey: @"initial_filter"];
+    /*NSInteger initialFilter = [[NSUserDefaults standardUserDefaults] integerForKey: @"initial_filter"];
     // Centers the view on the box containing all visible pins THIS prevents initial zoom
     if (!initialFilter) {
         [self calculateCenter];
-    }
+    }*/
     
 }
 
@@ -139,11 +135,11 @@ const int  MAX_PINS_TO_DROP = 200;
         [self calculateCenter];
     }
     
-    NSInteger initialFilter = [[NSUserDefaults standardUserDefaults] integerForKey: @"initial_filter"];
+    /*NSInteger initialFilter = [[NSUserDefaults standardUserDefaults] integerForKey: @"initial_filter"];
     // Centers the view on the box containing all visible pins THIS overrides persistant zoom
     if (initialFilter) {
         [self calculateCenter];
-    }
+    }*/
 }
 
 -(void)viewWillDisappear:(BOOL)animated
