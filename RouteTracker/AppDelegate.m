@@ -28,6 +28,7 @@
         NSDictionary *appDefaults  = [NSDictionary dictionaryWithObjectsAndKeys:[NSDate date], dateKey, nil];
         
 // NSUserDefault setup for passing info around the app the starting default values.
+        [[NSUserDefaults standardUserDefaults] setInteger:50 forKey:@"copies_bundle"];
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"list_filtered"];
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"initial_filter"];
        [[NSUserDefaults standardUserDefaults] setObject:@"EdibleMontereyDistributionListCurrent" forKey:@"selected_spreadsheet"];

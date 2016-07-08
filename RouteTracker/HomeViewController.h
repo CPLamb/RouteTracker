@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-static NSString* kListTableStartNewSearchNotification = @"router.tarchker.new.serach";
+static NSString* kListTableStartNewSearchNotification = @"router.tracker.new.serach";
+static NSString* kListCopiesBundleChangeNotification = @"router.tracker.copies.bundle";
 
 @interface HomeViewController : UIViewController
 
