@@ -187,7 +187,8 @@
         copies = copies + [[[array objectAtIndex:i] valueForKey:@"Total Quantity to Deliver"] integerValue];
         returns = returns + [[[array objectAtIndex:i] valueForKey:@"Returns"] integerValue];
     }
-    bundles = copies/50;
+    NSInteger cb = [[NSUserDefaults standardUserDefaults] integerForKey:@"copies_bundle"];
+    bundles = copies/cb;
     self.stopTextField.text = [NSString stringWithFormat:@"%ld", stops];
     self.returnTextField.text = [NSString stringWithFormat:@"%ld", returns];
     self.copiesTextField.text = [NSString stringWithFormat:@"%ld", copies];

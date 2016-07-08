@@ -14,35 +14,34 @@
 @protocol SetupTableViewControllerDelegate  <NSObject>
 
 @optional
-- (void)dataFileSelect:(SetupTableViewController *)controller;
-- (void)changeSpreadsheet:(SetupTableViewController *)controller;
+- (void)dataFileSelect:(nonnull SetupTableViewController *)controller;
+- (void)changeSpreadsheet:(nonnull SetupTableViewController *)controller;
 @end
 
 @interface SetupTableViewController : UITableViewController
 
-@property (weak, nonatomic) id <SetupTableViewControllerDelegate> delegate;
-@property (weak, nonatomic) NSArray *directoryContent;
-@property (strong, nonnull) NSArray *routerContent;
+@property (weak, nonatomic, nullable) id <SetupTableViewControllerDelegate> delegate;
+@property (weak, nonatomic, nullable) NSArray *directoryContent;
+@property (strong, nonatomic, nonnull) NSArray *routerContent;
 
-
-@property (weak, nonatomic) IBOutlet UISegmentedControl *magazineSelectorControl;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *mapSelectorControl;
-@property (weak, nonatomic) IBOutlet UIPickerView *filePicker;
-@property (weak, nonatomic) IBOutlet UIPickerView *routerPicker;
-@property (weak, nonatomic) IBOutlet UIButton *uploadToGoogleButton;
+@property (weak, nonatomic, nullable) IBOutlet UISegmentedControl *mapSelectorControl;
+@property (weak, nonatomic, nullable) IBOutlet UIPickerView *filePicker;
+@property (weak, nonatomic, nullable) IBOutlet UIPickerView *routerPicker;
+@property (weak, nonatomic, nullable) IBOutlet UIButton *uploadToGoogleButton;
 // MARK: - selected list
-@property (weak, nonatomic) IBOutlet UILabel *currentListSelected;
+@property (weak, nonatomic, nullable) IBOutlet UILabel *currentListSelected;
 
-@property (weak, nonatomic) IBOutlet UITextField *stopTextField;
-@property (weak, nonatomic) IBOutlet UITextField *returnTextField;
-@property (weak, nonatomic) IBOutlet UITextField *bundleTextField;
-@property (weak, nonatomic) IBOutlet UITextField *copiesTextField;
-@property (weak, nonatomic) IBOutlet UITextField *uploadEmailTextField;
+@property (weak, nonatomic, nullable) IBOutlet UITextField *stopTextField;
+@property (weak, nonatomic, nullable) IBOutlet UITextField *returnTextField;
+@property (weak, nonatomic, nullable) IBOutlet UITextField *bundleTextField;
+@property (weak, nonatomic, nullable) IBOutlet UITextField *copiesTextField;
+@property (weak, nonatomic, nullable) IBOutlet UITextField *uploadEmailTextField;
+@property (weak, nonatomic, nullable) IBOutlet UITextField *copiesBoxBundle;
 
-@property (weak, nonatomic) IBOutlet UILabel *routeSelectedLabel;
+@property (weak, nonatomic, nullable) IBOutlet UILabel *routeSelectedLabel;
 
 @property (copy, nonnull) NSString* searchString;
 
-- (IBAction)mapTypeControl:(UISegmentedControl *)sender;
+- (IBAction)mapTypeControl:(nonnull UISegmentedControl *)sender;
 
 @end

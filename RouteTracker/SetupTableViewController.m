@@ -76,6 +76,14 @@ NSUInteger filesCount = 1;
 #pragma mark - Custom methods
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == self.copiesBoxBundle) {
+        int v = textField.text.intValue;
+        if (v != 0) {
+            [[NSUserDefaults standardUserDefaults] setInteger:v forKey:@"copies_bundle"];
+            [self calculateTotals:[self selectProperPlistData]];
+        }
+    }
+    
     return [textField resignFirstResponder];
 }
 
@@ -120,7 +128,8 @@ NSUInteger filesCount = 1;
         copies = copies + [[[array objectAtIndex:i] valueForKey:@"Total Quantity to Deliver"] integerValue];
         returns = returns + [[[array objectAtIndex:i] valueForKey:@"Returns"] integerValue];
     }
-    bundles = copies/50;
+    NSInteger v = [[NSUserDefaults standardUserDefaults] integerForKey:@"copies_bundle"];
+    bundles = copies/v;
     self.stopTextField.text = [NSString stringWithFormat:@"%ld", stops];
     self.returnTextField.text = [NSString stringWithFormat:@"%ld", returns];
     self.copiesTextField.text = [NSString stringWithFormat:@"%ld", copies];
@@ -357,9 +366,6 @@ NSUInteger filesCount = 1;
         NSLog(@"SetupVC - file selected -> %@", file);
         
         _currentListSelected.text = file;
-        // sets the global BOOL list_filtered to 0
-        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"list_filtered"];
-        [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"initial_filter"];
         [[NSUserDefaults standardUserDefaults] setObject:file forKey:@"selected_photo"];
         [[NSUserDefaults standardUserDefaults] setObject:file forKey:@"selected_plist"];
         // use selected filename to load membersArray from documents directory
