@@ -17,12 +17,12 @@
 @property UITextField *returnedTextField;  // Custom tableViewCell properties
 @property BOOL delivered;
 @property NSIndexPath *selectedMemberPath;
+@property (strong, nonatomic) UIBarButtonItem *dircetionsBarButton;
 
 @end
 
 @implementation ListTableViewController
 
-@synthesize mapViewController = _mapViewController;
 @synthesize sortSelectionView = _sortSelectionView;
 
 #define TRIM_LENGTH 7
@@ -43,6 +43,23 @@
     self.searchString = [NSString stringWithFormat:@"Coffee"];
     self.filteredArray = [NSMutableArray arrayWithCapacity:20];
     self.mySearchBar.delegate = self;
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(routerPickerValueChange:) name:kRouterPickerValueChangeNotification object:nil];
+}
+
+-(void)awakeFromNib {
+    self.dircetionsBarButton = self.navigationItem.rightBarButtonItem;
+}
+
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+-(void)addNotification {
+    [self viewDidLoad];
+    [self viewWillAppear:false];
+    [self viewDidAppear:false];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -50,11 +67,11 @@
     self.memberListAll = [[MemberListData alloc] init];
     [self.memberListAll loadPlistData];
     self.membersArray = [NSArray arrayWithArray: self.memberListAll.membersArray];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    self.navigationItem.rightBarButtonItem = nil;
     [super viewWillAppear:animated];
     // Changes the correct spreadsheet based upon the appDelegate memberData property IF the list is NOT filtered
     NSInteger listFiltered = [[NSUserDefaults standardUserDefaults] integerForKey: @"list_filtered"];
@@ -66,12 +83,17 @@
         // Makes up the index array & the sorted array for the cells
         [self makeSectionsIndex:delegate.memberData.membersArray];     // self.membersArray
         [self makeIndexedArray:delegate.memberData.membersArray withIndex:self.indexArray];
+    } else {
+        if (_namesArray.count == 0) {
+            [self cancelSearch];
+        }
     }
     
     //    sortedByDriver = NO;
     memberTableViewCell = [[MemberTableViewCell alloc] init];
     
     // Reloads the list
+    
     [self.tableView reloadData];
 }
 
@@ -111,6 +133,34 @@
     if ([[segue identifier] isEqualToString:@"showSortSelection"]) {
         [[segue destinationViewController] setDelegate:self];
     }
+}
+
+- (IBAction)dircetions:(id)sender {
+    NSLog(@"Opens the native Map app's turn-by-turn navigation");
+    
+    //business location
+    // test location
+    //    CLLocationCoordinate2D coords = CLLocationCoordinate2DMake(36.9793,-121.9985);
+    NSString *latitude = [[[self.namesArray objectAtIndex:0] objectAtIndex:0] objectForKey:@"Latitude"];
+    NSString *longitude = [[[self.namesArray objectAtIndex:0] objectAtIndex:0] objectForKey:@"Longitude"];
+    
+    CLLocationCoordinate2D coords = CLLocationCoordinate2DMake([latitude doubleValue], [longitude doubleValue]);
+    
+    MKPlacemark *place = [[MKPlacemark alloc] initWithCoordinate:coords addressDictionary:nil];
+    MKMapItem *mapItemDestination = [[MKMapItem alloc]initWithPlacemark:place];
+    
+    //current location
+    MKMapItem *mapItemCurrent = [MKMapItem mapItemForCurrentLocation];
+    
+    NSArray *mapItems = @[mapItemCurrent, mapItemDestination];
+    
+    NSDictionary *options = @{
+                              MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeDriving,
+                              MKLaunchOptionsMapTypeKey:[NSNumber numberWithInteger:MKMapTypeStandard],
+                              MKLaunchOptionsShowsTrafficKey:@YES
+                              };
+    [MKMapItem openMapsWithItems:mapItems launchOptions:options];
+    
 }
 
 #pragma mark - Custom sort & search methods
@@ -225,6 +275,30 @@
     return self.namesArray;
 }
 
+- (void)filterNameForSelectedRouter: (NSString *)text {
+    NSMutableArray *tempArr = [NSMutableArray new];
+    
+    for (int i=0; i<+[self.membersArray count]-1; i++) {
+        NSString *searchName = [[self.membersArray objectAtIndex:i] objectForKey:@"Name"];
+        
+        // Checks for an empty search string
+        if (text.length > 0) {
+            
+            // Searches in the various fields for the string match
+            BOOL foundInName = [searchName rangeOfString:text options:NSCaseInsensitiveSearch].location == NSNotFound;
+            if (!foundInName) {
+                [tempArr addObject:[self.membersArray objectAtIndex:i]];
+            }
+        }
+    }
+
+    if ([tempArr count] > 0) {
+        MEMBERLISTDATA.namesArray = [NSArray arrayWithArray:tempArr];
+    }
+    [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"list_filtered"];
+    [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"initial_filter"];
+}
+
 - (void)filterContentForSearchText:(NSString *)searchText scope:(NSString *)scope {
     // Update the filtered array based on the search text & scope
     
@@ -263,22 +337,59 @@
         
         
         MEMBERLISTDATA.namesArray = [NSArray arrayWithArray:self.namesArray];
-        
         [self.tableView reloadData];
-        
         //Loads up the annotation pins for the BigMap
-        self.mapViewController.mapAnnotations = [[NSMutableArray alloc] initWithArray:self.namesArray];
         NSLog(@"Loaded %lu pins", (unsigned long)[self.namesArray count]);
+    } else {
+        self.navigationItem.rightBarButtonItem = nil;
     }
+    
     // sets the global BOOL list_filtered to 1
     [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"list_filtered"];
     
+    if (_filteredArray.count != 1) {
+        self.navigationItem.rightBarButtonItem = nil;
+    } else {
+        self.navigationItem.rightBarButtonItem = _dircetionsBarButton;
+    }
+    
     // calculates the total for the filtered list
     [self calculateTotals];
-    
+}
+
+- (void)routerPickerValueChange: (NSNotification *)notification {
+    if ([notification.object isKindOfClass:[NSArray class]]) {
+        NSArray *arrs = (NSArray *)notification.object;
+        _mySearchBar.text = @"";
+        NSString *selectedRouter = arrs.lastObject;
+        [self cancelSearch];
+        
+        if ([selectedRouter isEqualToString:@"All"]) {
+            selectedRouter = @" ";
+        }
+        self.navigationItem.title = @"List";
+//        [self filterNameForSelectedRouter:selectedRouter];
+    }
 }
 
 #pragma mark - UISearchBarDelegate methods
+
+- (void)cancelSearch {
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate.memberData loadPlistData];
+    NSLog(@"ListTableVC -- Should reload the dataFile %@", delegate.memberData.description);
+    
+    // Makes up the index array & the sorted array for the cells
+    [self makeSectionsIndex:delegate.memberData.membersArray];     // self.membersArray
+    [self makeIndexedArray:delegate.memberData.membersArray withIndex:self.indexArray];
+    
+    if (_namesArray.count == 1 && [_namesArray[0] count] == 1) {
+        self.navigationItem.rightBarButtonItem = _dircetionsBarButton;
+    } else {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
+    [self.tableView reloadData];
+}
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
     [searchBar setShowsCancelButton:true animated:true];
@@ -289,14 +400,10 @@
     [searchBar resignFirstResponder];
     searchBar.text = @"";
     [searchBar setShowsCancelButton:false animated:true];
-    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-    [delegate.memberData loadPlistData];
-    NSLog(@"ListTableVC -- Should reload the dataFile %@", delegate.memberData.description);
+    [self cancelSearch];
     
-    // Makes up the index array & the sorted array for the cells
-    [self makeSectionsIndex:delegate.memberData.membersArray];     // self.membersArray
-    [self makeIndexedArray:delegate.memberData.membersArray withIndex:self.indexArray];
-    [self.tableView reloadData];
+    self.navigationItem.title = @"List";
+    [[NSNotificationCenter defaultCenter] postNotificationName:kListTableStartNewSearchNotification object:@""];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
@@ -312,13 +419,20 @@
     self.navigationItem.title = [NSString stringWithFormat:@"%@'s route", self.searchString];
     [self.mySearchBar resignFirstResponder];            // dismisses the keyboard
     
-    
     [[NSNotificationCenter defaultCenter] postNotificationName:kListTableStartNewSearchNotification object:self.searchString];
     // sets the global BOOL list_filtered to TRUE
     [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"list_filtered"];
     [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"initial_filter"];
-
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kListSearchFilterChangeNotification object:nil];
 }
+
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    if (searchBar.text.length == 0) {
+        [self cancelSearch];
+    }
+}
+
 /*
  - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
  NSString *searchString = self.mySearchBar.text;
@@ -327,11 +441,42 @@
  */
 #pragma mark - Custom methods
 
+- (IBAction)turnByRouting:(UIBarButtonItem *)sender
+{
+    NSLog(@"Opens the native Map app's turn-by-turn navigation");
+    
+    //business location
+    // test location
+    //    CLLocationCoordinate2D coords = CLLocationCoordinate2DMake(36.9793,-121.9985);
+    
+    NSString *latitude = [[self.filteredArray objectAtIndex:0] objectForKey:@"Latitude"];
+    NSString *longitude = [[self.filteredArray objectAtIndex:0] objectForKey:@"Longitude"];
+    
+    CLLocationCoordinate2D coords = CLLocationCoordinate2DMake([latitude doubleValue], [longitude doubleValue]);
+    
+    MKPlacemark *place = [[MKPlacemark alloc] initWithCoordinate:coords addressDictionary:nil];
+    MKMapItem *mapItemDestination = [[MKMapItem alloc]initWithPlacemark:place];
+    
+    //current location
+    MKMapItem *mapItemCurrent = [MKMapItem mapItemForCurrentLocation];
+    
+    NSArray *mapItems = @[mapItemCurrent, mapItemDestination];
+    
+    NSDictionary *options = @{
+                              MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeDriving,
+                              MKLaunchOptionsMapTypeKey:[NSNumber numberWithInteger:MKMapTypeStandard],
+                              MKLaunchOptionsShowsTrafficKey:@YES
+                              };
+    [MKMapItem openMapsWithItems:mapItems launchOptions:options];
+    
+}
+
+
 - (void) calculateTotals
 {
     NSInteger stops = [self.filteredArray count];
     NSInteger copies = 0;
-    NSInteger *bundles = 0;
+    NSInteger bundles = 0;
     NSInteger returns = 0;
     
     // loop thru the array & total values
@@ -339,7 +484,7 @@
         copies = copies + [[[self.filteredArray objectAtIndex:i] valueForKey:@"Total Quantity to Deliver"] integerValue];
         returns = returns + [[[self.filteredArray objectAtIndex:i] valueForKey:@"Returns"] integerValue];
     }
-    bundles = copies/50;
+    bundles = copies / 50;
     NSLog(@"Total stops %ld  & returns %ld", stops, returns);
     NSLog(@"Total copies %ld  & bundles = %ld", copies, bundles);
 }

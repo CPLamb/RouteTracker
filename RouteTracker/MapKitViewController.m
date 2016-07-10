@@ -13,7 +13,11 @@
 #import "AppDelegate.h"
 
 @interface MapKitViewController () <CLLocationManagerDelegate>
+
 @property (strong, nonatomic) CLLocationManager *locationManager;
+@property (strong, nonnull, nonatomic) NoShopAnnotation *tempPin;
+@property (assign, nonatomic) MKCoordinateRegion tempRegion;
+@property (strong, nonatomic) UIBarButtonItem *dircetionsBarButton;
 
 @end
 
@@ -35,7 +39,7 @@ const int  MAX_PINS_TO_DROP = 200;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    _dircetionsBarButton = self.navigationItem.rightBarButtonItem;
     NSLog(@"%@ view did load for the first time.", self);
     
     // ** Don't forget to add NSLocationWhenInUseUsageDescription in MyApp-Info.plist and give it a string
@@ -67,6 +71,11 @@ const int  MAX_PINS_TO_DROP = 200;
     [self loadPins];
     
     [self enable3DMapping];
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"list_detail"];
+}
+
+-(void)awakeFromNib {
+    self.dircetionsBarButton = self.navigationItem.rightBarButtonItem;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -102,29 +111,30 @@ const int  MAX_PINS_TO_DROP = 200;
     NSInteger detailFiltered = [[NSUserDefaults standardUserDefaults] integerForKey: @"list_detail"];
     if (!detailFiltered) {
         [self loadPins];
+        
+        NSInteger initialFilter = [[NSUserDefaults standardUserDefaults] integerForKey: @"initial_filter"];
+        // Centers the view on the box containing all visible pins THIS prevents initial zoom
+        if (!initialFilter) {
+            [self calculateCenter];
+        }
+    } else {
+        [self.mapView setRegion:_tempRegion animated:true];
+        [self.mapView addAnnotation:_tempPin];
     }
     
-    /*NSInteger initialFilter = [[NSUserDefaults standardUserDefaults] integerForKey: @"initial_filter"];
-    // Centers the view on the box containing all visible pins THIS prevents initial zoom
-    if (!initialFilter) {
-        [self calculateCenter];
-    }*/
-    
+    if (_mapAnnotations.count == 1) {
+        self.navigationItem.rightBarButtonItem = _dircetionsBarButton;
+    } else {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     NSLog(@"%@ DID appear...", self);
     
-    //    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-    //    [delegate.memberData loadPlistData];
     NSInteger detailFiltered = [[NSUserDefaults standardUserDefaults] integerForKey: @"list_detail"];
     if (!detailFiltered) {
-        if (self.currentRect.size.width != 0) {
-            [self.mapView setVisibleMapRect:self.currentRect animated:YES];
-        } else {
-            [self.mapView setRegion:self.centerRegion animated:YES];
-        }
         
         // Limit the total number pins to drop to MAX_PINS_TO_DROP so that map view is not too cluttered
         NSLog(@"Pins in the select = %lu", (unsigned long)[self.mapAnnotations count]);
@@ -133,13 +143,12 @@ const int  MAX_PINS_TO_DROP = 200;
         
         // Centers the view on the box containing all visible pins
         [self calculateCenter];
+        NSInteger initialFilter = [[NSUserDefaults standardUserDefaults] integerForKey: @"initial_filter"];
+        // Centers the view on the box containing all visible pins THIS overrides persistant zoom
+        if (initialFilter) {
+            [self calculateCenter];
+        }
     }
-    
-    /*NSInteger initialFilter = [[NSUserDefaults standardUserDefaults] integerForKey: @"initial_filter"];
-    // Centers the view on the box containing all visible pins THIS overrides persistant zoom
-    if (initialFilter) {
-        [self calculateCenter];
-    }*/
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -160,6 +169,10 @@ const int  MAX_PINS_TO_DROP = 200;
 }
 
 #pragma mark - Custom Methods
+
+-(void)addNotification {
+    [self viewDidLoad];
+}
 
 - (void) enterNewDetail: (NSNotification *) notification {
     if ([notification.object isKindOfClass:[NSDictionary class]]) {
@@ -306,32 +319,6 @@ const int  MAX_PINS_TO_DROP = 200;
 }
 
 #pragma mark - Custom Annotation methods
-/*
- - (NSArray*)pinsArray {
- NSMutableArray *pinsArray = [NSMutableArray array];
- 
- // If a single detailItem is set, prefer that to the list of all pins
- if (self.detailItem != nil) {
- [pinsArray addObject:self.detailItem];
- }
- else {
- // Otherwise show all pins in the namesArray
- for( id arrayOrDict in MEMBERLISTDATA.namesArray ){
- // Flatten any arrays (needed in data for sorting lists with categories)
- if( [arrayOrDict isKindOfClass:[NSArray class]] ){
- [pinsArray addObjectsFromArray:arrayOrDict];
- }
- else {
- [pinsArray addObject:arrayOrDict];
- }
- }
- }
- //    [pinsArray addObject:self.mapView.userLocation];
- 
- NSLog(@"ACCESSING pinsArray with count = %lu", (unsigned long)[pinsArray count]);
- return pinsArray;
- }
- */
 
 - (NSArray*)pinsArray {
     NSMutableArray *pinsArray = [NSMutableArray array];
@@ -348,6 +335,7 @@ const int  MAX_PINS_TO_DROP = 200;
         [pinsArray addObject:self.detailItem];
     } else {
         // Otherwise show all pins in the namesArray
+        NSLog(@"MEMBERLISTDATA.namesArray count = %ld", MEMBERLISTDATA.namesArray.count);
         for( id arrayOrDict in MEMBERLISTDATA.namesArray ){
             // Flatten any arrays (needed in data for sorting lists with categories)
             if( [arrayOrDict isKindOfClass:[NSArray class]] ){
@@ -376,12 +364,10 @@ const int  MAX_PINS_TO_DROP = 200;
             double aLatitude = [aLatitudeString doubleValue];
             double aLongitude = [aLongitudeString doubleValue];
             CLLocationCoordinate2D coordinates = CLLocationCoordinate2DMake(aLatitude, aLongitude);
-            NoShopAnnotation *aNewPin = [[NoShopAnnotation alloc] initWithCoordinates:coordinates memberData:dict];
-            aNewPin.memberData = dict;
+            _tempPin = [[NoShopAnnotation alloc] initWithCoordinates:coordinates memberData:dict];
+            _tempPin.memberData = dict;
             
-            MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinates, DEFAULT_DETAIL_SPAN, DEFAULT_DETAIL_SPAN);
-            [self.mapView setRegion:region animated:true];
-            [self.mapView addAnnotation:aNewPin];
+            _tempRegion = MKCoordinateRegionMakeWithDistance(coordinates, DEFAULT_DETAIL_SPAN, DEFAULT_DETAIL_SPAN);
             
             return;
         }

@@ -37,6 +37,7 @@
 @property (weak, nonatomic, nullable) IBOutlet UITextField *copiesTextField;
 @property (weak, nonatomic, nullable) IBOutlet UITextField *uploadEmailTextField;
 @property (weak, nonatomic, nullable) IBOutlet UITextField *copiesBoxBundle;
+@property (weak, nonatomic, nullable) IBOutlet UITextField *upload2EmailTextField;
 
 @property (weak, nonatomic, nullable) IBOutlet UILabel *routeSelectedLabel;
 

@@ -10,6 +10,7 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 
+
 static NSString* kListTableStartNewDetailNotification = @"router.tarchker.new.detail";
 
 @interface MapKitViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate>
@@ -23,7 +24,6 @@ static NSString* kListTableStartNewDetailNotification = @"router.tarchker.new.de
 @property (strong, nonatomic) CLLocation *referenceLocation;
 @property (nonatomic, readonly) NSArray* pinsArray;
 
-
 - (IBAction)turnByRouting:(UIBarButtonItem *)sender;
-
+- (void)addNotification;
 @end

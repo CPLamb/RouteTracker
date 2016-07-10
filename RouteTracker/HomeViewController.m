@@ -13,6 +13,8 @@
 
 #import "HomeViewController.h"
 #import <CoreLocation/CoreLocation.h>
+#import "MapKitViewController.h"
+#import "ListTableViewController.h"
 #import "AppDelegate.h"
 
 @interface HomeViewController ()
@@ -28,7 +30,7 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *homeScrollView;
 @property (weak, nonatomic) IBOutlet UILabel *routeSelectedLabel;
 
-@property (copy, nonnull) NSString* searchString;
+@property (copy, nonnull, nonatomic) NSString* searchString;
 @end
 
 @implementation HomeViewController
@@ -46,15 +48,18 @@
     
     AppDelegate *delegate = [UIApplication sharedApplication].delegate;
     UITabBarController *c = (UITabBarController *)delegate.window.rootViewController;
-    c.selectedIndex = 1;
-    //    UINavigationController *nav = c.viewControllers[1];
-    //    MapKitViewController *map = nav.viewControllers.firstObject;
-    //    [map viewDidLoad];
+    UINavigationController *nav = c.viewControllers[1];
+    MapKitViewController *map = nav.viewControllers.firstObject;
+    [map addNotification];
+    nav = c.viewControllers[2];
+    ListTableViewController *list = nav.viewControllers.firstObject;
+    [list addNotification];
     
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(newSearchFromList:) name:kListTableStartNewSearchNotification object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(routerPickerValueChange:) name:kRouterPickerValueChangeNotification object:nil];
     // init search string = nil
     // search string can only set by notification from list view controller
     // if it have been set, new filter will be enabled.
@@ -69,6 +74,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     NSString *dataFilenameIndex = [[NSUserDefaults standardUserDefaults] stringForKey:@"selected_plist"];
     
     NSLog(@"HomeVC -- dataFilenameIndex = %@", dataFilenameIndex.description);
@@ -82,7 +88,10 @@
     
     NSLog(@"HomeVC -- Listing the loaded spreadsheet %@", self.selectedMagazineLabel.text);
     
-    [self calculateTotals:[self selectProperPlistData]];
+    if (_searchString != nil) {
+        [self calculateTotals:[self selectProperPlistData]];
+    }
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -111,12 +120,40 @@
 
 - (void)newSearchFromList: (NSNotification *)notification {
     if (notification.object) {
-        _searchString = notification.object;
-        self.routeSelectedLabel.text = _searchString;
+        [self changeSearchString:notification.object];
+    }
+}
+
+- (void)routerPickerValueChange: (NSNotification *)notification {
+    if (notification.object) {
+        _searchString = nil;
+        if ([notification.object isKindOfClass:[NSArray class]]) {
+            NSArray *arr = (NSArray *) notification.object;
+            _stopTextField.text = arr[0];
+            _returnTextField.text = arr[1];
+            _copiesTextField.text = arr[2];
+            _bundleTextField.text = arr[3];
+            
+            _routeSelectedLabel.text = arr[4];
+            
+            if (_routeSelectedLabel.text.length <= 0 || [_routeSelectedLabel.text isEqualToString:@"All"]) {
+                _routeSelectedLabel.text = @"All";
+            }
+        }
+    }
+}
+
+- (void) changeSearchString: (NSObject *)searchString {
+    if ([searchString isKindOfClass:[NSString class]]) {
+        _searchString = (NSString *) searchString;
+    } else {
+        return;
     }
     
+    _routeSelectedLabel.text = _searchString;
+    
     if (_searchString.length <= 0) {
-        self.routeSelectedLabel.text = @"All";
+        _routeSelectedLabel.text = @"All";
     }
 }
 
@@ -171,6 +208,7 @@
         _searchString = nil;
         return [NSArray arrayWithArray:filterArray];
     } else {
+        _searchString = nil;
         return array;
     }
 }
@@ -189,10 +227,10 @@
     }
     NSInteger cb = [[NSUserDefaults standardUserDefaults] integerForKey:@"copies_bundle"];
     bundles = copies/cb;
-    self.stopTextField.text = [NSString stringWithFormat:@"%ld", stops];
-    self.returnTextField.text = [NSString stringWithFormat:@"%ld", returns];
-    self.copiesTextField.text = [NSString stringWithFormat:@"%ld", copies];
-    self.bundleTextField.text = [NSString stringWithFormat:@"%ld", bundles];
+    _stopTextField.text = [NSString stringWithFormat:@"%ld", stops];
+    _returnTextField.text = [NSString stringWithFormat:@"%ld", returns];
+    _copiesTextField.text = [NSString stringWithFormat:@"%ld", copies];
+    _bundleTextField.text = [NSString stringWithFormat:@"%ld", bundles];
 }
 
 @end
