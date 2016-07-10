@@ -231,7 +231,7 @@ const int  MAX_PINS_TO_DROP = 200;
     }
     mapArray = nil;
     
-    // after checking all
+/*    // after checking all  This includes User's location inn the min/max calc
     if((self.mapView.userLocation.coordinate.latitude != 0.0) && (self.mapView.userLocation.coordinate.latitude != 0.0)) {
         CLLocationCoordinate2D userCoord = self.referenceLocation.coordinate;
         minCoord.latitude = MIN(minCoord.latitude, userCoord.latitude);
@@ -239,7 +239,7 @@ const int  MAX_PINS_TO_DROP = 200;
         maxCoord.latitude = MAX(maxCoord.latitude, userCoord.latitude);
         maxCoord.longitude = MAX(maxCoord.longitude, userCoord.longitude);
     }
-    
+*/
     CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake((minCoord.latitude + maxCoord.latitude)/2, (minCoord.longitude + maxCoord.longitude)/2);
     
     // Initializes distance at DEFAULT_SPAN if both coordinates are the same
@@ -259,12 +259,13 @@ const int  MAX_PINS_TO_DROP = 200;
         
         if (ceil(distanceLong - distanceLat) > 1000000) {
             distance = distanceLat > distanceLong ? distanceLat : distanceLong;
+            distance = distance * 1.2;      //provides a better overall view
         } else {
             distance = sqrt(distanceLat * distanceLat + distanceLong * distanceLong) * 0.65f;
-            distance = distance * 1.1;      //provides a better overall view
+            distance = distance * 1.2;      //provides a better overall view
         }
         
-        NSLog(@"distance difference = %f, long = %f, lat = %f, ", distanceLong - distanceLat, distanceLong, distanceLat);
+        NSLog(@"distance = %f, long = %f, lat = %f, ", distance, distanceLong, distanceLat);
         //
     }
     
