@@ -42,14 +42,24 @@ NSUInteger filesCount = 1;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(newSearchFromList:) name:kListTableStartNewSearchNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(listFilterChange) name:kListSearchFilterChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enterDetail) name:kListTableStartNewSearchNotification object:nil];
+
     _routerContent = [NSArray new];
+    
+    [self.filePicker reloadAllComponents];
+    [self pickerView:_filePicker didSelectRow:0 inComponent:0];
+}
+
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     [self hardcodedListWhenFirstLaunchOrClearList];
-    [self.filePicker reloadAllComponents];
     
     //  NSLog(@"SetupViewController viewWillAppear");
     
@@ -60,7 +70,9 @@ NSUInteger filesCount = 1;
     // Gets the directoryContent before the view appears???
     //   [self TestButton:self.
     
-    [self calculateTotals:[self selectProperPlistData]];
+    if ([_routerPicker selectedRowInComponent:0] == 0) {
+        [self calculateTotals:[self selectProperPlistData]];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -74,6 +86,13 @@ NSUInteger filesCount = 1;
 }
 
 #pragma mark - Custom methods
+
+- (void)enterDetail {
+}
+
+- (void)listFilterChange {
+    [_routerPicker selectRow:0 inComponent:0 animated:false];
+}
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (textField == self.copiesBoxBundle) {
@@ -116,7 +135,7 @@ NSUInteger filesCount = 1;
     }
 }
 
-- (void) calculateTotals:(NSArray *)array
+- (NSArray *)calculateTotals:(NSArray *)array
 {
     NSInteger stops = [array count];
     NSInteger copies = 0;
@@ -130,14 +149,17 @@ NSUInteger filesCount = 1;
     }
     NSInteger v = [[NSUserDefaults standardUserDefaults] integerForKey:@"copies_bundle"];
     bundles = copies/v;
-    self.stopTextField.text = [NSString stringWithFormat:@"%ld", stops];
-    self.returnTextField.text = [NSString stringWithFormat:@"%ld", returns];
-    self.copiesTextField.text = [NSString stringWithFormat:@"%ld", copies];
-    self.bundleTextField.text = [NSString stringWithFormat:@"%ld", bundles];
+    _stopTextField.text = [NSString stringWithFormat:@"%ld", stops];
+    _returnTextField.text = [NSString stringWithFormat:@"%ld", returns];
+    _copiesTextField.text = [NSString stringWithFormat:@"%ld", copies];
+    _bundleTextField.text = [NSString stringWithFormat:@"%ld", bundles];
+    
+    return @[_stopTextField.text, _returnTextField.text, _copiesTextField.text, _bundleTextField.text];
 }
 
 #pragma mark - new home ui caculator
 - (NSArray *)selectProperPlistData {
+    
     
     NSString *myFilename = [[NSUserDefaults standardUserDefaults] stringForKey:@"selected_plist"];
     
@@ -206,6 +228,9 @@ NSUInteger filesCount = 1;
     
     if (_uploadEmailTextField.text.length > 0) {
         [toRecipients addObject:_uploadEmailTextField.text];
+    }
+    if (_upload2EmailTextField.text.length > 0) {
+        [toRecipients addObject:_upload2EmailTextField.text];
     }
     
     [emailVC setToRecipients:toRecipients];
@@ -337,7 +362,7 @@ NSUInteger filesCount = 1;
         NSArray *filesList = [[NSUserDefaults standardUserDefaults] objectForKey:@"downloaded_files"];
         return [filesList count];
     } else {
-        return [_routerContent count];
+        return [_routerContent count] + 1;
     }
     
     //    NSArray *driversList = [[NSUserDefaults standardUserDefaults] objectForKey:@"drivers_list"];
@@ -351,7 +376,11 @@ NSUInteger filesCount = 1;
         NSArray *filesList = [[NSUserDefaults standardUserDefaults] objectForKey:@"downloaded_files"];
         return [filesList objectAtIndex:row];
     } else {
-        return _routerContent[row][@"Name"];
+        if (row == 0) {
+            return @"All";
+        } else {
+            return _routerContent[row];
+        }
     }
     
     //    NSArray *driversList = [[NSUserDefaults standardUserDefaults] objectForKey:@"drivers_list"];
@@ -373,13 +402,31 @@ NSUInteger filesCount = 1;
         
         [self calculateTotals:[self selectProperPlistData]];
         [self caculatorRouterPicker];
+    } else {
+        if (row == 0) {
+            _routeSelectedLabel.text = @"All";
+            _searchString = @"";
+        } else {
+            _searchString = _routerContent[row];
+            _routeSelectedLabel.text = _routerContent[row];
+        }
+        
+        NSMutableArray *calculates = [NSMutableArray arrayWithArray:
+                               [self calculateTotals:[self selectProperPlistData]]];
+        [calculates addObject:_routeSelectedLabel.text];
+        
+        
+        NSArray *notfiArr = [NSArray arrayWithArray:calculates];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kRouterPickerValueChangeNotification object: notfiArr];
     }
 }
 
 - (void)caculatorRouterPicker {
     NSArray *arr = [self selectProperPlistData];
-    NSSet *set = [NSSet setWithArray:arr];
-    
+    NSMutableSet *set = [NSMutableSet new];
+    [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [set addObject:obj[@"Name"]];
+    }];
     _routerContent = [set allObjects];
     [_routerPicker reloadAllComponents];
 }

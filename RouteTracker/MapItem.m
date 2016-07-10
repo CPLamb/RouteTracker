@@ -46,7 +46,7 @@
     _latitude = [NSNumber numberWithDouble:location.latitude];
     _longitude = [NSNumber numberWithDouble:location.longitude];
     
-    // Temporary patch to display Qty & Driver on annotation title FIX is adding a 2nd line to the annotation
+// Temporary patch to display Qty & Driver on annotation title FIX is adding a 2nd line to the annotation
     NSString *nameString;
     if ([[memberData objectForKey:@"Name"] length] > 13) {
         nameString = [[[memberData objectForKey:@"Name"] substringToIndex:13U] stringByAppendingString:@" "];
@@ -60,7 +60,7 @@
         deliveredString = [[memberData objectForKey:@"Delivered to Date"] stringByAppendingString:@"/"];
     }
     NSString *qtyString = [[memberData objectForKey:@"Total Quantity to Deliver"]stringByAppendingString:@" "];
-# warning  crash here, check it later
+
     NSString *driverString = @"";
     NSString *rawDirverString = [memberData objectForKey:@"Driver"];
     if (rawDirverString != nil && [rawDirverString length] > 3) {
@@ -68,13 +68,13 @@
     }
     
     _title = nameString;
-    // _title = [[[nameString stringByAppendingString:deliveredString] stringByAppendingString:qtyString] stringByAppendingString:driverString];
-    //    _title = [memberData objectForKey:@"Name"];
+   // _title = [[[nameString stringByAppendingString:deliveredString] stringByAppendingString:qtyString] stringByAppendingString:driverString];
+   //    _title = [memberData objectForKey:@"Name"];
     
     _subtitle = [[deliveredString stringByAppendingString:qtyString] stringByAppendingString:driverString];
     hasShop = [[memberData objectForKey:@"hasShop"] boolValue];
     _pinColor = [memberData objectForKey:@"Color"];
-    
+
     return self;
 }
 

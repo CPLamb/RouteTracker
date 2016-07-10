@@ -56,4 +56,8 @@
     return YES;
 }
 
+-(void)applicationWillTerminate:(UIApplication *)application {
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"list_detail"];
+}
+
 @end

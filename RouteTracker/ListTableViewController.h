@@ -35,8 +35,6 @@
 @property (nonatomic, strong) NSMutableArray *searchArray;
 @property (nonatomic, strong) NSMutableArray *filteredArray;
 
-@property (nonatomic, strong) MapKitViewController *mapViewController;
-
 @property (weak, nonatomic) IBOutlet UIView *sortSelectionView; //TODO: delete?
 @property (weak, nonatomic) IBOutlet UILabel *sender;
 
@@ -44,4 +42,5 @@
 
 - (IBAction)sortListButton:(UIBarButtonItem *)sender;
 
+- (void)addNotification;
 @end

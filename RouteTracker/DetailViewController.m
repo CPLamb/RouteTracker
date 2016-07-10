@@ -8,6 +8,7 @@
 
 #import "DetailViewController.h"
 #import "MemberListData.h"
+#import "HomeViewController.h"
 #import "AppDelegate.h"
 #import <MapKit/MapKit.h>
 
@@ -27,6 +28,11 @@
     
     [self initializeDetailItem];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pickerViewChange) name:kRouterPickerValueChangeNotification object:nil];
+}
+
+- (void)pickerViewChange {
+    [self.navigationController popViewControllerAnimated:false];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -34,22 +40,20 @@
     [self initializeDetailItem];
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-}
-
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     NSLog(@"Save the modified details to the detailItem mutableDictionary");
     
     [self updateDetailItem];
-    
-    
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+}
 
 -(void)dealloc {
     [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"list_detail"];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)initializeDetailItem
@@ -168,33 +172,33 @@
 - (void)hideTap:(UIGestureRecognizer *)gestureRecognizer
 {
     [self.view endEditing:YES];
-    //    NSLog(@"Hides the keyboard");
+//    NSLog(@"Hides the keyboard");
 }
 
 - (IBAction)geocodeButton:(UIButton *)sender {
     NSLog(@"Changes location's lat/long values");
     
-    // NSMutableDictionary *myDictionary = [[NSMutableDictionary alloc] initWithDictionary:self.detailItem];
+   // NSMutableDictionary *myDictionary = [[NSMutableDictionary alloc] initWithDictionary:self.detailItem];
     
     CLLocationManager *lm = [[CLLocationManager alloc] init];
     lm.delegate = self;
     lm.desiredAccuracy = kCLLocationAccuracyBest;
     lm.distanceFilter = kCLDistanceFilterNone;
     [lm startUpdatingLocation];
-    
+
     NSString *userLatitude = [NSString stringWithFormat:@"%f",
                               lm.location.coordinate.latitude];
     NSString *userLongitude = [NSString stringWithFormat:@"%f",lm.location.coordinate.longitude];
     
     self.latitudeTextField.text = userLatitude;
     self.longitudeTextField.text = userLongitude;
-    
+
     /*
-     [myDictionary setValue:[self.detailItem objectForKey:@"Index"] forKey:@"Index"];
-     [myDictionary setValue:userLatitude forKey:@"Latitude"];
-     [myDictionary setValue:userLongitude forKey:@"Longitude"];
-     AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-     [delegate.memberData modifyMemberListFile:self.detailItem withUpdates:myDictionary];*/
+    [myDictionary setValue:[self.detailItem objectForKey:@"Index"] forKey:@"Index"];
+    [myDictionary setValue:userLatitude forKey:@"Latitude"];
+    [myDictionary setValue:userLongitude forKey:@"Longitude"];
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate.memberData modifyMemberListFile:self.detailItem withUpdates:myDictionary];*/
     
     
 }
@@ -208,7 +212,7 @@
     // Pass the selected object to the new view controller.
     // Moves to other view & sets the detailItem to the selected item
     
-    //    NSLog(@"Segue ID is %@", [segue identifier]);
+//    NSLog(@"Segue ID is %@", [segue identifier]);
     [self updateDetailItem];
     if ([[segue identifier] isEqualToString:@"showMap"]) {
         [[segue destinationViewController] setDetailItem:self.detailItem];
