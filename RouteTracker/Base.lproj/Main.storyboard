@@ -305,7 +305,7 @@
                                 <segue destination="YiI-Pk-2d9" kind="show" identifier="showSortSelection" id="MXa-0z-zaF"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Dircetions" id="Zkz-cH-Z3j">
+                        <barButtonItem key="rightBarButtonItem" title="Directions" id="Zkz-cH-Z3j">
                             <connections>
                                 <action selector="dircetions:" destination="LKA-AQ-dKo" id="frc-CT-GIw"/>
                             </connections>
@@ -331,7 +331,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dUl-CY-pRf">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dUl-CY-pRf">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <connections>
                                     <outlet property="delegate" destination="8rJ-Kc-sve" id="O6e-NV-p2R"/>
@@ -960,9 +960,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Details" id="BDV-U6-duS">
-                        <barButtonItem key="rightBarButtonItem" title="Map" id="ngs-yj-eiG">
+                        <barButtonItem key="rightBarButtonItem" title="Directions" id="ngs-yj-eiG">
                             <connections>
-                                <segue destination="8rJ-Kc-sve" kind="show" identifier="showMap" id="fec-gw-sch"/>
+                                <action selector="directions:" destination="ehp-uA-B6h" id="HNx-9V-8Rk"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -2042,7 +2042,6 @@
         <image name="questions1.png" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="iFG-n3-Skd"/>
-        <segue reference="qPY-Ep-njk"/>
+        <segue reference="hGG-Lb-Gts"/>
     </inferredMetricsTieBreakers>
 </document>

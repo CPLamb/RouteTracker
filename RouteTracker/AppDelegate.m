@@ -32,6 +32,7 @@
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"list_filtered"];
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"initial_filter"];
        [[NSUserDefaults standardUserDefaults] setObject:@"EdibleMontereyDistributionListCurrent" forKey:@"selected_spreadsheet"];
+        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"list_detail_enter"];
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"selected_map_type"];
         [[NSUserDefaults standardUserDefaults] setObject:@"ALL" forKey:@"selected_driver"];
         [[NSUserDefaults standardUserDefaults] setObject:@"EdibleMontereyDistributionList" forKey:@"selected_plist"];
@@ -52,12 +53,7 @@
     self.arrayToBeUploaded = [[NSMutableArray alloc] init];
 
     [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:dateKey];
-    
+
     return YES;
 }
-
--(void)applicationWillTerminate:(UIApplication *)application {
-    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"list_detail"];
-}
-
 @end

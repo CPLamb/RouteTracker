@@ -15,7 +15,7 @@
 @interface MapKitViewController () <CLLocationManagerDelegate>
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
-@property (strong, nonnull, nonatomic) NoShopAnnotation *tempPin;
+@property (strong, nullable, nonatomic) NoShopAnnotation *tempPin;
 @property (assign, nonatomic) MKCoordinateRegion tempRegion;
 @property (strong, nonatomic) UIBarButtonItem *dircetionsBarButton;
 
@@ -71,7 +71,7 @@ const int  MAX_PINS_TO_DROP = 200;
     [self loadPins];
     
     [self enable3DMapping];
-    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"list_detail"];
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"list_detail_enter"];
 }
 
 -(void)awakeFromNib {
@@ -108,8 +108,9 @@ const int  MAX_PINS_TO_DROP = 200;
     //    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
     //    [delegate.memberData loadPlistData];
     
-    NSInteger detailFiltered = [[NSUserDefaults standardUserDefaults] integerForKey: @"list_detail"];
-    if (!detailFiltered) {
+    
+    NSInteger detailFiltered = [[NSUserDefaults standardUserDefaults] integerForKey: @"list_detail_enter"];
+    if (!detailFiltered && _tempPin == nil) {
         [self loadPins];
         
         NSInteger initialFilter = [[NSUserDefaults standardUserDefaults] integerForKey: @"initial_filter"];
@@ -133,8 +134,8 @@ const int  MAX_PINS_TO_DROP = 200;
     [super viewDidAppear:animated];
     NSLog(@"%@ DID appear...", self);
     
-    NSInteger detailFiltered = [[NSUserDefaults standardUserDefaults] integerForKey: @"list_detail"];
-    if (!detailFiltered) {
+    NSInteger detailFiltered = [[NSUserDefaults standardUserDefaults] integerForKey: @"list_detail_enter"];
+    if (!detailFiltered && _tempPin == nil) {
         
         // Limit the total number pins to drop to MAX_PINS_TO_DROP so that map view is not too cluttered
         NSLog(@"Pins in the select = %lu", (unsigned long)[self.mapAnnotations count]);
@@ -148,6 +149,8 @@ const int  MAX_PINS_TO_DROP = 200;
         if (initialFilter) {
             [self calculateCenter];
         }
+    } else {
+        _tempPin = nil;
     }
 }
 
@@ -172,6 +175,8 @@ const int  MAX_PINS_TO_DROP = 200;
 
 -(void)addNotification {
     [self viewDidLoad];
+    [self viewWillAppear:false];
+    [self viewDidAppear:false];
 }
 
 - (void) enterNewDetail: (NSNotification *) notification {
@@ -231,7 +236,7 @@ const int  MAX_PINS_TO_DROP = 200;
     }
     mapArray = nil;
     
-/*    // after checking all  This includes User's location inn the min/max calc
+    // after checking all
     if((self.mapView.userLocation.coordinate.latitude != 0.0) && (self.mapView.userLocation.coordinate.latitude != 0.0)) {
         CLLocationCoordinate2D userCoord = self.referenceLocation.coordinate;
         minCoord.latitude = MIN(minCoord.latitude, userCoord.latitude);
@@ -239,7 +244,7 @@ const int  MAX_PINS_TO_DROP = 200;
         maxCoord.latitude = MAX(maxCoord.latitude, userCoord.latitude);
         maxCoord.longitude = MAX(maxCoord.longitude, userCoord.longitude);
     }
-*/
+    
     CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake((minCoord.latitude + maxCoord.latitude)/2, (minCoord.longitude + maxCoord.longitude)/2);
     
     // Initializes distance at DEFAULT_SPAN if both coordinates are the same
@@ -259,13 +264,12 @@ const int  MAX_PINS_TO_DROP = 200;
         
         if (ceil(distanceLong - distanceLat) > 1000000) {
             distance = distanceLat > distanceLong ? distanceLat : distanceLong;
-            distance = distance * 1.2;      //provides a better overall view
         } else {
             distance = sqrt(distanceLat * distanceLat + distanceLong * distanceLong) * 0.65f;
-            distance = distance * 1.2;      //provides a better overall view
+            distance = distance * 1.1;      //provides a better overall view
         }
         
-        NSLog(@"distance = %f, long = %f, lat = %f, ", distance, distanceLong, distanceLat);
+        NSLog(@"distance difference = %f, long = %f, lat = %f, ", distanceLong - distanceLat, distanceLong, distanceLat);
         //
     }
     
@@ -352,13 +356,12 @@ const int  MAX_PINS_TO_DROP = 200;
     return pinsArray;
 }
 
-
 - (void)loadDetailPin: (NSDictionary *)detailDict {
     [self removeAllPins:nil];
     
     for(NSDictionary *dict in self.pinsArray){
         if ([self dictionary:dict isEqualTo:detailDict]) {
-            [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"list_detail"];
+            [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"list_detail_enter"];
             NSString *aLatitudeString = [dict objectForKey:@"Latitude"];
             NSString *aLongitudeString = [dict objectForKey:@"Longitude"];
             double aLatitude = [aLatitudeString doubleValue];
@@ -366,12 +369,13 @@ const int  MAX_PINS_TO_DROP = 200;
             CLLocationCoordinate2D coordinates = CLLocationCoordinate2DMake(aLatitude, aLongitude);
             _tempPin = [[NoShopAnnotation alloc] initWithCoordinates:coordinates memberData:dict];
             _tempPin.memberData = dict;
-            
             _tempRegion = MKCoordinateRegionMakeWithDistance(coordinates, DEFAULT_DETAIL_SPAN, DEFAULT_DETAIL_SPAN);
-            
+            NSLog(@"found it \n\n!!!");
             return;
         }
     }
+    
+    NSLog(@"cant found it \n\n!!!");
 }
 
 - (BOOL)dictionary: (NSDictionary *)dict isEqualTo: (NSDictionary *)detailDict {
