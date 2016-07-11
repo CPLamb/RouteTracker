@@ -57,7 +57,8 @@ const int  MAX_PINS_TO_DROP = 200;
     [self.locationManager startUpdatingLocation];
     
     // Setup for the mapView
-    self.mapView.showsUserLocation = false;
+//    self.mapView.showsUserLocation = false;
+    self.mapView.showsUserLocation = true;      // temp fix CPL
     [self.mapView setDelegate:self];            // set by storyboard
     //    CLLocationDegrees theLatitude = 36.9665;
     //    CLLocationDegrees theLongitude = -122.0237;
@@ -111,6 +112,7 @@ const int  MAX_PINS_TO_DROP = 200;
     
     NSInteger detailFiltered = [[NSUserDefaults standardUserDefaults] integerForKey: @"list_detail_enter"];
     if (!detailFiltered && _tempPin == nil) {
+ //   if (!detailFiltered) {      // temp fix CPL
         [self loadPins];
         
         NSInteger initialFilter = [[NSUserDefaults standardUserDefaults] integerForKey: @"initial_filter"];
@@ -136,7 +138,7 @@ const int  MAX_PINS_TO_DROP = 200;
     
     NSInteger detailFiltered = [[NSUserDefaults standardUserDefaults] integerForKey: @"list_detail_enter"];
     if (!detailFiltered && _tempPin == nil) {
-        
+//    if (!detailFiltered) {       // temp fix CPL
         // Limit the total number pins to drop to MAX_PINS_TO_DROP so that map view is not too cluttered
         NSLog(@"Pins in the select = %lu", (unsigned long)[self.mapAnnotations count]);
         
@@ -236,7 +238,7 @@ const int  MAX_PINS_TO_DROP = 200;
     }
     mapArray = nil;
     
-    // after checking all
+/*    // after checking all    temp fix CPL
     if((self.mapView.userLocation.coordinate.latitude != 0.0) && (self.mapView.userLocation.coordinate.latitude != 0.0)) {
         CLLocationCoordinate2D userCoord = self.referenceLocation.coordinate;
         minCoord.latitude = MIN(minCoord.latitude, userCoord.latitude);
@@ -244,7 +246,7 @@ const int  MAX_PINS_TO_DROP = 200;
         maxCoord.latitude = MAX(maxCoord.latitude, userCoord.latitude);
         maxCoord.longitude = MAX(maxCoord.longitude, userCoord.longitude);
     }
-    
+*/
     CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake((minCoord.latitude + maxCoord.latitude)/2, (minCoord.longitude + maxCoord.longitude)/2);
     
     // Initializes distance at DEFAULT_SPAN if both coordinates are the same

@@ -147,7 +147,8 @@ NSUInteger filesCount = 1;
         copies = copies + [[[array objectAtIndex:i] valueForKey:@"Total Quantity to Deliver"] integerValue];
         returns = returns + [[[array objectAtIndex:i] valueForKey:@"Returns"] integerValue];
     }
-    NSInteger v = [[NSUserDefaults standardUserDefaults] integerForKey:@"copies_bundle"];
+//    NSInteger v = [[NSUserDefaults standardUserDefaults] integerForKey:@"copies_bundle"];
+    NSInteger v = 50;   // temp fix CPL for initialization problem
     bundles = copies/v;
     _stopTextField.text = [NSString stringWithFormat:@"%ld", stops];
     _returnTextField.text = [NSString stringWithFormat:@"%ld", returns];
