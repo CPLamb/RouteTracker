@@ -16,13 +16,14 @@
 
 @property UITextField *returnedTextField;  // Custom tableViewCell properties
 @property BOOL delivered;
+@property BOOL pickerChanged;
 @property NSIndexPath *selectedMemberPath;
-@property (strong, nonatomic) UIBarButtonItem *dircetionsBarButton;
+@property (strong, nonatomic) UIBarButtonItem *directionsBarButton;
 
 @end
 
 @implementation ListTableViewController
-
+@synthesize directionsBarButton = _directionsBarButton;
 @synthesize sortSelectionView = _sortSelectionView;
 
 #define TRIM_LENGTH 7
@@ -43,13 +44,12 @@
     self.searchString = [NSString stringWithFormat:@"Coffee"];
     self.filteredArray = [NSMutableArray arrayWithCapacity:20];
     self.mySearchBar.delegate = self;
-    
-    
+    _pickerChanged = false;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(routerPickerValueChange:) name:kRouterPickerValueChangeNotification object:nil];
 }
 
 -(void)awakeFromNib {
-    self.dircetionsBarButton = self.navigationItem.rightBarButtonItem;
+    _directionsBarButton = self.navigationItem.rightBarButtonItem;
 }
 
 -(void)dealloc {
@@ -89,6 +89,13 @@
         }
     }
     
+    if (_pickerChanged) {
+        _pickerChanged = false;
+        
+        [self cancelSearch];
+    }
+
+    
     //    sortedByDriver = NO;
     memberTableViewCell = [[MemberTableViewCell alloc] init];
     
@@ -110,6 +117,7 @@
     
     // Show Details screen
     if ([[segue identifier] isEqualToString:@"showDetails"]) {
+        
         self.selectedMemberPath = [self.tableView indexPathForCell:sender];
         NSDictionary *object = [[self.namesArray objectAtIndex:self.selectedMemberPath.section] objectAtIndex:self.selectedMemberPath.row];
         
@@ -350,7 +358,7 @@
     if (_filteredArray.count != 1) {
         self.navigationItem.rightBarButtonItem = nil;
     } else {
-        self.navigationItem.rightBarButtonItem = _dircetionsBarButton;
+        self.navigationItem.rightBarButtonItem = _directionsBarButton;
     }
     
     // calculates the total for the filtered list
@@ -368,7 +376,8 @@
             selectedRouter = @" ";
         }
         self.navigationItem.title = @"List";
-//        [self filterNameForSelectedRouter:selectedRouter];
+        [self filterNameForSelectedRouter:selectedRouter];
+        _pickerChanged = true;
     }
 }
 
@@ -384,7 +393,7 @@
     [self makeIndexedArray:delegate.memberData.membersArray withIndex:self.indexArray];
     
     if (_namesArray.count == 1 && [_namesArray[0] count] == 1) {
-        self.navigationItem.rightBarButtonItem = _dircetionsBarButton;
+        self.navigationItem.rightBarButtonItem = _directionsBarButton;
     } else {
         self.navigationItem.rightBarButtonItem = nil;
     }

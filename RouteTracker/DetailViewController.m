@@ -50,9 +50,36 @@
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
 }
+- (IBAction)directions:(id)sender {
+    NSLog(@"Opens the native Map app's turn-by-turn navigation");
+    
+    //business location
+    // test location
+    //    CLLocationCoordinate2D coords = CLLocationCoordinate2DMake(36.9793,-121.9985);
+    
+    double latitude = [_detailItem[@"Latitude"] doubleValue];
+    double longitude = [_detailItem[@"Longitude"] doubleValue];
+    
+    CLLocationCoordinate2D coords = CLLocationCoordinate2DMake(latitude, longitude);
+    
+    MKPlacemark *place = [[MKPlacemark alloc] initWithCoordinate:coords addressDictionary:nil];
+    MKMapItem *mapItemDestination = [[MKMapItem alloc]initWithPlacemark:place];
+    
+    //current location
+    MKMapItem *mapItemCurrent = [MKMapItem mapItemForCurrentLocation];
+    
+    NSArray *mapItems = @[mapItemCurrent, mapItemDestination];
+    
+    NSDictionary *options = @{
+                              MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeDriving,
+                              MKLaunchOptionsMapTypeKey:[NSNumber numberWithInteger:MKMapTypeStandard],
+                              MKLaunchOptionsShowsTrafficKey:@YES
+                              };
+    [MKMapItem openMapsWithItems:mapItems launchOptions:options];
+}
 
 -(void)dealloc {
-    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"list_detail"];
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"list_detail_enter"];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
