@@ -426,8 +426,10 @@ NSUInteger filesCount = 1;
     NSArray *arr = [self selectProperPlistData];
     NSMutableSet *set = [NSMutableSet new];
     [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [set addObject:obj[@"Name"]];
+//        [set addObject:obj[@"Name"]];
+        [set addObject:obj[@"Driver"]];  // temp fix CPL
     }];
+
     _routerContent = [set allObjects];
     [_routerPicker reloadAllComponents];
 }
