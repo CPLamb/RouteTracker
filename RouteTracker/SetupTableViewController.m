@@ -12,7 +12,7 @@
 @import MessageUI;
 
 // This needs to be an NSArray of email addresses
-#define EMAILID01 @"guna.iosdev@gmail.com"
+// #define EMAILID01 @"guna.iosdev@gmail.com"       // temp fix CPL
 #define   EMAILID02 @"cplamb@pacbell.net"
 
 @interface SetupTableViewController ()<MFMailComposeViewControllerDelegate, UITextFieldDelegate>
@@ -225,7 +225,8 @@ NSUInteger filesCount = 1;
     }
     NSData *updatedPlistXML = [[NSFileManager defaultManager] contentsAtPath:plistPath];
     
-    NSMutableArray *toRecipients	= [NSMutableArray arrayWithObjects:EMAILID01, EMAILID02, nil];
+//    NSMutableArray *toRecipients	= [NSMutableArray arrayWithObjects:EMAILID01, EMAILID02, nil];
+    NSMutableArray *toRecipients	= [NSMutableArray arrayWithObjects:EMAILID02, nil]; // temp fix CPL
     
     if (_uploadEmailTextField.text.length > 0) {
         [toRecipients addObject:_uploadEmailTextField.text];
