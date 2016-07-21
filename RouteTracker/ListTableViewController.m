@@ -33,6 +33,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.mySearchBar.hidden = YES;
+    
     sortedByDriver = NO;
     
     
@@ -45,7 +47,8 @@
     self.filteredArray = [NSMutableArray arrayWithCapacity:20];
     self.mySearchBar.delegate = self;
     _pickerChanged = false;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(routerPickerValueChange:) name:kRouterPickerValueChangeNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(routerPickerValueChange:) name:kRouterPickerValueChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didUpdateDetailItem:) name:kDidUpdateDetailItem object:nil];
 }
 
 -(void)awakeFromNib {
@@ -74,20 +77,34 @@
     self.navigationItem.rightBarButtonItem = nil;
     [super viewWillAppear:animated];
     // Changes the correct spreadsheet based upon the appDelegate memberData property IF the list is NOT filtered
-    NSInteger listFiltered = [[NSUserDefaults standardUserDefaults] integerForKey: @"list_filtered"];
-    if (!listFiltered) {
+//    NSInteger listFiltered = [[NSUserDefaults standardUserDefaults] integerForKey: @"list_filtered"];
+//    if (!listFiltered) {
         AppDelegate *delegate = [UIApplication sharedApplication].delegate;
         [delegate.memberData loadPlistData];
         NSLog(@"ListTableVC -- Should reload the dataFile %@", delegate.memberData.description);
         
         // Makes up the index array & the sorted array for the cells
-        [self makeSectionsIndex:delegate.memberData.membersArray];     // self.membersArray
-        [self makeIndexedArray:delegate.memberData.membersArray withIndex:self.indexArray];
-    } else {
-        if (_namesArray.count == 0) {
-            [self cancelSearch];
+    
+    NSArray *listItems = delegate.memberData.membersArray;
+    
+    NSString *selectedDriver = [[NSUserDefaults standardUserDefaults] objectForKey:@"SelectedDriver"];
+    if (selectedDriver && selectedDriver.length > 0) {
+        if (![selectedDriver isEqualToString:@"All"]) {
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"Driver == %@", selectedDriver];
+            NSArray *filterItems = [self.membersArray filteredArrayUsingPredicate:predicate];
+            if (filterItems && filterItems.count > 0) {
+                listItems = filterItems;
+            }
         }
     }
+    
+        [self makeSectionsIndex:listItems];     // self.membersArray
+        [self makeIndexedArray:listItems withIndex:self.indexArray];
+//    } else {
+//        if (_namesArray.count == 0) {
+//            [self cancelSearch];
+//        }
+//    }
     
     if (_pickerChanged) {
         _pickerChanged = false;
@@ -100,6 +117,22 @@
     memberTableViewCell = [[MemberTableViewCell alloc] init];
     
     // Reloads the list
+    
+    [self.tableView reloadData];
+}
+
+- (void)didUpdateDetailItem:(NSNotification *)notification {
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate.memberData loadPlistData];
+    NSLog(@"ListTableVC -- Should reload the dataFile %@", delegate.memberData.description);
+    
+    // Makes up the index array & the sorted array for the cells
+    [self makeSectionsIndex:delegate.memberData.membersArray];     // self.membersArray
+    [self makeIndexedArray:delegate.memberData.membersArray withIndex:self.indexArray];
+    
+    self.memberListAll = [[MemberListData alloc] init];
+    [self.memberListAll loadPlistData];
+    self.membersArray = [NSArray arrayWithArray: self.memberListAll.membersArray];
     
     [self.tableView reloadData];
 }
@@ -174,6 +207,14 @@
 #pragma mark - Custom sort & search methods
 
 - (NSArray *)makeSectionsIndex:(NSArray *)arrayOfDictionaries {
+    if (!arrayOfDictionaries) {
+        return @[];
+    }
+    if (arrayOfDictionaries.count > 0) {
+        
+    } else {
+        return @[];
+    }
     //       NSLog(@"Takes the array of Dictionaries (PList), and creates an index of first letters for use in the tableview");
     
     // Creates a mutable set to read each letter only once
@@ -242,6 +283,15 @@
 
 
 - (NSArray *)makeIndexedArray:(NSArray *)wordsArray withIndex:(NSArray *)indexArray {
+    if (!wordsArray) {
+        return @[];
+    }
+    
+    if (wordsArray.count > 0) {
+        
+    } else {
+        return @[];
+    }
     //      NSLog(@"Takes an array of index letters (sections) and name array (rows) for display in the indexed tableview");
     //      NSLog(@"wordsArray is %@", wordsArray);
     

@@ -8,6 +8,7 @@
 
 #import "MemberListData.h"
 #import "CHCSVParser.h"
+#import "HomeViewController.h"
 
 @implementation MemberListData
 @synthesize namesArray = _namesArray;
@@ -54,6 +55,23 @@
     if (!temp) {
         NSLog(@"Error reading plist: %@, format %lu", errorDescr, (unsigned long)format);
     }
+    
+    if (temp && temp.count > 0) {
+        NSDictionary *firstItem = temp.firstObject;
+        if (firstItem[@"Index"] == nil) {
+            NSMutableArray *mutableItems = [NSMutableArray new];
+            for (int i = 0; i < temp.count; i++) {
+                NSMutableDictionary *item = [temp[i] mutableCopy];
+                item[@"Index"] = @(i);
+                [mutableItems addObject:item];
+            }
+            [mutableItems writeToFile:plistPath atomically:YES];
+
+            self.membersArray = [NSMutableArray arrayWithArray:mutableItems];
+            return;
+        }
+    }
+    
     self.membersArray = [NSMutableArray arrayWithArray:temp];
     //    NSLog(@"Took no time at all! %@", [temp objectAtIndex:[temp count]-1]);
     
@@ -83,9 +101,9 @@
         NSLog(@"Error reading plist: %@, format %lu", errorDescr, (unsigned long)format);
     }
     NSMutableArray *plistEdibleContent = [[NSMutableArray alloc] initWithArray:temp];
-    for (int i = 0; i < [plistEdibleContent count]; i++){
-        NSDictionary *currentEntry = [plistEdibleContent objectAtIndex:i];
-        if([[currentEntry objectForKey:@"Index"] isEqualToString:[completeEntry objectForKey:@"Index"]]) {
+    for (int i = 0; i < [temp count]; i++){
+        NSDictionary *currentEntry = [temp objectAtIndex:i];
+        if([[currentEntry objectForKey:@"Index"] isEqualToNumber:[completeEntry objectForKey:@"Index"]]) {
             [plistEdibleContent replaceObjectAtIndex:i withObject:completeEntry];
             break;
         }
@@ -97,7 +115,7 @@
     BOOL entryFound = FALSE;
     for (int i = 0; i < [delegate.arrayToBeUploaded count]; i++){
         NSDictionary *entry = [delegate.arrayToBeUploaded objectAtIndex:i];
-        if ([[entry objectForKey:@"Index"] isEqualToString:[updatedEntry objectForKey:@"Index"]]) {
+        if ([[entry objectForKey:@"Index"] isEqualToNumber:[updatedEntry objectForKey:@"Index"]]) {
             [delegate.arrayToBeUploaded replaceObjectAtIndex:i withObject:updatedEntry];
             entryFound = TRUE;
             break;
@@ -107,7 +125,10 @@
         [delegate.arrayToBeUploaded addObject:updatedEntry];
     }
     
+    
     [self createCSVFile];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kDidUpdateDetailItem object:nil];
 }
 
 -(void)createCSVFile
