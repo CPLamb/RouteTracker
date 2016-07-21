@@ -47,7 +47,7 @@ const int  MAX_PINS_TO_DROP = 200;
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     [self.locationManager requestWhenInUseAuthorization];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enterNewDetail:) name:kListTableStartNewDetailNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enterNewDetail:) name:kListTableStartNewDetailNotification object:nil];
     
     // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
     if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
@@ -294,6 +294,7 @@ const int  MAX_PINS_TO_DROP = 200;
     
     MKPlacemark *place = [[MKPlacemark alloc] initWithCoordinate:coords addressDictionary:nil];
     MKMapItem *mapItemDestination = [[MKMapItem alloc]initWithPlacemark:place];
+    mapItemDestination.name = self.detailItem[@"Name"];
     
     //current location
     MKMapItem *mapItemCurrent = [MKMapItem mapItemForCurrentLocation];
@@ -342,7 +343,19 @@ const int  MAX_PINS_TO_DROP = 200;
     } else {
         // Otherwise show all pins in the namesArray
         NSLog(@"MEMBERLISTDATA.namesArray count = %ld", MEMBERLISTDATA.namesArray.count);
-        for( id arrayOrDict in MEMBERLISTDATA.namesArray ){
+        NSArray *listItems = MEMBERLISTDATA.namesArray;
+        
+        NSString *selectedDriver = [[NSUserDefaults standardUserDefaults] objectForKey:@"SelectedDriver"];
+        if (selectedDriver && selectedDriver.length > 0) {
+            if (![selectedDriver isEqualToString:@"All"]) {
+                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"Driver == %@", selectedDriver];
+                NSArray *filterItems = [MEMBERLISTDATA.namesArray filteredArrayUsingPredicate:predicate];
+                if (filterItems && filterItems.count > 0) {
+                    listItems = filterItems;
+                }
+            }
+        }
+        for( id arrayOrDict in listItems ){
             // Flatten any arrays (needed in data for sorting lists with categories)
             if( [arrayOrDict isKindOfClass:[NSArray class]] ){
                 [pinsArray addObjectsFromArray:arrayOrDict];

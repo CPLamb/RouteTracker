@@ -13,6 +13,8 @@ static NSString * _Nonnull __strong kListSearchFilterChangeNotification = @"rout
 static NSString * _Nonnull __strong kListTableStartNewSearchNotification = @"router.tracker.new.serach";
 static NSString * _Nonnull __strong kListCopiesBundleChangeNotification = @"router.tracker.copies.bundle";
 
+static NSString * _Nonnull __strong kDidUpdateDetailItem = @"router.tracker.did.update.detail";
+
 @interface HomeViewController : UIViewController
 
 @end

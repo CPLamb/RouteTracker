@@ -11,8 +11,9 @@
 #import "HomeViewController.h"
 #import "AppDelegate.h"
 #import <MapKit/MapKit.h>
+#import "MapKitViewController.h"
 
-@interface DetailViewController ()<CLLocationManagerDelegate, UITextFieldDelegate>
+@interface DetailViewController ()<CLLocationManagerDelegate, UITextFieldDelegate, UITextViewDelegate>
 
 - (void)hideTap:(UIGestureRecognizer *)gestureRecognizer;
 
@@ -121,6 +122,16 @@
     [self.view addGestureRecognizer:hideKeyboardTap];
 }
 
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    self.textFieldChanged = YES;
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    self.textFieldChanged = YES;
+    return YES;
+}
+
 -(void)updateDetailItem
 {
     // A mutable Dictionary must be created from the original for editing?
@@ -149,8 +160,8 @@
     
     // Stores the detailItem to NSUserDefaults
     //  NSDictionary *modifiedDictionary = [NSDictionary dictionaryWithDictionary:mutableDetailItem];
-    NSMutableDictionary *modifiedDictionary = [[NSMutableDictionary alloc] init];
-    [modifiedDictionary setValue:[mutableDetailItem objectForKey:@"Index"] forKey:@"Index"];
+//    NSMutableDictionary *modifiedDictionary = [[NSMutableDictionary alloc] init];
+//    [modifiedDictionary setValue:[mutableDetailItem objectForKey:@"Index"] forKey:@"Index"];
     
     if (self.textFieldChanged) {
         [mutableDetailItem setValue:self.nameTextField.text forKey:@"Name"];
@@ -241,9 +252,13 @@
     
 //    NSLog(@"Segue ID is %@", [segue identifier]);
     [self updateDetailItem];
-    if ([[segue identifier] isEqualToString:@"showMap"]) {
-        [[segue destinationViewController] setDetailItem:self.detailItem];
+    if ([segue.destinationViewController isKindOfClass:[MapKitViewController class]]) {
+        MapKitViewController *mapViewController = segue.destinationViewController;
+        mapViewController.detailItem = self.detailItem;
     }
+//    if ([[segue identifier] isEqualToString:@"showMap"]) {
+//        [[segue destinationViewController] setDetailItem:self.detailItem];
+//    }
 }
 
 @end

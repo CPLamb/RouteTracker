@@ -422,8 +422,10 @@ NSString* fileContent;
     
     if (!errorDescr) {
         NSMutableArray *mutableTemp = [NSMutableArray new];
-        for (NSDictionary *dict in temp) {
+        for (int i = 0; i < temp.count; i++) {
+            NSDictionary *dict = temp[i];
             NSMutableDictionary *mutableDict = [dict mutableCopy];
+            mutableDict[@"Index"] = @(i);
             NSString *categoryValue = dict[@"Category"];
             if (categoryValue && categoryValue.length > 0) {
                 if ([categoryValue isEqualToString:@" "]) {

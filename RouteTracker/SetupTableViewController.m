@@ -49,6 +49,18 @@ NSUInteger filesCount = 1;
     _routerContent = [NSArray new];
     
     [self.filePicker reloadAllComponents];
+    
+    NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"selected_plist"];
+    if (filename) {
+        NSArray *filesList = [[NSUserDefaults standardUserDefaults] objectForKey:@"downloaded_files"];
+        if (filesList && filesList.count > 0) {
+            NSInteger index = [filesList indexOfObject:filename];
+            if (index) {
+                [self.filePicker selectRow:index inComponent:0 animated:YES];
+                return [self.filePicker.delegate pickerView:self.filePicker didSelectRow:index inComponent:0];
+            }
+        }
+    }
     [self pickerView:_filePicker didSelectRow:0 inComponent:0];
 }
 
@@ -73,6 +85,8 @@ NSUInteger filesCount = 1;
     if ([_routerPicker selectedRowInComponent:0] == 0) {
         [self calculateTotals:[self selectProperPlistData]];
     }
+    
+    [self.filePicker reloadAllComponents];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -381,7 +395,7 @@ NSUInteger filesCount = 1;
         if (row == 0) {
             return @"All";
         } else {
-            return _routerContent[row];
+            return _routerContent[row-1];
         }
     }
     
@@ -391,6 +405,7 @@ NSUInteger filesCount = 1;
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
+    NSMutableArray *calculates;
     //  GETs the selected file
     if (_filePicker == pickerView) {
         NSString *file = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"downloaded_files"] objectAtIndex:row];
@@ -402,25 +417,34 @@ NSUInteger filesCount = 1;
         // use selected filename to load membersArray from documents directory
         [self loadUrlFromDocuments];
         
-        [self calculateTotals:[self selectProperPlistData]];
         [self caculatorRouterPicker];
+        
+        calculates = [NSMutableArray arrayWithArray:
+                                      [self calculateTotals:[self selectProperPlistData]]];
+        [calculates addObject:_routeSelectedLabel.text];
+        
+        [self.routerPicker reloadAllComponents];
+        if (self.routerContent && self.routerContent.count > 0) {
+            [self.routerPicker selectRow:0 inComponent:0 animated:YES];
+        }
     } else {
         if (row == 0) {
             _routeSelectedLabel.text = @"All";
             _searchString = @"";
         } else {
-            _searchString = _routerContent[row];
-            _routeSelectedLabel.text = _routerContent[row];
+            _searchString = _routerContent[row-1];
+            _routeSelectedLabel.text = _routerContent[row-1];
         }
         
-        NSMutableArray *calculates = [NSMutableArray arrayWithArray:
+        [[NSUserDefaults standardUserDefaults] setObject:self.routeSelectedLabel.text forKey:@"SelectedDriver"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        calculates = [NSMutableArray arrayWithArray:
                                [self calculateTotals:[self selectProperPlistData]]];
         [calculates addObject:_routeSelectedLabel.text];
-        
-        
-        NSArray *notfiArr = [NSArray arrayWithArray:calculates];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kRouterPickerValueChangeNotification object: notfiArr];
     }
+    NSArray *notfiArr = [NSArray arrayWithArray:calculates];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRouterPickerValueChangeNotification object: notfiArr];
 }
 
 - (void)caculatorRouterPicker {
