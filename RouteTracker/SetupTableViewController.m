@@ -48,20 +48,7 @@ NSUInteger filesCount = 1;
 
     _routerContent = [NSArray new];
     
-    [self.filePicker reloadAllComponents];
-    
-    NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"selected_plist"];
-    if (filename) {
-        NSArray *filesList = [[NSUserDefaults standardUserDefaults] objectForKey:@"downloaded_files"];
-        if (filesList && filesList.count > 0) {
-            NSInteger index = [filesList indexOfObject:filename];
-            if (index) {
-                [self.filePicker selectRow:index inComponent:0 animated:YES];
-                return [self.filePicker.delegate pickerView:self.filePicker didSelectRow:index inComponent:0];
-            }
-        }
-    }
-    [self pickerView:_filePicker didSelectRow:0 inComponent:0];
+
 }
 
 -(void)dealloc {
@@ -87,6 +74,37 @@ NSUInteger filesCount = 1;
     }
     
     [self.filePicker reloadAllComponents];
+    
+    NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"selected_plist"];
+    if (filename) {
+        NSArray *filesList = [[NSUserDefaults standardUserDefaults] objectForKey:@"downloaded_files"];
+        if (filesList && filesList.count > 0) {
+            NSInteger index = [filesList indexOfObject:filename];
+            if (index <= filesCount) {
+                [self.filePicker selectRow:index inComponent:0 animated:YES];
+                [self.filePicker.delegate pickerView:self.filePicker didSelectRow:index inComponent:0];
+            }
+        }
+    } else {
+        [self.filePicker selectRow:0 inComponent:0 animated:YES];
+        [self.filePicker.delegate pickerView:self.filePicker didSelectRow:0 inComponent:0];
+    }
+
+    
+    NSString *routeSelected = [[NSUserDefaults standardUserDefaults] objectForKey:@"SelectedDriver"];
+    if (routeSelected) {
+        NSInteger index = [self.routerContent indexOfObject:routeSelected];
+        if (index+1 <= self.routerContent.count) {
+            [self.routerPicker selectRow:index+1 inComponent:0 animated:YES];
+            [self.routerPicker.delegate pickerView:self.routerPicker didSelectRow:index inComponent:0];
+        }
+    } else {
+        if (self.routerContent && self.routerContent.count > 0) {
+            [self.routerPicker selectRow:0 inComponent:0 animated:YES];
+            [self.routerPicker.delegate pickerView:self.routerPicker didSelectRow:0 inComponent:0];
+        }
+    }
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -424,9 +442,8 @@ NSUInteger filesCount = 1;
         [calculates addObject:_routeSelectedLabel.text];
         
         [self.routerPicker reloadAllComponents];
-        if (self.routerContent && self.routerContent.count > 0) {
-            [self.routerPicker selectRow:0 inComponent:0 animated:YES];
-        }
+        
+        [self.routerPicker selectRow:0 inComponent:0 animated:YES];
     } else {
         if (row == 0) {
             _routeSelectedLabel.text = @"All";

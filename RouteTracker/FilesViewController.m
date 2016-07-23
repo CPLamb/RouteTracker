@@ -115,8 +115,12 @@ NSString* fileContent;
         NSLog(@"File %d: %@", (Count + 1), [directoryContent objectAtIndex:Count]);
     }
     
+    [[NSUserDefaults standardUserDefaults] setObject:self.filenameLabel.text forKey:@"selected_plist"];
+    
     [[NSUserDefaults standardUserDefaults] setObject:directoryContent
                                               forKey:@"downloaded_files"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SelectedDriver"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (IBAction)test04Button:(UIButton *)sender {

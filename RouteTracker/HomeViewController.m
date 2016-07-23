@@ -88,9 +88,9 @@
     
     NSLog(@"HomeVC -- Listing the loaded spreadsheet %@", self.selectedMagazineLabel.text);
     
-    if (_searchString != nil) {
+//    if (_searchString != nil) {
         [self calculateTotals:[self selectProperPlistData]];
-    }
+//    }
     
 }
 

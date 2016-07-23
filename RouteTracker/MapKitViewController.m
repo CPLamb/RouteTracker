@@ -11,6 +11,7 @@
 #import "NoShopAnnotation.h"
 #import "MemberListData.h"
 #import "AppDelegate.h"
+#import "HomeViewController.h"
 
 @interface MapKitViewController () <CLLocationManagerDelegate>
 
@@ -18,6 +19,7 @@
 @property (strong, nullable, nonatomic) NoShopAnnotation *tempPin;
 @property (assign, nonatomic) MKCoordinateRegion tempRegion;
 @property (strong, nonatomic) UIBarButtonItem *dircetionsBarButton;
+@property (nonatomic, assign) MKCoordinateRegion selectedRegion;
 
 @end
 
@@ -39,6 +41,7 @@ const int  MAX_PINS_TO_DROP = 200;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     _dircetionsBarButton = self.navigationItem.rightBarButtonItem;
     NSLog(@"%@ view did load for the first time.", self);
     
@@ -73,6 +76,12 @@ const int  MAX_PINS_TO_DROP = 200;
     
     [self enable3DMapping];
     [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"list_detail_enter"];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pickerViewChanged:) name:kRouterPickerValueChangeNotification object:nil];
+}
+
+- (void)pickerViewChanged:(NSNotification *)notification {
+    self.currentRect = MKMapRectMake(0, 0, 0, 0);
 }
 
 -(void)awakeFromNib {
@@ -153,6 +162,10 @@ const int  MAX_PINS_TO_DROP = 200;
         }
     } else {
         _tempPin = nil;
+    }
+    
+    if (self.currentRect.origin.x != 0 && self.currentRect.size.width != 0 && !self.detailItem) {
+        [self.mapView setVisibleMapRect:self.currentRect animated:NO];
     }
 }
 
@@ -547,6 +560,11 @@ const int  MAX_PINS_TO_DROP = 200;
     customPinView.rightCalloutAccessoryView = rightButton;
     
     return customPinView;
+}
+
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
+    MKCoordinateRegion region = mapView.region;
+    self.selectedRegion = region;
 }
 
 @end
