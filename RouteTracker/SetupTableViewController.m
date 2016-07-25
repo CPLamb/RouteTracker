@@ -444,6 +444,7 @@ NSUInteger filesCount = 1;
         [self.routerPicker reloadAllComponents];
         
         [self.routerPicker selectRow:0 inComponent:0 animated:YES];
+        [self.routerPicker.delegate pickerView:self.routerPicker didSelectRow:0 inComponent:0];
     } else {
         if (row == 0) {
             _routeSelectedLabel.text = @"All";
