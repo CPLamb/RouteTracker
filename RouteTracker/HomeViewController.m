@@ -75,6 +75,11 @@
 {
     [super viewWillAppear:animated];
     
+    NSString *selectedDriver = [[NSUserDefaults standardUserDefaults] objectForKey:@"SelectedDriver"];
+    if (selectedDriver) {
+        self.routeSelectedLabel.text = selectedDriver;
+    }
+    
     NSString *dataFilenameIndex = [[NSUserDefaults standardUserDefaults] stringForKey:@"selected_plist"];
     
     NSLog(@"HomeVC -- dataFilenameIndex = %@", dataFilenameIndex.description);
