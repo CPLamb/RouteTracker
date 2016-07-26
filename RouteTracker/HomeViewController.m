@@ -77,6 +77,11 @@
     
     NSString *selectedDriver = [[NSUserDefaults standardUserDefaults] objectForKey:@"SelectedDriver"];
     if (selectedDriver) {
+        if ([selectedDriver isEqualToString:@"All"]) {
+            self.searchString = @"";
+        } else {
+            self.searchString = selectedDriver;
+        }
         self.routeSelectedLabel.text = selectedDriver;
     }
     
@@ -94,7 +99,8 @@
     NSLog(@"HomeVC -- Listing the loaded spreadsheet %@", self.selectedMagazineLabel.text);
     
 //    if (_searchString != nil) {
-        [self calculateTotals:[self selectProperPlistData]];
+
+    [self calculateTotals:[self selectProperPlistData]];
 //    }
     
 }
