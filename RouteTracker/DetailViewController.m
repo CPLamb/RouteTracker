@@ -230,6 +230,8 @@
     
     self.latitudeTextField.text = userLatitude;
     self.longitudeTextField.text = userLongitude;
+    
+    self.textFieldChanged = YES;
 
     /*
     [myDictionary setValue:[self.detailItem objectForKey:@"Index"] forKey:@"Index"];
